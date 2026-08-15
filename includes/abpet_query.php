@@ -1,0 +1,323 @@
+<?php
+	if (!defined('ABSPATH')) {
+		die;
+	} // Cannot access pages directly
+	if (!class_exists('ABPET_Query')) {
+		class ABPET_Query {
+			public function __construct() {
+			}
+			public static function get_info() {
+				global $wpdb;
+				$cache_key = 'abpet_info';
+				$abpet_info = wp_cache_get($cache_key);
+				if (false !== $abpet_info) {
+					return $abpet_info;
+				}
+				$order_table = $wpdb->prefix . 'abpet_orders';
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+				$total_order = (int)$wpdb->get_var(
+					$wpdb->prepare("SELECT COUNT(*) FROM %i", $order_table)
+				);
+				$abpet_info = array();
+				$post_ids = self::get_post_id(['status' => ['publish', 'draft', 'private', 'trash']]);
+				$post_counts = wp_count_posts(ABPET_Function::get_cpt());
+				$total_publish = $post_counts->publish ?? 0;
+				$total_draft = $post_counts->draft ?? 0;
+				$total_private = $post_counts->private ?? 0;
+				$total_trash = $post_counts->trash ?? 0;
+				$abpet_info['post_ids'] = $post_ids;
+				$abpet_info['total_post'] = sizeof($post_ids);
+				$abpet_info['total_publish'] = $total_publish;
+				$abpet_info['total_draft'] = $total_draft;
+				$abpet_info['total_private'] = $total_private;
+				$abpet_info['total_trash'] = $total_trash;
+				$abpet_info['total_order'] = $total_order;
+				wp_cache_set($cache_key, $abpet_info);
+				return $abpet_info;
+			}
+			public static function query_post_type($post_type, $show = -1, $page = 1): WP_Query {
+				$args = array(
+					'post_type' => $post_type,
+					'posts_per_page' => $show,
+					'paged' => $page,
+					'post_status' => 'publish'
+				);
+				return new WP_Query($args);
+			}
+			public static function get_post_id($filters = []): array {
+				$post_type = ($filters['cpt'] ?? null) ?: ABPET_Function::get_cpt();
+				$show = ($filters['posts_per_page'] ?? null) ?: -1;
+				$page = ($filters['paged'] ?? null) ?: 1;
+				$status = ($filters['status'] ?? null) ?: 'publish';
+				$cat_id = $filters['cat_id'] ?? null;
+				$bp_dp = $filters['bp_dp'] ?? null;
+				$meta_query = ['relation' => 'AND'];
+				// Category query
+				if (!empty($cat_id)) {
+					$meta_query[] = ['key' => 'abpet_category', 'value' => $cat_id, 'compare' => '='];
+				}
+				// route query
+				if (!empty($bp_dp)) {
+					$meta_query[] = ['key' => 'route_data', 'value' => '"' . $bp_dp . '"', 'compare' => 'LIKE'];
+				}
+				$all_data = get_posts(array(
+					'fields' => 'ids',
+					'post_type' => $post_type,
+					'posts_per_page' => $show,
+					'paged' => $page,
+					'post_status' => $status,
+					'meta_query' => $meta_query
+				));
+				return array_unique($all_data);
+			}
+			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false) {
+				global $wpdb;
+				$table_name = $wpdb->prefix . 'abpet_orders';
+				$cache_key = 'abpet_bk_' . md5(wp_json_encode($filters) . $limit . $offset . (int)$count);
+				$cache_group = 'abpet_orders';
+				$cached = wp_cache_get($cache_key, $cache_group);
+				if (false !== $cached) {
+					return $cached;
+				}
+				$conditions = array();
+				$params = array();
+				// Order Status Filter
+				$status = !empty($filters['status']) ? sanitize_text_field($filters['status']) : null;
+				$booked_status = $status ?: ABPET_Function::booking_status();
+				$booked_status = $booked_status ? explode(',', $booked_status) : array();
+				$is_all_status = (!empty($booked_status) && current($booked_status) === 'all');
+				if (!empty($booked_status) && !$is_all_status) {
+					$placeholders = implode(',', array_fill(0, count($booked_status), '%s'));
+					$conditions[] = "order_status IN ($placeholders)";
+					$params = array_merge($params, $booked_status);
+				}
+				// Integer ID Filters
+				$int_keys = array('id', 'post_id', 'user_id', 'item_id', 'order_id', 'start_point', 'sp_id');
+				foreach ($int_keys as $key) {
+					if (!empty($filters[$key])) {
+						$conditions[] = "{$key} = %d";
+						$params[] = absint($filters[$key]);
+					}
+				}
+				// Start Time Filter (Fixed Y-m-d format for DATE() comparison)
+				if (!empty($filters['start_time'])) {
+					$timestamp = strtotime($filters['start_time']);
+					if (gmdate('H:i', $timestamp) !== '00:00') {
+						$params[] = gmdate('Y-m-d H:i', $timestamp);
+						$conditions[] = "DATE_FORMAT(start_time, '%%Y-%%m-%%d %%H:%%i') = %s";
+					} else {
+						$params[] = gmdate('Y-m-d', $timestamp);
+						$conditions[] = 'DATE(start_time) = %s';
+					}
+				}
+				// Route Directions (BP & DP dynamically handled)
+				if (!empty($filters['bp_dp'])) {
+					$post_id = !empty($filters['post_id']) ? absint($filters['post_id']) : 0;
+					$start_time = !empty($filters['start_time']) ? sanitize_text_field($filters['start_time']) : '';
+					$bp_dp_parts = explode('_', sanitize_text_field($filters['bp_dp']));
+					if (count($bp_dp_parts) >= 2 && $post_id && $start_time) {
+						$bp = intval($bp_dp_parts[0]);
+						$dp = intval($bp_dp_parts[1]);
+						$routes = ABPET_Function::get_post_info($post_id, 'return_route_direction', array());
+						if (!empty($routes) && is_array($routes)) {
+							$sp = array_search($bp, $routes, false);
+							$ep = array_search($dp, $routes, false);
+							if (false !== $sp && false !== $ep) {
+								$valid_bps = array_slice($routes, 0, $ep);
+								$valid_dps = array_slice($routes, $sp + 1);
+								if (!empty($valid_bps) && !empty($valid_dps)) {
+									$bp_placeholders = implode(',', array_fill(0, count($valid_bps), '%s'));
+									$dp_placeholders = implode(',', array_fill(0, count($valid_dps), '%s'));
+									$conditions[] = "bp IN ({$bp_placeholders})";
+									$params = array_merge($params, $valid_bps); // FIXED ARRAY MERGE
+									$conditions[] = "dp IN ({$dp_placeholders})";
+									$params = array_merge($params, $valid_dps); // FIXED ARRAY MERGE
+								}
+							}
+						}
+					}
+				} else {
+					// Single BP / DP filters fallback (if bp_dp is not present)
+					if (!empty($filters['bp']) || !empty($filters['_bp'])) {
+						$bp_val = !empty($filters['bp']) ? $filters['bp'] : $filters['_bp'];
+						$conditions[] = 'bp = %d';
+						$params[] = absint($bp_val);
+					}
+					if (!empty($filters['dp']) || !empty($filters['_dp'])) {
+						$dp_val = !empty($filters['dp']) ? $filters['dp'] : $filters['_dp'];
+						$conditions[] = 'dp = %d';
+						$params[] = absint($dp_val);
+					}
+				}
+				// JSON Fields
+				if (!empty($filters['ticket_id'])) {
+					$conditions[] = 'JSON_CONTAINS(ticket_id, %s)';
+					$params[] = wp_json_encode(sanitize_text_field($filters['ticket_id']));
+				}
+				if (!empty($filters['ex_id'])) {
+					$conditions[] = 'JSON_CONTAINS(ex_id, %s)';
+					$params[] = wp_json_encode(sanitize_text_field($filters['ex_id']));
+				}
+				// Date Range Filters
+				if (!empty($filters['order_date'])) {
+					$conditions[] = 'DATE(created_at) = %s';
+					$params[] = gmdate('Y-m-d', strtotime($filters['order_date']));
+				}
+				if (!empty($filters['start_time_from']) && !empty($filters['start_time_to'])) {
+					$conditions[] = 'DATE(start_time) BETWEEN %s AND %s';
+					$params[] = gmdate('Y-m-d', strtotime($filters['start_time_from']));
+					$params[] = gmdate('Y-m-d', strtotime($filters['start_time_to']));
+				}
+				if (!empty($filters['order_date_from']) && !empty($filters['order_date_to'])) {
+					$conditions[] = 'DATE(created_at) BETWEEN %s AND %s';
+					$params[] = gmdate('Y-m-d', strtotime($filters['order_date_from']));
+					$params[] = gmdate('Y-m-d', strtotime($filters['order_date_to']));
+				}
+				// Billing Info (LIKE search)
+				$like_keys = array('billing_name', 'billing_email', 'billing_phone');
+				foreach ($like_keys as $like_key) {
+					if (!empty($filters[$like_key])) {
+						$conditions[] = "{$like_key} LIKE %s";
+						$params[] = '%' . $wpdb->esc_like(sanitize_text_field($filters[$like_key])) . '%';
+					}
+				}
+				// SQL Query Assembly
+				$select = $count ? 'SELECT COUNT(*)' : 'SELECT *';
+				$sql = "{$select} FROM {$table_name}";
+				if (!empty($conditions)) {
+					$sql .= ' WHERE ' . implode(' AND ', $conditions);
+				}
+				if (!$count) {
+					$allowed_columns = array('id', 'post_id', 'order_id', 'status', 'created_at');
+					$raw_order_by = !empty($filters['order_by']) ? sanitize_key($filters['order_by']) : 'order_id';
+					$order_by = in_array($raw_order_by, $allowed_columns, true) ? $raw_order_by : 'order_id';
+					$order_dir = (!empty($filters['order_dir']) && strtoupper($filters['order_dir']) === 'ASC') ? 'ASC' : 'DESC';
+					$sql .= " ORDER BY {$order_by} {$order_dir}";
+					if ($limit > 0) {
+						$sql .= ' LIMIT %d OFFSET %d';
+						$params[] = absint($limit);
+						$params[] = absint($offset);
+					}
+				}
+				if ($count) {
+					if (!empty($params)) {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						$results = $wpdb->get_var(
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+							$wpdb->prepare($sql, ...$params)
+						);
+					} else {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						$results = $wpdb->get_var($sql);
+					}
+				} else {
+					if (!empty($params)) {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						$results = $wpdb->get_results(
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+							$wpdb->prepare($sql, ...$params),
+							ARRAY_A
+						);
+					} else {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						$results = $wpdb->get_results($sql, ARRAY_A);
+					}
+				}
+				$results = $results ?: ($count ? 0 : array());
+				wp_cache_set($cache_key, $results, $cache_group, 30);
+				return $results;
+			}
+			public static function get_sold_qty_ex($filters = []) {
+				$sold_qty = 0;
+				$booking_lists = self::get_booking_query($filters);
+				if (empty($booking_lists)) {
+					return $sold_qty;
+				}
+				$id = $filters['ex_id'] ?? '';
+				foreach ($booking_lists as $booking_list) {
+					$ex_ids = json_decode($booking_list['ex_id'] ?? '', true) ?: [];
+					$additional_infos = json_decode($booking_list['ex_info'] ?? '', true) ?: [];
+					if (!empty($id)) {
+						if (in_array($id, $ex_ids, true) && isset($additional_infos[$id])) {
+							$sold_qty += $additional_infos[$id]['qty'] ?? 1;
+						}
+					} else {
+						foreach ($additional_infos as $additional_info) {
+							$sold_qty += $additional_info['qty'] ?? 1;
+						}
+					}
+				}
+				return $sold_qty;
+			}
+			public static function get_sp($id = '', $count = false) {
+				global $wpdb;
+				$cache_key = 'abpet_sp_' . md5($id . ($count ? '_count' : '_all'));
+				$abpet_sp = wp_cache_get($cache_key);
+				if (false !== $abpet_sp) {
+					return $abpet_sp;
+				}
+				$table_name = $wpdb->prefix . 'abpet_sp';
+				if ($count) {
+					if (!empty($id)) {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
+						$results = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE id = %d", (int)$id));
+					} else {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
+						$results = $wpdb->get_var("SELECT COUNT(*) FROM {$table_name}");
+					}
+				} else {
+					if (!empty($id)) {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
+						$results = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$table_name} WHERE id = %d ORDER BY id ASC", (int)$id), ARRAY_A);
+					} else {
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
+						$results = $wpdb->get_results("SELECT * FROM {$table_name} ORDER BY id ASC", ARRAY_A);
+					}
+				}
+				wp_cache_set($cache_key, $results);
+				return $results;
+			}
+			public static function get_sold_ticket($filters = []): array {
+				$sold_qty = [];
+				$booking_lists = self::get_booking_query($filters);
+				if (empty($booking_lists)) {
+					return $sold_qty;
+				}
+				foreach ($booking_lists as $booking_list) {
+					$ticket_infos = json_decode($booking_list['ticket_info'] ?? '', true) ?: [];
+					if (!empty($ticket_infos)) {
+						foreach ($ticket_infos as $ticket_info) {
+							if (!empty($ticket_info)) {
+								$qty = $ticket_info ['qty'] ?? 1;
+								$id = $ticket_info ['id'] ?? 'price';
+								$sold_qty [$id] = ($sold_qty [$id] ?? 0) + $qty;
+								$sold_qty ['total'] = ($sold_qty ['total'] ?? 0) + $qty;
+							}
+						}
+					}
+				}
+				return $sold_qty;
+			}
+			public static function get_sold_seat($filters = []): array {
+				$sold_seats = [];
+				$booking_lists = self::get_booking_query($filters);
+				if (empty($booking_lists)) {
+					return $sold_seats;
+				}
+				foreach ($booking_lists as $booking_list) {
+					$ticket_infos = json_decode($booking_list['ticket_info'] ?? '', true) ?: [];
+					if (!empty($ticket_infos)) {
+						foreach ($ticket_infos as $ticket_info) {
+							if (!empty($ticket_info)) {
+								$sold_seats [] = $ticket_info ['name'] ?? '';
+							}
+						}
+					}
+				}
+				return array_values(array_unique($sold_seats));
+			}
+		}
+		new ABPET_Query();
+	}
