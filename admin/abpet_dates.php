@@ -355,17 +355,17 @@
                 </div>
 				<?php
 			}
-			public function day_wise_time( $day_times = [], $prefix = '' ): void {
+			public function day_wise_time( $day_times = [] ): void {
 				$days = ABPET_Layout::week_day();
 				?>
-                <div class="full_width  <?php echo esc_attr( ! empty( $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#<?php echo esc_attr( $prefix ); ?>day_wise_time">
+                <div class="full_width  <?php echo esc_attr( ! empty( $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#day_wise_time">
                     <div class="_divider_xxs"></div>
                     <div class="_fj_between _fa_center">
                         <span class="_abp_label"><?php esc_html_e( 'Day Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
                         <div class="_group_content custom_checkbox">
 							<?php foreach ( $days as $key => $day ) { ?>
                                 <div class="checkbox_item">
-                                    <button type="button" class="_btn_light_info_xs <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'abp_active' : '' ); ?>" data-collapse-target="#<?php echo esc_attr( $prefix . $key ); ?>" data-checked="<?php echo esc_attr( $key ); ?>" data-open-icon="fa-check-square" data-close-icon="fa-square">
+                                    <button type="button" class="_btn_light_info_xs <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'abp_active' : '' ); ?>" data-collapse-target="#<?php echo esc_attr(  $key ); ?>" data-checked="<?php echo esc_attr( $key ); ?>" data-open-icon="fa-check-square" data-close-icon="fa-square">
                                         <span data-icon class="far <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'far fa-check-square' : 'fa-square' ); ?>"></span><?php echo esc_html( $day ); ?>
                                     </button>
                                 </div>
@@ -376,7 +376,7 @@
 					<?php foreach ( $days as $key => $day ) {
 						$operation_times = $day_times[ $key ] ?? [];
 						?>
-                        <div class="configuration_content <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#<?php echo esc_attr( $prefix . $key ); ?>">
+                        <div class="configuration_content <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#<?php echo esc_attr( $key ); ?>">
                             <div class="_divider_xs"></div>
                             <div class="insertable_area sortable_area _f_wrap_gap_xs">
 								<?php ABPET_Layout::button_add( __( 'Operation Time : ', 'abp-event-ticket' ) . $day ); ?>
@@ -384,7 +384,7 @@
 									if ( ! empty( $operation_times ) ) {
 										foreach ( $operation_times as $times ) {
 											if ( ! empty( $times ) ) {
-												$this->time_item( $prefix . $key . '_time[]', $times );
+												$this->time_item(  $key . '_time[]', $times );
 											}
 										}
 									}
@@ -392,7 +392,7 @@
                             </div>
                             <div class="abp_hidden">
                                 <div class="hidden_content">
-									<?php $this->time_item( $prefix . $key . '_time[]' ); ?>
+									<?php $this->time_item( $key . '_time[]' ); ?>
                                 </div>
                             </div>
                         </div>
@@ -400,9 +400,9 @@
                 </div>
 				<?php
 			}
-			public function date_wise_time( $date_times = [], $prefix = '' ): void {
+			public function date_wise_time( $date_times = []): void {
 				?>
-                <div class="full_width configuration_content   <?php echo esc_attr( ! empty( $date_times ) ? 'abp_active' : '' ); ?>" data-collapse="#<?php echo esc_attr( $prefix ); ?>date_wise_time">
+                <div class="full_width configuration_content   <?php echo esc_attr( ! empty( $date_times ) ? 'abp_active' : '' ); ?>" data-collapse="#date_wise_time">
                     <div class="_divider_xxs"></div>
                     <div class="_f_wrap_fj_between_fa_center">
                         <span class="_abp_label"><?php esc_html_e( 'Date Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
@@ -412,13 +412,13 @@
                     <div class="insertable_area sortable_area">
 						<?php if ( ! empty( $date_times ) ) {
 							foreach ( $date_times as $key => $date_time ) {
-								$this->date_wise_time_item( $date_time, $key, $prefix );
+								$this->date_wise_time_item( $date_time, $key );
 							}
 						} ?>
                     </div>
                     <div class="abp_hidden" data-hidden_id>
                         <div class="hidden_content">
-							<?php $this->date_wise_time_item( [], uniqid( 'abp_' ), $prefix ); ?>
+							<?php $this->date_wise_time_item( [], uniqid( 'abp_' ) ); ?>
                         </div>
                     </div>
                 </div>
@@ -459,17 +459,17 @@
                 </div>
 				<?php
 			}
-			public function date_wise_time_item( $date_time = [], $key = '', $prefix = '' ): void {
+			public function date_wise_time_item( $date_time = [], $key = ''): void {
 				$times = $date_time['time'] ?? [];
 				?>
                 <div class="configuration_content delete_area">
-                    <input type="hidden" name="<?php echo esc_attr( $prefix ); ?>date_wise_time_id[]" class="hidden_id" value="<?php echo esc_attr( $key ); ?>">
+                    <input type="hidden" name="date_wise_time_id[]" class="hidden_id" value="<?php echo esc_attr( $key ); ?>">
                     <div class="_divider_xs"></div>
                     <div class="_fa_start_gap_xs">
                         <div class="_group_content">
 							<?php
 								ABPET_Layout::button_sort();
-								ABPET_Layout::input_date( $prefix . 'date_wise_date[' . $key . '][]', ( $date_time['date'] ?? '' ) );
+								ABPET_Layout::input_date( 'date_wise_date[' . $key . '][]', ( $date_time['date'] ?? '' ) );
 								ABPET_Layout::button_delete();
 							?>
                         </div>
@@ -478,7 +478,7 @@
 							<?php if ( ! empty( $times ) ) {
 								foreach ( $times as $time ) {
 									if ( ! empty( $time ) ) {
-										$this->time_item( $prefix . 'date_wise_time[' . $key . '][]', $time );
+										$this->time_item(  'date_wise_time[' . $key . '][]', $time );
 									}
 								}
 							} ?>
@@ -486,7 +486,7 @@
                     </div>
                     <div class="abp_hidden">
                         <div class="hidden_content">
-							<?php $this->time_item( $prefix . 'date_wise_time[' . $key . '][]' ); ?>
+							<?php $this->time_item(  'date_wise_time[' . $key . '][]' ); ?>
                         </div>
                     </div>
                 </div>

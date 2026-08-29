@@ -47,13 +47,13 @@
 				include_once ABPET_Function::template_path( 'layout/registration.php' );
 				do_action( 'abpet_registration_template', $post_infos, $form_data );
 			}
-			public function additional( $post_infos = [], $prefix = '' ): void {
+			public function additional( $post_infos = [] ): void {
 				include_once ABPET_Function::template_path( 'layout/additional_services.php' );
-				do_action( 'abpet_additional_template', $post_infos, $prefix );
+				do_action( 'abpet_additional_template', $post_infos);
 			}
-			public function client_form( $post_infos = [], $prefix = '' ): void {
+			public function client_form( $post_infos = [] ): void {
 				include_once ABPET_Function::template_path( 'layout/client_form.php' );
-				do_action( 'abpet_client_form_template', $post_infos, $prefix );
+				do_action( 'abpet_client_form_template', $post_infos );
 			}
 			public function total_price( $post_infos = [], $form_data = [] ): void {
 				include_once ABPET_Function::template_path( 'layout/total_price.php' );

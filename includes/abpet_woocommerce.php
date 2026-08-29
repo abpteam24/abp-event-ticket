@@ -105,7 +105,7 @@
 				}
 				return $item_data;
 			}
-			public static function get_booking_info($post_infos = [], $bp_dp = '', $prefix = '') {
+			public static function get_booking_info($post_infos = [], $bp_dp = '') {
 				$booking_info = [];
 				if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$post_int_array = fn($key) => (isset($_POST[$key]) && is_array($_POST[$key])) ? array_map('absint', wp_unslash($_POST[$key])) : [];
@@ -115,14 +115,14 @@
 					$post_id = $post_infos['post_id'] ?? '';
 					$seat_type = $post_infos['seat_type'] ?? 'sp';
 					$seat_type = ABPET_Function::on_off('sp') ? $seat_type : 'ticket';
-					$journey_time = $post_val($prefix . 'journey_time');
-					$start_time = $post_val($prefix . 'start_time');
-					$start_point = $post_val($prefix . 'start_point');
+					$journey_time = $post_val( 'journey_time');
+					$start_time = $post_val( 'start_time');
+					$start_point = $post_val( 'start_point');
 					$ticket_price = 0;
 					if (!empty($journey_time) && !empty($bp_dp) && !empty($post_id) && !empty($start_time)) {
 						if ($seat_type == 'ticket') {
-							$ticket_types = $post_array($prefix . 'item_check');
-							$item_qty = $post_int_array($prefix . 'item_qty');
+							$ticket_types = $post_array( 'item_check');
+							$item_qty = $post_int_array( 'item_qty');
 							if (!empty($ticket_types) && !empty($item_qty) && sizeof($ticket_types) > 0) {
 								foreach ($ticket_types as $key => $ticket_type) {
 									$qty = absint($item_qty[$key] ?? '');
@@ -137,11 +137,11 @@
 								}
 							}
 						} else {
-							$seats = $post_val($prefix . 'sp_selected_seat');
+							$seats = $post_val( 'sp_selected_seat');
 							$seats = $seats ? explode(',', $seats) : [];
-							$types = $post_val($prefix . 'sp_selected_seat_id');
+							$types = $post_val( 'sp_selected_seat_id');
 							$types = $types ? explode(',', $types) : [];
-							$sp_id = $post_int($prefix . 'sp_id');
+							$sp_id = $post_int( 'sp_id');
 							if (!empty($sp_id) && !empty($seats) && !empty($types)) {
 								foreach ($types as $index => $type) {
 									$seat = $seats[$index] ?? '';
@@ -158,13 +158,13 @@
 							}
 						}
 						if (!empty($booking_info['info'])) {
-							$additional_info = self::get_additional_info($post_infos, $prefix);
+							$additional_info = self::get_additional_info($post_infos);
 							$additional_price = self::get_additional_price($additional_info);
 							$booking_info['seat_type'] = $seat_type;
 							$booking_info['journey_time'] = $journey_time;
 							$booking_info['start_time'] = $start_time;
 							$booking_info['start_point'] = $start_point;
-							$booking_info['pass_info'] = self::get_passenger_info($post_infos, $prefix);
+							$booking_info['pass_info'] = self::get_passenger_info($post_infos);
 							$booking_info['additional_info'] = $additional_info;
 							$booking_info['price'] = $ticket_price;
 							$booking_info['ex_price'] = $additional_price;
@@ -187,14 +187,14 @@
 				}
 				return $price;
 			}
-			public static function get_additional_info($post_infos = [], $prefix = ''): array {
+			public static function get_additional_info($post_infos = []): array {
 				$infos = array();
 				if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$services = ABPET_Function::additional_data($post_infos);
 					if (!empty($services) && is_array($services)) {
 						foreach ($services as $id => $service) {
-							$name = isset($_POST[$prefix . 'name_' . $id]) ? sanitize_text_field(wp_unslash($_POST[$prefix . 'name_' . $id])) : '';
-							$quantity = isset($_POST[$prefix . 'qty_' . $id]) ? sanitize_text_field(wp_unslash($_POST[$prefix . 'qty_' . $id])) : '';
+							$name = isset($_POST['name_' . $id]) ? sanitize_text_field(wp_unslash($_POST[ 'name_' . $id])) : '';
+							$quantity = isset($_POST[ 'qty_' . $id]) ? sanitize_text_field(wp_unslash($_POST[ 'qty_' . $id])) : '';
 							if (!empty($name) && !empty($quantity) && $quantity > 0 && !empty($id)) {
 								$infos[$id]['name'] = $name;
 								$infos[$id]['qty'] = $quantity;
@@ -207,13 +207,13 @@
 				}
 				return $infos;
 			}
-			public static function get_passenger_info($post_infos = [], $prefix = ''): array {
+			public static function get_passenger_info($post_infos = []): array {
 				$pass_info = [];
 				if (ABPET_Function::on_off('client_info') && isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$forms = ABPET_Function::client_data($post_infos);
 					if (!empty($forms) && is_array($forms)) {
 						foreach ($forms as $id => $form) {
-							$infos = isset($_POST[$prefix . $id]) ? array_map('sanitize_text_field', wp_unslash($_POST[$prefix . $id])) : [];
+							$infos = isset($_POST[$id]) ? array_map('sanitize_text_field', wp_unslash($_POST[$id])) : [];
 							if (!empty($infos)) {
 								foreach ($infos as $key => $info) {
 									if (!empty($info)) {

@@ -2,7 +2,7 @@
     if (!defined('ABSPATH')) {
         exit; // Exit if accessed directly
     }
-    add_action('abpet_additional_template', function ($post_infos = [], $prefix = '') {
+    add_action('abpet_additional_template', function ($post_infos = []) {
         $additional_services = ABPET_Function::additional_data($post_infos);
         //echo '<pre>';            print_r($additional_services);            echo '</pre>';
         if (!empty($additional_services) && is_array($additional_services)) {
@@ -40,16 +40,16 @@
                         $ex_count++; ?>
                         <div class="service_item _d_flex">
                             <div class="_w_100 _fs_h3_all_center">
-                                <?php ABPET_Layout::image_icon($icon_image, ''); ?>
+                                <?php ABPET_Layout::image_icon($icon_image); ?>
                             </div>
                             <div class="_fd_column_w_full">
                                 <div class="_fj_between">
                                     <h6 class="_abp_fa_center"><?php echo esc_html($name); ?></h6>
                                     <?php if ($available > 0) { ?>
-                                        <input type="hidden" name="<?php echo esc_attr($prefix); ?>name_<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($name); ?>"/>
+                                        <input type="hidden" name="name_<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($name); ?>"/>
                                         <?php
                                         $input_info = [
-                                            'name' => $prefix . 'qty_' . $id,
+                                            'name' => 'qty_' . $id,
                                             'price' => $tax_price,
                                             'min_qty' => 0,
                                             'max_qty' => $max_qty,

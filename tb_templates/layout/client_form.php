@@ -2,7 +2,7 @@
     if (!defined('ABSPATH')) {
         exit; // Exit if accessed directly
     }
-    add_action('abpet_client_form_template', function ($post_infos, $prefix = '') {
+    add_action('abpet_client_form_template', function ($post_infos) {
         $forms = ABPET_Function::client_data($post_infos);
         if (!empty($forms) && is_array($forms)) { ?>
             <div class="client_info_area">
@@ -12,7 +12,7 @@
                     </h5>
                     <?php
                         foreach ($forms as $id => $form) {
-                            ABPET_Layout::create_client_form($form, $id, $prefix);
+                            ABPET_Layout::create_client_form($form, $id);
                         }
                     ?>
                 </div>
