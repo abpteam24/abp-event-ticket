@@ -4,6 +4,8 @@
 	}
 	if (!class_exists('ABPET_Dependencies')) {
 		class ABPET_Dependencies {
+			private const ORDER_SCHEMA_VERSION = 2;
+
 			public function __construct() {
 				add_action('admin_enqueue_scripts', array($this, 'admin_enqueue'), 90);
 				add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue'), 90);
@@ -13,6 +15,7 @@
 				add_filter('plugin_action_links', array($this, 'plugin_settings_link'), 10, 2);
 				add_action('upgrader_process_complete', [$this, 'flush_rewrite']);
 				add_action('admin_init', array($this, 'activation_redirect'));
+				add_action('init', array($this, 'maybe_upgrade_order_schema'), 5);
 			}
 			public function admin_enqueue($hook): void {
 				$screen = get_current_screen();
@@ -213,11 +216,9 @@
 					'msg' => [
 						'date_loading' => __('Date  Loading.............', 'abp-event-ticket'),
 						'end_date_loading' => __('Return Date  Loading.............', 'abp-event-ticket'),
-						'bp_select' => __('Please select boarding point......!', 'abp-event-ticket'),
-						'dp_select' => __('Please select dropping point......!', 'abp-event-ticket'),
 						'select_post' => __('Please Select', 'abp-event-ticket') . ' ' . ABPET_Function::label(),
 						'select_start_date' => __('Please Select Journey Date', 'abp-event-ticket'),
-						'select_journey_time' => __('Please Select Journey Time', 'abp-event-ticket'),
+						'select_session_time' => __('Please Select Session Time', 'abp-event-ticket'),
 						'free' => __('FREE', 'abp-event-ticket'),
 						'loading' => __('Loading..............!', 'abp-event-ticket'),
 					],
@@ -254,6 +255,7 @@
 					require_once ABPET_DIR . 'includes/abpet_frontend.php';
 					require_once ABPET_DIR . 'includes/abpet_shortcodes.php';
 					require_once ABPET_DIR . 'includes/abpet_woocommerce.php';
+					require_once ABPET_DIR . 'includes/abpet_customer_account.php';
 					require_once ABPET_DIR . 'admin/abpet_hidden_post.php';
 				}
 			}
@@ -388,17 +390,24 @@
 				$order_table = $wpdb->prefix . 'abpet_orders';
 				$sp_table = $wpdb->prefix . 'abpet_sp';
 				$collate = $wpdb->get_charset_collate();
+				$schema_version = (int) get_option('abpet_orders_schema_version', 0);
+				$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $order_table)) === $order_table;
+				if ($table_exists && $schema_version < self::ORDER_SCHEMA_VERSION) {
+					// The event schema is intentionally fresh; existing legacy rows are not migrated.
+					$wpdb->query("DROP TABLE IF EXISTS `{$order_table}`");
+				}
 				$abpet_orders = "CREATE TABLE $order_table (
 					        id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 					        order_id bigint(20) unsigned NOT NULL,
 					        item_id bigint(20) unsigned NOT NULL,
 					        post_id bigint(20) unsigned NOT NULL,
 					        user_id bigint(20) unsigned NOT NULL,
-					        location bigint(20) unsigned NOT NULL,
-					        start_time datetime DEFAULT NULL,
+					        event_date date DEFAULT NULL,
+					        session_time time DEFAULT NULL,
+					        seat_type varchar(20) NOT NULL DEFAULT 'ticket',
+					        sp_id bigint(20) unsigned NOT NULL DEFAULT 0,
 					        ticket_info text NOT NULL,
 					        ticket_id varchar(255) NOT NULL,
-					        sp_id bigint(20) NOT NULL,
 					        qty int(5) NOT NULL DEFAULT 1,
 					        price varchar(100) DEFAULT NULL,					        
 					        ex_info text NOT NULL,				        					        
@@ -407,8 +416,6 @@
 					        total varchar(100) DEFAULT NULL,					        
 					        pass_info text NOT NULL,					        
 					        checkin tinyint(1) NOT NULL DEFAULT 0,					        
-					        female tinyint(1) NOT NULL DEFAULT 0,					        
-					        book_type int(5) NOT NULL DEFAULT 0,
 					        order_status varchar(20) NOT NULL,
 					        payment_method varchar(100) DEFAULT NULL,
 					        billing_name varchar(100) DEFAULT NULL,
@@ -421,7 +428,9 @@
 					        PRIMARY KEY  (id),
 					        KEY order_id  (order_id),
 					        KEY user_id  (user_id),
-					        KEY item_id  (item_id)
+					        KEY item_id  (item_id),
+					        KEY event_date  (event_date),
+					        KEY session_time  (session_time)
 					    ) $collate;";
 				// Seat Plan Table
 				$sp = "CREATE TABLE $sp_table (
@@ -440,6 +449,16 @@
 				}
 				dbDelta($abpet_orders);
 				dbDelta($sp);
+				update_option('abpet_orders_schema_version', self::ORDER_SCHEMA_VERSION);
+			}
+
+			public function maybe_upgrade_order_schema(): void {
+				global $wpdb;
+				$order_table = $wpdb->prefix . 'abpet_orders';
+				$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $order_table)) === $order_table;
+				if (!$table_exists || (int) get_option('abpet_orders_schema_version', 0) < self::ORDER_SCHEMA_VERSION) {
+					self::create_table();
+				}
 			}
 			public function plugin_settings_link($links_array, $plugin_file_name) {
 				if (strpos($plugin_file_name, ABPET_BASE)) {

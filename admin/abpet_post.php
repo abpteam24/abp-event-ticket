@@ -8,6 +8,7 @@
 				add_action( 'abpet_load_posts', array( $this, 'load_posts' ) );
 				add_action( 'add_meta_boxes', [ $this, 'settings_meta' ] );
 				add_action( 'save_post', array( $this, 'save_settings' ) );
+				add_action( 'admin_notices', array( $this, 'configuration_notice' ) );
 				add_action( 'wp_ajax_abpet_post_permanent_remove', array( $this, 'post_permanent_remove' ) );
 				add_action( 'wp_ajax_abpet_post_move_trash', array( $this, 'post_move_trash' ) );
 				add_action( 'wp_ajax_abpet_post_restore', array( $this, 'post_restore' ) );
@@ -214,6 +215,7 @@
                                     <option disabled selected><?php esc_html_e( 'Please Select', 'abp-event-ticket' ); ?></option>
                                     <option value="default" <?php echo esc_attr( $abpet_template == 'default' ? 'selected' : '' ); ?>><?php esc_html_e( 'Default Template', 'abp-event-ticket' ); ?></option>
                                     <option value="light" <?php echo esc_attr( $abpet_template == 'light' ? 'selected' : '' ); ?>><?php esc_html_e( 'Light Template', 'abp-event-ticket' ); ?></option>
+                                    <option value="modern" <?php echo esc_attr( $abpet_template == 'modern' ? 'selected' : '' ); ?>><?php esc_html_e( 'Modern Template', 'abp-event-ticket' ); ?></option>
                                 </select>
                             </label>
                             <div class="_divider_xxs"></div>
@@ -402,6 +404,7 @@
 			}
 			//====================================//
 			public function save_settings( $post_id ): void {
+				static $validating_status = false;
 				if ( ! isset( $_POST['abpet_post_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['abpet_post_nonce'] ) ), 'abpet_post_nonce' ) ) {
 					return;
 				}
@@ -421,6 +424,8 @@
 					$post_textarea_array = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'sanitize_textarea_field', wp_unslash( $_POST[ $key ] ) ) : [];
 					$post_deep           = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? map_deep( wp_unslash( $_POST[ $key ] ), 'sanitize_text_field' ) : [];
 					$format_date                       = fn( $date ) => $date ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
+					$date_infos                        = [];
+					$time_info                         = [];
 					//$post_html_array     = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'wp_kses_post', wp_unslash( $_POST[ $key ] ) ) : [];
 					/***********************************/
 					$seat_type           = $post_val( 'seat_type' );
@@ -578,6 +583,9 @@
 							}
 						}
 					};
+					if ( $date_infos['date_type'] === 'specific_date' && empty( $date_infos['specific_dates'] ) ) {
+						$date_infos['date_type'] = 'periodic_date';
+					}
 					/***********************************/
 					$display_additional_services = $post_val( 'display_additional_services', 'off' );
 					$active_global_additional    = $display_additional_services == 'on' ? $post_val( 'active_global_additional', 'on' ) : 'off';
@@ -637,6 +645,24 @@
 						'active_global_tc'            => $active_global_tc,
 						'abpet_tc'                    => $abpet_tc,
 					];
+					$validation_errors = $this->validate_event_configuration(
+						$post_id,
+						$seat_type,
+						$ticket_infos,
+						$sp_infos,
+						$date_infos,
+						$time_info
+					);
+					if ( get_post_status( $post_id ) === 'publish' && ! empty( $validation_errors ) && ! $validating_status ) {
+						$validating_status = true;
+						wp_update_post( [ 'ID' => $post_id, 'post_status' => 'draft' ] );
+						$validating_status = false;
+						set_transient(
+							'abpet_event_configuration_errors_' . get_current_user_id(),
+							$validation_errors,
+							MINUTE_IN_SECONDS
+						);
+					}
 					//=============tax================//
 					if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) {
 						$meta_info['_tax_status'] = $post_val( '_tax_status', 'none' );
@@ -649,8 +675,83 @@
 							update_post_meta( $post_id, sanitize_key( $key ), $value );
 						}
 					}
+					foreach ( [
+						'abpet_category'  => 'abpet_category',
+						'abpet_location'  => 'abpet_location',
+						'abpet_organizer' => 'abpet_organizer',
+						'abpet_brand'     => 'abpet_brand',
+					] as $meta_key => $taxonomy ) {
+						if ( taxonomy_exists( $taxonomy ) ) {
+							$value = $meta_info[ $meta_key ] ?? '';
+							$ids   = is_array( $value ) ? $value : explode( ',', (string) $value );
+							$ids   = array_values( array_filter( array_map( 'absint', $ids ) ) );
+							wp_set_object_terms( $post_id, $ids, $taxonomy, false );
+						}
+					}
 				}
 			}
+					public function validate_event_configuration( $post_id, $seat_type, $ticket_infos, $sp_infos, $date_infos, $time_info ): array {
+						$errors = [];
+						if ( ! get_the_title( $post_id ) ) {
+							$errors[] = __( 'Add an event title before publishing.', 'abp-event-ticket' );
+						}
+						$date_type = $date_infos['date_type'] ?? 'periodic_date';
+						$dates     = [];
+						if ( $date_type === 'specific_date' ) {
+							$dates = $date_infos['specific_dates'] ?? [];
+						} elseif ( ! empty( $date_infos['periodic_start_date'] ) ) {
+							$dates[] = $date_infos['periodic_start_date'];
+							if ( ! empty( $date_infos['periodic_end_date'] ) ) {
+								$dates[] = $date_infos['periodic_end_date'];
+							}
+						} else {
+							$dates[] = current_time( 'Y-m-d' );
+						}
+						$dates = array_filter( $dates, static function ( $date ) {
+							return $date && strtotime( $date ) !== false;
+						} );
+						if ( empty( $dates ) ) {
+							$errors[] = __( 'Configure at least one valid event date.', 'abp-event-ticket' );
+						}
+						$times = array_filter( $time_info['time'] ?? [], static function ( $time ) {
+							return (bool) preg_match( '/^(?:[01]\d|2[0-3]):[0-5]\d$/', (string) $time );
+						} );
+						foreach ( $time_info['day_time'] ?? [] as $day_times ) {
+							$times = array_merge( $times, array_filter( (array) $day_times ) );
+						}
+						foreach ( $time_info['date_times'] ?? [] as $date_time ) {
+							$times = array_merge( $times, array_filter( (array) ( $date_time['time'] ?? [] ) ) );
+						}
+						if ( empty( $times ) || ( count( $times ) === 1 && reset( $times ) === '00:00' && empty( $_POST['operation_time'] ) ) ) {
+							$errors[] = __( 'Configure at least one valid event session time.', 'abp-event-ticket' );
+						}
+						if ( $seat_type === 'ticket' ) {
+							$valid_tickets = array_filter( $ticket_infos, static function ( $ticket ) {
+								return isset( $ticket['price'], $ticket['qty'] ) && (float) $ticket['price'] >= 0 && (int) $ticket['qty'] > 0;
+							} );
+							if ( empty( $valid_tickets ) ) {
+								$errors[] = __( 'Add at least one ticket type with a valid price and quantity.', 'abp-event-ticket' );
+							}
+						} elseif ( empty( $sp_infos ) ) {
+							$errors[] = __( 'Assign at least one seat plan to this event.', 'abp-event-ticket' );
+						}
+						if ( empty( ABPET_Function::get_post_info( $post_id, 'link_wc_id' ) ) ) {
+							$errors[] = __( 'The WooCommerce product could not be linked to this event.', 'abp-event-ticket' );
+						}
+						return array_unique( $errors );
+					}
+					public function configuration_notice(): void {
+						$errors = get_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
+						if ( empty( $errors ) || ! is_array( $errors ) ) {
+							return;
+						}
+						delete_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
+						echo '<div class="notice notice-error"><p><strong>' . esc_html__( 'Event was saved as draft because its configuration is incomplete:', 'abp-event-ticket' ) . '</strong></p><ul>';
+						foreach ( $errors as $error ) {
+							echo '<li>' . esc_html( $error ) . '</li>';
+						}
+						echo '</ul></div>';
+					}
 			public function post_permanent_remove(): void {
 				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );

@@ -6,7 +6,8 @@
 		class ABPET_Hidden_Post {
 			public function __construct() {
 				add_action( 'wp_insert_post', [ $this, 'insert_wc_hidden_post' ], 10, 3 );
-				add_action( 'save_post', [ $this, 'save_hidden_post' ], 99 );
+				// Create/link the hidden WooCommerce product before event validation runs.
+				add_action( 'save_post', [ $this, 'save_hidden_post' ], 5 );
 				add_action( 'parse_query', [ $this, 'hide_hidden_post' ] );
 				add_action( 'wp', [ $this, 'hide_hidden_post_frontend' ] );
 				add_action( 'wp_head', [ $this, 'exclude_url_from_search_engine' ] );
@@ -53,13 +54,13 @@
 				update_post_meta( $product_id, '_manage_stock', 'no' );
 				update_post_meta( $product_id, '_virtual', 'yes' );
 				update_post_meta( $product_id, '_sold_individually', 'yes' );
-				remove_action( 'save_post', [ $this, 'save_hidden_post' ], 99 );
+				remove_action( 'save_post', [ $this, 'save_hidden_post' ], 5 );
 				wp_update_post( [
 					'ID' => $product_id,
 					'post_title' => $title,
 					'post_name' => uniqid( 'prod_', false ),
 				] );
-				add_action( 'save_post', [ $this, 'save_hidden_post' ], 99 );
+				add_action( 'save_post', [ $this, 'save_hidden_post' ], 5 );
 			}
 			public function hide_hidden_post( $query ): void {
 				if ( ! is_admin() ) {

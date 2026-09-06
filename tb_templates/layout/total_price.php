@@ -12,7 +12,6 @@
             return;
         }
         $display_additional = $post_infos['display_additional_services'] ?? ABPET_Function::get_post_info($post_id, 'display_additional_services', 'on');
-        //echo '<pre>';                print_r($double_route);                echo '</pre>';
         //echo '<pre>';                print_r($form_data);                echo '</pre>';
         ?>
         <div class="total_continue_area">

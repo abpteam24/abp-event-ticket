@@ -25,7 +25,10 @@
 		get_header();
 		the_post();
 	}
-	printf('%s',  do_shortcode( "[abpet-post loc_id='".esc_attr(get_queried_object()->term_id)."']" ));
+	$term = get_queried_object();
+	if ( $term instanceof WP_Term ) {
+		printf( '<main class="abpet_area"><div class="abp_container"><h1 class="abpet_details_title">%s</h1>%s</div></main>', esc_html( $term->name ), do_shortcode( '[abpet-post loc_id="' . absint( $term->term_id ) . '"]' ) );
+	}
 	if ( wp_is_block_theme() ) {
 		?>
 		<footer class="wp-block-template-part">
@@ -33,6 +36,7 @@
 		</footer>
 		<?php wp_footer(); ?>
 		</body>
+		</html>
 		<?php
 	} else {
 		get_footer();

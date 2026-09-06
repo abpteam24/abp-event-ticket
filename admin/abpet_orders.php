@@ -108,7 +108,7 @@
                             <th><?php esc_html_e('Action', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
                             <th><?php esc_html_e('Order ID/ Date', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
                             <th><?php ABPET_Layout::image_icon($brand_icon); ?><?php echo esc_html($label); ?><?php $count_foot_left_col++; ?></th>
-                            <th><span class="_gap_xxs"><span class="fas fa-route"></span><?php esc_html_e('From - To', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></span></th>
+                            <th><?php esc_html_e('Event Date / Session', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
                             <th><?php esc_html_e('Ticket Info', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
                             <?php if (ABPET_Function::on_off('additional_info')) { ?>
                                 <th><?php esc_html_e('Additional Info', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
@@ -157,12 +157,11 @@
                                 </th>
                                 <th class="_text_left">
                                     <div class="_gap_xxs"><?php ABPET_Layout::title($post_infos); ?></div>
-                                    <p class="_abp_color_theme"><?php echo esc_html(ABPET_Function::date_format($booking_list['start_time'] ?? '')); ?></p>
                                 </th>
                                 <td>
-                                    <p class="_abp_color_theme"><?php echo esc_html(ABPET_Function::date_format($booking_list['bp_time'] ?? '')); ?></p>
+                                    <p class="_abp_color_theme"><?php echo esc_html(ABPET_Function::date_format(($booking_list['event_date'] ?? '') . ' ' . ($booking_list['session_time'] ?? ''))); ?></p>
                                 </td>
-                                <th><?php ABPET_Layout::ticket_info($ticket_infos,$post_id); ?></th>
+                                <th><?php ABPET_Layout::ticket_info($ticket_infos, $post_id, $booking_list['seat_type'] ?? '', $booking_list['sp_id'] ?? 0); ?></th>
                                 <?php if (ABPET_Function::on_off('additional_info')) { ?>
                                     <td><?php ABPET_Layout::additional_info($additional_infos); ?></td>
                                 <?php } ?>

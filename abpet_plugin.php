@@ -1,7 +1,7 @@
 <?php
 	/**
 	 * Plugin Name: ABP Event Ticket
-	 * Description: WooCommerce Event Ticketing System to sell tickets, manage bookings, and offer seamless seat reservations for any event.
+	 * Description: WooCommerce event ticketing system for selling general admission tickets and reserved seats.
 	 * Version: 1.0.0
 	 * Author: abpteam
 	 * Author URI: https://abp-team.com

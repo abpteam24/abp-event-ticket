@@ -7,13 +7,13 @@
         $post_id = $booking_infos['post_id'] ?? '';
         if (!empty($booking_info) && sizeof($booking_info) > 0 && !empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt()) {
             $return = '';
-            foreach ($booking_info as $bp_dp => $cart_item) {
+            foreach ($booking_info as $cart_item) {
                 if (!empty($cart_item)) {
                     $ticket_infos = $cart_item['info'] ?? [];
                     $seat_type = $cart_item['seat_type'] ?? '';
                     if (!empty($ticket_infos) && sizeof($ticket_infos) > 0) {
-                        $journey_time = $cart_item['journey_time'] ?? '';
-                        [$bp, $dp] = array_map('intval', explode('_', $bp_dp));
+                        $event_date = $cart_item['event_date'] ?? '';
+                        $session_time = $cart_item['session_time'] ?? '';
                         $additional_info = $cart_item['additional_info'] ?? [];
                         $attendee_infos = $cart_item['pass_info'] ?? [];
                         ?>
@@ -24,16 +24,12 @@
                                     <div class="_divider_xxs"></div>
                                     <ul class="_abp cart_list">
                                         <li class="_gap_xxs">
-                                            <span class="fas fa-location"></span>
-                                            <span class="_fs_label"><?php esc_html_e('Departure : ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::location_value($bp)); ?>
+                                            <span class="fas fa-calendar-check"></span>
+                                            <span class="_fs_label"><?php esc_html_e('Event Date : ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::date_format($event_date)); ?>
                                         </li>
                                         <li class="_gap_xxs">
                                             <span class="fas fa-calendar-check"></span>
-                                            <span class="_fs_label"><?php esc_html_e('Departure Time: ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::date_format($journey_time)); ?>
-                                        </li>
-                                        <li class="_gap_xxs">
-                                            <span class="fas fa-location"></span>
-                                            <span class="_fs_label"><?php esc_html_e('Arrival : ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::location_value($dp)); ?>
+                                            <span class="_fs_label"><?php esc_html_e('Session Time: ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::date_format($event_date . ' ' . $session_time)); ?>
                                         </li>
                                     </ul>
                                 </div>
@@ -48,7 +44,7 @@
                                             $price = $price > 0 ? wc_price($price * $qty) : __('FREE', 'abp-event-ticket');
                                             $name = $ticket_info['name'] ?? '';
                                             if ($seat_type == 'sp') {
-                                                $name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? ''));
+                                                $name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? $cart_item['sp_id'] ?? ''));
                                             } ?>
                                             <li class="_gap_xxs">
                                                 <?php echo esc_html($name . __(' : ', 'abp-event-ticket')); ?>

@@ -21,10 +21,12 @@
 				add_action( 'abpet_related_item', [ $this, 'related_item' ], 10, 2 );
 				add_action( 'abpet_slider', [ $this, 'slider' ], 10, 3 );
 				add_action( 'abpet_slider_popup', [ $this, 'slider_popup' ], 10, 3 );
+				add_action( 'abpet_event_schedule_list', [ $this, 'event_schedule_list' ], 10, 6 );
 			}
 			public function details_template( $post_id ): void {
 				require_once ABPET_Function::details_template_path( $post_id );
-				$template_name = ABPET_Function::get_post_info( $post_id, 'abpet_template', 'default' );
+				$template_name = sanitize_key( ABPET_Function::get_post_info( $post_id, 'abpet_template', 'default' ) );
+				$template_name = in_array( $template_name, [ 'default', 'light', 'modern' ], true ) ? $template_name : 'default';
 				do_action( 'abpet_details_' . $template_name . '_template', $post_id );
 			}
 			public function search_form( $post_infos = [] ): void {
@@ -75,9 +77,9 @@
 				include_once ABPET_Function::template_path( 'layout/term_condition.php' );
 				do_action( 'abpet_term_condition_template', $post_infos, $type );
 			}
-			public function related_item( $related_item = '' ): void {
+			public function related_item( $related_item = '', int $current_post_id = 0 ): void {
 				include_once ABPET_Function::template_path( 'layout/related_item.php' );
-				do_action( 'abpet_related_item_template', $related_item );
+				do_action( 'abpet_related_item_template', $related_item, $current_post_id );
 			}
 			public function slider( $img_ids = '', $params = [] ): void {
 				if ( ! empty( $img_ids ) ) {
@@ -102,6 +104,47 @@
 			public function slider_popup( $abpet_slider, $img_ids, $popup_id = '#abpet_slider_' ): void {
 				include_once ABPET_Function::template_path( 'layout/slider_popup.php' );
 				do_action( 'abpet_slider_popup_template', $abpet_slider, $img_ids, $popup_id );
+			}
+			public function event_schedule_list( int $post_id, array $dates, array $time_infos, string $selected_date = '', string $selected_time = '', string $layout = 'dropdown' ): void {
+				$items = ABPET_Function::event_schedule_items( $post_id, $dates, $time_infos );
+				if ( ! ABPET_Function::on_off( 'event_date_list' ) || count( $items ) < 2 ) {
+					return;
+				}
+				$is_scroll_layout = 'scroll' === $layout;
+				$dropdown_id      = 'abpet-schedule-dropdown-' . $post_id;
+				?>
+				<?php if ( ! $is_scroll_layout ) : ?>
+				<div class="abpet_schedule_picker">
+					<button class="_btn_theme_xs abpet_schedule_toggle" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $dropdown_id ); ?>">
+						<span class="fas fa-calendar-alt" aria-hidden="true"></span>
+						<?php esc_html_e( 'View More Date', 'abp-event-ticket' ); ?>
+					</button>
+					<div id="<?php echo esc_attr( $dropdown_id ); ?>" class="abpet_schedule_dropdown" hidden>
+				<?php endif; ?>
+					<div class="abpet_schedule_list<?php echo esc_attr( $is_scroll_layout ? ' abpet_schedule_list--scroll' : '' ); ?>">
+						<div class="abpet_schedule_list_heading">
+							<span class="fas fa-calendar-alt" aria-hidden="true"></span>
+							<strong><?php esc_html_e( 'Available Schedule', 'abp-event-ticket' ); ?></strong>
+						</div>
+						<div class="abpet_schedule_list_items">
+							<?php foreach ( $items as $item ) : ?>
+								<div class="abpet_event_schedule_day">
+									<?php foreach ( $item['times'] as $time ) :
+										$is_active = $item['date'] === $selected_date && $time === $selected_time;
+										?>
+										<a class="<?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'], $time ) ); ?>">
+											<time datetime="<?php echo esc_attr( $item['date'] . 'T' . $time ); ?>"><?php echo esc_html( ABPET_Function::date_format( $item['date'] . ' ' . $time ) ); ?></time>
+										</a>
+									<?php endforeach; ?>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				<?php if ( ! $is_scroll_layout ) : ?>
+					</div>
+				</div>
+				<?php endif; ?>
+				<?php
 			}
 		}
 		new ABPET_Hooks();

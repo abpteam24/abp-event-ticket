@@ -7,8 +7,8 @@
             public function __construct() {
                 add_action('wp_ajax_abpet_global_booking', [$this, 'global_booking']);
                 add_action('wp_ajax_nopriv_abpet_global_booking', [$this, 'global_booking']);
-                add_action('wp_ajax_abpet_load_transport_data', [$this, 'load_transport_data']);
-                add_action('wp_ajax_nopriv_abpet_load_transport_data', [$this, 'load_transport_data']);
+                add_action('wp_ajax_abpet_load_booking_data', [$this, 'load_booking_data']);
+                add_action('wp_ajax_nopriv_abpet_load_booking_data', [$this, 'load_booking_data']);
                 add_action('wp_ajax_abpet_load_date', [$this, 'load_date']);
                 add_action('wp_ajax_nopriv_abpet_load_date', [$this, 'load_date']);
 
@@ -27,6 +27,7 @@
                 if (!empty($post_id) && $post_id > 0) {
                     if (get_post_type($post_id) == ABPET_Function::get_cpt() && (get_post_status($post_id) == 'publish' || is_admin())) {
                         $post_infos = ABPET_Function::get_all_meta($post_id);
+                        $form_data['post_id'] = $post_id;
                         $sale_continue = $post_infos['sale_continue'] ?? 'on';
                         if ($sale_continue == 'on') {
                             if(empty($start_date)) {
@@ -44,6 +45,7 @@
                             }
 	                        $form_data['start_date'] = $start_date;
 	                        $form_data['start_time'] = $start_time;
+	                        $form_data['session_time'] = $start_time;
 	                        $form_data['event_date'] = $upcoming_date;
 
                             do_action('abpet_registration', $post_infos, $form_data);
@@ -99,7 +101,7 @@
                 $html = ob_get_clean();
                 wp_send_json_success(['html' => $html, 'msg' => $msg, 'type' => 'success']);
             }
-            public function load_transport_data(): void {
+            public function load_booking_data(): void {
                 if (!check_ajax_referer('abpet_ajax_nonce', 'nonce', false)) {
                     wp_send_json_error(['msg' => __('Session expired. Page Reloading......', 'abp-event-ticket'), 'type' => 'warn'], 403);
                 }
@@ -108,9 +110,12 @@
                 $post_id = $post_int('post_id');
                 if (!empty($post_id) && $post_id > 0 && get_post_type($post_id) == ABPET_Function::get_cpt() && (get_post_status($post_id) == 'publish' || is_admin())) {
                     $post_infos = ABPET_Function::get_all_meta($post_id);
+                    $form_data['post_id'] = $post_id;
                     $sale_continue = $post_infos['sale_continue'] ?? 'on';
                     ob_start();
                     if ($sale_continue == 'on') {
+	                    $start_date = $post_val('event_date') ?: $post_val('start_date');
+	                    $session_time = $post_val('session_time') ?: $post_val('start_time');
 	                    if(empty($start_date)) {
 		                    $all_dates = ABPET_Function::date($post_id);
 		                    $start_date = current($all_dates);
@@ -119,15 +124,26 @@
 
 	                    $time_infos=$post_infos['time_infos']??[];
 	                    $all_times = ABPET_Function::time($time_infos, $start_date);
-	                    $start_time = !empty($all_times) ? current($all_times) : '';
+	                    $session_time = $session_time ?: (!empty($all_times) ? current($all_times) : '');
 	                    $upcoming_date='';
 	                    if(!empty($start_date)) {
-		                    $upcoming_date=!empty($start_time) ? gmdate('Y-m-d H:i', strtotime($start_date.' '.$start_time)) : $start_date;
+		                    $upcoming_date=!empty($session_time) ? gmdate('Y-m-d H:i', strtotime($start_date.' '.$session_time)) : $start_date;
 	                    }
 	                    $form_data['start_date'] = $start_date;
-	                    $form_data['start_time'] = $start_time;
-	                    $form_data['event_date'] = $upcoming_date;
-                        $seat_type = $post_infos['seat_type'] ?? 'sp';
+	                    $form_data['start_time'] = $session_time;
+	                    $form_data['event_date'] = $start_date;
+	                    $form_data['session_time'] = $session_time;
+	                    $selected_sp_id = $post_int( 'sp_id', 0 );
+	                    if ( $selected_sp_id > 0 ) {
+	                        $available_sp_ids = array_map(
+	                            'absint',
+	                            wp_list_pluck( (array) ( $post_infos['sp_infos'] ?? [] ), 'id' )
+	                        );
+	                        if ( in_array( $selected_sp_id, $available_sp_ids, true ) ) {
+	                            $form_data['sp_id'] = $selected_sp_id;
+	                        }
+	                    }
+	                    $seat_type = $post_infos['seat_type'] ?? 'sp';
                         $seat_type = ABPET_Function::on_off('sp') ? $seat_type : 'ticket';
                         if ($seat_type === 'ticket') {
                             do_action('abpet_ticket_type', $post_infos, $form_data);
@@ -139,7 +155,20 @@
                     }
                     //echo '<pre>';				print_r($form_data);				echo '</pre>';
                     $html = ob_get_clean();
-                    wp_send_json_success(['html' => $html, 'msg' => (get_the_title($post_id) . ' ' . __('data loaded....!', 'abp-event-ticket')), 'type' => 'success']);
+                    $time_options = [];
+                    foreach ( (array) ( $all_times ?? [] ) as $available_time ) {
+                        $time_options[] = [
+                            'value' => $available_time,
+                            'label' => ABPET_Function::date_format( $start_date . ' ' . $available_time ),
+                        ];
+                    }
+                    wp_send_json_success([
+                        'html' => $html,
+                        'times' => $time_options,
+                        'selected_time' => $session_time,
+                        'msg' => (get_the_title($post_id) . ' ' . __('data loaded....!', 'abp-event-ticket')),
+                        'type' => 'success'
+                    ]);
                 } else {
                     wp_send_json_success(['msg' => __('Something Wrong... Reload Page....!', 'abp-event-ticket'), 'type' => 'warn']);
                 }

@@ -5,11 +5,12 @@
 	#abpet_search_area {background: var(--tb_color_white); border-radius: var(--tb_br); padding: var(--tb_gap); box-shadow: var(--tb_shadow_29); display: -webkit-flex;display: flex; gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
 	#abpet_search_area form {max-width: 100%;gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;}
 	/**********************************/
-	div.abpet_booking form {display: -webkit-flex;display: flex;}
-	div.abpet_booking .booking_area {display: -webkit-flex;display: flex; gap: var(--tb_gap);-webkit-flex-grow: 1;flex-grow: 1; -webkit-flex-shrink: 1; flex-shrink: 1; -webkit-flex-basis: 45%; flex-basis: 45%;min-width: 600px;}
+	div.abpet_booking form {display: -webkit-flex;display: flex; min-width: 0; width: 100%;}
+	div.abpet_area .abpet_booking {margin: var(--tb_gap) 0; min-width: 0; width: 100%;}
+	div.abpet_booking .booking_area {display: -webkit-flex;display: flex; flex-wrap: wrap; gap: var(--tb_gap);-webkit-flex-grow: 1;flex-grow: 1; -webkit-flex-shrink: 1; flex-shrink: 1; -webkit-flex-basis: 100%; flex-basis: 100%;min-width: 0; width: 100%;}
 	div.abpet_booking .booking_area .ticket_item {margin: 0;}
-	div.abpet_booking .booking_area .ticket_left {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 550px;}
-	div.abpet_booking .booking_area .ticket_right {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 400px;}
+	div.abpet_booking .booking_area .ticket_left {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 320px;}
+	div.abpet_booking .booking_area .ticket_right {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 280px;}
 	div.abpet_booking .booking_area .ticket_content {display: -webkit-flex;display: flex; gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
 	div.abpet_booking .seat_selection,
 	div.abpet_booking .total_continue_area,
@@ -27,6 +28,9 @@
 /******************************************************************** List Grid Property item ************************************************/
 @media only screen and (min-width: 10px) {
 	div.abpet_area .post_top_filter {margin: 0 0 var(--tb_gap) 0; border-radius: var(--tb_br);display: -webkit-flex;display: flex;flex-wrap: wrap;-webkit-justify-content: space-between;justify-content: space-between; -webkit-align-items: center;align-items: center;padding: var(--tb_gap_xs); background: var(--tb_color_4);gap: var(--tb_gap_xs);}
+	div.abpet_area .post_top_filter > label {flex: 1 1 220px; min-width: 0; max-width: 100%; flex-wrap: wrap; white-space: normal;}
+	div.abpet_area .item_select {flex-wrap: wrap;}
+	div.abpet_booking ._section_15_xs {max-width: 100%; overflow-x: auto;}
 	/*********************************/
 	.abpet_area .item_head {background: var(--tb_color_4); padding: var(--tb_gap_xs); text-align: center; position: relative;width: 100%;min-height: auto;display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;line-height: 1;}
 	.abpet_area .item_head i {font-size: 75px;padding: var(--tb_gap);min-height: 150px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
@@ -72,6 +76,13 @@
 	div.abpet_area .abpet_missionary {border-radius: var(--tb_br_xl); display: block; column-gap: var(--tb_gap);}
 	div.abpet_area .abpet_missionary .item_head {padding: 0;}
 	div.abpet_area .abpet_missionary .item_box_1 {position: relative;margin-bottom: var(--tb_gap); break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;}
+	div.abpet_area .abpet_minimal {display: grid; gap: var(--tb_gap_xs);}
+	div.abpet_area .abpet_minimal .minimal_item {display: flex; align-items: center; gap: var(--tb_gap); padding: var(--tb_gap_xs) var(--tb_gap); background: var(--tb_color_white); border: 1px solid var(--tb_color_border); border-radius: var(--tb_br); box-shadow: var(--tb_shadow_4);}
+	div.abpet_area .abpet_minimal .minimal_image {width: 72px; min-width: 72px; height: 54px; border-radius: var(--tb_br); overflow: hidden;}
+	div.abpet_area .abpet_minimal .minimal_content {min-width: 0; flex: 1;}
+	div.abpet_area .abpet_minimal .minimal_title {display: block; padding: 0; border: 0; background: transparent; color: var(--tb_color_theme); font-size: var(--tb_fs_h5); font-weight: var(--tb_fw-medium); text-align: left; overflow-wrap: anywhere;}
+	div.abpet_area .abpet_minimal .minimal_meta {margin-top: var(--tb_gap_xxs); color: var(--tb_text_off); font-size: var(--tb_fs_small);}
+	div.abpet_area .abpet_minimal .minimal_action {flex: 0 0 auto; white-space: nowrap;}
 	/*******************Group property********************/
 	div.abpet_area .group_property {margin: var(--tb_gap) 0 0 0;padding: var(--tb_gap);}
 	div.abpet_area .group_property .ticket_item {display: -webkit-flex;display: flex;-webkit-align-items: stretch;align-items: stretch;}
@@ -101,13 +112,22 @@
 		div.abpet_area .group_property .price_row { font-size: var(--tb_fs_h6);}
 		div.abpet_area .group_property .price_value {font-size: var(--tb_fs_h6);margin: 0 0 0 var(--tb_gap_xs);}
 		div.abpet_area .group_property .price_row {-webkit-flex-direction: initial;flex-direction: initial;-webkit-justify-content: flex-start;justify-content: flex-start;margin: var(--tb_gap_xxs) 0;}
+		div.abpet_booking .booking_area,
+		div.abpet_booking .booking_area .ticket_left,
+		div.abpet_booking .booking_area .ticket_right {min-width: 0;width: 100%;}
+		div.abpet_booking .booking_area {flex-direction: column;}
+		div.attendee_item [class*="_input_item"] {width: 100%;}
+		div.abpet_booking .total_continue {flex-wrap: wrap;gap: var(--tb_gap_xs);}
+		div.abpet_area .abpet_minimal .minimal_item {align-items: flex-start; gap: var(--tb_gap_xs);}
+		div.abpet_area .abpet_minimal .minimal_image {width: 56px; min-width: 56px; height: 48px;}
+		div.abpet_area .abpet_minimal .minimal_action {padding-left: var(--tb_gap_xs); padding-right: var(--tb_gap_xs);}
 	}
 }
 /******************************************************************** ticket_area************************************************/
 @media only screen and (min-width: 10px) {
 	/*=============================*/
 	/*=============================*/
-	span[aria-hidden="true"] { display: none !important; }
+	span.screen-reader-text[aria-hidden="true"] { display: none !important; }
 }
 /******************************************************************** shortcode ************************************************/
 @media only screen and (min-width: 10px) {
@@ -120,5 +140,599 @@
 }
 @media only screen and (max-width: 800px) {
 }
-@media only screen and (max-width: 600px) {
+.abpet_area .abpet_details_column {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+.abpet_area .abpet_details_title {
+	color: var(--tb_color_theme);
+	font-size: var(--tb_fs_h4);
+	font-weight: var(--tb_fw-bold);
+	line-height: 1.15;
+	margin: 0 0 var(--tb_gap_xs);
+	overflow-wrap: anywhere;
+}
+
+.abpet_area .abpet_details_title small {
+	font-size: var(--tb_fs_small);
+}
+.abpet_area .abpet_details_title > span,
+.abpet_area .abpet_details_title > .abp_image {
+	display: inline-flex;
+	font-size: inherit;
+	height: 1em;
+	margin-right: 0.2em;
+	vertical-align: middle;
+	width: 1em;
+}
+.abpet_area .abpet_details_title > span img.emoji,
+.abpet_area .abpet_details_title > span i {
+	font-size: inherit;
+	height: 1em !important;
+	width: 1em;
+}
+.abpet_area .abpet_details_title > .abp_image img {
+	height: 100%;
+	object-fit: contain;
+	width: 100%;
+}
+
+.abpet_area .abpet_faq_panel,
+.abpet_area .abpet_tc_panel {
+	margin: 0;
+	padding: var(--tb_gap);
+}
+.abpet_area .related_item_area {
+	margin-top: var(--tb_gap);
+}
+.abpet_area .abpet_faq_panel h4,
+.abpet_area .abpet_tc_panel h4 {
+	margin: 0;
+}
+.abpet_area .abpet_faq_panel > ._divider_xs {
+	margin: var(--tb_gap_xs) 0;
+}
+.abpet_area .abpet_faq_panel .faq_list {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin: 0;
+}
+.abpet_area .abpet_faq_panel .faq_item {
+	margin: 0;
+	border-bottom: 1px solid var(--tb_color_border);
+	border-left: 0;
+	border-right: 0;
+}
+.abpet_area .abpet_faq_panel .faq_item:last-child {
+	border-bottom: 0;
+}
+.abpet_area .abpet_faq_panel .faq_question {
+	align-items: center;
+	display: flex;
+	gap: var(--tb_gap_xs);
+	justify-content: space-between;
+	min-height: 44px;
+	padding: var(--tb_gap_xs);
+}
+.abpet_area .abpet_faq_panel .faq_question h6 {
+	margin: 0;
+}
+.abpet_area .abpet_faq_panel .faq_answer_content {
+	padding: 0 var(--tb_gap_xs) var(--tb_gap_xs);
+}
+
+.default_details_page .abpet_faq_panel {
+	border-top: 3px solid var(--tb_color_theme);
+}
+.default_details_page .abpet_tc_panel {
+	border-left: 3px solid var(--tb_color_theme);
+}
+
+.abpet_light_details .abpet_faq_panel,
+.abpet_light_details .abpet_tc_panel {
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br);
+}
+.abpet_light_details .abpet_faq_panel .faq_question {
+	padding: var(--tb_gap_xs);
+}
+.abpet_light_details .abpet_tc_panel {
+	border-left: 4px solid var(--tb_color_theme);
+}
+
+.abpet_modern_details .abpet_faq_panel {
+	border-left: 5px solid var(--tb_color_theme);
+	border-radius: var(--tb_br);
+}
+.abpet_modern_details .abpet_faq_panel .faq_item {
+	border-bottom-style: dashed;
+}
+.abpet_modern_details .abpet_tc_panel {
+	border: 1px dashed var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+}
+.abpet_modern_details .abpet_tc_panel h4 {
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.abpet_default_intro {
+	align-items: center;
+	gap: var(--tb_gap);
+}
+
+.abpet_default_intro > .abpet_details_column:first-child {
+	min-width: min(100%, 420px);
+}
+
+.default_details_page .abpet_default_intro {
+	align-items: stretch;
+}
+.default_details_page .abpet_default_intro > .abpet_details_column:first-child {
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	overflow: hidden;
+}
+.default_details_page .abpet_default_media {
+	overflow: hidden;
+}
+.default_details_page .abpet_default_media .abpet_slider {
+	height: 100%;
+}
+.abpet_schedule_picker {
+	position: relative;
+	margin-top: var(--tb_gap);
+}
+.abpet_schedule_picker,
+.abpet_schedule_dropdown {
+	display: block;
+}
+.abpet_schedule_dropdown[hidden] {
+	display: none;
+}
+.abpet_schedule_toggle {
+	align-items: center;
+	display: inline-flex;
+	gap: var(--tb_gap_xxs);
+}
+.abpet_schedule_dropdown {
+	position: absolute;
+	left: 0;
+	top: calc(100% + var(--tb_gap_xxs));
+	width: min(320px, calc(100vw - 32px));
+	z-index: 20;
+}
+.abpet_schedule_dropdown .abpet_schedule_list {
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br);
+	box-shadow: var(--tb_shadow_23);
+	padding: var(--tb_gap_xs);
+}
+.default_details_page .the_post_content,
+.abpet_light_details .the_post_content,
+.abpet_modern_details .the_post_content {
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br);
+	margin: var(--tb_gap) 0;
+	padding: var(--tb_gap);
+}
+
+.abpet_light_details .abpet_light_intro {
+	align-items: center;
+	gap: var(--tb_gap);
+}
+
+.abpet_light_details .abpet_light_media {
+	order: 2;
+	min-width: min(100%, 360px);
+}
+
+.abpet_light_details .abpet_light_summary {
+	order: 1;
+	padding: var(--tb_gap);
+}
+
+.abpet_light_details .abpet_light_booking {
+	order: 3;
+	padding: var(--tb_gap);
+}
+.abpet_light_details .abpet_light_summary {
+	border-left: 4px solid var(--tb_color_theme);
+	border-radius: var(--tb_br);
+	box-shadow: var(--tb_shadow_23);
+}
+.abpet_light_details .abpet_details_title {
+	font-size: var(--tb_fs_h4);
+}
+.abpet_light_details .abpet_light_booking {
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br);
+	padding: 0;
+}
+.abpet_schedule_column {
+	display: flex;
+	min-height: 0;
+	overflow: hidden;
+}
+.abpet_schedule_column .abpet_schedule_list {
+	width: 100%;
+}
+.abpet_light_details .abpet_light_intro {
+	align-items: stretch;
+}
+.abpet_schedule_list {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 0;
+	padding: var(--tb_gap);
+}
+.abpet_schedule_list_heading {
+	align-items: center;
+	color: var(--tb_color_theme);
+	display: flex;
+	gap: var(--tb_gap_xs);
+	margin-bottom: var(--tb_gap_xs);
+}
+.abpet_schedule_list_items {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	gap: var(--tb_gap_xs);
+	height: 200px;
+	min-height: 0;
+	max-height: 200px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding-right: 6px;
+	-webkit-overflow-scrolling: touch;
+}
+.abpet_event_schedule_day {
+	display: grid;
+	gap: var(--tb_gap_xxs);
+}
+.abpet_schedule_list_items a {
+	background: var(--tb_color_2);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br);
+	color: inherit;
+	display: block;
+	overflow-wrap: anywhere;
+	text-decoration: none;
+	padding: 10px 12px;
+}
+.abpet_schedule_list_items a:hover,
+.abpet_schedule_list_items a.is-active {
+	background: var(--tb_color_theme);
+	border-color: var(--tb_color_theme);
+	color: var(--tb_color_white);
+	font-weight: var(--tb_fw-bold);
+}
+.abpet_schedule_list_items time {
+	display: block;
+}
+.abpet_schedule_list_empty {
+	color: rgb(128, 128, 128);
+	margin: auto 0;
+}
+
+.abpet_modern_details .abp_container {
+	max-width: var(--tb_container_max);
+}
+
+.abpet_modern_details .abpet_modern_media,
+.abpet_modern_details .abpet_modern_summary {
+	padding: var(--tb_gap);
+}
+.abpet_modern_details .abpet_modern_media {
+	display: flex;
+	align-items: center;
+}
+.abpet_modern_details .abpet_modern_media img {
+	filter: saturate(1.08);
+}
+.abpet_modern_details .abpet_details_title {
+	font-size: clamp(2rem, 5vw, 4rem);
+	letter-spacing: -0.04em;
+}
+
+.abpet_modern_details ._f_equal_f_wrap_gap_section_15 {
+	align-items: stretch;
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	gap: var(--tb_gap);
+	overflow: hidden;
+	padding: 0;
+}
+
+.abpet_modern_details .post_top_filter {
+	align-items: center;
+	background: var(--tb_color_1);
+	border-radius: var(--tb_br);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--tb_gap_xs);
+	justify-content: space-between;
+	margin: var(--tb_gap) 0 var(--tb_gap_xs);
+	padding: var(--tb_gap_xs) var(--tb_gap);
+}
+
+.abpet_modern_details .abpet_booking {
+	border-radius: var(--tb_br_xl);
+	padding: var(--tb_gap_xs) var(--tb_gap) var(--tb_gap);
+}
+
+.abpet_modern_details .abp_tag {
+	border-radius: var(--tb_br_xl);
+	margin: var(--tb_gap_xxs) var(--tb_gap_xs) var(--tb_gap_xxs) 0;
+	padding: var(--tb_gap_xxs) var(--tb_gap_xs);
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+	div.abpet_area .abpet_light_intro > .abpet_light_summary {
+		flex: 1 1 280px;
+	}
+	div.abpet_area .abpet_light_intro > .abpet_light_media {
+		flex: 1 1 360px;
+	}
+	div.abpet_area .abpet_light_intro > .abpet_light_booking {
+		flex: 1 1 100%;
+	}
+	.abpet_light_details .abpet_schedule_list {
+		height: auto;
+	}
+}
+
+@media (max-width: 700px) {
+	.abpet_area ._f_equal_f_wrap_gap_section_15 {
+		flex-direction: column;
+	}
+
+	.abpet_default_intro > .abpet_details_column:first-child,
+	.abpet_light_details .abpet_light_media {
+		min-width: 0;
+	}
+
+	.abpet_light_details .abpet_light_media,
+	.abpet_light_details .abpet_light_summary,
+	.abpet_light_details .abpet_light_booking {
+		order: initial;
+		padding: var(--tb_gap_xs);
+	}
+	.abpet_light_details .abpet_light_booking {
+		padding: 0;
+	}
+	.abpet_light_details .post_top_filter {
+		align-items: stretch;
+		flex-direction: column;
+	}
+	.abpet_light_details .post_top_filter > label {
+		min-width: 0;
+		width: 100%;
+	}
+	.abpet_schedule_list {
+		height: auto;
+		min-height: 220px;
+	}
+	.abpet_schedule_list_items {
+		height: 200px;
+		max-height: 200px;
+	}
+	.abpet_schedule_dropdown {
+		left: 0;
+		right: auto;
+		width: min(320px, calc(100vw - 32px));
+	}
+
+	.abpet_modern_details .abpet_modern_media,
+	.abpet_modern_details .abpet_modern_summary {
+		padding: var(--tb_gap_xs);
+	}
+
+	.abpet_modern_details .post_top_filter {
+		align-items: stretch;
+		flex-direction: column;
+	}
+}
+/*************************************************************** Light Details Template - Responsive & Polish ************************************************/
+/* NOTE: the light root carries BOTH .abpet_area and .abpet_light_details on the same node,
+   so every rule below is scoped via #abpet_area.abpet_light_details (id + class) so it
+   reliably beats the framework selectors in abpet_lib.css. */
+@media only screen and (min-width: 1025px) {
+	#abpet_area.abpet_light_details .abpet_light_intro > .abpet_light_media {
+		flex: 1 1 400px;
+		max-width: 44%;
+	}
+	#abpet_area.abpet_light_details .abpet_light_intro > .abpet_light_summary {
+		flex: 1 1 0;
+		min-width: 300px;
+	}
+	#abpet_area.abpet_light_details .abpet_light_intro > .abpet_light_booking {
+		flex: 0 1 340px;
+		min-width: 280px;
+	}
+	#abpet_area.abpet_light_details .abpet_light_booking .abpet_schedule_list_items {
+		height: 260px;
+		max-height: 260px;
+	}
+}
+#abpet_area.abpet_light_details .abpet_light_media .abp_image {
+	height: 100%;
+	max-height: 540px;
+	min-height: 260px;
+	overflow: hidden;
+}
+#abpet_area.abpet_light_details .abpet_light_media .abp_image img._img_control {
+	display: block;
+	height: 100%;
+	max-height: 540px;
+	object-fit: cover;
+	object-position: center;
+}
+#abpet_area.abpet_light_details .abpet_light_media:hover .abp_image img._img_control {
+	transform: scale(1.03);
+}
+#abpet_area.abpet_light_details .abpet_light_summary .abp_tag {
+	overflow-wrap: anywhere;
+}
+#abpet_area.abpet_light_details .post_top_filter {
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_21);
+}
+#abpet_area.abpet_light_details .abpet_schedule_list_items {
+	scrollbar-color: var(--tb_color_theme_88) transparent;
+	scrollbar-width: thin;
+}
+#abpet_area.abpet_light_details .abpet_schedule_list_items::-webkit-scrollbar {
+	width: 6px;
+}
+#abpet_area.abpet_light_details .abpet_schedule_list_items::-webkit-scrollbar-thumb {
+	background: var(--tb_color_theme_88);
+	border-radius: 6px;
+}
+#abpet_area.abpet_light_details .abpet_schedule_list_items a {
+	padding: 12px 14px;
+}
+#abpet_area.abpet_light_details .abpet_faq_panel .faq_question {
+	padding: var(--tb_gap_xs);
+}
+#abpet_area.abpet_light_details .the_post_content img,
+#abpet_area.abpet_light_details .the_post_content video,
+#abpet_area.abpet_light_details .the_post_content iframe,
+#abpet_area.abpet_light_details .the_post_content table {
+	max-width: 100%;
+}
+#abpet_area.abpet_light_details .the_post_content img {
+	height: auto;
+}
+#abpet_area.abpet_light_details .the_post_content table {
+	display: block;
+	overflow-x: auto;
+}
+@media only screen and (min-width: 701px) and (max-width: 1024px) {
+	#abpet_area.abpet_light_details .abpet_schedule_list_items {
+		align-content: start;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		height: auto;
+		max-height: 320px;
+	}
+	#abpet_area.abpet_light_details .abpet_light_media .abp_image {
+		min-height: 240px;
+	}
+}
+@media only screen and (max-width: 900px) {
+	#abpet_area.abpet_light_details ._f_equal_f_wrap_gap_w_full {
+		display: block;
+	}
+	#abpet_area.abpet_light_details ._f_equal_f_wrap_gap_w_full > .abpet_details_column {
+		-webkit-flex-basis: 100%;
+		flex-basis: 100%;
+		max-width: 100%;
+		width: 100%;
+		margin-bottom: var(--tb_gap, 10px);
+	}
+	#abpet_area.abpet_light_details ._f_equal_f_wrap_gap_w_full > .abpet_details_column:last-child {
+		margin-bottom: 0;
+	}
+}
+@media only screen and (max-width: 700px) {
+	#abpet_area.abpet_light_details .abpet_light_intro {
+		gap: var(--tb_gap);
+		padding: var(--tb_gap_xs);
+	}
+	#abpet_area.abpet_light_details .abpet_light_media .abp_image {
+		border-radius: var(--tb_br);
+		height: auto;
+		max-height: none;
+		min-height: 0;
+	}
+	#abpet_area.abpet_light_details .abpet_light_media .abp_image img._img_control {
+		aspect-ratio: 16 / 10;
+		height: auto;
+		max-height: none;
+	}
+	#abpet_area.abpet_light_details .abpet_light_summary .abp_tag {
+		text-wrap: wrap;
+		white-space: normal;
+	}
+	#abpet_area.abpet_light_details .abpet_light_booking .abpet_schedule_list {
+		padding: var(--tb_gap_xs);
+	}
+	#abpet_area.abpet_light_details .abpet_schedule_list_items {
+		height: 220px;
+		max-height: 220px;
+	}
+	#abpet_area.abpet_light_details .post_top_filter > label {
+		flex: 1 1 auto;
+	}
+}
+@media only screen and (max-width: 480px) {
+	#abpet_area.abpet_light_details .abpet_light_summary {
+		padding: var(--tb_gap) var(--tb_gap_xs);
+	}
+	#abpet_area.abpet_light_details .total_continue {
+		-webkit-align-items: stretch;
+		align-items: stretch;
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
+	#abpet_area.abpet_light_details .total_continue .book_continue {
+		width: 100%;
+	}
+	#abpet_area.abpet_light_details .abpet_faq_panel .faq_question {
+		-webkit-align-items: flex-start;
+		align-items: flex-start;
+		gap: var(--tb_gap_xs);
+	}
+	#abpet_area.abpet_light_details .related_item_area ._panel_head {
+		-webkit-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
+}
+.abpet_customer_orders {
+	margin: 24px 0;
+}
+.abpet_customer_orders h2 {
+	margin-bottom: 16px;
+}
+.abpet_customer_orders_list {
+	display: grid;
+	gap: 12px;
+}
+.abpet_customer_order {
+	display: grid;
+	grid-template-columns: minmax(150px, 1fr) minmax(130px, auto) auto;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+}
+.abpet_customer_order time {
+	display: block;
+	margin-top: 4px;
+	color: #6b7280;
+	font-size: 13px;
+}
+.abpet_customer_order > div:nth-child(2) {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+@media (max-width: 600px) {
+	.abpet_customer_order {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.abpet_customer_order .button {
+		width: 100%;
+		text-align: center;
+	}
 }

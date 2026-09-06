@@ -27,6 +27,9 @@
 				if (is_tax('abpet_brand')) {
 					return ABPET_Function::template_path('page/brand.php');
 				}
+				if (is_tax('abpet_organizer')) {
+					return ABPET_Function::template_path('page/organizer.php');
+				}
 				return (string)$template;
 			}
 		}

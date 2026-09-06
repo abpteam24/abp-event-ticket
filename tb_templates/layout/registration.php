@@ -12,7 +12,8 @@
 			if ( $sale_continue == 'on' ) { ?>
                 <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
-                    <input type="hidden" name="event_date" value="<?php echo esc_attr( $form_data['event_date'] ?? '' ); ?>">
+                    <input type="hidden" name="event_date" value="<?php echo esc_attr( $form_data['start_date'] ?? $form_data['event_date'] ?? '' ); ?>">
+                    <input type="hidden" name="session_time" value="<?php echo esc_attr( $form_data['session_time'] ?? $form_data['start_time'] ?? '' ); ?>">
                     <input type="hidden" name="seat_type" value="<?php echo esc_attr( $seat_type ); ?>">
                     <input type="hidden" name="same_attendee" value="<?php echo esc_attr( $post_infos['display_single_form'] ?? 'on' ); ?>">
                     <input type="hidden" name="min_qty" value="<?php echo esc_attr( $post_infos['min_qty'] ?? 1 ); ?>">

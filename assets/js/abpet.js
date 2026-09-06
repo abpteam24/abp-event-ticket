@@ -90,18 +90,31 @@
             }
         });
     });
-    //==============//
-    abpet_booking.on('change', "[name='journey_time'] , [name='sp_id'] ", function (e) {
+    // Refresh ticket/seat availability for the selected event date and session.
+    abpet_parent.on('change', '#abpet_search_area [name="start_date"], .post_top_filter [name="start_date"]', function () {
+        let date = $(this).val();
+        abpet_booking.find('form [name="event_date"]').val(date);
+        abpet_booking.find('form [name="session_time"]').val('');
+        abpet_booking.find('form [name="session_time"]').first().trigger('change');
+    });
+    abpet_booking.on('change', "[name='session_time'] , [name='sp_id'] ", function (e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
         let target = $(this).closest(".booking_area");
-        let parent = target.closest("form");
+        let parent = target.length ? target.closest("form") : $(this).closest('.abpet_booking').find('form').first();
+        target = target.length ? target : parent.find('.booking_area');
         let target_html = target.find('.ticket_content');
         let formData = abpet_get_form_data(target_html);
+        let booking_area = parent.closest('.abpet_booking');
+        if ($(this).attr('name') === 'session_time') {
+            parent.find('[name="session_time"]').val($(this).val());
+        }
         formData.append('post_id', parent.find('[name="post_id"]').val());
-        formData.append('double_route', parent.find('[name="double_route"]').val());
-        formData.append('action', 'abpet_load_transport_data');
+        formData.append('sp_id', parent.find('[name="sp_id"]').val() || '');
+        formData.append('event_date', parent.find('[name="event_date"]').val() || booking_area.find('[name="start_date"]').val());
+        formData.append('session_time', parent.find('[name="session_time"]').val() || booking_area.find('[name="session_time"]').val());
+        formData.append('action', 'abpet_load_booking_data');
         formData.append('nonce', abpet_infos.nonce);
         $.ajax({
             type: 'POST', url: abpet_infos.ajax_url, contentType: false, processData: false, data: formData,
@@ -113,6 +126,21 @@
                 abpet_spinner_remove(target);
                 //console.log(response);
                 abpet_toast_msg(response.data.msg, response.data.type);
+                if (response.data && Array.isArray(response.data.times)) {
+                    let timeFields = booking_area.find('[name="session_time"]');
+                    timeFields.each(function () {
+                        let field = $(this);
+                        if (field.is('select')) {
+                            field.empty();
+                            response.data.times.forEach(function (time) {
+                                field.append($('<option>', {value: time.value, text: time.label}));
+                            });
+                            field.val(response.data.selected_time || '');
+                        } else {
+                            field.val(response.data.selected_time || '');
+                        }
+                    });
+                }
                 if (response.data && response.data.hasOwnProperty('html') && target_html.length > 0) {
                     target_html.html(response.data.html).promise().done(function () {
                         abpet_init(target_html);
@@ -160,7 +188,6 @@
         let seat_type = $.trim(form.find('[name="seat_type"]').val());
         let max_qty = parseInt(form.find('[name="max_qty"]').val());
         let qty = get_quantity(parent, seat_type);
-        alert(qty);
         if (max_qty > 0 && qty > max_qty) {
             $this.val(parseInt($this.val()) - 1);
             abpet_toast_msg(form.find('[name="max_qty"]').attr('data-msg'), 'warn');
@@ -171,7 +198,8 @@
         e.preventDefault();
         all_management($(this));
     });
-    abpet_booking.on('click', '.sp_cell.available', function (e) {
+    // Delegate to the stable plugin root so seats added by AJAX remain interactive.
+    abpet_parent.on('click', '.abpet_booking .sp_cell.available', function (e) {
         e.preventDefault();
         let current = $(this);
         current.toggleClass('selected').promise().done(function () {
@@ -186,8 +214,7 @@
         let seat_type = $.trim(form.find('[name="seat_type"]').val());
         if (get_quantity(parent, seat_type) > 0 ) {
             if (submit_validation(current) < 1) {
-                form.find("[name='add-to-cart']").trigger('click');
-                form.find("[name='add-admin-order']").trigger('click');
+                form.find("[name='add-to-cart'], [name='add-admin-order']").first().trigger('click');
             }
         } else {
             abpet_alert(current);

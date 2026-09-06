@@ -20,7 +20,7 @@
             $categories = array_unique($categories);
         }
         $cat_count = count($categories);
-        if ($cat_count > 1 || $style === 'grid' || $style === 'list') {
+        if ($cat_count > 1 || $style === 'grid' || $style === 'list' || $style === 'minimal') {
             ?>
             <div class="post_top_filter">
                 <?php

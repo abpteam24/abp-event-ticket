@@ -12,7 +12,6 @@
                 //echo '<pre>';            print_r(ABPET_Query::get_sold_seat($form_data));            echo '</pre>';
                 ?>
 
-                <input type="hidden" name="start_time" value="<?php echo esc_attr($form_data['start_time'] ?? ''); ?>">
                 <input type="hidden" name="sp_selected_seat" value="">
                 <input type="hidden" name="sp_selected_seat_id" value="">
                 <?php if (sizeof($_ticket_infos) > 1) { ?>

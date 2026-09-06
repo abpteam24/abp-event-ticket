@@ -333,6 +333,13 @@
                             'default' => 'on',
                         ),
                         array(
+                            'name' => 'event_date_list',
+                            'label' => __('Event Date and Time List', 'abp-event-ticket'),
+                            'desc' => __('Show a clickable date and time list on event details pages when an event has more than one date.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'on',
+                        ),
+                        array(
                             'name' => 'organizer',
                             'label' => ABPET_Function::organizer_label(),
                             'desc' => __('If you do not want to use Organizer , simply turn this switch OFF. Once disabled, Organizer Title field and related Organizer options will be completely removed from the site.', 'abp-event-ticket'),

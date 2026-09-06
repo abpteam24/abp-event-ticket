@@ -18,7 +18,7 @@
                 return;
             }
             ?>
-            <div class="_section_card_xs_w_full faq_area">
+            <div class="_section_card_xs_w_full faq_area abpet_faq_panel">
                 <h4 class="_abp">
                     <span class="_mar_r_xxs">❓</span>
                     <?php esc_html_e('Frequently Asked Questions', 'abp-event-ticket'); ?>

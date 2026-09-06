@@ -4,10 +4,10 @@
 	}
 	if ( wp_is_block_theme() ) { ?>
 		<!DOCTYPE html>
-		<html  lang="" <?php language_attributes(); ?>>
+		<html lang="" <?php language_attributes(); ?>>
 		<head>
 			<meta charset="<?php bloginfo( 'charset' ); ?>">
-			<title></title>
+			<title><?php echo esc_html( wp_get_document_title() ); ?></title>
 			<?php
 				do_blocks( '<div class="wp-block-group"></div>' );
 				wp_head();
@@ -27,7 +27,11 @@
 	}
 	$term = get_queried_object();
 	if ( $term instanceof WP_Term ) {
-		printf( '<main class="abpet_area"><div class="abp_container"><h1 class="abpet_details_title">%s</h1>%s</div></main>', esc_html( $term->name ), do_shortcode( '[abpet-post cat_id="' . absint( $term->term_id ) . '"]' ) );
+		printf(
+			'<main class="abpet_area"><div class="abp_container"><h1 class="abpet_details_title">%s</h1>%s</div></main>',
+			esc_html( $term->name ),
+			do_shortcode( '[abpet-post organizer_id="' . absint( $term->term_id ) . '"]' )
+		);
 	}
 	if ( wp_is_block_theme() ) {
 		?>

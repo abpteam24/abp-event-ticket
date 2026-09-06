@@ -9,13 +9,14 @@
         $all_post_ids = $post_infos['all_post'] ?? [$post_id];
         $form_type = $form_data['form'] ?? 'inline';
         $brand_icon = ABPET_Function::icon();
-        if (isset($_SESSION['abpet_cart_success']) && empty($admin_order)) {
+        $abpet_cart_success = function_exists('WC') && WC()->session ? WC()->session->get('abpet_cart_success') : '';
+        if (!empty($abpet_cart_success) && empty($admin_order)) {
             ?>
             <div class="toast_notice" data-type="success">
-                <?php echo esc_html(sanitize_text_field(wp_unslash($_SESSION['abpet_cart_success']))); ?>
+                <?php echo esc_html(sanitize_text_field($abpet_cart_success)); ?>
             </div>
             <?php
-            unset($_SESSION['abpet_cart_success']);
+            WC()->session->set('abpet_cart_success', null);
         }
         $all_dates = ABPET_Function::date_all($all_post_ids);
         $upcoming_date = current($all_dates);

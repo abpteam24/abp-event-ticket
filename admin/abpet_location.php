@@ -14,7 +14,7 @@
 			public function global_location(): void {
 				$label = ABPET_Function::location_label(); ?>
                 <div class="_fj_between">
-                    <h5 class="_abp_gap_xs"><span class="fas fa-route"></span><?php echo esc_html( $label ); ?></h5>
+                    <h5 class="_abp_gap_xs"><span class="fas fa-map-marker-alt"></span><?php echo esc_html( $label ); ?></h5>
 					<?php ABPET_Layout::button_global_popup( 'tax_location', __( 'Add New', 'abp-event-ticket' ) . ' ' . $label ); ?>
                 </div>
 				<?php ABPET_Layout::info_text( 'abpet_location' ); ?>

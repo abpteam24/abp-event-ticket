@@ -1,6 +1,6 @@
 === ABP Event Ticket ===
 Contributors: abpteam
-Tags: transport booking, bus booking, seat reservation, ticket booking,
+Tags: event tickets, ticket booking, seat reservation, event registration, WooCommerce
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -8,423 +8,223 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce transport booking for bus, ferry, shuttle and coach services with seat plans, ticket types, routes, schedules and return trips.
+WooCommerce event ticketing with general admission tickets, reserved seating, flexible ticket types, attendee forms, and event schedules.
 
 == Description ==
 
-ABP Event Ticket Plugin transforms WooCommerce into a complete transportation ticketing platform, enabling businesses to manage routes, reservations, and online ticket sales efficiently from a single dashboard.
+ABP Event Ticket turns WooCommerce into a complete event ticketing and registration system. Create events, configure ticket types and prices, publish event details, collect attendee information, and sell tickets through the standard WooCommerce checkout.
 
-Designed for bus, ferry, launch, shuttle, coach, van, minibus, and other passenger transport services, the plugin provides a flexible booking system with customizable ticket types, reusable seat plans, route and schedule management, passenger information forms, additional services, and booking.
+The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated as tickets are booked.
 
-Customers can search available transport services, select travel dates, choose ticket types and seats, provide passenger information, and complete bookings through WooCommerce checkout.
-
-ABP Event Ticket supports both one-way and return trip bookings. Customers can book an outbound journey and a return journey using the same transport when return travel is configured and available.
-
-Seat plans are highly customizable and can be created with drag-and-drop controls, automatic numbering, dynamic ticket type assignment, custom cells, flexible layouts, and multiple design options. The same seat plan can be reused across multiple transports and assigned multiple times within the same transport for multi-layer seating arrangements.
-
-Administrators can create reusable global ticket types, seat plans, stops, categories, organizers, brands, features, additional services, passenger forms, FAQs, and Terms & Conditions, then use them across multiple transports.
+Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, and Terms & Conditions. Global configuration can be imported into an individual event and customized when needed.
 
 == Key Features ==
 
-* Passenger transport booking
-* One-way trip booking
-* Return trip booking
-* Return booking using the same transport
-* Bus, ferry, launch, shuttle, coach, van, and minibus support
-* Route and schedule management
-* Event management dashboard
-* Event list with pagination
-* Event edit, clone, view, and delete options
-* Filterable booking and order list
-* Order pagination and cancellation
-* Detailed booking and order information
-* Flexible ticket type management
+* Event creation and management
+* Event list with pagination and status filters
+* Event edit, clone, view, trash, restore, and permanent delete actions
+* General admission ticket sales
+* Reserved seat ticket sales
 * Reusable global ticket types
-* Custom and reusable seat plans
-* Multi-layer seat plan support
-* Drag-and-drop seat plan design
-* Automatic seat numbering
-* Custom seat labels and prefixes
-* Dynamic ticket type assignment
-* Custom seat cells and layout options
+* Multiple ticket types and pricing options
+* Minimum, maximum, and reserved quantity controls
+* Reusable seat plans
+* Drag-and-drop seat plan designer
+* Automatic seat numbering and custom seat prefixes
+* Custom seat labels, cells, dimensions, spacing, and layout
+* Ticket-type assignment to seats
+* Multiple seat plan instances and seat layers
 * Real-time seat availability
-* Date and schedule configuration
-* Boarding and drop-off stop management
-* Passenger information forms
-* Additional services
-* FAQ management
-* Terms & Conditions management
-* Global and transport-specific configuration
-* Global stops, categories, organizers, brands, and features
-* Global feature enable/disable controls
-* Related transport display
-* Dynamic pricing and quantity controls
-* WooCommerce checkout and payment integration
-* Responsive frontend booking interface
+* Specific-date and periodic-date event schedules
+* Date-wise and day-wise time configuration
+* Advance booking and sale closing buffer controls
+* Location, category, organizer, and brand management
+* Event features and related event display
+* Configurable attendee information forms
+* Optional additional services with pricing
+* Event FAQs and Terms & Conditions
+* Global and event-specific configuration
+* Feature enable and disable controls
+* Event search, filtering, and pagination
+* Event details templates and display themes
+* Event gallery and image slider
+* WooCommerce cart, checkout, payment, tax, coupon, and order integration
+* Booking and order details in the WordPress dashboard
 * Translation-ready
+* Gutenberg-compatible event post type and taxonomies
+* Polylang-compatible frontend language filtering when Polylang is active
 
-== Return Trip Booking ==
+== Ticket Types and Pricing ==
 
-ABP Event Ticket supports return journey booking for passenger transport services.
+Create ticket types such as Adult, Child, VIP, or Early Bird and configure their prices and quantities. Ticket types can be created globally and reused across events. For reserved seating events, ticket types can also be assigned to specific seats or seat areas.
 
-Customers can book an outbound journey and a return journey when return travel is configured for the transport.
+== Seat Plan Designer ==
 
-Return booking can be used when passengers need to travel to a destination and return later using the same transport service.
+The seat plan designer lets you create reusable seating layouts for theaters, conferences, classrooms, venues, and other events.
 
-This can be useful for:
+Seat plans support:
 
-* Bus return journeys
-* Ferry and launch return trips
-* Shuttle return services
-* Tourist transportation
-* Event transportation
-* Scheduled passenger return journeys
-
-== Global Data & Reusable Configuration ==
-
-ABP Event Ticket allows administrators to create common transport data globally and reuse it across multiple transports.
-
-Global data includes:
-
-* Ticket Types
-* Seat Plans
-* Location
-* Categories
-* Organizers
-* Brands
-* Features
-* Additional Services
-* Passenger Forms
-* FAQs
-* Terms & Conditions
-
-Global data helps reduce repetitive configuration when managing multiple transports.
-
-Supported global configurations can be imported and customized for individual transports when required.
-
-== Global Ticket Types ==
-
-Create ticket types once and reuse them across multiple transports.
-
-Ticket types can be assigned while designing seat plans, allowing different seats or seating areas to use different ticket categories.
-
-Global ticket types are managed independently from individual transports, making them easier to maintain and reuse.
-
-== Global Seat Plans ==
-
-Create a seat plan once and assign it to multiple transports.
-
-The same seat plan can also be assigned multiple times to the same transport, allowing multi-layer seating arrangements.
-
-Seat plan design supports:
-
-* Drag-and-drop seat positioning
-* Automatic numbering
-* Dynamic ticket type assignment
+* Drag-and-drop positioning
+* Automatic seat numbering
 * Custom seat names and prefixes
 * Custom cells and text
 * Flexible rows and columns
-* Adjustable cell dimensions
-* Adjustable spacing and gaps
+* Adjustable cell size and gaps
+* Ticket-type assignment
 * Multiple layout configurations
-* Background and visual customization
-* Multi-layer seat arrangements
-* Clone Seat plan
-* Edit Seat plan
-* Delete Seat plan
-* View Seat plan
+* Visual and background customization
+* Clone, edit, view, and delete actions
 
-== Event Management ==
+== Event Scheduling ==
 
-Manage transports from a dedicated WordPress dashboard.
+Configure when tickets are available for each event:
 
-* Create transports
-* Edit transports
-* Clone transports
-* View transport details
-* Delete transports
-* Manage routes
-* Manage schedules
-* Configure ticket types
-* Configure seat plans
-* Configure pricing
-* Configure dates and availability
-* Manage frontend display settings
-* Display related transports
+* Specific event dates
+* Periodic dates
+* Date-wise times
+* Day-wise times
+* Advance booking date limits
+* Sale closing buffer time
+* Availability and quantity controls
 
-== Booking and Order Management ==
+== Attendee Information and Services ==
 
-Manage transport bookings and WooCommerce orders from the dashboard.
+Collect the information required for registration through configurable attendee forms. Add optional services, such as meals, merchandise, or other event extras, with separate prices.
 
-* Filter bookings and orders
-* Paginate order results
-* View complete order details
-* View passenger information
-* View ticket and seat information
-* View booking information
-* Cancel orders
-* WooCommerce order integration
-
-== Route, Stop & Schedule Management ==
-
-Create and manage transportation routes and their stops.
-
-* Global stop management
-* Boarding stops
-* Drop-off stops
-* Boarding and drop-off stops
-* Multiple pickup points
-* Multiple drop-off points
-* Route direction configuration
-* Date-wise schedules
-* Travel time configuration
-* Special date configuration
-* Availability controls
-
-== Seat Reservation & Ticket Types ==
-
-Customers can select available seats during booking when a seat plan is enabled.
-
-The seat system supports:
-
-* Custom seat layouts
-* Ticket-type based seating
-* Seat name prefixes
-* Automatic seat numbering
-* Custom seat labels
-* Multiple seat layers
-* Reusable seat plans
-* Real-time seat availability
-* Flexible visual seat design
-
-== Pricing & Quantity Control ==
-
-Configure booking quantity and pricing according to transport requirements.
-
-* Minimum quantity
-* Maximum quantity
-* Reserved quantity
-* Dynamic price calculation
-* Multiple pricing configurations
-* Ticket and seat based pricing options
-
-== Availability Management ==
-
-Control when a transport can be booked.
-
-* Date-wise availability
-* Weekend availability controls
-* Special date configuration
-* Off-date configuration
-* Availability overrides
-* Schedule and time configuration
-
-== Passenger Information ==
-
-Collect passenger information during the booking process using configurable passenger forms.
-
-* Global passenger forms
-* Event-specific passenger forms
-* Custom passenger fields
-* Passenger information management
-
-== Additional Services ==
-
-Offer optional services during booking.
-
-* Global additional services
-* Event-specific services
-* Optional service selection
-* Service pricing
-
-== FAQ & Terms and Conditions ==
-
-Create reusable customer information globally or customize it for individual transports.
-
-* Global FAQ configuration
-* Event-specific FAQ configuration
-* Global Terms & Conditions
-* Event-specific Terms & Conditions
-* Import global configuration
-* Customize imported configuration for a transport
-
-== Feature Controls ==
-
-Major plugin features can be enabled or disabled globally from the configuration panel.
-
-This allows administrators to keep the dashboard and frontend focused on the features required for their transportation business.
-
-== Frontend Booking Experience ==
-
-The frontend booking experience can include:
-
-* Event listing pages
-* Search and filtering
-* Event details
-* Related transports
-* Route and stop information
-* Schedule information
-* Travel date selection
-* Return date selection
-* Ticket type selection
-* Seat selection
-* Passenger information forms
-* Additional services
-* Dynamic pricing
-* WooCommerce checkout
-* Responsive booking interface
+Global attendee forms and additional services can be imported into an event and customized for that event.
 
 == WooCommerce Integration ==
 
-ABP Event Ticket uses WooCommerce for checkout and payment processing.
+WooCommerce is required for ticket cart and checkout functionality. Customers can select an event, ticket type, date, seats (when enabled), attendee details, and optional services before completing payment through any payment gateway supported by WooCommerce.
 
-Customers can complete transport bookings through WooCommerce checkout and use payment gateways supported by WooCommerce.
+WooCommerce manages the cart, checkout, payment, tax, coupon, customer account, and order workflow.
 
-WooCommerce handles payment processing, taxes, coupons, customer accounts, and order management according to the site's WooCommerce configuration.
+== Shortcodes ==
 
-== Recommended For ==
+Add these shortcodes to any WordPress page:
 
-* Bus operators
-* Ferry and launch services
-* Shuttle services
-* Coach operators
-* Van and minibus operators
-* Intercity transport services
-* Local passenger transport
-* Airport transfer services
-* Corporate transportation
-* School and college transportation
-* Tourist transportation
-* Event transportation
-* Group travel transportation
-* Passenger transport agencies
-* Multi-route transport businesses
+`[abpet-booking]`
+
+Displays the event listing and booking interface, including search, filters, ticket selection, attendee forms, and checkout flow.
+
+`[abpet-post]`
+
+Displays an event listing without the booking wrapper.
+
+`[abpet-gallery]`
+
+Displays event images in a gallery or slider.
+
+Common attributes include:
+
+* `post_id` - Display a specific event.
+* `cat_id` - Filter by category.
+* `loc_id` - Filter by location.
+* `organizer_id` - Filter by organizer.
+* `brand_id` - Filter by brand.
+* `style` - Listing style: `grid`, `list`, `missionary`, or `minimal`.
+* `slider_style` - Gallery style: `gallery` or `slider`.
+* `pagination` - Enable or disable pagination.
+* `pagination-style` - Pagination mode: `live` or `number`.
+* `column` - Number of listing columns.
+* `sort` - Event order: `ASC` or `DESC`.
+
+Example:
+
+`[abpet-booking style="grid" column="3" pagination="yes"]`
+
+Minimal event list example:
+
+`[abpet-post style="minimal" show="8" pagination-style="number"]`
 
 == Requirements ==
 
 * WordPress 6.2 or later
 * PHP 7.4 or later
-* WooCommerce
+* MySQL 5.7 or later
+* WooCommerce 8.0 or later
 
-== Shortcodes ==
+== Gutenberg and Multilingual Support ==
 
-Use these shortcodes to display transport content on your website:
+The event post type and all event taxonomies are registered with REST API support, so events and taxonomies can be edited with the Gutenberg block editor. The plugin's event listing and booking shortcodes can also be inserted into Gutenberg Shortcode blocks.
 
-[abpet-booking] — Display transport listings and booking functionality.
+The plugin is translation-ready and supports Polylang's frontend language filtering for event listings. Create a translated event and translated taxonomy terms in Polylang for each language you publish. WooCommerce handles translated checkout and customer account pages according to the multilingual plugin configuration.
 
-[abpet-post] — Display transport listings.
-
-[abpet-gallery] — Display transport images and galleries.
+Plugin-specific global configuration labels, ticket names, and option values are stored as reusable settings and are not automatically duplicated or translated by Polylang. Translate those values through your multilingual workflow or use event-specific values when each language needs different content.
 
 == Installation ==
 
 = Automatic Installation =
 
 1. Install and activate WooCommerce.
-2. Go to Plugins → Add New in your WordPress dashboard.
+2. In WordPress, go to Plugins > Add New.
 3. Search for "ABP Event Ticket".
 4. Install and activate the plugin.
 5. Open Event Ticket from the WordPress admin menu.
 6. Configure the global settings.
-7. Create global ticket types, seat plans, stops, and other reusable data as required.
-8. Create a transport and configure its route, schedule, ticket types, seat plan, pricing, and availability.
-9. Configure return trip options when required.
-10. Add the booking shortcode to a page.
+7. Create ticket types, seat plans, dates, locations, and other reusable data.
+8. Create an event and configure its tickets, prices, schedule, and availability.
+9. Add one of the ABP Event Ticket shortcodes to a page.
 
 = Manual Installation =
 
 1. Download the plugin ZIP file.
-2. Go to Plugins → Add New → Upload Plugin.
-3. Upload the plugin ZIP file.
-4. Activate the plugin.
+2. Go to Plugins > Add New > Upload Plugin.
+3. Upload and install the ZIP file.
+4. Activate ABP Event Ticket.
 5. Install and activate WooCommerce if it is not already installed.
-6. Open Event Ticket from the WordPress admin menu and complete the configuration.
+6. Configure the plugin and create your events.
 
 == Frequently Asked Questions ==
 
-= What types of passenger transport can I manage? =
+= Is WooCommerce required? =
 
-ABP Event Ticket is designed for passenger transport services such as buses, ferries, launches, shuttles, coaches, vans, minibuses, and similar ticket-based transportation services.
+Yes. WooCommerce is required for the cart, checkout, payment, and order functionality.
 
-= Can I create one-way and return bookings? =
+= Can I sell both general admission and reserved seat tickets? =
 
-Yes. The plugin supports one-way and return trip bookings when return travel is configured for the transport.
-
-= Can customers book a return trip using the same transport? =
-
-Yes. Customers can book an outbound journey and a return journey using the same transport when return travel is configured and available.
+Yes. Each event can use general admission tickets or a configurable seat plan for reserved seating.
 
 = Can I create reusable ticket types? =
 
-Yes. Ticket types can be created globally and reused across multiple transports and seat plans.
+Yes. Global ticket types can be reused across multiple events.
 
-= Can I reuse a seat plan on multiple transports? =
+= Can I reuse a seat plan? =
 
-Yes. A global seat plan can be assigned to multiple transports.
+Yes. A global seat plan can be assigned to multiple events and can be used multiple times within an event.
 
-= Can I use the same seat plan multiple times in one transport? =
+= Can I create custom seat layouts? =
 
-Yes. The same seat plan can be assigned multiple times to the same transport, which can be useful for multi-layer seating arrangements.
+Yes. The seat plan designer supports drag-and-drop positioning, automatic numbering, custom labels, ticket-type assignment, custom cells, and layout controls.
 
-= Can I create a custom seat layout? =
+= Can I collect attendee information? =
 
-Yes. The seat plan designer provides drag-and-drop controls, automatic numbering, dynamic ticket type assignment, custom cells, and multiple layout options.
+Yes. Create global attendee forms or configure event-specific attendee fields.
 
-= Can I manage common transport data globally? =
+= Can I add optional services to a ticket booking? =
 
-Yes. Ticket types, seat plans, stops, categories, organizers, brands, features, additional services, passenger forms, FAQs, and Terms & Conditions can be created globally and reused across transports.
+Yes. Additional services can be created globally or for a specific event and can include their own prices.
 
-= Can I customize global settings for an individual transport? =
+= Can I configure recurring or specific event dates? =
 
-Yes. Where supported, global configurations can be imported and customized for an individual transport.
+Yes. Events support both specific dates and periodic dates, with day-wise and date-wise time configuration.
 
-= Can I enable or disable plugin features? =
+= Can I customize the event listing and gallery? =
 
-Yes. Major features can be enabled or disabled globally from the configuration settings.
-
-= Does the plugin use WooCommerce payment gateways? =
-
-Yes. Payments are handled through WooCommerce and its supported payment gateways.
-
-= Can I manage bookings and orders from the dashboard? =
-
-Yes. The plugin provides a filterable order list with pagination, order cancellation, and detailed booking and order information.
+Yes. Use the listing and gallery shortcodes with supported attributes to control the displayed event content and layout.
 
 = Is the plugin translation-ready? =
 
-Yes. ABP Event Ticket is translation-ready and compatible with standard WordPress localization tools.
+Yes. The plugin uses the WordPress localization system and is translation-ready.
 
-= Can I use the plugin in a local development environment? =
+== Support ==
 
-Yes. The plugin can be used in local WordPress development environments such as XAMPP and LocalWP.
+For help and bug reports:
 
-
-== Need help or have suggestions? ==
-If you need any further assistance or support, do contact us at this [🎫 support form](https://abp-team.com/support-desk/). We are very open to your suggestions. So do feel free to tell us if there is anything we can do to improve the plugin.
-
-🌐 [Live Demo](https://transport-booking.abp-team.com/)
-📖 [Documentation](https://transport-booking.abp-team.com/documentation/)
-💬 [Support Forum](https://wordpress.org/support/plugin/abp-event-ticket/)
-🐛 [Bug Reports](https://github.com/abpteam24/abp-event-ticket/issues)
-📧 Email: support@abp-team.com
-
-If you find ABP Event Ticket useful, please leave a ⭐⭐⭐⭐⭐ review on WordPress.org — it really helps!
-
-
-== Screenshots ==
-
-1. Event list page with grid view and transport management options.
-2. Event list page with list view and management controls.
-3. Order list page with filtering and pagination.
-4. Global data configuration panel for reusable transport data.
-5. Global configuration and feature controls.
-6. Ticket type and pricing configuration.
-7. Seat plan designer with dynamic ticket type assignment.
-8. Custom seat plan layout and design options.
-9. Event route, stop, and schedule configuration.
-10. Frontend transport booking and seat selection interface.
-11. Return trip booking configuration.
-12. Frontend return trip booking.
+* Support: https://abp-team.com/support-desk/
+* Support Forum: https://wordpress.org/support/plugin/abp-event-ticket/
+* Bug Reports: https://github.com/abpteam24/abp-event-ticket/issues
+* Email: support@abp-team.com
 
 == Changelog ==
 
@@ -435,4 +235,5 @@ If you find ABP Event Ticket useful, please leave a ⭐⭐⭐⭐⭐ review on Wo
 == Upgrade Notice ==
 
 = 1.0.0 =
+
 Initial release.

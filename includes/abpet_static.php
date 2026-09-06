@@ -44,7 +44,6 @@
 					'loc_name'                    => __( 'Note: Please enter a Location name — the field cannot be empty. ', 'abp-event-ticket' ),
 					'loc_slug'                    => __( 'Note: Location slug is optional — leave it blank to auto-generate from the name. ', 'abp-event-ticket' ),
 					'loc_des'                     => __( 'Note: Location Address is optional — you can add details to better explain this Location Full  Address. ', 'abp-event-ticket' ),
-					'display_pd'                  => __( 'You can add multiple pickup/drop-off  points for a single location. For each pickup/drop-off  point, set the travel time relative to the main location. Use a negative value (in minutes) if the pickup/drop-off  point is before the main location, or a positive value (in minutes) if it is after the main location. For example, use -15 for 15 minutes before the main location, or 20 for 20 minutes after it.', 'abp-event-ticket' ),
 					//=============================//
 					'no_brand'                    => __( 'No Brand Found ! ', 'abp-event-ticket' ),
 					'brand_name'                  => __( 'Note: Please enter a Brand name — the field cannot be empty. ', 'abp-event-ticket' ),
@@ -100,7 +99,6 @@
 					'not_match'                   => __( 'No Results Found !', 'abp-event-ticket' ),
 					'not_found'                   => __( 'Nothing Found !', 'abp-event-ticket' ),
 					'no_sp'                       => __( 'No Seat Plan Found. Click Add New to create one.', 'abp-event-ticket' ),
-					'transport_not_available'     => __( 'The Event is not available for the selected date and time. Please choose a different schedule.', 'abp-event-ticket' ),
 					//=============================//
 					'no_ticket_type'              => __( 'No Ticket Type Found ! Please add Ticket Type to use Multiple Ticket Type', 'abp-event-ticket' ),
 					'no_ticket_config'            => __( 'No ticket configuration is available for this Event. Please contact the administrator.', 'abp-event-ticket' ),

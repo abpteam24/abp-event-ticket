@@ -16,7 +16,7 @@
             }
             if (!empty($infos) && is_string($infos)) {
                 ?>
-                <div class="_section_card_xs_w_full term_condition">
+                <div class="_section_card_xs_w_full term_condition abpet_tc_panel">
                     <h4 class="_abp"><span class="_mar_r_xxs">🤝</span> <?php esc_html_e('Term & Conditions', 'abp-event-ticket'); ?></h4>
                     <div class="_divider_xs"></div>
                     <?php

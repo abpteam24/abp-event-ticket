@@ -26,7 +26,18 @@
 		the_post();
 	}
 	//do_action( 'woocommerce_before_single_product' );
-    do_action( 'abpet_load_details_template' ,get_the_id() );
+    $abpet_cart_success = function_exists( 'WC' ) && WC()->session ? WC()->session->get( 'abpet_cart_success' ) : '';
+    if ( ! empty( $abpet_cart_success ) ) {
+        ?>
+        <div class="abpet_area">
+            <div class="toast_notice" data-type="success">
+                <?php echo esc_html( sanitize_text_field( $abpet_cart_success ) ); ?>
+            </div>
+        </div>
+        <?php
+        WC()->session->set( 'abpet_cart_success', null );
+    }
+    do_action( 'abpet_load_details_template', get_the_id() );
 	if ( wp_is_block_theme() ) {
 		?>
         <footer class="wp-block-template-part">

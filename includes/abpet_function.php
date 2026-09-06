@@ -110,6 +110,45 @@
 				$value = ( ABPET_On_Off[ $key ] ?? 'on' ) ?: 'on';
 				return $value !== 'off';
 			}
+			public static function event_schedule_url( int $post_id, string $event_date, string $session_time = '' ): string {
+				$args = [ 'event_date' => $event_date ];
+				if ( $session_time !== '' ) {
+					$args['session_time'] = $session_time;
+				}
+				return add_query_arg( $args, get_permalink( $post_id ) );
+			}
+			public static function event_schedule_items( int $post_id, array $dates, array $time_infos ): array {
+				$items = [];
+				foreach ( $dates as $date ) {
+					$date = gmdate( 'Y-m-d', strtotime( (string) $date ) );
+					if ( isset( $items[ $date ] ) ) {
+						continue;
+					}
+					$times = ABPET_Function::time( $time_infos, $date );
+					$items[ $date ] = [
+						'date'  => $date,
+						'times' => array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) $times ) ) ) ),
+					];
+				}
+				return array_values( $items );
+			}
+			public static function event_schedule_selection( array $dates, array $time_infos ): array {
+				$dates = array_values( array_unique( array_map( static function ( $date ): string {
+					return gmdate( 'Y-m-d', strtotime( (string) $date ) );
+				}, $dates ) ) );
+				$start_date = (string) ( $dates[0] ?? '' );
+				$requested_date = isset( $_GET['event_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_date'] ) ) : '';
+				if ( $requested_date && in_array( $requested_date, $dates, true ) ) {
+					$start_date = $requested_date;
+				}
+				$all_times = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $start_date ) ) ) ) );
+				$start_time = (string) ( $all_times[0] ?? '' );
+				$requested_time = isset( $_GET['session_time'] ) ? sanitize_text_field( wp_unslash( $_GET['session_time'] ) ) : '';
+				if ( $requested_time && in_array( $requested_time, $all_times, true ) ) {
+					$start_time = $requested_time;
+				}
+				return [ $dates, $start_date, $all_times, $start_time ];
+			}
 			public static function array_to_string( $array ) {
 				$ids = '';
 				if ( sizeof( $array ) > 0 ) {
@@ -158,52 +197,41 @@
 				}
 				return 0;
 			}
-			public static function already_in_cart( $post_id, $bp, $dp, $bp_date, $seat_name ): int {
-				$count = 0;
-				if ( is_admin() && str_contains( wp_get_referer(), 'admin_order' ) ) {
-					return $count;
+			public static function polylang_query_args(): array {
+				if ( is_admin() || ! function_exists( 'pll_current_language' ) ) {
+					return [];
 				}
-				$formatted_bp_date = $bp_date ? gmdate( 'Y-m-d', strtotime( $bp_date ) ) : '';
-				if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
-					return $count;
+				$language = pll_current_language( 'slug' );
+				return $language ? [ 'lang' => sanitize_key( $language ) ] : [];
+			}
+			public static function get_customer_orders( int $user_id = 0, int $limit = 20 ): array {
+				if ( ! function_exists( 'wc_get_orders' ) ) {
+					return [];
 				}
-				$cart_items = WC()->cart->get_cart();
-				if ( ! is_array( $cart_items ) || empty( $cart_items ) ) {
-					return $count;
+				$user_id = $user_id ?: get_current_user_id();
+				if ( ! $user_id ) {
+					return [];
 				}
-				$routes = self::get_post_info( $post_id, 'route_direction', [] );
-				if ( ! is_array( $routes ) || empty( $routes ) ) {
-					return $count;
+				$orders = wc_get_orders( [
+					'customer_id' => $user_id,
+					'limit'       => -1,
+					'orderby'     => 'date',
+					'order'       => 'DESC',
+					'return'      => 'objects',
+				] );
+				if ( ! is_array( $orders ) ) {
+					return [];
 				}
-				$sp          = array_search( $bp, $routes, true );
-				$ep          = array_search( $dp, $routes, true );
-				$target_seat = strtolower( $seat_name );
-				foreach ( $cart_items as $cart_item ) {
-					$cart_post_id = absint( $cart_item['post_id'] ?? 0 );
-					$cart_date    = $cart_item['bp_time'] ?? '';
-					$cart_date    = $cart_date ? gmdate( 'Y-m-d', strtotime( $cart_date ) ) : '';
-					if ( $cart_post_id !== absint( $post_id ) || $cart_date !== $formatted_bp_date ) {
-						continue;
-					}
-					$cart_bp     = $cart_item['bp'] ?? '';
-					$cart_dp     = $cart_item['dp'] ?? '';
-					$is_bp_valid = in_array( $cart_bp, array_slice( $routes, 0, $ep ), true );
-					$is_dp_valid = in_array( $cart_dp, array_slice( $routes, $sp + 1 ), true );
-					if ( ! $is_bp_valid || ! $is_dp_valid ) {
-						continue;
-					}
-					$seat_infos = $cart_item['ticket_info'] ?? [];
-					if ( ! is_array( $seat_infos ) || empty( $seat_infos ) ) {
-						continue;
-					}
-					foreach ( $seat_infos as $seat_info ) {
-						$current_seat = strtolower( $seat_info['seat'] ?? '' );
-						if ( $current_seat === $target_seat ) {
-							$count += absint( $cart_item['qty'] ?? 1 );
+				$event_orders = [];
+				foreach ( $orders as $order ) {
+					foreach ( $order->get_items() as $item ) {
+						if ( $item->get_meta( '_abpet_items', true ) ) {
+							$event_orders[] = $order;
+							break;
 						}
 					}
 				}
-				return $count;
+				return array_slice( $event_orders, 0, max( 1, $limit ) );
 			}
 			public static function get_user_role( $user_ID ): string {
 				global $wp_roles;
@@ -225,7 +253,8 @@
 			//=========== Template Related==================//
 			public static function details_template_path( $post_id ): string {
 				$post_id       = $post_id ?? get_the_id();
-				$template_name = self::get_post_info( $post_id, 'abpet_template', 'default' );
+				$template_name = sanitize_key( self::get_post_info( $post_id, 'abpet_template', 'default' ) );
+				$template_name = in_array( $template_name, [ 'default', 'light', 'modern' ], true ) ? $template_name : 'default';
 				$file_name     = 'details_theme/' . $template_name . '.php';
 				$dir           = ABPET_DIR . 'tb_templates/' . $file_name;
 				if ( ! file_exists( $dir ) ) {
@@ -257,25 +286,31 @@
 				$all_dates           = self::date( $post_id );
 				$display_ticket_type = $post_infos['display_ticket_type'] ?? 'on';
 				$display_ticket_type = ABPET_Function::on_off( 'ticket_type' ) ? $display_ticket_type : 'off';
-				foreach ( $booking_info as $bp_dp => $cart_item ) {
+				foreach ( $booking_info as $cart_item ) {
 					if ( empty( $cart_item ) ) {
 						continue;
 					}
-					$start_time     = ! empty( $cart_item['start_time'] ) ? gmdate( 'Y-m-d H:i', strtotime( $cart_item['start_time'] ) ) : '';
-					$start_date   = ! empty( $start_time ) ? gmdate( 'Y-m-d', strtotime( $start_time ) ) : '';
-					$journey_time   = ! empty( $cart_item['journey_time'] ) ? gmdate( 'Y-m-d H:i', strtotime( $cart_item['journey_time'] ) ) : '';
+					$event_date     = ! empty( $cart_item['event_date'] ) ? gmdate( 'Y-m-d', strtotime( $cart_item['event_date'] ) ) : '';
+					$session_time   = ! empty( $cart_item['session_time'] ) ? gmdate( 'H:i:s', strtotime( '1970-01-01 ' . $cart_item['session_time'] ) ) : '';
 					$seat_type      = $cart_item['seat_type'] ?? '';
 					$time_infos     = $post_infos['time_infos'] ?? [];
-					$all_start_time = ABPET_Function::time( $time_infos, $start_date );
+					$all_start_time = ABPET_Function::time( $time_infos, $event_date );
 					$ticket_infos   = $cart_item['info'] ?? [];
 					// Early return if schedule or date validation fails.
-					if ( empty( $ticket_infos ) || ! in_array( $start_date, $all_dates, true ) || ! in_array( $start_time, $all_start_time, true ) ) {
+					$valid_session = false;
+					foreach ( $all_start_time as $available_time ) {
+						if ( gmdate( 'H:i', strtotime( '1970-01-01 ' . $available_time ) ) === gmdate( 'H:i', strtotime( '1970-01-01 ' . $session_time ) ) ) {
+							$valid_session = true;
+							break;
+						}
+					}
+					if ( empty( $ticket_infos ) || ! in_array( $event_date, $all_dates, true ) || ! $valid_session ) {
 						return false;
 					}
 					$form_data = [
 						'post_id'    => $post_id,
-						'start_time' => $start_time,
-						'bp_dp'      => $bp_dp,
+						'event_date' => $event_date,
+						'session_time' => $session_time,
 					];
 					// Specific Seat ('sp') Validation Branch.
 					if ( 'sp' === $seat_type ) {
@@ -325,17 +360,6 @@
 					}
 				}
 				return true;
-			}
-			public static function return_check( $post_infos, $bp_dp ): bool {
-				if ( ! empty( $post_infos ) && ! empty( $bp_dp ) ) {
-					$display_return = $post_infos['display_return'] ?? 'off';
-					$display_return = ABPET_Function::on_off( 'return' ) ? $display_return : 'off';
-					if ( $display_return == 'on' ) {
-						$return_price_infos = $post_infos['return_price_infos'] ?? [];
-						return isset( $return_price_infos[ $bp_dp ] );
-					}
-				}
-				return false;
 			}
 			//============= Date function================//
 			public static function date_all( $post_ids = [], $_date = '' ): array {

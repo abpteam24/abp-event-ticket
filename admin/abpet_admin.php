@@ -121,7 +121,7 @@
 							<?php } ?>
 							<?php do_action( 'abpet_add_admin_global_tab', $active_tab ); ?>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'location' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'location' ? 'abp_active' : '' ); ?>">
-                                <span class="fas fa-route"></span><?php echo esc_html( ABPET_Function::location_label() ); ?>
+                                <span class="fas fa-map-marker-alt"></span><?php echo esc_html( ABPET_Function::location_label() ); ?>
                             </a>
 							<?php if ( ABPET_Function::on_off( 'category' ) ) { ?>
                                 <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'category' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'category' ? 'abp_active' : '' ); ?>">

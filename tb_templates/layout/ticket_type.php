@@ -4,7 +4,7 @@
     }
     add_action('abpet_ticket_type_template', function ($post_infos, $form_data = []) {
         if (!empty($post_infos)) {
-            $start_date = $form_data['start_date'] ?? '';
+            $start_date = $form_data['event_date'] ?? ( $form_data['start_date'] ?? '' );
             $display_ticket_type = $post_infos['display_ticket_type'] ?? 'on';
             $display_ticket_type = ABPET_Function::on_off('ticket_type') ? $display_ticket_type : 'off';
             $ticket_infos = [];
@@ -36,7 +36,7 @@
                                 </div>
                             <?php } ?>
                         </div>
-                        <?php if (ABPET_Function::on_off('capacity')) { ?>
+                        <?php if ( ABPET_Function::on_off( 'display_capacity' ) ) { ?>
                             <h6 class="_abp"><?php echo esc_html__('Available : ', 'abp-event-ticket') . ' ' . esc_html($available . '/' . $qty); ?></h6>
                         <?php } ?>
                         <p class="_abp"><?php echo esc_html($ticket_info['description'] ?? ''); ?></p>

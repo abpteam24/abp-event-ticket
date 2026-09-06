@@ -9,6 +9,7 @@
 				add_action( 'wp_ajax_abpet_wc_config', array( $this, 'wc_config' ) );
 				add_action( 'wp_ajax_abpet_create_page', array( $this, 'create_page' ) );
 				add_action( 'wp_ajax_abpet_import_dummy', array( $this, 'import_dummy' ) );
+				add_action( 'wp_ajax_abpet_remove_dummy', array( $this, 'remove_dummy' ) );
 			}
 			public function load_status(): void {
 				?>
@@ -168,8 +169,16 @@
                     </div>
                     <div class="_divider_xs"></div>
                     <div class="_fa_center_fj_between">
-                        <h6 class="_abp"> <?php esc_html_e( 'Dummy Import', 'abp-event-ticket' ); ?> </h6>
-                        <button class="<?php echo esc_attr( $total > 0 ? '_btn_light_success_xs' : '_btn_warning_xs' ); ?>" onclick="abpet_import_global('dummy')" type="button"><span class="fas fa-plus"></span><?php esc_html_e( 'Add New Dummy Post', 'abp-event-ticket' ); ?></button>
+                        <h6 class="_abp"> <?php esc_html_e( 'Dummy Data', 'abp-event-ticket' ); ?> </h6>
+                        <?php $dummy_count = $this->dummy_post_count(); ?>
+                        <?php if ( $dummy_count > 0 ) { ?>
+                            <div class="_fa_center_fj_between _abp_gap_xs">
+                                <button class="_btn_warning_xs" onclick="abpet_import_global('dummy')" type="button"><span class="fas fa-plus"></span><?php esc_html_e( 'Add More Dummy Data', 'abp-event-ticket' ); ?></button>
+                                <button class="_btn_light_danger_xs" onclick="abpet_import_global('remove_dummy')" type="button"><span class="fas fa-trash"></span><?php printf( esc_html__( 'Remove Dummy Data (%d)', 'abp-event-ticket' ), $dummy_count ); ?></button>
+                            </div>
+                        <?php } else { ?>
+                            <button class="_btn_warning_xs" onclick="abpet_import_global('dummy')" type="button"><span class="fas fa-plus"></span><?php esc_html_e( 'Import Dummy Data', 'abp-event-ticket' ); ?></button>
+                        <?php } ?>
                     </div>
                 </div>
 				<?php
@@ -280,14 +289,27 @@
 					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
 				}
 				$dummy_infos = $this->dummy_data();
+				$previous_registry = ABPET_Function::get_option( 'abpet_dummy_registry', [] );
+				$registry = [
+					'posts' => array_map( 'absint', $previous_registry['posts'] ?? [] ),
+					'terms' => is_array( $previous_registry['terms'] ?? null ) ? $previous_registry['terms'] : [],
+				];
 				if ( isset( $dummy_infos['taxonomy'] ) ) {
 					foreach ( $dummy_infos['taxonomy'] as $tax => $taxonomy_option ) {
 						if ( taxonomy_exists( $tax ) ) {
-							$check_terms = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) );
-							if ( is_string( $check_terms ) || sizeof( $check_terms ) == 0 ) {
-								foreach ( $taxonomy_option as $taxonomy_data ) {
-									unset( $term );
-									$term = wp_insert_term( $taxonomy_data['name'], $tax );
+							foreach ( $taxonomy_option as $taxonomy_data ) {
+								$name = sanitize_text_field( $taxonomy_data['name'] ?? '' );
+								if ( empty( $name ) ) {
+									continue;
+								}
+								$existing = get_term_by( 'name', $name, $tax );
+								$term_id  = $existing ? (int) $existing->term_id : 0;
+								if ( ! $term_id ) {
+									$term = wp_insert_term( $name, $tax );
+									if ( ! is_wp_error( $term ) ) {
+										$term_id = (int) $term['term_id'];
+										$registry['terms'][] = [ 'taxonomy' => $tax, 'term_id' => $term_id ];
+									}
 								}
 							}
 						}
@@ -315,18 +337,80 @@
 						$args['post_status'] = 'publish';
 						$args['post_type']   = ABPET_Function::get_cpt();
 						$post_id             = wp_insert_post( $args );
+						if ( is_wp_error( $post_id ) || ! $post_id ) {
+							continue;
+						}
 						$post_data           = $dummy_data['post_data'] ?? [];
 						if ( ! empty( $post_data ) ) {
 							foreach ( $post_data as $meta_key => $data ) {
 								update_post_meta( $post_id, $meta_key, $data );
 							}
 						}
+						$this->sync_event_taxonomies( $post_id, $post_data );
+						$registry['posts'][] = (int) $post_id;
 					}
 				}
+				update_option( 'abpet_dummy_registry', $registry, false );
 				flush_rewrite_rules();
 				wp_send_json_success( [
 					'msg' => esc_html__( 'Dummy data imported successfully!', 'abp-event-ticket' )
 				] );
+			}
+			public function remove_dummy(): void {
+				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+				}
+				$post_ids = get_posts( [
+					'post_type'      => ABPET_Function::get_cpt(),
+					'post_status'    => 'any',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					'meta_key'       => 'dummy',
+					'meta_value'     => 'on',
+				] );
+				foreach ( $post_ids as $post_id ) {
+					wp_delete_post( (int) $post_id, true );
+				}
+				$registry = ABPET_Function::get_option( 'abpet_dummy_registry', [] );
+				foreach ( ( $registry['terms'] ?? [] ) as $term_data ) {
+					$taxonomy = sanitize_key( $term_data['taxonomy'] ?? '' );
+					$term_id  = absint( $term_data['term_id'] ?? 0 );
+					if ( $taxonomy && $term_id && taxonomy_exists( $taxonomy ) ) {
+						$term = get_term( $term_id, $taxonomy );
+						if ( $term && ! is_wp_error( $term ) && 0 === (int) $term->count ) {
+							wp_delete_term( $term_id, $taxonomy );
+						}
+					}
+				}
+				delete_option( 'abpet_dummy_registry' );
+				flush_rewrite_rules();
+				wp_send_json_success( [ 'msg' => esc_html__( 'Dummy data removed successfully.', 'abp-event-ticket' ), 'type' => 'success' ] );
+			}
+			private function dummy_post_count(): int {
+				return count( get_posts( [
+					'post_type'      => ABPET_Function::get_cpt(),
+					'post_status'    => 'any',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					'meta_key'       => 'dummy',
+					'meta_value'     => 'on',
+				] ) );
+			}
+			private function sync_event_taxonomies( int $post_id, array $post_data ): void {
+				foreach ( [
+					'abpet_category'  => 'abpet_category',
+					'abpet_location'  => 'abpet_location',
+					'abpet_organizer' => 'abpet_organizer',
+					'abpet_brand'     => 'abpet_brand',
+				] as $meta_key => $taxonomy ) {
+					if ( ! taxonomy_exists( $taxonomy ) ) {
+						continue;
+					}
+					$value = $post_data[ $meta_key ] ?? '';
+					$ids   = is_array( $value ) ? $value : explode( ',', (string) $value );
+					$ids   = array_values( array_filter( array_map( 'absint', $ids ) ) );
+					wp_set_object_terms( $post_id, $ids, $taxonomy, false );
+				}
 			}
 			public function dummy_data(): array {
 				return [

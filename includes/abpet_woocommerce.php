@@ -10,7 +10,7 @@
 				add_filter('woocommerce_cart_item_thumbnail', array($this, 'cart_item_thumbnail'), 90, 3);
 				add_filter('woocommerce_get_item_data', array($this, 'get_item_data'), 90, 2);
 				//=============================//
-				add_action('woocommerce_after_checkout_validation', array($this, 'after_checkout_validation'));
+				add_action('woocommerce_after_checkout_validation', array($this, 'after_checkout_validation'), 90, 2);
 				add_action('woocommerce_checkout_create_order_line_item', array($this, 'checkout_create_order_line_item'), 90, 4);
 				add_action('woocommerce_checkout_order_processed', array($this, 'checkout_order_processed'));
 				add_action('woocommerce_store_api_checkout_order_processed', array($this, 'api_checkout_order_processed'));
@@ -22,20 +22,10 @@
 				if (get_post_type($post_id) == ABPET_Function::get_cpt() && isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$post_val = fn($key, $default = '') => isset($_POST[$key]) ? sanitize_text_field(wp_unslash($_POST[$key])) : $default;
 					$post_infos = ABPET_Function::get_all_meta($post_id);
-					$bp_dp = $post_val('bp_dp');
 					$booking_infos = [];
-					if (!empty($bp_dp)) {
-						$route_info = self::get_booking_info($post_infos, $bp_dp);
-						if (!empty($route_info)) {
-							$booking_infos[$bp_dp] = $route_info;
-						}
-					}
-					$return_bp_dp = $post_val('return_bp_dp');
-					if (!empty($return_bp_dp)) {
-						$route_info = self::get_booking_info($post_infos, $return_bp_dp, 'return_');
-						if (!empty($route_info)) {
-							$booking_infos[$return_bp_dp] = $route_info;
-						}
+					$event_info = self::get_booking_info($post_infos);
+					if (!empty($event_info)) {
+						$booking_infos[] = $event_info;
 					}
 					$total_price = 0;
 					if (!empty($booking_infos)) {
@@ -49,7 +39,9 @@
 					$cart_item['line_total'] = $total_price;
 					$cart_item['line_subtotal'] = $total_price;
 					$cart_item = apply_filters('abpet_add_cart_item_data', $cart_item, $post_id);
-					$_SESSION['abpet_cart_success'] = get_the_title($post_id) . ' ' . __('Add to cart successfully!', 'abp-event-ticket');
+					if ( function_exists( 'WC' ) && WC()->session ) {
+						WC()->session->set( 'abpet_cart_success', get_the_title( $post_id ) . ' ' . __( 'Add to cart successfully!', 'abp-event-ticket' ) );
+					}
 				}
 				//echo '<pre>';				print_r($cart_item);				echo '</pre>';				die();
 				return $cart_item;
@@ -105,7 +97,7 @@
 				}
 				return $item_data;
 			}
-			public static function get_booking_info($post_infos = [], $bp_dp = '') {
+			public static function get_booking_info($post_infos = [], $context = '') {
 				$booking_info = [];
 				if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$post_int_array = fn($key) => (isset($_POST[$key]) && is_array($_POST[$key])) ? array_map('absint', wp_unslash($_POST[$key])) : [];
@@ -115,11 +107,12 @@
 					$post_id = $post_infos['post_id'] ?? '';
 					$seat_type = $post_infos['seat_type'] ?? 'sp';
 					$seat_type = ABPET_Function::on_off('sp') ? $seat_type : 'ticket';
-					$journey_time = $post_val( 'journey_time');
-					$start_time = $post_val( 'start_time');
-					$start_point = $post_val( 'start_point');
+					$event_date = $post_val('event_date');
+					$event_date = $event_date ?: $post_val('start_date');
+					$session_time = $post_val('session_time');
+					$session_time = $session_time ?: $post_val('start_time');
 					$ticket_price = 0;
-					if (!empty($journey_time) && !empty($bp_dp) && !empty($post_id) && !empty($start_time)) {
+					if (!empty($event_date) && !empty($session_time) && !empty($post_id)) {
 						if ($seat_type == 'ticket') {
 							$ticket_types = $post_array( 'item_check');
 							$item_qty = $post_int_array( 'item_qty');
@@ -127,7 +120,7 @@
 								foreach ($ticket_types as $key => $ticket_type) {
 									$qty = absint($item_qty[$key] ?? '');
 									if (!empty($ticket_type) && $qty > 0) {
-										$price = ABPET_Function::get_price($post_infos, $bp_dp, $ticket_type, $journey_time);
+										$price = ABPET_Function::get_price($post_infos, $ticket_type, $session_time);
 										$booking_info['info'][$ticket_type]['id'] = $ticket_type;
 										$booking_info['info'][$ticket_type]['name'] = ABPET_Function::ticket_name($ticket_type);
 										$booking_info['info'][$ticket_type]['price'] = $price;
@@ -146,9 +139,10 @@
 								foreach ($types as $index => $type) {
 									$seat = $seats[$index] ?? '';
 									if (!empty($seat) && !empty($type)) {
-										$price = ABPET_Function::get_price($post_infos, $bp_dp, $type, $journey_time);
+										$price = ABPET_Function::get_price($post_infos, $type, $session_time);
 										$booking_info['info'][$index]['id'] = $type;
 										$booking_info['info'][$index]['name'] = $seat;
+										$booking_info['info'][$index]['sp_id'] = $sp_id;
 										$booking_info['info'][$index]['price'] = $price;
 										$booking_info['info'][$index]['qty'] = 1;
 										$ticket_price = $ticket_price + $price * 1;
@@ -161,9 +155,8 @@
 							$additional_info = self::get_additional_info($post_infos);
 							$additional_price = self::get_additional_price($additional_info);
 							$booking_info['seat_type'] = $seat_type;
-							$booking_info['journey_time'] = $journey_time;
-							$booking_info['start_time'] = $start_time;
-							$booking_info['start_point'] = $start_point;
+							$booking_info['event_date'] = gmdate('Y-m-d', strtotime($event_date));
+							$booking_info['session_time'] = gmdate('H:i:s', strtotime('1970-01-01 ' . $session_time));
 							$booking_info['pass_info'] = self::get_passenger_info($post_infos);
 							$booking_info['additional_info'] = $additional_info;
 							$booking_info['price'] = $ticket_price;
@@ -233,17 +226,16 @@
 				$post_id = $booking_infos['post_id'] ?? '';
 				if (!empty($booking_info) && sizeof($booking_info) > 0 && !empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt()) {
 					$return = '';
-					foreach ($booking_info as $bp_dp => $cart_item) {
+					foreach ($booking_info as $cart_item) {
 						if (!empty($cart_item)) {
 							$ticket_infos = $cart_item['info'] ?? [];
 							if (!empty($ticket_infos) && sizeof($ticket_infos) > 0) {
-								$journey_time = $cart_item['journey_time'] ?? '';
+								$event_date = $cart_item['event_date'] ?? '';
+								$session_time = $cart_item['session_time'] ?? '';
 								$seat_type = $cart_item['seat_type'] ?? '';
-								[$bp, $dp] = array_map('intval', explode('_', $bp_dp));
 								$item_data[] = array('name' => __('Booking Information', 'abp-event-ticket') . ' ' . $return, 'value' => '<br />');
-								$item_data[] = array('name' => __('Departure', 'abp-event-ticket'), 'value' => ABPET_Function::location_value($bp) . '<br />');
-								$item_data[] = array('name' => __('Departure Time', 'abp-event-ticket'), 'value' => ABPET_Function::date_format($journey_time) . '<br />');
-								$item_data[] = array('name' => __('Arrival', 'abp-event-ticket'), 'value' => ABPET_Function::location_value($dp) . '<br />');
+								$item_data[] = array('name' => __('Event Date', 'abp-event-ticket'), 'value' => ABPET_Function::date_format($event_date) . '<br />');
+								$item_data[] = array('name' => __('Session Time', 'abp-event-ticket'), 'value' => ABPET_Function::date_format($event_date . ' ' . $session_time) . '<br />');
 								$item_data[] = array('name' => __('Ticket Information', 'abp-event-ticket'), 'value' => '<br />');
 								foreach ($ticket_infos as $ticket_info) {
 									$price = $ticket_info['price'] ?? 0;
@@ -252,7 +244,7 @@
 									$price = $price > 0 ? wc_price($price * $qty) : __('FREE', 'abp-event-ticket');
 									$name = $ticket_info['name'] ?? '';
 									if ($seat_type == 'sp') {
-										$name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? ''));
+										$name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? $cart_item['sp_id'] ?? ''));
 									}
 									$item_data[] = array('name' => $name, 'value' => $price_text . ' X ' . $qty . '  = ' . $price . '<br />');
 								}
@@ -292,34 +284,37 @@
 				return $item_data;
 			}
 			//=============================//
-			public function after_checkout_validation(): void {
-				global $woocommerce;
-				$cart_items = $woocommerce->cart->get_cart();
-				foreach ($cart_items as $booking_infos) {
-					if (!ABPET_Function::checkout_validation($booking_infos)) {
-						$woocommerce->cart->empty_cart();
-						wc_add_notice(__("Oh ! We are Sorry, Something Wrong. please Try another Time.", 'abp-event-ticket'), 'error');
+			public function after_checkout_validation( $data, $errors ): void {
+				if ( ! WC()->cart ) {
+					return;
+				}
+				foreach ( WC()->cart->get_cart() as $booking_infos ) {
+					if ( ! ABPET_Function::checkout_validation( $booking_infos ) ) {
+						$errors->add(
+							'abpet_booking_invalid',
+							__( 'One or more event tickets are no longer available. Please review your booking and try again.', 'abp-event-ticket' )
+						);
+						break;
 					}
 				}
 			}
-			public function checkout_create_order_line_item($item, $_key, $booking_infos): void {
+			public function checkout_create_order_line_item($item, $_key, $booking_infos, $order = null): void {
 				$booking_info = $booking_infos['booking_infos'] ?? [];
 				$post_id = $booking_infos['post_id'] ?? 0;
 				if (!empty($booking_info) && sizeof($booking_info) > 0 && !empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt()) {
 					$return = '';
-					foreach ($booking_info as $bp_dp => $cart_item) {
+					foreach ($booking_info as $cart_item) {
 						if (!empty($cart_item)) {
 							$ticket_infos = $cart_item['info'] ?? [];
 							$seat_type = $cart_item['seat_type'] ?? '';
 							if (!empty($ticket_infos) && sizeof($ticket_infos) > 0) {
-								$journey_time = $cart_item['journey_time'] ?? '';
-								[$bp, $dp] = array_map('intval', explode('_', $bp_dp));
+								$event_date = $cart_item['event_date'] ?? '';
+								$session_time = $cart_item['session_time'] ?? '';
 								$additional_infos = $cart_item['additional_info'] ?? [];
 								$attendee_infos = $cart_item['pass_info'] ?? [];
 								$item->add_meta_data(__('Booking Information', 'abp-event-ticket') . ' ' . $return, '');
-								$item->add_meta_data(__('Departure', 'abp-event-ticket'), ABPET_Function::location_value($bp));
-								$item->add_meta_data(__('Departure Time: ', 'abp-event-ticket'), ABPET_Function::date_format($journey_time));
-								$item->add_meta_data(__('Arrival : ', 'abp-event-ticket'), ABPET_Function::location_value($dp));
+								$item->add_meta_data(__('Event Date', 'abp-event-ticket'), ABPET_Function::date_format($event_date));
+								$item->add_meta_data(__('Session Time: ', 'abp-event-ticket'), ABPET_Function::date_format($event_date . ' ' . $session_time));
 								$item->add_meta_data(__('Ticket Information', 'abp-event-ticket'), '');
 								foreach ($ticket_infos as $ticket_info) {
 									$price = $ticket_info['price'] ?? 0;
@@ -328,7 +323,7 @@
 									$price = $price > 0 ? wc_price($price * $qty) : __('FREE', 'abp-event-ticket');
 									$name = $ticket_info['name'] ?? '';
 									if ($seat_type == 'sp') {
-										$name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? ''));
+										$name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? $cart_item['sp_id'] ?? ''));
 									}
 									$item->add_meta_data($name, ($price_text . ' X ' . $qty . '  = ' . $price));
 								}
@@ -365,7 +360,7 @@
 					}
 					$item_info = [
 						'post_id' => $post_id,
-						'user_id' => get_current_user_id(),
+						'user_id' => $order instanceof WC_Order ? $order->get_customer_id() : get_current_user_id(),
 						'booking_infos' => $booking_info,
 						'item_total' => $cart_item['total_price'] ?? '',
 					];
@@ -398,12 +393,11 @@
 								if (!empty($item_infos) && is_array($item_infos) && sizeof($item_infos) > 0) {
 									$post_id = $item_infos['post_id'] ?? '';
 									$booking_info = $item_infos['booking_infos'] ?? [];
-									$seat_type = $item_infos['seat_type'] ?? '';
 									if (!empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt() && !empty($booking_info) && sizeof($booking_info) > 0) {
-										foreach ($booking_info as $bp_dp => $item_info) {
+										foreach ($booking_info as $item_info) {
 											if (!empty($item_info)) {
+												$seat_type = $item_info['seat_type'] ?? ($item_infos['seat_type'] ?? 'ticket');
 												$ticket_infos = $item_info['info'] ?? [];
-												[$bp, $dp] = array_map('intval', explode('_', $bp_dp));
 												$additional_info = $item_info['additional_info'] ?? [];
 												global $wpdb;
 												$table_name = $wpdb->prefix . 'abpet_orders';
@@ -430,18 +424,9 @@
 														'item_id' => intval($item_id),
 														'post_id' => intval($post_id),
 														'user_id' => intval($user_id),
-														'start_point' => intval($item_info['start_point'] ?? ''),
-														'start_time' => sanitize_text_field($item_info['start_time'] ?? ''),
 														'seat_type' => sanitize_text_field($seat_type),
-														'bp_dp' => sanitize_text_field($bp_dp),
-														'bp' => intval($bp),
-														'dp' => intval($dp),
-														'bp_time' => sanitize_text_field($item_info['journey_time'] ?? ''),
-														'dp_time' => sanitize_text_field($item_info['end_time'] ?? ''),
-														'pick_up' => sanitize_text_field($item_info['pick_up'] ?? ''),
-														'pick_up_time' => sanitize_text_field($item_info['pick_up_time'] ?? ''),
-														'drop_off' => sanitize_text_field($item_info['drop_off'] ?? ''),
-														'drop_off_time' => sanitize_text_field($item_info['drop_off_time'] ?? ''),
+														'event_date' => sanitize_text_field($item_info['event_date'] ?? ''),
+														'session_time' => sanitize_text_field($item_info['session_time'] ?? ''),
 														'sp_id' => intval($item_info['sp_id'] ?? ''),
 														'ticket_info' => wp_json_encode($ticket_infos),
 														'ticket_id' => wp_json_encode($ticket_id),
@@ -453,8 +438,6 @@
 														'total' => sanitize_text_field($item_info['total'] ?? ''),
 														'pass_info' => wp_json_encode($item_info['pass_info'] ?? []),
 														'checkin' => 0,
-														'female' => 0,
-														'book_type' => 0,
 														'order_status' => sanitize_text_field($_order_status),
 														'payment_method' => sanitize_text_field($payment_method),
 														'billing_name' => sanitize_text_field($billing_name),

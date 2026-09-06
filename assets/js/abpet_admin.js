@@ -280,8 +280,11 @@ window.abpet_post_action = function (action, id) {
 };
 window.abpet_import_global = function (action) {
     if (action) {
+        if (action === 'remove_dummy' && !window.confirm('Remove all ABP Event Ticket dummy data? Real events will not be removed.')) {
+            return;
+        }
         let target = abpet_parent.find('.' + action);
-        if (action === 'dummy') {
+        if (action === 'dummy' || action === 'remove_dummy') {
             target = abpet_parent.find('.abp_status');
         }
         jQuery.ajax({
@@ -293,7 +296,7 @@ window.abpet_import_global = function (action) {
             }, success: function (response) {
                 abpet_spinner_remove(target);
                 abpet_toast_msg(response.data.msg, response.data.type);
-                if (action === 'dummy') {
+                if (action === 'dummy' || action === 'remove_dummy') {
                     window.location.reload();
                 } else {
                     if (target && target.length > 0 && response.data && response.data.hasOwnProperty('html')) {

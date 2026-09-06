@@ -4,7 +4,7 @@
 	}
 	add_action( 'abpet_missionary_template', function ( $params = [] ) {
 		//echo '<pre>';print_r($params);echo '</pre>';
-		$global_order = $post_infos['global_order'] ?? '';
+		$global_order = $params['global_order'] ?? '';
 		$post_ids     = $params['all_post'] ?? [];
 		if ( ! empty( $post_ids ) && sizeof( $post_ids ) > 0 ) {
 			$column            = $params['column'] ?? 3;
@@ -39,7 +39,10 @@
                     </div>
 				<?php } ?>
             </div>
-			<?php do_action( 'abpet_pagination', $args ); ?>
+			<?php if ( ( $params['pagination'] ?? 'yes' ) !== 'no' ) {
+				$args['style'] = $params['pagination_style'] ?? ( $params['pagination-style'] ?? 'live' );
+				do_action( 'abpet_pagination', $args );
+			} ?>
 			<?php
 		} else {
 			ABPET_Layout::layout_warning_info( 'not_found' );

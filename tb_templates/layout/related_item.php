@@ -2,9 +2,13 @@
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit;
 	}
-	add_action( 'abpet_related_item_template', function ( $related_item = '' ) {
+	add_action( 'abpet_related_item_template', function ( $related_item = '', $current_post_id = 0 ) {
 		if ( ABPET_Function::on_off( 'related' ) && ! empty( $related_item ) ) {
-			$post_ids = explode( ',', $related_item );
+			$post_ids = is_array( $related_item ) ? $related_item : explode( ',', (string) $related_item );
+			$post_ids = array_values( array_unique( array_filter( array_map( 'absint', $post_ids ) ) ) );
+			$post_ids = array_values( array_filter( $post_ids, static function ( $post_id ) use ( $current_post_id ) {
+				return $post_id !== absint( $current_post_id ) && get_post_type( $post_id ) === ABPET_Function::get_cpt() && get_post_status( $post_id ) === 'publish';
+			} ) );
 			if ( empty( $post_ids ) || ! is_array( $post_ids ) ) {
 				return;
 			}

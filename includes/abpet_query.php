@@ -41,7 +41,7 @@
 					'posts_per_page' => $show,
 					'paged' => $page,
 					'post_status' => 'publish'
-				);
+				) + ABPET_Function::polylang_query_args();
 				return new WP_Query($args);
 			}
 			public static function get_post_id($filters = []): array {
@@ -50,35 +50,39 @@
 				$page = ($filters['paged'] ?? null) ?: 1;
 				$status = ($filters['status'] ?? null) ?: 'publish';
 				$cat_id = $filters['cat_id'] ?? null;
-				$bp_dp = $filters['bp_dp'] ?? null;
+				$loc_id = $filters['loc_id'] ?? null;
+				$organizer_id = $filters['organizer_id'] ?? null;
+				$brand_id = $filters['brand_id'] ?? null;
 				$meta_query = ['relation' => 'AND'];
 				// Category query
 				if (!empty($cat_id)) {
-					$meta_query[] = ['key' => 'abpet_category', 'value' => $cat_id, 'compare' => '='];
+					$meta_query[] = ['key' => 'abpet_category', 'value' => '(^|,)' . absint($cat_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
-				// route query
-				if (!empty($bp_dp)) {
-					$meta_query[] = ['key' => 'route_data', 'value' => '"' . $bp_dp . '"', 'compare' => 'LIKE'];
+				if (!empty($loc_id)) {
+					$meta_query[] = ['key' => 'abpet_location', 'value' => '(^|,)' . absint($loc_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
+				if (!empty($organizer_id)) {
+					$meta_query[] = ['key' => 'abpet_organizer', 'value' => '(^|,)' . absint($organizer_id) . '(,|$)', 'compare' => 'REGEXP'];
+				}
+				if (!empty($brand_id)) {
+					$meta_query[] = ['key' => 'abpet_brand', 'value' => '(^|,)' . absint($brand_id) . '(,|$)', 'compare' => 'REGEXP'];
+				}
+				$order = strtoupper((string) ($filters['sort'] ?? 'ASC')) === 'DESC' ? 'DESC' : 'ASC';
 				$all_data = get_posts(array(
 					'fields' => 'ids',
 					'post_type' => $post_type,
 					'posts_per_page' => $show,
 					'paged' => $page,
 					'post_status' => $status,
+					'orderby' => 'date',
+					'order' => $order,
 					'meta_query' => $meta_query
-				));
+				) + ABPET_Function::polylang_query_args());
 				return array_unique($all_data);
 			}
 			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false) {
 				global $wpdb;
 				$table_name = $wpdb->prefix . 'abpet_orders';
-				$cache_key = 'abpet_bk_' . md5(wp_json_encode($filters) . $limit . $offset . (int)$count);
-				$cache_group = 'abpet_orders';
-				$cached = wp_cache_get($cache_key, $cache_group);
-				if (false !== $cached) {
-					return $cached;
-				}
 				$conditions = array();
 				$params = array();
 				// Order Status Filter
@@ -92,62 +96,23 @@
 					$params = array_merge($params, $booked_status);
 				}
 				// Integer ID Filters
-				$int_keys = array('id', 'post_id', 'user_id', 'item_id', 'order_id', 'start_point', 'sp_id');
+				$int_keys = array('id', 'post_id', 'user_id', 'item_id', 'order_id', 'sp_id');
 				foreach ($int_keys as $key) {
 					if (!empty($filters[$key])) {
 						$conditions[] = "{$key} = %d";
 						$params[] = absint($filters[$key]);
 					}
 				}
-				// Start Time Filter (Fixed Y-m-d format for DATE() comparison)
-				if (!empty($filters['start_time'])) {
-					$timestamp = strtotime($filters['start_time']);
-					if (gmdate('H:i', $timestamp) !== '00:00') {
-						$params[] = gmdate('Y-m-d H:i', $timestamp);
-						$conditions[] = "DATE_FORMAT(start_time, '%%Y-%%m-%%d %%H:%%i') = %s";
-					} else {
-						$params[] = gmdate('Y-m-d', $timestamp);
-						$conditions[] = 'DATE(start_time) = %s';
-					}
+				// Event date/session filters.
+				$event_date = $filters['event_date'] ?? '';
+				if (!empty($event_date)) {
+					$conditions[] = 'event_date = %s';
+					$params[] = gmdate('Y-m-d', strtotime(sanitize_text_field($event_date)));
 				}
-				// Route Directions (BP & DP dynamically handled)
-				if (!empty($filters['bp_dp'])) {
-					$post_id = !empty($filters['post_id']) ? absint($filters['post_id']) : 0;
-					$start_time = !empty($filters['start_time']) ? sanitize_text_field($filters['start_time']) : '';
-					$bp_dp_parts = explode('_', sanitize_text_field($filters['bp_dp']));
-					if (count($bp_dp_parts) >= 2 && $post_id && $start_time) {
-						$bp = intval($bp_dp_parts[0]);
-						$dp = intval($bp_dp_parts[1]);
-						$routes = ABPET_Function::get_post_info($post_id, 'return_route_direction', array());
-						if (!empty($routes) && is_array($routes)) {
-							$sp = array_search($bp, $routes, false);
-							$ep = array_search($dp, $routes, false);
-							if (false !== $sp && false !== $ep) {
-								$valid_bps = array_slice($routes, 0, $ep);
-								$valid_dps = array_slice($routes, $sp + 1);
-								if (!empty($valid_bps) && !empty($valid_dps)) {
-									$bp_placeholders = implode(',', array_fill(0, count($valid_bps), '%s'));
-									$dp_placeholders = implode(',', array_fill(0, count($valid_dps), '%s'));
-									$conditions[] = "bp IN ({$bp_placeholders})";
-									$params = array_merge($params, $valid_bps); // FIXED ARRAY MERGE
-									$conditions[] = "dp IN ({$dp_placeholders})";
-									$params = array_merge($params, $valid_dps); // FIXED ARRAY MERGE
-								}
-							}
-						}
-					}
-				} else {
-					// Single BP / DP filters fallback (if bp_dp is not present)
-					if (!empty($filters['bp']) || !empty($filters['_bp'])) {
-						$bp_val = !empty($filters['bp']) ? $filters['bp'] : $filters['_bp'];
-						$conditions[] = 'bp = %d';
-						$params[] = absint($bp_val);
-					}
-					if (!empty($filters['dp']) || !empty($filters['_dp'])) {
-						$dp_val = !empty($filters['dp']) ? $filters['dp'] : $filters['_dp'];
-						$conditions[] = 'dp = %d';
-						$params[] = absint($dp_val);
-					}
+				$session_time = $filters['session_time'] ?? '';
+				if (!empty($session_time)) {
+					$conditions[] = "TIME_FORMAT(session_time, '%%H:%%i') = %s";
+					$params[] = gmdate('H:i', strtotime('1970-01-01 ' . sanitize_text_field($session_time)));
 				}
 				// JSON Fields
 				if (!empty($filters['ticket_id'])) {
@@ -163,10 +128,12 @@
 					$conditions[] = 'DATE(created_at) = %s';
 					$params[] = gmdate('Y-m-d', strtotime($filters['order_date']));
 				}
-				if (!empty($filters['start_time_from']) && !empty($filters['start_time_to'])) {
-					$conditions[] = 'DATE(start_time) BETWEEN %s AND %s';
-					$params[] = gmdate('Y-m-d', strtotime($filters['start_time_from']));
-					$params[] = gmdate('Y-m-d', strtotime($filters['start_time_to']));
+				$event_date_from = $filters['event_date_from'] ?? '';
+				$event_date_to = $filters['event_date_to'] ?? '';
+				if (!empty($event_date_from) && !empty($event_date_to)) {
+					$conditions[] = 'event_date BETWEEN %s AND %s';
+					$params[] = gmdate('Y-m-d', strtotime($event_date_from));
+					$params[] = gmdate('Y-m-d', strtotime($event_date_to));
 				}
 				if (!empty($filters['order_date_from']) && !empty($filters['order_date_to'])) {
 					$conditions[] = 'DATE(created_at) BETWEEN %s AND %s';
@@ -188,7 +155,7 @@
 					$sql .= ' WHERE ' . implode(' AND ', $conditions);
 				}
 				if (!$count) {
-					$allowed_columns = array('id', 'post_id', 'order_id', 'status', 'created_at');
+					$allowed_columns = array('id', 'post_id', 'order_id', 'event_date', 'session_time', 'order_status', 'created_at');
 					$raw_order_by = !empty($filters['order_by']) ? sanitize_key($filters['order_by']) : 'order_id';
 					$order_by = in_array($raw_order_by, $allowed_columns, true) ? $raw_order_by : 'order_id';
 					$order_dir = (!empty($filters['order_dir']) && strtoupper($filters['order_dir']) === 'ASC') ? 'ASC' : 'DESC';
@@ -226,7 +193,6 @@
 					}
 				}
 				$results = $results ?: ($count ? 0 : array());
-				wp_cache_set($cache_key, $results, $cache_group, 30);
 				return $results;
 			}
 			public static function get_sold_qty_ex($filters = []) {
