@@ -25,63 +25,91 @@
             <div id="abpet_area" class="abpet_area abpet_light_details">
                 <div class="abp_container">
                     <div class="_abp_row">
-                        <div class="_f_equal_f_wrap_gap_section_15 abpet_light_intro">
-                            <div class="abpet_details_column abpet_light_media">
-                                <?php ABPET_Layout::image( $post_id ); ?>
+                        <div class="_f_equal_f_wrap_gap_section_15 abpet_light_lead">
+                            <div class="abpet_details_column abpet_light_lead_media">
+								<?php if ( ! empty( $post_infos['abpet_slider'] ) ) {
+									do_action( 'abpet_slider', $post_infos['abpet_slider'], [ 'slider_style' => 'slider' ] );
+								} else {
+									ABPET_Layout::image( $post_id );
+								} ?>
                             </div>
-                            <div class="abpet_details_column abpet_light_summary">
-                                <h1 class="abpet_details_title"><?php ABPET_Layout::title($post_infos); ?></h1>
-                                <?php ABPET_Layout::sub_title($post_infos); ?>
-                                <div class="_gap_xs_mar_t_xs">
-                                    <?php ABPET_Layout::capacity($post_infos);
-                                        ABPET_Layout::category($post_infos);
-                                        ABPET_Layout::brand($post_infos);
-                                        ABPET_Layout::organizer($post_infos, 'publish');
-                                        ABPET_Layout::location($post_infos);
-                                    ?>
+                            <div class="abpet_details_column abpet_light_lead_body">
+                                <div class="abpet_light_lead_kicker">
+									<?php ABPET_Static::icon_svg( 'location_1' ); ?>
+                                    <span><?php esc_html_e( 'Event Highlights', 'abp-event-ticket' ); ?></span>
                                 </div>
-                                <?php if ( ABPET_Function::on_off( 'feature' ) ) {
-                                    ABPET_Layout::item_feature($post_infos['post_feature'] ?? '');
-                                }
-                                    ABPET_Layout::description($post_infos);                          ?>
+                                <h1 class="abpet_details_title"><?php ABPET_Layout::title($post_infos); ?></h1>
+								<?php ABPET_Layout::sub_title($post_infos); ?>
+                                <div class="abpet_light_lead_meta _gap_xs_mar_t_xs">
+									<?php ABPET_Layout::capacity($post_infos);
+										ABPET_Layout::category($post_infos);
+										ABPET_Layout::brand($post_infos);
+										ABPET_Layout::organizer($post_infos, 'publish');
+										ABPET_Layout::location($post_infos);
+									?>
+                                </div>
+								<?php if ( ! empty( $upcoming_date ) ) { ?>
+                                    <div class="abpet_light_lead_date">
+										<?php ABPET_Static::icon_svg( 'date_1' ); ?>
+                                        <span><?php echo esc_html( ABPET_Function::date_format( $upcoming_date ) ); ?></span>
+                                    </div>
+								<?php } ?>
                             </div>
-                            <?php if ( $show_date_list ) { ?>
-                            <div class="abpet_details_column abpet_light_booking">
-                                <?php do_action( 'abpet_event_schedule_list', $post_id, $all_dates, $time_infos, $start_date, $start_time, 'scroll' ); ?>
-                            </div>
-                            <?php } ?>
                         </div>
                     </div>
-                    <?php if (!empty($content)) { ?>
+					<?php if ( $show_date_list ) { ?>
                         <div class="_abp_row">
                             <div class="_col_12">
-                                <div class="the_post_content">
-                                    <?php the_content(); ?>
+                                <div class="abpet_light_schedule_scroll">
+									<?php do_action( 'abpet_event_schedule_list', $post_id, $all_dates, $time_infos, $start_date, $start_time, 'scroll' ); ?>
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+					<?php } ?>
                     <div class="_abp_row">
-                        <div class="_col_12 abpet_booking">
-                            <?php if ( ($post_infos['sale_continue'] ?? 'on') === 'on' ) { ?>
-                                <div class="post_top_filter">
-                                    <?php ABPET_Layout::start_date( $all_dates, $start_date ); ABPET_Layout::start_time($form_data); ?>
+                        <div class="_col_12">
+                            <div class="abpet_light_booking_card">
+                                <div class="abpet_light_booking_head">
+                                    <i class="fas fa-ticket-alt" aria-hidden="true"></i>
+                                    <span><?php esc_html_e( 'Book Your Ticket', 'abp-event-ticket' ); ?></span>
                                 </div>
-                                <?php do_action('abpet_registration', $post_infos, $form_data); ?>
-                            <?php } else {
-                                ABPET_Layout::layout_warning_info( 'sale_close_msg' );
-                            } ?>
+                                <div class="abpet_booking">
+									<?php if ( ($post_infos['sale_continue'] ?? 'on') === 'on' ) { ?>
+                                        <div class="post_top_filter">
+											<?php ABPET_Layout::start_date( $all_dates, $start_date ); ABPET_Layout::start_time($form_data); ?>
+                                        </div>
+										<?php do_action('abpet_registration', $post_infos, $form_data); ?>
+									<?php } else {
+										ABPET_Layout::layout_warning_info( 'sale_close_msg' );
+									} ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="_abp_row">
-                        <div class="_f_equal_f_wrap_gap_w_full">
+                        <div class="_f_equal_f_wrap_gap_section_15 abpet_light_detail">
+                            <div class="abpet_details_column abpet_light_main">
+								<?php if ( ABPET_Function::on_off( 'feature' ) ) {
+									ABPET_Layout::item_feature($post_infos['post_feature'] ?? '');
+								}
+									ABPET_Layout::description($post_infos); ?>
+								<?php if (!empty($content)) { ?>
+                                    <div class="the_post_content">
+										<?php echo wp_kses_post( apply_filters( 'the_content', $content ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter 'the_content'. ?>
+                                    </div>
+								<?php } ?>
+                            </div>
                             <div class="abpet_details_column _fd_column_gap_xs">
-                                <?php do_action('abpet_faq', $post_infos); ?>
-                                <?php do_action('abpet_slider', ($post_infos['abpet_slider'] ?? [])); ?>
+								<?php do_action('abpet_faq', $post_infos); ?>
+								<?php if ( empty( $post_infos['abpet_slider'] ) ) { ?>
+									<?php do_action('abpet_slider', ($post_infos['abpet_slider'] ?? [])); ?>
+								<?php } ?>
                             </div>
-                            <div class="abpet_details_column">
-                                <?php do_action('abpet_term_condition', $post_infos); ?>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="_abp_row">
+                        <div class="_col_12">
+							<?php do_action('abpet_term_condition', $post_infos); ?>
                         </div>
                     </div>
                     <div class="_abp_row">

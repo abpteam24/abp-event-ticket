@@ -225,7 +225,7 @@
 				$booking_info = $booking_infos['booking_infos'] ?? [];
 				$post_id = $booking_infos['post_id'] ?? '';
 				if (!empty($booking_info) && sizeof($booking_info) > 0 && !empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt()) {
-					$return = '';
+					$html = '';
 					foreach ($booking_info as $cart_item) {
 						if (!empty($cart_item)) {
 							$ticket_infos = $cart_item['info'] ?? [];
@@ -233,10 +233,10 @@
 								$event_date = $cart_item['event_date'] ?? '';
 								$session_time = $cart_item['session_time'] ?? '';
 								$seat_type = $cart_item['seat_type'] ?? '';
-								$item_data[] = array('name' => __('Booking Information', 'abp-event-ticket') . ' ' . $return, 'value' => '<br />');
-								$item_data[] = array('name' => __('Event Date', 'abp-event-ticket'), 'value' => ABPET_Function::date_format($event_date) . '<br />');
-								$item_data[] = array('name' => __('Session Time', 'abp-event-ticket'), 'value' => ABPET_Function::date_format($event_date . ' ' . $session_time) . '<br />');
-								$item_data[] = array('name' => __('Ticket Information', 'abp-event-ticket'), 'value' => '<br />');
+								$html .= esc_html__('Booking Information', 'abp-event-ticket') . '<br />';
+								$html .= esc_html__('Event Date', 'abp-event-ticket') . ' : ' . esc_html(ABPET_Function::date_format($event_date)) . '<br />';
+								$html .= esc_html__('Session Time', 'abp-event-ticket') . ' : ' . esc_html(ABPET_Function::date_format($event_date . ' ' . $session_time)) . '<br />';
+								$html .= esc_html__('Ticket Information', 'abp-event-ticket') . '<br />';
 								foreach ($ticket_infos as $ticket_info) {
 									$price = $ticket_info['price'] ?? 0;
 									$qty = $ticket_info['qty'] ?? 1;
@@ -246,39 +246,41 @@
 									if ($seat_type == 'sp') {
 										$name = $name . ' - ' . ABPET_Function::sp_label($post_id, ($ticket_info['sp_id'] ?? $cart_item['sp_id'] ?? ''));
 									}
-									$item_data[] = array('name' => $name, 'value' => $price_text . ' X ' . $qty . '  = ' . $price . '<br />');
+									$html .= esc_html($name) . ' : ' . wp_kses_post($price_text) . ' X ' . esc_html($qty) . ' = ' . wp_kses_post($price) . '<br />';
 								}
 								$additional_info = $cart_item['additional_info'] ?? [];
 								if (ABPET_Function::on_off('additional_info') && !empty($additional_info) && sizeof($additional_info) > 0) {
-									$item_data[] = array('name' => __('Additional Information', 'abp-event-ticket'), 'value' => '<br />');
+									$html .= esc_html__('Additional Information', 'abp-event-ticket') . '<br />';
 									foreach ($additional_info as $additional) {
 										if (is_array($additional)) {
 											$qty = $additional['qty'] ?? 1;
 											$price = $additional['price'] ?? 0;
 											$price_text = $price > 0 ? wc_price($price) : __('FREE', 'abp-event-ticket');
 											$ex_price = $price > 0 ? wc_price($price * $qty) : __('FREE', 'abp-event-ticket');
-											$item_data[] = array('name' => $additional['name'] ?? '', 'value' => $price_text . ' X ' . $qty . '  = ' . $ex_price . '<br />');
+											$html .= esc_html($additional['name'] ?? '') . ' : ' . wp_kses_post($price_text) . ' X ' . esc_html($qty) . ' = ' . wp_kses_post($ex_price) . '<br />';
 										}
 									}
 								}
 								$attendee_infos = $cart_item['pass_info'] ?? [];
 								if (ABPET_Function::on_off('client_info') && !empty($attendee_infos) && sizeof($attendee_infos) > 0) {
-									$item_data[] = array('name' => __('Client Information', 'abp-event-ticket'), 'value' => '<br />');
+									$html .= esc_html__('Client Information', 'abp-event-ticket') . '<br />';
 									foreach ($attendee_infos as $attendee_info) {
 										if (!empty($attendee_info)) {
 											foreach ($attendee_info as $attendee) {
 												$label = $attendee['label'] ?? '';
 												$value = $attendee['value'] ?? '';
 												if ($label && $value) {
-													$item_data[] = array('name' => $label, 'value' => $value . '<br />');
+													$html .= esc_html($label) . ' : ' . esc_html($value) . '<br />';
 												}
 											}
 										}
 									}
 								}
-								$return = __('( Return )', 'abp-event-ticket');
 							}
 						}
+					}
+					if (!empty($html)) {
+						$item_data[] = array('name' => __('Booking Details', 'abp-event-ticket'), 'value' => $html);
 					}
 				}
 				return $item_data;
@@ -386,21 +388,37 @@
 					$billing_name = $_billing_first_name . ' ' . $_billing_last_name;
 					$billing_address = $_billing_address_1 . ' ' . $_billing_address_2;
 					if ($order_status != 'failed') {
-						$total_order = ABPET_Query::get_booking_query(['order_id' => $order_id], 0, 0, true);
-						if ($total_order == 0) {
-							foreach ($order->get_items() as $item_id => $item) {
-								$item_infos = wc_get_order_item_meta($item_id, '_abpet_items');
-								if (!empty($item_infos) && is_array($item_infos) && sizeof($item_infos) > 0) {
-									$post_id = $item_infos['post_id'] ?? '';
-									$booking_info = $item_infos['booking_infos'] ?? [];
-									if (!empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt() && !empty($booking_info) && sizeof($booking_info) > 0) {
-										foreach ($booking_info as $item_info) {
-											if (!empty($item_info)) {
+						global $wpdb;
+						// Serialize concurrent order writes so availability is re-checked atomically and the last seat is never sold twice.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching -- MySQL advisory lock, no user input.
+						$got_lock = $wpdb->get_var("SELECT GET_LOCK('abpet_orders_write', 10)");
+						if (!$got_lock) {
+							$order->update_status('failed', __('Could not finalize the booking due to a temporary database lock. Please review and try again.', 'abp-event-ticket'));
+							return;
+						}
+						try {
+							$total_order = ABPET_Query::get_booking_query(['order_id' => $order_id], 0, 0, true);
+							if ($total_order == 0) {
+								$table_name = $wpdb->prefix . 'abpet_orders';
+								$rows = array();
+								foreach ($order->get_items() as $item_id => $item) {
+									$item_infos = wc_get_order_item_meta($item_id, '_abpet_items');
+									if (!empty($item_infos) && is_array($item_infos) && sizeof($item_infos) > 0) {
+										$post_id = $item_infos['post_id'] ?? '';
+										$booking_info = $item_infos['booking_infos'] ?? [];
+										if (!empty($post_id) && get_post_type($post_id) == ABPET_Function::get_cpt() && !empty($booking_info) && sizeof($booking_info) > 0) {
+											// Re-validate availability inside the lock to prevent overselling on concurrent checkouts.
+											if (!ABPET_Function::checkout_validation($item_infos)) {
+												$order->update_status('failed', __('One or more seats became unavailable. The order has been cancelled.', 'abp-event-ticket'));
+												return;
+											}
+											foreach ($booking_info as $item_info) {
+												if (empty($item_info)) {
+													continue;
+												}
 												$seat_type = $item_info['seat_type'] ?? ($item_infos['seat_type'] ?? 'ticket');
 												$ticket_infos = $item_info['info'] ?? [];
 												$additional_info = $item_info['additional_info'] ?? [];
-												global $wpdb;
-												$table_name = $wpdb->prefix . 'abpet_orders';
 												if (!empty($ticket_infos) && sizeof($ticket_infos) > 0) {
 													$ticket_id = $ex_id = [];
 													$qty = 0;
@@ -417,45 +435,60 @@
 															$ex_id[] = $key;
 														}
 													}
-													$others = [];
-													$_order_status = 'wc-' . $order_status;
-													$data = [
-														'order_id' => intval($order_id),
-														'item_id' => intval($item_id),
-														'post_id' => intval($post_id),
-														'user_id' => intval($user_id),
-														'seat_type' => sanitize_text_field($seat_type),
-														'event_date' => sanitize_text_field($item_info['event_date'] ?? ''),
-														'session_time' => sanitize_text_field($item_info['session_time'] ?? ''),
-														'sp_id' => intval($item_info['sp_id'] ?? ''),
-														'ticket_info' => wp_json_encode($ticket_infos),
-														'ticket_id' => wp_json_encode($ticket_id),
-														'qty' => intval($qty),
-														'price' => sanitize_text_field($item_info['price'] ?? ''),
-														'ex_info' => wp_json_encode($additional_info),
-														'ex_id' => wp_json_encode($ex_id),
-														'ex_price' => sanitize_text_field($item_info['ex_price'] ?? ''),
-														'total' => sanitize_text_field($item_info['total'] ?? ''),
-														'pass_info' => wp_json_encode($item_info['pass_info'] ?? []),
-														'checkin' => 0,
-														'order_status' => sanitize_text_field($_order_status),
-														'payment_method' => sanitize_text_field($payment_method),
-														'billing_name' => sanitize_text_field($billing_name),
-														'billing_email' => sanitize_text_field($billing_email),
-														'billing_phone' => sanitize_text_field($billing_phone),
-														'billing_address' => sanitize_text_field($billing_address),
-														'others' => wp_json_encode($others),
-														'created_at' => current_time('Y-m-d H:i'),
-														'updated_at' => current_time('Y-m-d H:i')
-													];
-													// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-													$wpdb->insert($table_name, $data);
+$money = static function ($value): ?string {
+												return ('' === $value || null === $value) ? null : sanitize_text_field((string) $value);
+											};
+											$others = [];
+											$_order_status = 'wc-' . $order_status;
+											$rows[] = [
+												'order_id' => intval($order_id),
+												'item_id' => intval($item_id),
+												'post_id' => intval($post_id),
+												'user_id' => intval($user_id),
+												'seat_type' => sanitize_text_field($seat_type),
+												'event_date' => sanitize_text_field($item_info['event_date'] ?? ''),
+												'session_time' => sanitize_text_field($item_info['session_time'] ?? ''),
+												'sp_id' => intval($item_info['sp_id'] ?? ''),
+												'ticket_info' => wp_json_encode($ticket_infos),
+												'ticket_id' => wp_json_encode($ticket_id),
+												'qty' => intval($qty),
+												'price' => $money($item_info['price'] ?? ''),
+												'ex_info' => wp_json_encode($additional_info),
+												'ex_id' => wp_json_encode($ex_id),
+												'ex_price' => $money($item_info['ex_price'] ?? ''),
+												'total' => $money($item_info['total'] ?? ''),
+												'pass_info' => wp_json_encode($item_info['pass_info'] ?? []),
+												'checkin' => 0,
+												'order_status' => sanitize_text_field($_order_status),
+												'payment_method' => sanitize_text_field($payment_method),
+												'billing_name' => sanitize_text_field($billing_name),
+												'billing_email' => sanitize_text_field($billing_email),
+												'billing_phone' => sanitize_text_field($billing_phone),
+												'billing_address' => sanitize_text_field($billing_address),
+												'deposit_total' => null,
+												'due_amount' => null,
+												'payment_status' => null,
+												'deposit_date' => null,
+												'others' => wp_json_encode($others),
+												'created_at' => current_time('Y-m-d H:i'),
+												'updated_at' => current_time('Y-m-d H:i')
+											];
 												}
 											}
 										}
 									}
 								}
+								foreach ($rows as $row) {
+									// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+									$wpdb->insert($table_name, $row);
+								}
+								if (!empty($rows)) {
+									ABPET_Query::flush_cache();
+								}
 							}
+						} finally {
+							// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching -- MySQL advisory lock, no user input.
+							$wpdb->query("SELECT RELEASE_LOCK('abpet_orders_write')");
 						}
 					}
 				}
@@ -495,6 +528,7 @@
 							}
 						}
 					}
+					ABPET_Query::flush_cache();
 				}
 			}
 		}

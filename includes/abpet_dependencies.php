@@ -4,7 +4,7 @@
 	}
 	if (!class_exists('ABPET_Dependencies')) {
 		class ABPET_Dependencies {
-			private const ORDER_SCHEMA_VERSION = 2;
+			private const ORDER_SCHEMA_VERSION = 3;
 
 			public function __construct() {
 				add_action('admin_enqueue_scripts', array($this, 'admin_enqueue'), 90);
@@ -16,6 +16,9 @@
 				add_action('upgrader_process_complete', [$this, 'flush_rewrite']);
 				add_action('admin_init', array($this, 'activation_redirect'));
 				add_action('init', array($this, 'maybe_upgrade_order_schema'), 5);
+				add_action('save_post_' . ABPET_Function::get_cpt(), function (): void {
+					ABPET_Query::flush_cache();
+				}, 20);
 			}
 			public function admin_enqueue($hook): void {
 				$screen = get_current_screen();
@@ -101,6 +104,9 @@
 				do_action('abpet_admin_enqueue');
 			}
 			public function frontend_enqueue(): void {
+				if (!$this->frontend_assets_needed()) {
+					return;
+				}
 				if (in_array('woocommerce/woocommerce.php', get_option('active_plugins'))) {
 					wp_enqueue_script('wc-checkout');
 					wp_enqueue_style('select2');
@@ -110,6 +116,29 @@
 				wp_enqueue_script('abpet_slick', ABPET_URL . 'assets/js/slick.min.js', array('jquery'), ABPET_VERSION, true);
 				$this->global_enqueue();
 				do_action('abpet_frontend_enqueue');
+			}
+			private function frontend_assets_needed(): bool {
+				if (is_singular(ABPET_Function::get_cpt())) {
+					return true;
+				}
+				if (is_post_type_archive(ABPET_Function::get_cpt())) {
+					return true;
+				}
+				if (is_tax(array('abpet_category', 'abpet_location', 'abpet_brand', 'abpet_organizer'))) {
+					return true;
+				}
+				$post = get_post();
+				if ($post && !empty($post->post_content)) {
+					foreach (array('abpet-booking', 'abpet-post', 'abpet-gallery') as $tag) {
+						if (has_shortcode($post->post_content, $tag)) {
+							return true;
+						}
+					}
+				}
+				if (function_exists('is_cart') && (is_cart() || is_checkout())) {
+					return true;
+				}
+				return false;
 			}
 			public function global_enqueue(): void {
 				wp_enqueue_script('jquery');
@@ -243,6 +272,7 @@
 					require_once ABPET_DIR . 'admin/abpet_resource.php';
 					require_once ABPET_DIR . 'admin/abpet_configuration.php';
 					require_once ABPET_DIR . 'admin/abpet_status.php';
+require_once ABPET_DIR . 'admin/abpet_documentation.php';
 					require_once ABPET_DIR . 'admin/abpet_category.php';
 					require_once ABPET_DIR . 'admin/abpet_organizer.php';
 					require_once ABPET_DIR . 'admin/abpet_location.php';
@@ -391,9 +421,11 @@
 				$sp_table = $wpdb->prefix . 'abpet_sp';
 				$collate = $wpdb->get_charset_collate();
 				$schema_version = (int) get_option('abpet_orders_schema_version', 0);
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Table existence probe on init/upgrade.
 				$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $order_table)) === $order_table;
 				if ($table_exists && $schema_version < self::ORDER_SCHEMA_VERSION) {
 					// The event schema is intentionally fresh; existing legacy rows are not migrated.
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Schema migration; table name is $wpdb->prefix + fixed suffix.
 					$wpdb->query("DROP TABLE IF EXISTS `{$order_table}`");
 				}
 				$abpet_orders = "CREATE TABLE $order_table (
@@ -406,22 +438,26 @@
 					        session_time time DEFAULT NULL,
 					        seat_type varchar(20) NOT NULL DEFAULT 'ticket',
 					        sp_id bigint(20) unsigned NOT NULL DEFAULT 0,
-					        ticket_info text NOT NULL,
-					        ticket_id varchar(255) NOT NULL,
+					        ticket_info text DEFAULT NULL,
+					        ticket_id text DEFAULT NULL,
 					        qty int(5) NOT NULL DEFAULT 1,
-					        price varchar(100) DEFAULT NULL,					        
-					        ex_info text NOT NULL,				        					        
-					        ex_id varchar(255) NOT NULL,
-					        ex_price varchar(100) DEFAULT NULL,
-					        total varchar(100) DEFAULT NULL,					        
-					        pass_info text NOT NULL,					        
-					        checkin tinyint(1) NOT NULL DEFAULT 0,					        
-					        order_status varchar(20) NOT NULL,
+					        price decimal(10,2) DEFAULT NULL,
+					        ex_info text DEFAULT NULL,
+					        ex_id text DEFAULT NULL,
+					        ex_price decimal(10,2) DEFAULT NULL,
+					        total decimal(10,2) DEFAULT NULL,
+					        pass_info text DEFAULT NULL,
+					        checkin tinyint(1) NOT NULL DEFAULT 0,
+					        order_status varchar(30) NOT NULL DEFAULT 'wc-pending',
 					        payment_method varchar(100) DEFAULT NULL,
 					        billing_name varchar(100) DEFAULT NULL,
 					        billing_email varchar(100) DEFAULT NULL,
-					        billing_phone varchar(20) DEFAULT NULL,
+					        billing_phone varchar(50) DEFAULT NULL,
 					        billing_address varchar(255) DEFAULT NULL,
+					        deposit_total decimal(10,2) DEFAULT NULL,
+					        due_amount decimal(10,2) DEFAULT NULL,
+					        payment_status varchar(30) DEFAULT NULL,
+					        deposit_date datetime DEFAULT NULL,
 					        others text DEFAULT NULL,
 					        created_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
 					        updated_at datetime DEFAULT NULL,
@@ -429,8 +465,13 @@
 					        KEY order_id  (order_id),
 					        KEY user_id  (user_id),
 					        KEY item_id  (item_id),
+					        KEY post_id  (post_id),
+					        KEY sp_id  (sp_id),
+					        KEY order_status  (order_status),
+					        KEY checkin  (checkin),
 					        KEY event_date  (event_date),
-					        KEY session_time  (session_time)
+					        KEY session_time  (session_time),
+					        KEY avail  (post_id, event_date, session_time)
 					    ) $collate;";
 				// Seat Plan Table
 				$sp = "CREATE TABLE $sp_table (
@@ -455,6 +496,7 @@
 			public function maybe_upgrade_order_schema(): void {
 				global $wpdb;
 				$order_table = $wpdb->prefix . 'abpet_orders';
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Table existence probe on init/upgrade.
 				$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $order_table)) === $order_table;
 				if (!$table_exists || (int) get_option('abpet_orders_schema_version', 0) < self::ORDER_SCHEMA_VERSION) {
 					self::create_table();

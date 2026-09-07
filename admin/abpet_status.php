@@ -174,7 +174,10 @@
                         <?php if ( $dummy_count > 0 ) { ?>
                             <div class="_fa_center_fj_between _abp_gap_xs">
                                 <button class="_btn_warning_xs" onclick="abpet_import_global('dummy')" type="button"><span class="fas fa-plus"></span><?php esc_html_e( 'Add More Dummy Data', 'abp-event-ticket' ); ?></button>
-                                <button class="_btn_light_danger_xs" onclick="abpet_import_global('remove_dummy')" type="button"><span class="fas fa-trash"></span><?php printf( esc_html__( 'Remove Dummy Data (%d)', 'abp-event-ticket' ), $dummy_count ); ?></button>
+                                <button class="_btn_light_danger_xs" onclick="abpet_import_global('remove_dummy')" type="button"><span class="fas fa-trash"></span><?php
+                                /* translators: %d: number of dummy events to remove. */
+                                printf( esc_html__( 'Remove Dummy Data (%d)', 'abp-event-ticket' ), esc_html( $dummy_count ) );
+                                ?></button>
                             </div>
                         <?php } else { ?>
                             <button class="_btn_warning_xs" onclick="abpet_import_global('dummy')" type="button"><span class="fas fa-plus"></span><?php esc_html_e( 'Import Dummy Data', 'abp-event-ticket' ); ?></button>
@@ -365,7 +368,9 @@
 					'post_status'    => 'any',
 					'posts_per_page' => -1,
 					'fields'         => 'ids',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Fixed plugin dummy-data flag lookup.
 					'meta_key'       => 'dummy',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Fixed plugin dummy-data flag lookup.
 					'meta_value'     => 'on',
 				] );
 				foreach ( $post_ids as $post_id ) {
@@ -392,7 +397,9 @@
 					'post_status'    => 'any',
 					'posts_per_page' => -1,
 					'fields'         => 'ids',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Fixed plugin dummy-data flag lookup.
 					'meta_key'       => 'dummy',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Fixed plugin dummy-data flag lookup.
 					'meta_value'     => 'on',
 				] ) );
 			}

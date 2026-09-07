@@ -24,7 +24,10 @@ if ( ! class_exists( 'ABPET_Customer_Account' ) ) {
 						<?php foreach ( $orders as $order ) : ?>
 							<article class="abpet_customer_order">
 								<div>
-									<strong><?php printf( esc_html__( 'Order #%s', 'abp-event-ticket' ), esc_html( $order->get_order_number() ) ); ?></strong>
+									<strong><?php
+									/* translators: %s: WooCommerce order number. */
+									printf( esc_html__( 'Order #%s', 'abp-event-ticket' ), esc_html( $order->get_order_number() ) );
+									?></strong>
 									<time datetime="<?php echo esc_attr( $order->get_date_created() ? $order->get_date_created()->date( 'c' ) : '' ); ?>">
 										<?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?>
 									</time>

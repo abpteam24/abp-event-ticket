@@ -75,6 +75,9 @@
 								<?php ABPET_Static::icon_svg( 'status' );
 									esc_html_e( 'Status', 'abp-event-ticket' ); ?>
                             </a>
+                            <a href="<?php echo esc_url( ABPET_Function::build_url( 'documentation' ) ); ?>" class="_btn_white_xs <?php echo esc_attr( $active_tab == 'documentation' ? 'abp_active' : '' ); ?>">
+								<span>📘</span><?php esc_html_e( 'Documentation', 'abp-event-ticket' ); ?>
+                            </a>
 							<?php do_action( 'abpet_add_admin_menu_tab', $active_tab ); ?>
                         </div>
 						<?php if ( ABPET_WC == 2 ) { ?>

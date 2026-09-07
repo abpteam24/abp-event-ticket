@@ -68,7 +68,7 @@
 				$cpt                       = ABPET_Function::get_cpt();
 				$filters['status']         = $status;
 				$filters['posts_per_page'] = $limit;
-				$filters['paged']          = $page_number - 1;
+				$filters['paged']          = $page_number;
 				//echo '<pre>';print_r($filters);echo '</pre>';
 				$post_ids = ABPET_Query::get_post_id( $filters );
 				if ( ! empty( $post_ids ) && sizeof( $post_ids ) > 0 ) {
@@ -722,6 +722,7 @@
 						foreach ( $time_info['date_times'] ?? [] as $date_time ) {
 							$times = array_merge( $times, array_filter( (array) ( $date_time['time'] ?? [] ) ) );
 						}
+						// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce and capability are verified in the caller save_settings() before validation runs.
 						if ( empty( $times ) || ( count( $times ) === 1 && reset( $times ) === '00:00' && empty( $_POST['operation_time'] ) ) ) {
 							$errors[] = __( 'Configure at least one valid event session time.', 'abp-event-ticket' );
 						}

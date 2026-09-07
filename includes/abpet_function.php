@@ -137,12 +137,14 @@
 					return gmdate( 'Y-m-d', strtotime( (string) $date ) );
 				}, $dates ) ) );
 				$start_date = (string) ( $dates[0] ?? '' );
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL pre-select for display; no state change.
 				$requested_date = isset( $_GET['event_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_date'] ) ) : '';
 				if ( $requested_date && in_array( $requested_date, $dates, true ) ) {
 					$start_date = $requested_date;
 				}
 				$all_times = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $start_date ) ) ) ) );
 				$start_time = (string) ( $all_times[0] ?? '' );
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL pre-select for display; no state change.
 				$requested_time = isset( $_GET['session_time'] ) ? sanitize_text_field( wp_unslash( $_GET['session_time'] ) ) : '';
 				if ( $requested_time && in_array( $requested_time, $all_times, true ) ) {
 					$start_time = $requested_time;
@@ -334,19 +336,25 @@
 					if ( empty( $_ticket_infos ) || ! is_array( $_ticket_infos ) ) {
 						return false;
 					}
+					$order_tickets = $cart_item['info'] ?? [];
 					if ( 'off' === $display_ticket_type ) {
-						$key          = array_key_first( $_ticket_infos );
-						$ticket_infos = [ $key => $_ticket_infos[ $key ] ];
-					} else {
-						$ticket_infos = $_ticket_infos;
+						$key           = array_key_first( $_ticket_infos );
+						$requested_qty = 0;
+						foreach ( $order_tickets as $order_ticket ) {
+							$requested_qty += intval( $order_ticket['qty'] ?? 0 );
+						}
+						$order_tickets = [ $key => [ 'qty' => $requested_qty ] ];
+					}
+					if ( empty( $order_tickets ) ) {
+						return false;
 					}
 					$sold_infos = ABPET_Query::get_sold_ticket( $form_data );
-					foreach ( $ticket_infos as $tic_id => $ticket_info ) {
+					foreach ( $order_tickets as $tic_id => $order_ticket ) {
 						if ( ! isset( $_ticket_infos[ $tic_id ] ) ) {
-							continue;
+							return false;
 						}
 						$_ticket_info  = $_ticket_infos[ $tic_id ];
-						$qty           = intval( $ticket_info['qty'] ?? 0 );
+						$qty           = intval( $order_ticket['qty'] ?? 1 );
 						$sold          = $sold_infos[ $tic_id ] ?? 0;
 						$reserve       = intval( $_ticket_info['reserve'] ?? 0 );
 						$total_qty     = intval( $_ticket_info['qty'] ?? 0 );

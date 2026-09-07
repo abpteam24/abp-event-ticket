@@ -281,6 +281,46 @@
 .default_details_page .abpet_default_media .abpet_slider {
 	height: 100%;
 }
+
+div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--tb_gap_xxs) var(--tb_gap_xs);
+	max-width: 100%;
+}
+
+div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
+	max-width: 100%;
+	overflow-wrap: anywhere;
+	text-wrap: wrap;
+	white-space: normal;
+	word-break: break-word;
+}
+
+.default_details_page .abpet_default_summary {
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+}
+
+.default_details_page .abpet_default_summary > * {
+	max-width: 100%;
+}
+
+.default_details_page .abpet_default_media {
+	max-width: 100%;
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+	.abpet_default_intro > .abpet_details_column:first-child {
+		flex: 1 1 300px;
+		min-width: min(100%, 300px);
+	}
+	.default_details_page .abpet_details_title {
+		font-size: clamp(1.45rem, 3.5vw, 2rem);
+	}
+}
 .abpet_schedule_picker {
 	position: relative;
 	margin-top: var(--tb_gap);
@@ -672,6 +712,15 @@
 	#abpet_area.abpet_light_details .post_top_filter > label {
 		flex: 1 1 auto;
 	}
+	#abpet_area.abpet_light_details .booking_area {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
+	#abpet_area.abpet_light_details .booking_area > .ticket_left,
+	#abpet_area.abpet_light_details .booking_area > .ticket_right {
+		min-width: 0;
+		width: 100%;
+	}
 }
 @media only screen and (max-width: 480px) {
 	#abpet_area.abpet_light_details .abpet_light_summary {
@@ -734,5 +783,465 @@
 	.abpet_customer_order .button {
 		width: 100%;
 		text-align: center;
+	}
+}
+/******************************************************************** Details Theme Redesign v2 - default / light / modern ************************************************/
+/* ============ default : Editorial Cover ============ */
+#abpet_area.default_details_page .abpet_default_cover {
+	position: relative;
+}
+#abpet_area.default_details_page .abpet_default_cover_media {
+	min-height: clamp(320px, 58vh, 560px);
+	overflow: hidden;
+}
+#abpet_area.default_details_page .abpet_default_cover_media .abp_image {
+	height: 100%;
+	min-height: clamp(320px, 58vh, 560px);
+	overflow: hidden;
+}
+#abpet_area.default_details_page .abpet_default_cover_media .abp_image img._img_control {
+	display: block;
+	height: 100%;
+	min-height: clamp(320px, 58vh, 560px);
+	object-fit: cover;
+	object-position: center;
+}
+#abpet_area.default_details_page .abpet_default_cover_media:hover .abp_image img._img_control {
+	transform: scale(1.02);
+}
+#abpet_area.default_details_page .abpet_default_cover_overlay {
+	align-items: flex-end;
+	background: linear-gradient(180deg, rgba(10, 12, 22, 0.18) 0%, rgba(10, 12, 22, 0.38) 45%, rgba(8, 10, 18, 0.86) 100%);
+	display: flex;
+	inset: 0;
+	padding: clamp(24px, 6vw, 72px) 0;
+	pointer-events: none;
+	position: absolute;
+}
+#abpet_area.default_details_page .abpet_default_cover_inner {
+	max-width: min(100%, 780px);
+}
+#abpet_area.default_details_page .abpet_default_date_chip {
+	align-items: center;
+	background: rgba(255, 255, 255, 0.16);
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: var(--tb_br_xl);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	color: var(--tb_color_white);
+	display: inline-flex;
+	font-size: var(--tb_fs_small);
+	font-weight: var(--tb_fw-medium);
+	gap: var(--tb_gap_xxs);
+	line-height: 1;
+	margin-bottom: var(--tb_gap_xs);
+	padding: 7px 14px;
+}
+#abpet_area.default_details_page .abpet_default_cover .abpet_details_title {
+	color: var(--tb_color_white);
+	font-size: var(--tb_fs_h4);
+	font-weight: var(--tb_fw-bold);
+	letter-spacing: -0.02em;
+	line-height: 1.12;
+	margin: 0 0 var(--tb_gap_xs) 0;
+	text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+}
+#abpet_area.default_details_page .abpet_default_subtitle {
+	color: rgba(255, 255, 255, 0.86);
+	font-size: var(--tb_fs_h6);
+	margin: 0;
+	max-width: 640px;
+}
+#abpet_area.default_details_page .abpet_default_metabar {
+	align-items: center;
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--tb_gap_xxs) var(--tb_gap_xs);
+	margin: -28px auto 0;
+	max-width: calc(100% - 48px);
+	padding: var(--tb_gap_xs) var(--tb_gap);
+	position: relative;
+	z-index: 2;
+}
+#abpet_area.default_details_page .abpet_default_body {
+	align-items: start;
+	gap: var(--tb_gap);
+	margin-top: var(--tb_gap);
+}
+#abpet_area.default_details_page .abpet_default_main {
+	flex: 1 1 0;
+	min-width: 0;
+}
+#abpet_area.default_details_page .abpet_default_sidebar {
+	flex: 0 1 360px;
+	min-width: 280px;
+}
+#abpet_area.default_details_page .abpet_default_booking_sticky {
+	position: sticky;
+	top: var(--tb_gap);
+}
+#abpet_area.default_details_page .abpet_default_booking_sticky .abpet_booking {
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	margin: 0;
+	padding: var(--tb_gap_xs) var(--tb_gap) var(--tb_gap);
+}
+#abpet_area.default_details_page .abpet_default_schedule {
+	margin-top: var(--tb_gap);
+}
+#abpet_area.default_details_page .abpet_default_main .abpet_details_title,
+#abpet_area.default_details_page .abpet_default_main .abpet_faq_panel h4,
+#abpet_area.default_details_page .abpet_default_main .abpet_tc_panel h4 {
+	font-size: var(--tb_fs_h4);
+}
+@media only screen and (max-width: 1024px) {
+	#abpet_area.default_details_page .abpet_default_body {
+		flex-direction: column;
+	}
+	#abpet_area.default_details_page .abpet_default_sidebar {
+		flex: 1 1 100%;
+		max-width: 100%;
+		min-width: 0;
+	}
+	#abpet_area.default_details_page .abpet_default_booking_sticky {
+		position: static;
+	}
+}
+@media only screen and (max-width: 700px) {
+	#abpet_area.default_details_page .abpet_default_cover_media,
+	#abpet_area.default_details_page .abpet_default_cover_media .abp_image,
+	#abpet_area.default_details_page .abpet_default_cover_media .abp_image img._img_control {
+		min-height: clamp(280px, 52vh, 400px);
+	}
+	#abpet_area.default_details_page .abpet_default_overlay,
+	#abpet_area.default_details_page .abpet_default_cover_overlay {
+		padding: 24px 0;
+	}
+	#abpet_area.default_details_page .abpet_default_metabar {
+		margin-top: calc(var(--tb_gap) * -1);
+		max-width: 100%;
+	}
+}
+/* ============ light : Gallery Lead + booking card ============ */
+#abpet_area.abpet_light_details .abpet_light_lead {
+	align-items: stretch;
+	gap: var(--tb_gap);
+}
+#abpet_area.abpet_light_details .abpet_light_lead_media {
+	flex: 1 1 46%;
+	max-width: 48%;
+	min-width: 0;
+}
+#abpet_area.abpet_light_details .abpet_light_lead_body {
+	flex: 1 1 54%;
+	flex-direction: column;
+	justify-content: center;
+	min-width: 0;
+}
+#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image {
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	height: 100%;
+	max-height: 540px;
+	min-height: 320px;
+	overflow: hidden;
+}
+#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image img._img_control {
+	display: block;
+	height: 100%;
+	max-height: 540px;
+	object-fit: cover;
+	object-position: center;
+}
+#abpet_area.abpet_light_details .abpet_light_lead_media:hover .abp_image img._img_control {
+	transform: scale(1.03);
+}
+#abpet_area.abpet_light_details .abpet_light_lead_kicker {
+	align-items: center;
+	color: var(--tb_color_theme);
+	display: flex;
+	font-size: var(--tb_fs_small);
+	font-weight: var(--tb_fw-bold);
+	gap: var(--tb_gap_xxs);
+	letter-spacing: 0.14em;
+	margin-bottom: var(--tb_gap_xs);
+	text-transform: uppercase;
+}
+#abpet_area.abpet_light_details .abpet_light_lead_date {
+	align-items: center;
+	background: var(--tb_color_light);
+	border-left: 4px solid var(--tb_color_theme);
+	border-radius: var(--tb_br);
+	color: var(--tb_color_theme);
+	display: inline-flex;
+	font-size: var(--tb_fs_h6);
+	font-weight: var(--tb_fw-medium);
+	gap: var(--tb_gap_xxs);
+	margin-top: var(--tb_gap_xs);
+	padding: 8px 14px;
+	width: fit-content;
+}
+#abpet_area.abpet_light_details .abpet_light_schedule_scroll {
+	margin-top: var(--tb_gap);
+}
+#abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_schedule_list {
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_21);
+	height: auto;
+}
+#abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_schedule_list_items {
+	flex-direction: row;
+	height: auto;
+	max-height: none;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: var(--tb_gap_xs) 2px var(--tb_gap_xs) 0;
+}
+#abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_event_schedule_day {
+	display: inline-flex;
+	flex-direction: column;
+	gap: var(--tb_gap_xxs);
+}
+#abpet_area.abpet_light_details .abpet_light_schedule_scroll a {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+#abpet_area.abpet_light_details .abpet_light_booking_card {
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	margin: var(--tb_gap) auto 0;
+	max-width: 880px;
+	overflow: hidden;
+	padding: var(--tb_gap);
+}
+#abpet_area.abpet_light_details .abpet_light_booking_head {
+	align-items: center;
+	color: var(--tb_color_theme);
+	display: flex;
+	font-size: var(--tb_fs_h5);
+	font-weight: var(--tb_fw-bold);
+	gap: var(--tb_gap_xs);
+	justify-content: center;
+	letter-spacing: 0.02em;
+	margin-bottom: var(--tb_gap_xs);
+	text-align: center;
+}
+#abpet_area.abpet_light_details .abpet_light_booking_card .abpet_booking {
+	margin: 0;
+}
+#abpet_area.abpet_light_details .abpet_light_booking_card .post_top_filter {
+	background: var(--tb_color_4);
+	border: 0;
+	box-shadow: none;
+	margin-top: 0;
+}
+#abpet_area.abpet_light_details .abpet_light_detail {
+	align-items: start;
+	gap: var(--tb_gap);
+	margin-top: var(--tb_gap);
+}
+#abpet_area.abpet_light_details .abpet_light_main {
+	flex: 1 1 58%;
+	min-width: 0;
+}
+#abpet_area.abpet_light_details .abpet_light_detail > .abpet_details_column:last-child {
+	flex: 1 1 42%;
+	min-width: 0;
+}
+@media only screen and (max-width: 900px) {
+	#abpet_area.abpet_light_details .abpet_light_lead {
+		flex-direction: column;
+	}
+	#abpet_area.abpet_light_details .abpet_light_lead_media {
+		flex: 1 1 auto;
+		max-width: 100%;
+	}
+	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image,
+	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image img._img_control {
+		max-height: 420px;
+	}
+	#abpet_area.abpet_light_details .abpet_light_booking_card {
+		max-width: 100%;
+	}
+	#abpet_area.abpet_light_details .abpet_light_detail {
+		flex-direction: column;
+	}
+	#abpet_area.abpet_light_details .abpet_light_main,
+	#abpet_area.abpet_light_details .abpet_light_detail > .abpet_details_column:last-child {
+		flex: 1 1 auto;
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 700px) {
+	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image,
+	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image img._img_control {
+		max-height: 300px;
+		min-height: 240px;
+	}
+	#abpet_area.abpet_light_details .abpet_light_booking_card {
+		border-radius: var(--tb_br);
+		padding: var(--tb_gap_xs);
+	}
+}
+/* ============ modern : Dark Split + floating booking ============ */
+#abpet_area.abpet_modern_details .abpet_modern_banner {
+	background: linear-gradient(135deg, #101322 0%, #171a2c 55%, #0f111f 100%);
+	color: var(--tb_color_white);
+	padding: clamp(28px, 6vw, 72px) 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_split {
+	align-items: stretch;
+	display: grid;
+	gap: clamp(24px, 4vw, 56px);
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+#abpet_area.abpet_modern_details .abpet_modern_sticky_media {
+	min-width: 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image {
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: var(--tb_br_xl);
+	height: 100%;
+	max-height: 640px;
+	min-height: 360px;
+	overflow: hidden;
+}
+#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image img._img_control {
+	display: block;
+	height: 100%;
+	max-height: 640px;
+	min-height: 360px;
+	object-fit: cover;
+	object-position: center;
+}
+#abpet_area.abpet_modern_details .abpet_modern_copy {
+	min-width: 0;
+	padding: clamp(8px, 1.5vw, 24px) 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_kicker {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--tb_gap_xs);
+	margin-bottom: var(--tb_gap);
+}
+#abpet_area.abpet_modern_details .abpet_modern_kicker span {
+	align-items: center;
+	border: 1px solid currentColor;
+	border-radius: var(--tb_br_xl);
+	display: inline-flex;
+	font-size: var(--tb_fs_small);
+	font-weight: var(--tb_fw-medium);
+	gap: var(--tb_gap_xxs);
+	line-height: 1;
+	padding: 7px 13px;
+}
+#abpet_area.abpet_modern_details .abpet_modern_kicker_date {
+	color: rgba(255, 255, 255, 0.85);
+}
+#abpet_area.abpet_modern_details .abpet_modern_kicker_live {
+	background: rgba(34, 197, 94, 0.18);
+	border-color: transparent !important;
+	color: #4ade80;
+}
+#abpet_area.abpet_modern_details .abpet_details_title {
+	color: var(--tb_color_white);
+	font-size: clamp(2rem, 5vw, 3.4rem);
+	letter-spacing: -0.04em;
+	line-height: 1.04;
+	margin: 0 0 var(--tb_gap_xs) 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_subtitle {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: var(--tb_fs_h6);
+	margin: 0 0 var(--tb_gap) 0;
+	max-width: 620px;
+}
+#abpet_area.abpet_modern_details .abpet_modern_meta {
+	margin-bottom: var(--tb_gap);
+}
+#abpet_area.abpet_modern_details .abpet_modern_meta .abp_tag {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	color: var(--tb_color_white);
+}
+#abpet_area.abpet_modern_details .abpet_modern_description {
+	color: rgba(255, 255, 255, 0.8);
+	padding: 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_description .load_more_action {
+	color: var(--tb_color_theme);
+}
+#abpet_area.abpet_modern_details .abpet_modern_booking_card {
+	background: var(--tb_color_white);
+	border: 1px solid var(--tb_color_border);
+	border-radius: var(--tb_br_xl);
+	box-shadow: var(--tb_shadow_23);
+	margin: calc(var(--tb_gap) * -1) 0 0 0;
+	padding: var(--tb_gap);
+	position: relative;
+	z-index: 3;
+}
+#abpet_area.abpet_modern_details .abpet_modern_booking_card .abpet_booking {
+	margin: 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_schedule {
+	margin-bottom: var(--tb_gap_xs);
+}
+#abpet_area.abpet_modern_details .abpet_modern_schedule .abpet_schedule_list {
+	height: auto;
+	padding: 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_schedule .abpet_schedule_list_items {
+	flex-direction: row;
+	height: auto;
+	max-height: none;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: var(--tb_gap_xxs) 2px var(--tb_gap_xxs) 0;
+}
+#abpet_area.abpet_modern_details .abpet_modern_schedule .abpet_event_schedule_day {
+	display: inline-flex;
+	flex-direction: column;
+	gap: var(--tb_gap_xxs);
+}
+#abpet_area.abpet_modern_details .abpet_modern_schedule a {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+@media only screen and (max-width: 1024px) {
+	#abpet_area.abpet_modern_details .abpet_modern_split {
+		grid-template-columns: 1fr;
+	}
+	#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image,
+	#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image img._img_control {
+		max-height: 460px;
+		min-height: 280px;
+	}
+	#abpet_area.abpet_modern_details .abpet_modern_booking_card {
+		margin-top: 0;
+	}
+}
+@media only screen and (max-width: 700px) {
+	#abpet_area.abpet_modern_details .abpet_modern_banner {
+		padding: 24px 0;
+	}
+	#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image,
+	#abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image img._img_control {
+		max-height: 300px;
+		min-height: 240px;
+	}
+	#abpet_area.abpet_modern_details .abpet_modern_booking_card {
+		border-radius: var(--tb_br);
+		padding: var(--tb_gap_xs);
 	}
 }

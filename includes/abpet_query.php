@@ -76,6 +76,7 @@
 					'post_status' => $status,
 					'orderby' => 'date',
 					'order' => $order,
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Meta query keys are fixed plugin strings.
 					'meta_query' => $meta_query
 				) + ABPET_Function::polylang_query_args());
 				return array_unique($all_data);
@@ -159,6 +160,7 @@
 					$raw_order_by = !empty($filters['order_by']) ? sanitize_key($filters['order_by']) : 'order_id';
 					$order_by = in_array($raw_order_by, $allowed_columns, true) ? $raw_order_by : 'order_id';
 					$order_dir = (!empty($filters['order_dir']) && strtoupper($filters['order_dir']) === 'ASC') ? 'ASC' : 'DESC';
+					// phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter -- ORDER BY column/direction are whitelisted constants.
 					$sql .= " ORDER BY {$order_by} {$order_dir}";
 					if ($limit > 0) {
 						$sql .= ' LIMIT %d OFFSET %d';
@@ -168,27 +170,27 @@
 				}
 				if ($count) {
 					if (!empty($params)) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
 						$results = $wpdb->get_var(
-						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 							$wpdb->prepare($sql, ...$params)
 						);
 					} else {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 						$results = $wpdb->get_var($sql);
 					}
 				} else {
 					if (!empty($params)) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
 						$results = $wpdb->get_results(
-						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 							$wpdb->prepare($sql, ...$params),
 							ARRAY_A
 						);
 					} else {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 						$results = $wpdb->get_results($sql, ARRAY_A);
 					}
 				}
@@ -217,6 +219,15 @@
 				}
 				return $sold_qty;
 			}
+			public static function flush_cache(int $sp_id = 0): void {
+				wp_cache_delete('abpet_info');
+				wp_cache_delete('abpet_sp_' . md5('_all'));
+				wp_cache_delete('abpet_sp_' . md5('_count'));
+				if ($sp_id > 0) {
+					wp_cache_delete('abpet_sp_' . md5((string) $sp_id . '_all'));
+					wp_cache_delete('abpet_sp_' . md5((string) $sp_id . '_count'));
+				}
+			}
 			public static function get_sp($id = '', $count = false) {
 				global $wpdb;
 				$cache_key = 'abpet_sp_' . md5($id . ($count ? '_count' : '_all'));
@@ -227,18 +238,18 @@
 				$table_name = $wpdb->prefix . 'abpet_sp';
 				if ($count) {
 					if (!empty($id)) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
 						$results = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE id = %d", (int)$id));
 					} else {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
 						$results = $wpdb->get_var("SELECT COUNT(*) FROM {$table_name}");
 					}
 				} else {
 					if (!empty($id)) {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable; $id is prepared.
 						$results = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$table_name} WHERE id = %d ORDER BY id ASC", (int)$id), ARRAY_A);
 					} else {
-						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
+						// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Safe table name variable with no user input.
 						$results = $wpdb->get_results("SELECT * FROM {$table_name} ORDER BY id ASC", ARRAY_A);
 					}
 				}

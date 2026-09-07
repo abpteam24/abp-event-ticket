@@ -400,12 +400,14 @@
                 if ($id > 0) {
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                     $wpdb->update($table_name, $data, ['id' => $id]);
+                    ABPET_Query::flush_cache($id);
                     $ticket_infos[$id] = $ticket_info;
                     update_option('abpet_ticket_sp', $ticket_infos);
                     wp_send_json_success(['msg' => __('Seat Plan Updated Successfully.....!', 'abp-event-ticket'), 'type' => 'success']);
                 } else {
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                     $wpdb->insert($table_name, $data);
+                    ABPET_Query::flush_cache($wpdb->insert_id);
                     $ticket_infos[$wpdb->insert_id] = $ticket_info;
                     update_option('abpet_ticket_sp', $ticket_infos);
                     wp_send_json_success(['msg' => __('Seat Plan Saved Successfully...!', 'abp-event-ticket'), 'type' => 'success']);
@@ -420,6 +422,7 @@
                     global $wpdb;
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                     $wpdb->delete($wpdb->prefix . 'abpet_sp', ['id' => $id], ['%d']);
+                    ABPET_Query::flush_cache($id);
                     $ticket_infos = ABPET_Function::get_option('abpet_ticket_sp');
                     unset($ticket_infos[$id]);
                     update_option('abpet_ticket_sp', $ticket_infos);

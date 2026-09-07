@@ -2,7 +2,7 @@
 Contributors: abpteam
 Tags: event tickets, ticket booking, seat reservation, event registration, WooCommerce
 Requires at least: 6.2
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv3

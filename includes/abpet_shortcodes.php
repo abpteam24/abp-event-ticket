@@ -12,6 +12,7 @@
             public function booking($attribute): bool|string {
                 $params = self::normalize_attributes($attribute);
                 $post_id = absint( $params['post_id'] ?? 0 );
+                nocache_headers();
                 ob_start();
                 if (!empty($post_id)) {
                     do_action('abpet_load_details_template', $post_id);
@@ -50,6 +51,7 @@
             public function post_list($attribute): bool|string {
                 $params = self::normalize_attributes($attribute);
                 $post_id = absint( $params['post_id'] ?? 0 );
+                nocache_headers();
                 //echo '<pre>';print_r($params);echo '</pre>';
                 ob_start();
                 if (!empty($post_id)) {
