@@ -44,6 +44,19 @@
 				) + ABPET_Function::polylang_query_args();
 				return new WP_Query($args);
 			}
+			public static function dummy_ids(): array {
+				$args = array(
+					'post_type' => ABPET_Function::get_cpt(),
+					'post_status' => 'any',
+					'posts_per_page' => -1,
+					'fields' => 'ids',
+					'meta_key' => 'dummy',
+					'meta_value' => 'on',
+				);
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				$posts = get_posts($args);
+				return is_array($posts) ? $posts : array();
+			}
 			public static function get_post_id($filters = []): array {
 				$post_type = ($filters['cpt'] ?? null) ?: ABPET_Function::get_cpt();
 				$show = ($filters['posts_per_page'] ?? null) ?: -1;
@@ -81,7 +94,7 @@
 				) + ABPET_Function::polylang_query_args());
 				return array_unique($all_data);
 			}
-			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false) {
+			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false): array|int|string {
 				global $wpdb;
 				$table_name = $wpdb->prefix . 'abpet_orders';
 				$conditions = array();
@@ -97,14 +110,31 @@
 					$params = array_merge($params, $booked_status);
 				}
 				// Integer ID Filters
+				$user_email = $filters['user_email'] ?? '';
 				$int_keys = array('id', 'post_id', 'user_id', 'item_id', 'order_id', 'sp_id');
 				foreach ($int_keys as $key) {
 					if (!empty($filters[$key])) {
+						if ('user_id' === $key && !empty($user_email)) {
+							continue;
+						}
 						$conditions[] = "{$key} = %d";
 						$params[] = absint($filters[$key]);
 					}
 				}
+				// Account lookup: match by user id OR the customer's billing email (covers guest checkouts).
+				if (!empty($user_email)) {
+					$conditions[] = '(user_id = %d OR billing_email = %s)';
+					$params[] = absint($filters['user_id'] ?? 0);
+					$params[] = sanitize_email($user_email);
+				}
 				// Event date/session filters.
+				$start_time = $filters['start_time'] ?? '';
+				if (!empty($start_time) && empty($filters['event_date']) && empty($filters['session_time'])) {
+					$start_st   = sanitize_text_field( $start_time );
+					$conditions[] = 'event_date = %s AND TIME_FORMAT(session_time, "%%H:%%i") = %s';
+					$params[]   = gmdate( 'Y-m-d', strtotime( $start_st ) );
+					$params[]   = gmdate( 'H:i', strtotime( $start_st ) );
+				}
 				$event_date = $filters['event_date'] ?? '';
 				if (!empty($event_date)) {
 					$conditions[] = 'event_date = %s';

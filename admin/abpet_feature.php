@@ -14,7 +14,7 @@
                 if (ABPET_Function::on_off('feature')) {
                     $label = ABPET_Function::feature_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="_abp"><span class="_mar_r_xs">🔗</span><?php echo esc_html($label); ?></h5>
+                        <h5 class="abp"><span class="_mar_r_xs">🔗</span><?php echo esc_html($label); ?></h5>
                         <?php ABPET_Layout::button_global_popup('option_feature', __('Add New', 'abp-event-ticket') . ' ' . $label); ?>
                     </div>
                     <?php ABPET_Layout::info_text('abpet_feature'); ?>
@@ -38,13 +38,13 @@
                 $title = __('Add new ', 'abp-event-ticket') . ' ' . $label;
                 ?>
                 <div class="abp_form">
-                    <h5 class="_abp"><span class="_mar_r_xs">🔗</span><?php echo esc_html($title); ?></h5>
+                    <h5 class="abp"><span class="_mar_r_xs">🔗</span><?php echo esc_html($title); ?></h5>
                     <?php ABPET_Layout::info_text('feature_icon');
                         ABPET_Layout::info_text('feature_name');
                         ABPET_Layout::info_text('feature_value'); ?>
                     <div class="_divider_xxs"></div>
                     <div class="configuration_content">
-                        <table class="_abp ">
+                        <table class="abp ">
                             <thead>
                             <tr>
                                 <th><?php esc_html_e('Icon', 'abp-event-ticket'); ?></th>
@@ -63,7 +63,7 @@
                             <?php ABPET_Layout::button_global_save('option_feature', $btn_label); ?>
                         </div>
                         <div class="abp_hidden">
-                            <table class="_abp">
+                            <table class="abp">
                                 <tbody class="hidden_content">
                                 <?php self::form_feature(); ?>
                                 </tbody>
@@ -143,16 +143,15 @@
                 ]);
             }
             public function feature_list(): void {
-                $features = ABPET_Function::get_option('abpet_feature');
-                //echo '<pre>';				print_r( $features );				echo '</pre>';
-                if (sizeof($features) > 0) { ?>
+            $features = ABPET_Function::get_option('abpet_feature');
+            if (sizeof($features) > 0) { ?>
                     <div class="_group_list">
                         <?php foreach ($features as $key => $feature) {
                             $label = $feature['label'] ?? '';
                             $value = $feature['value'] ?? '';
                             if (!empty($label)) { ?>
                                 <div class="_list_item">
-                                    <h6 class="_abp_gap_xs">
+                                    <h6 class="abp_gap_xs">
                                         <?php ABPET_Layout::image_icon($feature['icon'] ?? '');
                                             echo esc_html($label . ' ' . (!empty($value) ? '-' . $value : '')); ?>
                                     </h6>

@@ -278,14 +278,14 @@ window.abpet_post_action = function (action, id) {
         });
     }
 };
-window.abpet_import_global = function (action) {
+window.abpet_import_global = function (action, btn) {
     if (action) {
         if (action === 'remove_dummy' && !window.confirm('Remove all ABP Event Ticket dummy data? Real events will not be removed.')) {
             return;
         }
         let target = abpet_parent.find('.' + action);
         if (action === 'dummy' || action === 'remove_dummy') {
-            target = abpet_parent.find('.abp_status');
+            target = btn ? jQuery(btn).closest('.dash_card, .abp_status') : abpet_parent.find('.dash_card, .abp_status').first();
         }
         jQuery.ajax({
             type: 'POST', url: abpet_admin_data.ajax_url, data: {
@@ -315,9 +315,9 @@ window.abpet_import_global = function (action) {
         });
     }
 };
-window.abpet_create_page = function (page_type) {
+window.abpet_create_page = function (page_type, btn) {
     if (page_type) {
-        let parent = abpet_parent.find('.abp_status');
+        let parent = btn ? jQuery(btn).closest('.dash_card, .abp_status') : abpet_parent.find('.dash_card, .abp_status').first();
         jQuery.ajax({
             type: 'POST', url: abpet_admin_data.ajax_url, data: {
                 "action": "abpet_create_page", 'nonce': abpet_admin_data.nonce, 'type': page_type
@@ -328,14 +328,14 @@ window.abpet_create_page = function (page_type) {
                 abpet_toast_msg(response.data.msg, response.data.type);
                 window.location.reload();
             }, error: function (xhr) {
-                abpet_ajx_error(xhr, target);
+                abpet_ajx_error(xhr, parent);
             }
         });
     }
 };
-window.abpet_wc_config = function (page_type) {
+window.abpet_wc_config = function (page_type, btn) {
     if (page_type) {
-        let parent = abpet_parent.find('.abp_status');
+        let parent = btn ? jQuery(btn).closest('.dash_card, .abp_status') : abpet_parent.find('.dash_card, .abp_status').first();
         jQuery.ajax({
             type: 'POST', url: abpet_admin_data.ajax_url, data: {
                 "action": "abpet_wc_config", 'nonce': abpet_admin_data.nonce, 'type': page_type
@@ -396,43 +396,44 @@ window.abpet_image_selection = function ($this) {
     abpet_media_uploader.open();
 };
 //==========Post Pagination=================//
-abpet_parent.on('click', '.post_list .pagination_area button[data-page]', function () {
-    let $this = jQuery(this);
-    if (!$this.hasClass('abp_active')) {
-        let parent = $this.closest('.abpet_posts');
-        let target = parent.find('.post_list');
-        let filter_args = {};
-        if (parent.find("[name='select_hidden_post_status']").length > 0) {
-            filter_args['status'] = parent.find("[name='select_hidden_post_status']").val();
-        }
-        filter_args['page_number'] = parseInt($this.attr('data-page'));
-        if (parent.find("[name='page_item']").length > 0) {
-            filter_args['page_item'] = parseInt(parent.find("[name='page_item']").val());
-        }
-        if (target.length > 0) {
-            jQuery.ajax({
-                type: 'POST', url: abpet_admin_data.ajax_url, data: {
-                    "action": "abpet_reload_post_list", "filter_args": filter_args, 'nonce': abpet_admin_data.nonce
-                }, beforeSend: function () {
-                    abpet_spinner(parent);
-                    abpet_toast_msg(abpet_admin_data.msg.post_loading);
-                }, success: function (response) {
-                    if (response.data && response.data.hasOwnProperty('html')) {
-                        target.html(response.data.html);
-                    }
-                    abpet_spinner_remove(parent);
-                    abpet_toast_msg(response.data.msg, response.data.type);
-                }, error: function (xhr) {
-                    abpet_ajx_error(xhr, parent);
-                }
-            });
-        } else {
-            parent.find('.post_tab').trigger('click');
-        }
-    }
-});
+
 (function ($) {
     "use strict";
+    $(document).on('click', 'div.abpet_area .post_list .pagination_area button[data-page]', function () {
+        let $this = jQuery(this);
+        if (!$this.hasClass('abp_active')) {
+            let parent = $this.closest('.abpet_posts');
+            let target = parent.find('.post_list');
+            let filter_args = {};
+            if (parent.find("[name='select_hidden_post_status']").length > 0) {
+                filter_args['status'] = parent.find("[name='select_hidden_post_status']").val();
+            }
+            filter_args['page_number'] = parseInt($this.attr('data-page'));
+            if (parent.find("[name='page_item']").length > 0) {
+                filter_args['page_item'] = parseInt(parent.find("[name='page_item']").val());
+            }
+            if (target.length > 0) {
+                jQuery.ajax({
+                    type: 'POST', url: abpet_admin_data.ajax_url, data: {
+                        "action": "abpet_reload_post_list", "filter_args": filter_args, 'nonce': abpet_admin_data.nonce
+                    }, beforeSend: function () {
+                        abpet_spinner(parent);
+                        abpet_toast_msg(abpet_admin_data.msg.post_loading);
+                    }, success: function (response) {
+                        if (response.data && response.data.hasOwnProperty('html')) {
+                            target.html(response.data.html);
+                        }
+                        abpet_spinner_remove(parent);
+                        abpet_toast_msg(response.data.msg, response.data.type);
+                    }, error: function (xhr) {
+                        abpet_ajx_error(xhr, parent);
+                    }
+                });
+            } else {
+                parent.find('.post_tab').trigger('click');
+            }
+        }
+    });
     //==========ticket config=================//
     abpet_parent.on('abp_trigger', '.ticket_configuration .add_new_hook', function () {
         abpet_ticket_type_selection();
@@ -483,7 +484,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
             total_seat = total_seat + seatCount;
             if (label !== '') {
                 html += `<div class="abp_tag">`;
-                html += `<span class="_abp_gap_xxs" style="color: ${color}">`;
+                html += `<span class="abp_gap_xxs" style="color: ${color}">`;
                 if (icon_emoji !== '') {
                     html += ` ${icon_emoji}`;
                 }
@@ -605,7 +606,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
             }
         });
     });
-    abpet_parent.on('click', 'div.abpet_orders .order_status_menu button[data-status]', function () {
+    $(document).on('click', 'div.abpet_area div.abpet_orders .order_status_menu button[data-status]', function () {
         let $this = $(this);
         if (!$this.hasClass('abp_active')) {
             $this.closest('.order_status_menu').find('[data-status].abp_active').removeClass('abp_active').promise().done(function () {
@@ -615,7 +616,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
             });
         }
     });
-    abpet_parent.on('click', 'div.abpet_orders button.item_cancel', function () {
+    $(document).on('click', 'div.abpet_area div.abpet_orders button.item_cancel', function () {
         let $this = $(this);
         let parent = $(this).closest('.abpet_orders');
         let item_id = $this.attr('data-item_id');
@@ -638,7 +639,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
             });
         }
     });
-    abpet_parent.on('click', 'div.abpet_orders .order_list .pagination_area button[data-page]', function () {
+    $(document).on('click', 'div.abpet_area div.abpet_orders .order_list .pagination_area button[data-page]', function () {
         let $this = $(this);
         if (!$this.hasClass('abp_active')) {
             let parent = $(this).closest('.order_list');
@@ -737,7 +738,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
         parent.find('.image_icon_select_area').slideDown('fast');
     });
     //=========add_new_delete ==============//
-    abpet_parent.on('click', '.delete_hook', function () {
+    $(document).on('click', 'div.abpet_area .delete_hook', function () {
         if (confirm(abpet_admin_data.msg.confirm_delete + ' \n\n' + abpet_admin_data.msg.confirm_ok + ' \n ' + abpet_admin_data.msg.confirm_cancel)) {
             let deleteArea = $(this).closest('.delete_area');
             let parent = $(this).closest('.configuration_content');
@@ -751,7 +752,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
             });
         }
     });
-    abpet_parent.on('click', '.add_new_hook', function (e) {
+    $(document).on('click', 'div.abpet_area .add_new_hook', function (e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -799,11 +800,11 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
         }, 50);
         $(this).trigger('abp_trigger');
     });
-    abpet_parent.on('click', '.edit_hook', function () {
+    $(document).on('click', 'div.abpet_area .edit_hook', function () {
         $(this).closest('.delete_area').toggleClass('active').find('.edit_area').slideToggle('fast');
         //$(this).closest('.delete_area').find('.edit_area').slideToggle('fast');
     });
-    abpet_parent.on('keyup change', '[data-pass]', function () {
+    $(document).on('keyup change', 'div.abpet_area [data-pass]', function () {
         let input_value = $(this).val();
         let input_id = $(this).attr('data-pass');
         $(this).closest('.delete_area').find("[data-paste='" + input_id + "']").each(function () {
@@ -907,7 +908,7 @@ abpet_parent.on('click', '.post_list .pagination_area button[data-page]', functi
     }
     // ─── load input category ───────────
     function load_icon_category_list() {
-        let category_list = $('<ul>').addClass('_abp');
+        let category_list = $('<ul>').addClass('abp');
         $.each(abpet_json_icon, function (i, group) {
             let current_count = Object.keys(group.icons).length;
             if (i !== 0) {
@@ -1075,3 +1076,65 @@ class ABPET_Multi_Selection {
         }
     }
 }
+//==========Dashboard Recent/Today Orders===========//
+(function ($) {
+    "use strict";
+    $(document).on('click', 'div.abpet_admin .dash_order_tab[data-dtab]', function () {
+        let $this = $(this);
+        let $card = $this.closest('.dash_orders_card');
+        if ($this.hasClass('abp_active')) {
+            return;
+        }
+        $card.find('.dash_order_tab.abp_active').removeClass('abp_active');
+        $this.addClass('abp_active');
+        let key = $this.attr('data-dtab');
+        $card.find('.dash_orders_pane.abp_active').removeClass('abp_active');
+        let $panel = $card.find('.dash_orders_pane[data-dpane="' + key + '"]');
+        $panel.addClass('abp_active');
+    });
+    $(document).on('click', 'div.abpet_admin button.dash_orders_loadmore', function () {
+        let $this = $(this);
+        let $pane = $this.closest('.dash_orders_pane');
+        let step = parseInt($this.attr('data-step'));
+        if (isNaN(step) || step < 1) {
+            step = 10;
+        }
+        let $hidden = $pane.find('.dash_row_hidden');
+        $hidden.slice(0, step).removeClass('dash_row_hidden');
+        if ($pane.find('.dash_row_hidden').length === 0) {
+            $this.remove();
+        }
+    });
+    //========== Upcoming Journeys : click to open booking popup ==========//
+    $(document).on('click', 'div.abpet_admin .dash_journey_row', function () {
+        let $this = $(this);
+        let post_id = $this.attr('data-post');
+        let start_time = $this.attr('data-start');
+        let direction = $this.attr('data-direction') || 'up';
+        if (!post_id || !start_time) {
+            return;
+        }
+        jQuery('body').addClass('_stop_scroll').find('[data-popup="#abpet_global_popup"]').addClass('in').promise().done(function () {
+            let parent = abpet_parent.find('[data-popup="#abpet_global_popup"]').find('.popup_area').addClass('dash_journey_popup_area');
+            let target = parent.find('.popup_body');
+            jQuery.ajax({
+                type: 'POST', url: abpet_admin_data.ajax_url, data: {
+                    "action": 'abpet_journey_popup', 'post_id': post_id, 'start_time': start_time, 'direction': direction, 'nonce': abpet_admin_data.nonce
+                }, beforeSend: function () {
+                    abpet_spinner(parent);
+                    abpet_toast_msg(abpet_admin_data.msg.loading);
+                }, success: function (response) {
+                    abpet_spinner_remove(parent);
+                    if (response.data && response.data.hasOwnProperty('html')) {
+                        target.html(response.data.html).promise().done(function () {
+                            abpet_toast_msg(response.data.msg, response.data.type);
+                            abpet_init(target);
+                        });
+                    }
+                }, error: function (xhr) {
+                    abpet_ajx_error(xhr, parent);
+                }
+            });
+        });
+    });
+}(jQuery));

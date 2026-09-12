@@ -75,7 +75,7 @@
 					$total_post   = sizeof( ABPET_Query::get_post_id( [ 'status' => $status ] ) );
 					$new_post_url = admin_url( 'post-new.php?post_type=' . $cpt );
 					?>
-                    <table class="_abp">
+                    <table class="abp">
                         <thead>
                         <tr>
                             <th class="_w_50"><?php esc_html_e( 'SI', 'abp-event-ticket' ); ?></th>
@@ -104,9 +104,9 @@
                                     <td>
                                         <div class="_mar_b_xxs">
 											<?php if ( $post_status == 'trash' ) { ?>
-                                                <h6 class="_abp_color_warning"><?php ABPET_Layout::title( $post_infos ); ?></h6>
+                                                <h6 class="abp_color_warning"><?php ABPET_Layout::title( $post_infos ); ?></h6>
 											<?php } else { ?>
-                                                <a href="<?php echo esc_url( $edit_link ); ?>" class="_abp_fs_h6_color_theme"><?php ABPET_Layout::title( $post_infos ); ?></a>
+                                                <a href="<?php echo esc_url( $edit_link ); ?>" class="abp_fs_h6_color_theme"><?php ABPET_Layout::title( $post_infos ); ?></a>
 											<?php } ?>
                                         </div>
                                         <div class="_gap_xxs">
@@ -162,10 +162,10 @@
 				?>
                 <div class="abpet_area abpet_admin abp_post_config">
                     <input type="hidden" name="abpet_post_id" value="<?php echo esc_attr( $post_id ); ?>"/>
-                    <div class="_abp_panel">
+                    <div class="abp_panel">
                         <div class="abp_tabs tab_top">
                             <div class="_panel_head">
-                                <ul class="_abp tab_lists">
+                                <ul class="abp tab_lists">
                                     <li data-tabs-target="#abpet_general"><span class="fas fa-rainbow"></span><?php esc_html_e( 'General', 'abp-event-ticket' ); ?></li>
                                     <li data-tabs-target="#abpet_ticket"><span class="_mar_r_xxs">🎫 </span><?php esc_html_e( 'Ticket & Price', 'abp-event-ticket' ); ?></li>
                                     <li data-tabs-target="#abpet_dates"><span class="_mar_r_xxs">🗓️</span><?php esc_html_e( 'Date', 'abp-event-ticket' ); ?></li>
@@ -193,10 +193,10 @@
 			}
 			public function general_configuration( $post_infos ): void {
 				$abpet_template = $post_infos['abpet_template'] ?? 'default';
-				$event_type = $post_infos['event_type'] ?? 'offline';
+				$event_type     = $post_infos['event_type'] ?? 'offline';
 				?>
                 <div class="tab_item" data-tabs="#abpet_general">
-                    <h4 class="_abp_color_theme"><?php esc_html_e( 'General Configuration', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp_color_theme"><?php esc_html_e( 'General Configuration', 'abp-event-ticket' ); ?></h4>
 					<?php ABPET_Layout::info_text( 'general_config' ); ?>
                     <div class="_divider_xs"></div>
                     <div class="group_setting">
@@ -210,7 +210,7 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php esc_html_e( 'Template', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Template', 'abp-event-ticket' ); ?></span>
                                 <select class="_form_control " name="abpet_template" required>
                                     <option disabled selected><?php esc_html_e( 'Please Select', 'abp-event-ticket' ); ?></option>
                                     <option value="default" <?php echo esc_attr( $abpet_template == 'default' ? 'selected' : '' ); ?>><?php esc_html_e( 'Default Template', 'abp-event-ticket' ); ?></option>
@@ -239,7 +239,7 @@
 						<?php if ( ABPET_Function::on_off( 'post_icon' ) ) { ?>
                             <div class="setting_item">
                                 <divl class="_fj_between">
-                                    <span class="_abp_label"><?php esc_html_e( 'Event Icon', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Event Icon', 'abp-event-ticket' ); ?></span>
 									<?php do_action( 'abpet_add_icon', 'post_icon', ( $post_infos['post_icon'] ?? '' ) ); ?>
                                 </divl>
                                 <div class="_divider_xxs"></div>
@@ -249,7 +249,7 @@
 						<?php if ( ABPET_Function::on_off( 'sub_title' ) ) { ?>
                             <div class="setting_item">
                                 <div class="_f_equal_f_wrap">
-                                    <span class="_abp_label"><?php esc_html_e( 'Sub Title', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Sub Title', 'abp-event-ticket' ); ?></span>
                                     <label>
                                         <textarea class="_form_control" name="sub_title" placeholder="<?php esc_attr_e( 'Event Sub Title', 'abp-event-ticket' ); ?>"><?php echo esc_html( $post_infos['sub_title'] ?? '' ); ?></textarea>
                                     </label>
@@ -261,7 +261,7 @@
 						<?php if ( ABPET_Function::on_off( 'post_des' ) ) { ?>
                             <div class="setting_item">
                                 <label class="_f_equal_f_wrap">
-                                    <span class="_abp_label"><?php esc_html_e( 'Short Description', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Short Description', 'abp-event-ticket' ); ?></span>
                                     <textarea class="_form_control" name="post_description" placeholder="<?php esc_attr_e( 'EX: Description', 'abp-event-ticket' ); ?>"><?php echo esc_html( $post_infos['post_description'] ?? '' ); ?></textarea>
                                 </label>
                                 <div class="_divider_xxs"></div>
@@ -270,23 +270,23 @@
 						<?php } ?>
                         <div class="setting_item">
                             <div class=" _fj_between">
-                                <span class="_abp_label"><?php esc_html_e( 'Event Type', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
+                                <span class="abp_label"><?php esc_html_e( 'Event Type', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
                                 <div class="custom_radio _group_content">
                                     <input type="hidden" class="_form_control" name="event_type" value="<?php echo esc_attr( $event_type ); ?>"/>
                                     <div class="radio_item">
-                                        <button type="button" class="_btn_light_info_xs <?php echo esc_attr( $event_type == 'offline' ? 'abp_active' : '' ); ?>"  data-radio="offline" data-open-icon="far fa-check-circle" data-close-icon="far fa-circle">
+                                        <button type="button" class="_btn_light_info_xs <?php echo esc_attr( $event_type == 'offline' ? 'abp_active' : '' ); ?>" data-radio="offline" data-open-icon="far fa-check-circle" data-close-icon="far fa-circle">
                                             <span data-icon class="<?php echo esc_attr( $event_type == 'offline' ? 'far fa-check-circle' : 'far fa-circle' ); ?>"></span><?php esc_html_e( 'Offline', 'abp-event-ticket' ); ?>
                                         </button>
                                     </div>
                                     <div class="radio_item">
-                                        <button type="button" class="_btn_light_info_xs <?php echo esc_attr( $event_type == 'online' ? 'abp_active' : '' ); ?>"  data-radio="online" data-open-icon="far fa-check-circle" data-close-icon="far fa-circle">
+                                        <button type="button" class="_btn_light_info_xs <?php echo esc_attr( $event_type == 'online' ? 'abp_active' : '' ); ?>" data-radio="online" data-open-icon="far fa-check-circle" data-close-icon="far fa-circle">
                                             <span data-icon class=" <?php echo esc_attr( $event_type == 'online' ? 'far fa-check-circle' : 'far fa-circle' ); ?>"></span><?php esc_html_e( 'Online', 'abp-event-ticket' ); ?>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="_divider_xs"></div>
-		                    <?php ABPET_Layout::info_text( 'event_type' ); ?>
+							<?php ABPET_Layout::info_text( 'event_type' ); ?>
                         </div>
 						<?php if ( ABPET_Function::on_off( 'display_capacity' ) ) { ?>
                             <div class="setting_item">
@@ -369,7 +369,7 @@
 						<?php if ( ABPET_Function::on_off( 'related' ) ) { ?>
                             <div class="setting_item related_item">
                                 <div class="_fj_between_fa_center">
-                                    <span class="_abp_label"><?php esc_html_e( 'Related Event', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Related Event', 'abp-event-ticket' ); ?></span>
 									<?php ABPET_Layout::selection_area(); ?>
                                 </div>
                                 <div class="_divider_xxs"></div>
@@ -380,7 +380,7 @@
 						<?php if ( ABPET_Function::on_off( 'feature' ) ) { ?>
                             <div class="setting_item post_feature">
                                 <div class="_fj_between_fa_center">
-                                    <span class="_abp_label"><?php esc_html_e( 'Feature', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Feature', 'abp-event-ticket' ); ?></span>
                                     <div class="_group_content">
 										<?php ABPET_Layout::selection_area();
 											ABPET_Layout::button_global_popup( 'option_feature', __( 'Add New', 'abp-event-ticket' ) . ' ' . ABPET_Function::feature_label() ); ?>
@@ -392,7 +392,7 @@
                             </div>
 						<?php } ?>
                         <div class="setting_item full_width">
-                            <span class="_abp_label"><?php esc_html_e( 'Gallery', 'abp-event-ticket' ); ?></span>
+                            <span class="abp_label"><?php esc_html_e( 'Gallery', 'abp-event-ticket' ); ?></span>
                             <div class="_divider_xxs"></div>
 							<?php ABPET_Layout::info_text( 'display_slider' ); ?>
                             <div class="_divider_xxs"></div>
@@ -423,9 +423,9 @@
 					$post_array          = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) ) : [];
 					$post_textarea_array = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'sanitize_textarea_field', wp_unslash( $_POST[ $key ] ) ) : [];
 					$post_deep           = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? map_deep( wp_unslash( $_POST[ $key ] ), 'sanitize_text_field' ) : [];
-					$format_date                       = fn( $date ) => $date ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
-					$date_infos                        = [];
-					$time_info                         = [];
+					$format_date         = fn( $date ) => $date ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
+					$date_infos          = [];
+					$time_info           = [];
 					//$post_html_array     = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'wp_kses_post', wp_unslash( $_POST[ $key ] ) ) : [];
 					/***********************************/
 					$seat_type           = $post_val( 'seat_type' );
@@ -436,8 +436,8 @@
 					if ( $display_ticket_type == 'off' ) {
 						$all_ticket_types[] = 'price';
 					}
-					$ticket_ids         = $post_array( 'ticket_name' );
-					$price_data         = $post_array( 'ticket_price' );
+					$ticket_ids = $post_array( 'ticket_name' );
+					$price_data = $post_array( 'ticket_price' );
 					if ( ! empty( $ticket_ids ) ) {
 						foreach ( $ticket_ids as $key => $id ) {
 							if ( ! empty( $id ) ) {
@@ -491,7 +491,6 @@
 						}
 					}
 					/***********************************/
-
 					$date_infos['date_type']           = $post_val( 'date_type', 'periodic_date' );
 					$date_infos['periodic_start_date'] = $format_date( $post_val( 'periodic_start_date' ) );
 					$date_infos['periodic_end_date']   = $format_date( $post_val( 'periodic_end_date' ) );
@@ -543,8 +542,8 @@
 					$specific_dates = ! empty( $specific_dates ) ? array_values( array_unique( array_filter( $specific_dates ) ) ) : [];
 					sort( $specific_dates );
 					$date_infos['specific_dates'] = $specific_dates;
-					$operation_time  = [];
-					$operation_times = $post_array( 'operation_time' );
+					$operation_time               = [];
+					$operation_times              = $post_array( 'operation_time' );
 					if ( ! empty( $operation_times ) ) {
 						$operation_time = array_values( array_unique( array_filter( $operation_times ) ) );
 						sort( $operation_time );
@@ -608,7 +607,7 @@
 						'sub_title'                   => $post_textarea( 'sub_title' ),
 						'post_description'            => $post_textarea( 'post_description' ),
 						'display_organizer'           => $post_val( 'display_organizer', 'off' ),
-						'event_type'             => $post_val( 'event_type' ),
+						'event_type'                  => $post_val( 'event_type' ),
 						'abpet_organizer'             => $post_val( 'abpet_organizer' ),
 						'display_brand'               => $post_val( 'display_brand', 'off' ),
 						'abpet_brand'                 => $post_val( 'abpet_brand' ),
@@ -645,7 +644,7 @@
 						'active_global_tc'            => $active_global_tc,
 						'abpet_tc'                    => $abpet_tc,
 					];
-					$validation_errors = $this->validate_event_configuration(
+					$validation_errors           = $this->validate_event_configuration(
 						$post_id,
 						$seat_type,
 						$ticket_infos,
@@ -675,12 +674,14 @@
 							update_post_meta( $post_id, sanitize_key( $key ), $value );
 						}
 					}
-					foreach ( [
-						'abpet_category'  => 'abpet_category',
-						'abpet_location'  => 'abpet_location',
-						'abpet_organizer' => 'abpet_organizer',
-						'abpet_brand'     => 'abpet_brand',
-					] as $meta_key => $taxonomy ) {
+					foreach (
+						[
+							'abpet_category'  => 'abpet_category',
+							'abpet_location'  => 'abpet_location',
+							'abpet_organizer' => 'abpet_organizer',
+							'abpet_brand'     => 'abpet_brand',
+						] as $meta_key => $taxonomy
+					) {
 						if ( taxonomy_exists( $taxonomy ) ) {
 							$value = $meta_info[ $meta_key ] ?? '';
 							$ids   = is_array( $value ) ? $value : explode( ',', (string) $value );
@@ -690,69 +691,69 @@
 					}
 				}
 			}
-					public function validate_event_configuration( $post_id, $seat_type, $ticket_infos, $sp_infos, $date_infos, $time_info ): array {
-						$errors = [];
-						if ( ! get_the_title( $post_id ) ) {
-							$errors[] = __( 'Add an event title before publishing.', 'abp-event-ticket' );
-						}
-						$date_type = $date_infos['date_type'] ?? 'periodic_date';
-						$dates     = [];
-						if ( $date_type === 'specific_date' ) {
-							$dates = $date_infos['specific_dates'] ?? [];
-						} elseif ( ! empty( $date_infos['periodic_start_date'] ) ) {
-							$dates[] = $date_infos['periodic_start_date'];
-							if ( ! empty( $date_infos['periodic_end_date'] ) ) {
-								$dates[] = $date_infos['periodic_end_date'];
-							}
-						} else {
-							$dates[] = current_time( 'Y-m-d' );
-						}
-						$dates = array_filter( $dates, static function ( $date ) {
-							return $date && strtotime( $date ) !== false;
-						} );
-						if ( empty( $dates ) ) {
-							$errors[] = __( 'Configure at least one valid event date.', 'abp-event-ticket' );
-						}
-						$times = array_filter( $time_info['time'] ?? [], static function ( $time ) {
-							return (bool) preg_match( '/^(?:[01]\d|2[0-3]):[0-5]\d$/', (string) $time );
-						} );
-						foreach ( $time_info['day_time'] ?? [] as $day_times ) {
-							$times = array_merge( $times, array_filter( (array) $day_times ) );
-						}
-						foreach ( $time_info['date_times'] ?? [] as $date_time ) {
-							$times = array_merge( $times, array_filter( (array) ( $date_time['time'] ?? [] ) ) );
-						}
-						// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce and capability are verified in the caller save_settings() before validation runs.
-						if ( empty( $times ) || ( count( $times ) === 1 && reset( $times ) === '00:00' && empty( $_POST['operation_time'] ) ) ) {
-							$errors[] = __( 'Configure at least one valid event session time.', 'abp-event-ticket' );
-						}
-						if ( $seat_type === 'ticket' ) {
-							$valid_tickets = array_filter( $ticket_infos, static function ( $ticket ) {
-								return isset( $ticket['price'], $ticket['qty'] ) && (float) $ticket['price'] >= 0 && (int) $ticket['qty'] > 0;
-							} );
-							if ( empty( $valid_tickets ) ) {
-								$errors[] = __( 'Add at least one ticket type with a valid price and quantity.', 'abp-event-ticket' );
-							}
-						} elseif ( empty( $sp_infos ) ) {
-							$errors[] = __( 'Assign at least one seat plan to this event.', 'abp-event-ticket' );
-						}
-						if ( empty( ABPET_Function::get_post_info( $post_id, 'link_wc_id' ) ) ) {
-							$errors[] = __( 'The WooCommerce product could not be linked to this event.', 'abp-event-ticket' );
-						}
-						return array_unique( $errors );
+			public function validate_event_configuration( $post_id, $seat_type, $ticket_infos, $sp_infos, $date_infos, $time_info ): array {
+				$errors = [];
+				if ( ! get_the_title( $post_id ) ) {
+					$errors[] = __( 'Add an event title before publishing.', 'abp-event-ticket' );
+				}
+				$date_type = $date_infos['date_type'] ?? 'periodic_date';
+				$dates     = [];
+				if ( $date_type === 'specific_date' ) {
+					$dates = $date_infos['specific_dates'] ?? [];
+				} elseif ( ! empty( $date_infos['periodic_start_date'] ) ) {
+					$dates[] = $date_infos['periodic_start_date'];
+					if ( ! empty( $date_infos['periodic_end_date'] ) ) {
+						$dates[] = $date_infos['periodic_end_date'];
 					}
-					public function configuration_notice(): void {
-						$errors = get_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
-						if ( empty( $errors ) || ! is_array( $errors ) ) {
-							return;
-						}
-						delete_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
-						echo '<div class="notice notice-error"><p><strong>' . esc_html__( 'Event was saved as draft because its configuration is incomplete:', 'abp-event-ticket' ) . '</strong></p><ul>';
-						foreach ( $errors as $error ) {
-							echo '<li>' . esc_html( $error ) . '</li>';
-						}
-						echo '</ul></div>';
+				} else {
+					$dates[] = current_time( 'Y-m-d' );
+				}
+				$dates = array_filter( $dates, static function ( $date ) {
+					return $date && strtotime( $date ) !== false;
+				} );
+				if ( empty( $dates ) ) {
+					$errors[] = __( 'Configure at least one valid event date.', 'abp-event-ticket' );
+				}
+				$times = array_filter( $time_info['time'] ?? [], static function ( $time ) {
+					return (bool) preg_match( '/^(?:[01]\d|2[0-3]):[0-5]\d$/', (string) $time );
+				} );
+				foreach ( $time_info['day_time'] ?? [] as $day_times ) {
+					$times = array_merge( $times, array_filter( (array) $day_times ) );
+				}
+				foreach ( $time_info['date_times'] ?? [] as $date_time ) {
+					$times = array_merge( $times, array_filter( (array) ( $date_time['time'] ?? [] ) ) );
+				}
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce and capability are verified in the caller save_settings() before validation runs.
+				if ( empty( $times ) || ( count( $times ) === 1 && reset( $times ) === '00:00' && empty( $_POST['operation_time'] ) ) ) {
+					$errors[] = __( 'Configure at least one valid event session time.', 'abp-event-ticket' );
+				}
+				if ( $seat_type === 'ticket' ) {
+					$valid_tickets = array_filter( $ticket_infos, static function ( $ticket ) {
+						return isset( $ticket['price'], $ticket['qty'] ) && (float) $ticket['price'] >= 0 && (int) $ticket['qty'] > 0;
+					} );
+					if ( empty( $valid_tickets ) ) {
+						$errors[] = __( 'Add at least one ticket type with a valid price and quantity.', 'abp-event-ticket' );
 					}
+				} elseif ( empty( $sp_infos ) ) {
+					$errors[] = __( 'Assign at least one seat plan to this event.', 'abp-event-ticket' );
+				}
+				if ( empty( ABPET_Function::get_post_info( $post_id, 'link_wc_id' ) ) ) {
+					$errors[] = __( 'The WooCommerce product could not be linked to this event.', 'abp-event-ticket' );
+				}
+				return array_unique( $errors );
+			}
+			public function configuration_notice(): void {
+				$errors = get_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
+				if ( empty( $errors ) || ! is_array( $errors ) ) {
+					return;
+				}
+				delete_transient( 'abpet_event_configuration_errors_' . get_current_user_id() );
+				echo '<div class="notice notice-error"><p><strong>' . esc_html__( 'Event was saved as draft because its configuration is incomplete:', 'abp-event-ticket' ) . '</strong></p><ul>';
+				foreach ( $errors as $error ) {
+					echo '<li>' . esc_html( $error ) . '</li>';
+				}
+				echo '</ul></div>';
+			}
 			public function post_permanent_remove(): void {
 				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );

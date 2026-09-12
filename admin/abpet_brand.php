@@ -15,7 +15,7 @@
 				if ( ABPET_Function::on_off( 'brand' ) ) {
 					$label = ABPET_Function::brand_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="_abp"><span class="_mar_r_xs">🏷️</span><?php echo esc_html( $label ); ?></h5>
+                        <h5 class="abp"><span class="_mar_r_xs">🏷️</span><?php echo esc_html( $label ); ?></h5>
 						<?php ABPET_Layout::button_global_popup( 'tax_brand', __( 'Add New', 'abp-event-ticket' ) . ' ' . $label ); ?>
                     </div>
 					<?php ABPET_Layout::info_text( 'abpet_brand' ); ?>
@@ -47,13 +47,13 @@
 				}
 				?>
                 <div class="abp_form">
-                    <h5 class="_abp"><span class="_mar_r_xs">🏷️</span><?php echo esc_html( $title ); ?></h5>
+                    <h5 class="abp"><span class="_mar_r_xs">🏷️</span><?php echo esc_html( $title ); ?></h5>
                     <div class="_divider_xs"></div>
                     <input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
                     <div class="group_setting">
                         <div class="setting_item full_width">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
                                 <input class="_form_control" name="name" value="<?php echo esc_attr( $name ); ?>" placeholder="<?php esc_attr_e( 'Name', 'abp-event-ticket' ); ?>" required/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="setting_item full_width">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-event-ticket' ); ?></span>
                                 <input class="_form_control" name="slug" value="<?php echo esc_attr( $slug ); ?>" placeholder="<?php esc_attr_e( 'Slug', 'abp-event-ticket' ); ?>"/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="setting_item full_width">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Description(Optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Description(Optional)', 'abp-event-ticket' ); ?></span>
                                 <textarea class="_form_control" name="description" placeholder="<?php esc_attr_e( 'Description', 'abp-event-ticket' ); ?>"><?php echo esc_html( $des ); ?></textarea>
                             </label>
                             <div class="_divider_xs"></div>
@@ -166,7 +166,7 @@
 				$brands = ABPET_Function::get_option( 'abpet_brand' );
 				$count  = 1;
 				if ( ! empty( $brands ) && is_array( $brands ) && sizeof( $brands ) > 0 ) { ?>
-                    <table class="_abp">
+                    <table class="abp">
                         <thead>
                         <tr>
                             <th><?php esc_html_e( 'SI', 'abp-event-ticket' ) ?></th>
@@ -182,7 +182,7 @@
 							$name = $brand['name'] ?? ''; ?>
                             <tr>
                                 <th><?php echo esc_html( $count ); ?>.</th>
-                                <th class="_text_left"><a href="<?php echo esc_url( get_term_link( $term_id ) ); ?>" target="_blank" class="_abp_fs_h5 _color_theme"><?php echo esc_html( $name ); ?></a></th>
+                                <th class="_text_left"><a href="<?php echo esc_url( get_term_link( $term_id ) ); ?>" target="_blank" class="abp_fs_h5 _color_theme"><?php echo esc_html( $name ); ?></a></th>
                                 <th><?php echo esc_html( $term_id ); ?></th>
                                 <td><?php echo esc_html( $brand['description'] ?? '' ); ?></td>
                                 <th><code> [abpet-post brand_id="<?php echo esc_attr( $term_id ); ?>"]</code></th>

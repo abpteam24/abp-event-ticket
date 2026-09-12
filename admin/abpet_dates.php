@@ -17,19 +17,18 @@
 				<?php
 			}
 			public function dates_config(): void {
-				$date_infos = ABPET_Function::get_option( 'abpet_date_config' );
-				//echo '<pre>';print_r($date_infos);echo '</pre>';
-				$format_array = ABPET_Layout::array_date_format();
+			$date_infos = ABPET_Function::get_option( 'abpet_date_config' );
+			$format_array = ABPET_Layout::array_date_format();
 				$date_format  = $date_infos['date_format'] ?? 'D d M , yy';
 				$time_format  = $date_infos['time_format'] ?? ABPET_Time_Format;
 				?>
                 <div class="abp_form">
-                    <h4 class="_abp_gap_xs"><?php ABPET_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp_gap_xs"><?php ABPET_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-event-ticket' ); ?></h4>
 					<?php ABPET_Layout::info_text( 'abpet_dates' ); ?>
                     <div class="group_setting _mar_t_xs">
                         <div class="setting_item">
                             <label class="_f_wrap_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Date Format', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Date Format', 'abp-event-ticket' ); ?></span>
 								<?php if ( sizeof( $format_array ) > 0 ) { ?>
                                     <select class="_form_control " name="date_format" required>
 										<?php foreach ( $format_array as $key => $format ) { ?>
@@ -43,7 +42,7 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php esc_html_e( 'Time Format', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Time Format', 'abp-event-ticket' ); ?></span>
                                 <input type="text" class="_form_control" name="time_format" placeholder="<?php echo esc_attr( ABPET_Time_Format ); ?>" value="<?php echo esc_attr( $time_format ); ?>" required/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -59,7 +58,7 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php esc_html_e( 'Number of advance booking date', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Number of advance booking date', 'abp-event-ticket' ); ?></span>
                                 <input type="number" pattern="[0-9]*" step="1" class="_form_control validation_number" name="advance_date_number" placeholder="Ex: 28" value="<?php echo esc_attr( $date_infos['advance_date_number'] ?? 28 ); ?>"/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -79,18 +78,16 @@
 				$date_times      = $time_infos['date_times'] ?? [];
 				$date_type       = ( $date_infos['date_type'] ?? null ) ?: 'periodic_date';
 				$specific_dates  = $date_infos['specific_dates'] ?? [];
-				$opt_time = !empty($day_times) ? 'day_wise_time' : '';
-				$opt_time = !empty($date_times) ? $opt_time .',date_wise_time' : $opt_time;
-				// echo '<pre>';print_r($time_infos);echo '</pre>';
-				//echo '<pre>';print_r($time_infos);echo '</pre>';
-				?>
+			$opt_time = !empty($day_times) ? 'day_wise_time' : '';
+			$opt_time = !empty($date_times) ? $opt_time .',date_wise_time' : $opt_time;
+			?>
                 <div class="tab_item date_configuration" data-tabs="#abpet_dates">
-                    <h4 class="_abp_color_theme_gap_xxs">🗓️<?php esc_html_e( 'Date Configuration', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp_color_theme_gap_xxs">🗓️<?php esc_html_e( 'Date Configuration', 'abp-event-ticket' ); ?></h4>
                     <div class="_divider_xxs"></div>
                     <div class="_mar_t_xs group_setting">
                         <div class="setting_item">
                             <div class=" _fj_between">
-                                <span class="_abp_label"><?php esc_html_e( 'Date Type', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
+                                <span class="abp_label"><?php esc_html_e( 'Date Type', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
                                 <div class="custom_radio _group_content">
                                     <input type="hidden" class="_form_control" name="date_type" value="<?php echo esc_attr( $date_type ); ?>"/>
                                     <div class="radio_item">
@@ -118,7 +115,7 @@
                         </div>
                         <div class="setting_item <?php echo esc_attr( $date_type == 'periodic_date' ? 'abp_active' : '' ); ?>" data-close="#periodic_date">
                             <div class="_f_wrap_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Launching Date (Optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Launching Date (Optional)', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::input_date( 'periodic_start_date', ( $date_infos['periodic_start_date'] ?? '' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -126,7 +123,7 @@
                         </div>
                         <div class="setting_item <?php echo esc_attr( $date_type == 'periodic_date' ? 'abp_active' : '' ); ?>" data-close="#periodic_date">
                             <div class="_f_wrap_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Terminate Date (Optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Terminate Date (Optional)', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::input_date( 'periodic_end_date', ( $date_infos['periodic_end_date'] ?? '' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -134,7 +131,7 @@
                         </div>
                         <div class="setting_item full_width configuration_content <?php echo esc_attr( $date_type == 'specific_date' ? 'abp_active' : '' ); ?>" data-close="#specific_date">
                             <div class="_f_wrap_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Specific Dates', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Specific Dates', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::button_add( __( 'Add Specific Date', 'abp-event-ticket' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -160,13 +157,13 @@
                     </div>
 					<?php $this->special_on_off_dates( $date_infos ); ?>
                     <div class="_divider_xs"></div>
-                    <h4 class="_abp_color_theme_gap_xxs">⏰<?php esc_html_e( 'Time Configuration', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp_color_theme_gap_xxs">⏰<?php esc_html_e( 'Time Configuration', 'abp-event-ticket' ); ?></h4>
                     <div class="_divider_xxs"></div>
                     <div class="group_setting">
                         <div class="setting_item full_width">
                             <div class=" configuration_content">
                                 <div class="_f_wrap_fj_between_fa_center_mar_b_xxs">
-                                    <span class="_abp_label"><?php esc_html_e( 'Operation Time', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Operation Time', 'abp-event-ticket' ); ?></span>
                                     <div class="_group_content custom_checkbox">
                                         <input type="hidden" name="operation_time_optional" value="<?php echo esc_attr($opt_time); ?>"/>
                                         <div class="checkbox_item">
@@ -247,7 +244,7 @@
                     <div class="group_setting _mar_t_xs">
                         <div class="setting_item full_width">
                             <div class="_fj_between _mar_t_xs">
-                                <span class="_abp_label"><?php esc_html_e( 'Special On/Off Date(optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Special On/Off Date(optional)', 'abp-event-ticket' ); ?></span>
                                 <div class="custom_checkbox _group_content">
                                     <input type="hidden" name="date_rule" value="<?php echo esc_attr( $date_rule ); ?>"/>
 									<?php foreach ( $date_rules as $key => $rule ) { ?>
@@ -264,7 +261,7 @@
                         </div>
                         <div class="setting_item full_width <?php echo esc_attr( in_array( 'weekend', $date_rule_array, true ) ? 'abp_active' : '' ); ?> " data-collapse="#weekend">
                             <div class="_f_wrap_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Weekend(optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Weekend(optional)', 'abp-event-ticket' ); ?></span>
                                 <div class="custom_checkbox _group_content">
                                     <input type="hidden" name="weekend" value="<?php echo esc_attr( $weekend ); ?>"/>
 									<?php foreach ( $days as $key => $day ) { ?>
@@ -281,7 +278,7 @@
                         </div>
                         <div class="setting_item configuration_content <?php echo esc_attr( in_array( 'specific_off_dates', $date_rule_array, true ) ? 'abp_active' : '' ); ?>" data-collapse="#specific_off_dates">
                             <div class="_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Specific Off Dates(optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Specific Off Dates(optional)', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::button_add( __( 'Add Specific Off Date', 'abp-event-ticket' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -305,7 +302,7 @@
                         </div>
                         <div class="setting_item configuration_content  <?php echo esc_attr( in_array( 'special_on_dates', $date_rule_array, true ) ? 'abp_active' : '' ); ?>" data-collapse="#special_on_dates">
                             <div class="_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Special On Dates (optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Special On Dates (optional)', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::button_add( __( 'Add Special On Dates', 'abp-event-ticket' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -315,6 +312,7 @@
 									if ( sizeof( $special_dates ) ) {
 										foreach ( $special_dates as $specific_date ) {
 											if ( ! empty( $specific_date ) ) {
+												$specific_date = is_array( $specific_date ) ? ( $specific_date['date'] ?? '' ) : $specific_date;
 												$this->date_item( 'special_on_dates[]', $specific_date );
 											}
 										}
@@ -329,7 +327,7 @@
                         </div>
                         <div class="setting_item configuration_content <?php echo esc_attr( in_array( 'off_date_range', $date_rule_array, true ) ? 'abp_active' : '' ); ?>" data-collapse="#off_date_range">
                             <div class="_fj_between_fa_center">
-                                <span class="_abp_label"><?php esc_html_e( 'Off Date Range(optional)', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Off Date Range(optional)', 'abp-event-ticket' ); ?></span>
 								<?php ABPET_Layout::button_add( __( 'Add Off Date Range', 'abp-event-ticket' ) ); ?>
                             </div>
                             <div class="_divider_xs"></div>
@@ -361,7 +359,7 @@
                 <div class="full_width  <?php echo esc_attr( ! empty( $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#day_wise_time">
                     <div class="_divider_xxs"></div>
                     <div class="_fj_between _fa_center">
-                        <span class="_abp_label"><?php esc_html_e( 'Day Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
+                        <span class="abp_label"><?php esc_html_e( 'Day Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
                         <div class="_group_content custom_checkbox">
 							<?php foreach ( $days as $key => $day ) { ?>
                                 <div class="checkbox_item">
@@ -405,7 +403,7 @@
                 <div class="full_width configuration_content   <?php echo esc_attr( ! empty( $date_times ) ? 'abp_active' : '' ); ?>" data-collapse="#date_wise_time">
                     <div class="_divider_xxs"></div>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php esc_html_e( 'Date Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
+                        <span class="abp_label"><?php esc_html_e( 'Date Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
 						<?php ABPET_Layout::button_add( __( 'Add New Date Wise Operation Time', 'abp-event-ticket' ) ); ?>
                     </div>
 					<?php ABPET_Layout::info_text( 'date_wise_time' ); ?>

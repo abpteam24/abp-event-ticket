@@ -12,7 +12,7 @@
             public function load_orders(): void {
                 ?>
                 <div class="abpet_orders _section_card">
-                    <h4 class="_abp_title_gap_xs"><span>📋</span> <?php esc_html_e('Order Filter', 'abp-event-ticket'); ?></h4>
+                    <h4 class="abp_title_gap_xs"><span>📋</span> <?php esc_html_e('Order Filter', 'abp-event-ticket'); ?></h4>
                     <div class="_ov_initial_mar_t_xs">
                         <form class="abp_search_form" method="post" action="">
                             <div class="_form_inline">
@@ -102,7 +102,7 @@
                     <?php do_action('abpet_order_tab_action', $_filter_args); ?>
                 </div>
                 <?php if (!empty($booking_lists) && is_array($booking_lists)) { ?>
-                    <table class=" _abp">
+                    <table class=" abp">
                         <thead>
                         <tr>
                             <th><?php esc_html_e('Action', 'abp-event-ticket'); ?><?php $count_foot_left_col++; ?></th>
@@ -152,14 +152,14 @@
                                     </div>
                                 </th>
                                 <th class="_text_left">
-                                    <p class="_abp"><?php echo esc_html($si . '. #' . ($booking_list['order_id'] ?? '')); ?></p>
-                                    <p class="_abp_color_theme"><?php echo esc_html(ABPET_Function::date_format($booking_list['created_at'] ?? '')); ?></p>
+                                    <p class="abp"><?php echo esc_html($si . '. #' . ($booking_list['order_id'] ?? '')); ?></p>
+                                    <p class="abp_color_theme"><?php echo esc_html(ABPET_Function::date_format($booking_list['created_at'] ?? '')); ?></p>
                                 </th>
                                 <th class="_text_left">
                                     <div class="_gap_xxs"><?php ABPET_Layout::title($post_infos); ?></div>
                                 </th>
                                 <td>
-                                    <p class="_abp_color_theme"><?php echo esc_html(ABPET_Function::date_format(($booking_list['event_date'] ?? '') . ' ' . ($booking_list['session_time'] ?? ''))); ?></p>
+                                    <p class="abp_color_theme"><?php echo esc_html(ABPET_Function::date_format(($booking_list['event_date'] ?? '') . ' ' . ($booking_list['session_time'] ?? ''))); ?></p>
                                 </td>
                                 <th><?php ABPET_Layout::ticket_info($ticket_infos, $post_id, $booking_list['seat_type'] ?? '', $booking_list['sp_id'] ?? 0); ?></th>
                                 <?php if (ABPET_Function::on_off('additional_info')) { ?>

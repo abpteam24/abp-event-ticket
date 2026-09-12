@@ -71,6 +71,15 @@
 				return $default;
 			}
 			public static function booking_status() { return ( ABPET_Configuration['booked_status'] ?? null ) ?: 'wc-processing,wc-completed'; }
+			public static function booking_status_sold() {
+				$booked = self::booking_status();
+				$statuses = array_map('trim', explode(',', $booked));
+				if (in_array('all', $statuses, true)) {
+					return $booked;
+				}
+				$statuses = array_values(array_unique(array_merge($statuses, ['wc-pending', 'wc-on-hold'])));
+				return implode(',', $statuses);
+			}
 			public static function label() { return ( ABPET_Configuration['label'] ?? null ) ?: __( 'Events', 'abp-event-ticket' ); }
 			public static function slug() { return ( ABPET_Configuration['slug'] ?? null ) ?: 'event-ticket'; }
 			public static function icon_wp() { return ( ABPET_Configuration['icon'] ?? null ) ?: 'dashicons-tickets-alt'; }
@@ -124,7 +133,7 @@
 					if ( isset( $items[ $date ] ) ) {
 						continue;
 					}
-					$times = ABPET_Function::time( $time_infos, $date );
+					$times          = ABPET_Function::time( $time_infos, $date );
 					$items[ $date ] = [
 						'date'  => $date,
 						'times' => array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) $times ) ) ) ),
@@ -133,7 +142,7 @@
 				return array_values( $items );
 			}
 			public static function event_schedule_selection( array $dates, array $time_infos ): array {
-				$dates = array_values( array_unique( array_map( static function ( $date ): string {
+				$dates      = array_values( array_unique( array_map( static function ( $date ): string {
 					return gmdate( 'Y-m-d', strtotime( (string) $date ) );
 				}, $dates ) ) );
 				$start_date = (string) ( $dates[0] ?? '' );
@@ -142,7 +151,7 @@
 				if ( $requested_date && in_array( $requested_date, $dates, true ) ) {
 					$start_date = $requested_date;
 				}
-				$all_times = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $start_date ) ) ) ) );
+				$all_times  = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $start_date ) ) ) ) );
 				$start_time = (string) ( $all_times[0] ?? '' );
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL pre-select for display; no state change.
 				$requested_time = isset( $_GET['session_time'] ) ? sanitize_text_field( wp_unslash( $_GET['session_time'] ) ) : '';
@@ -206,35 +215,7 @@
 				$language = pll_current_language( 'slug' );
 				return $language ? [ 'lang' => sanitize_key( $language ) ] : [];
 			}
-			public static function get_customer_orders( int $user_id = 0, int $limit = 20 ): array {
-				if ( ! function_exists( 'wc_get_orders' ) ) {
-					return [];
-				}
-				$user_id = $user_id ?: get_current_user_id();
-				if ( ! $user_id ) {
-					return [];
-				}
-				$orders = wc_get_orders( [
-					'customer_id' => $user_id,
-					'limit'       => -1,
-					'orderby'     => 'date',
-					'order'       => 'DESC',
-					'return'      => 'objects',
-				] );
-				if ( ! is_array( $orders ) ) {
-					return [];
-				}
-				$event_orders = [];
-				foreach ( $orders as $order ) {
-					foreach ( $order->get_items() as $item ) {
-						if ( $item->get_meta( '_abpet_items', true ) ) {
-							$event_orders[] = $order;
-							break;
-						}
-					}
-				}
-				return array_slice( $event_orders, 0, max( 1, $limit ) );
-			}
+
 			public static function get_user_role( $user_ID ): string {
 				global $wp_roles;
 				$user_role_list = '';
@@ -310,8 +291,8 @@
 						return false;
 					}
 					$form_data = [
-						'post_id'    => $post_id,
-						'event_date' => $event_date,
+						'post_id'      => $post_id,
+						'event_date'   => $event_date,
 						'session_time' => $session_time,
 					];
 					// Specific Seat ('sp') Validation Branch.
@@ -449,8 +430,10 @@
 				return $all_dates;
 			}
 			public static function date_list_modify( $start_date, $end_date, $date_infos ): array {
-				$all_dates = [];
-				if ( strtotime( $start_date ) <= strtotime( $end_date ) ) {
+				$start_date = is_scalar( $start_date ) ? (string) $start_date : '';
+				$end_date   = is_scalar( $end_date ) ? (string) $end_date : '';
+				$all_dates  = [];
+				if ( $start_date !== '' && $end_date !== '' && strtotime( $start_date ) <= strtotime( $end_date ) ) {
 					$now             = current_time( 'Y-m-d' );
 					$off_dates       = [];
 					$date_rule       = $date_infos['date_rule'] ?? '';
@@ -459,7 +442,7 @@
 						$off_date_range = $date_infos['off_date_range'] ?? [];
 						if ( is_array( $off_date_range ) && sizeof( $off_date_range ) > 0 ) {
 							foreach ( $off_date_range as $off_date ) {
-								if ( is_array( $off_date ) && ( $off_date['from'] ?? '' ) !== '' && ( $off_date['to'] ?? '' ) !== '' ) {
+								if ( is_array( $off_date ) && isset( $off_date['from'], $off_date['to'] ) && is_string( $off_date['from'] ) && is_string( $off_date['to'] ) && $off_date['from'] !== '' && $off_date['to'] !== '' ) {
 									$from_date      = gmdate( 'Y-m-d', strtotime( $off_date['from'] ) );
 									$to_date        = gmdate( 'Y-m-d', strtotime( $off_date['to'] ) );
 									$off_date_lists = self::date_separate_period( $from_date, $to_date );
@@ -474,8 +457,10 @@
 						$particular_off_dates = $date_infos['specific_off_dates'] ?? [];
 						if ( is_array( $particular_off_dates ) && sizeof( $particular_off_dates ) > 0 ) {
 							foreach ( $particular_off_dates as $particular_off_date ) {
-								$particular_off_date = gmdate( 'Y-m-d', strtotime( $particular_off_date ) );
-								$off_dates[]         = $particular_off_date;
+								if ( is_scalar( $particular_off_date ) && (string) $particular_off_date !== '' ) {
+									$particular_off_date = gmdate( 'Y-m-d', strtotime( (string) $particular_off_date ) );
+									$off_dates[]         = $particular_off_date;
+								}
 							}
 						}
 					}
@@ -483,7 +468,7 @@
 					$off_day_array = [];
 					if ( in_array( 'weekend', $date_rule_array ) ) {
 						$off_days      = $date_infos['weekend'] ?? '';
-						$off_day_array = $off_days ? explode( ',', $off_days ) : [];
+						$off_day_array = is_string( $off_days ) && $off_days ? explode( ',', $off_days ) : [];
 					}
 					$repeat = $date_infos['periodic_after'] ?? 1;
 					$dates  = self::date_separate_period( $start_date, $end_date, $repeat );
@@ -501,7 +486,8 @@
 						$special_on_dates = $date_infos['special_on_dates'] ?? [];
 						if ( is_array( $special_on_dates ) && sizeof( $special_on_dates ) > 0 ) {
 							foreach ( $special_on_dates as $date_item ) {
-								if ( ! empty( $date_item ) ) {
+								$date_item = is_array( $date_item ) && isset( $date_item['date'] ) ? $date_item['date'] : $date_item;
+								if ( is_string( $date_item ) && $date_item !== '' ) {
 									$date_item = gmdate( 'Y-m-d', strtotime( $date_item ) );
 									if ( strtotime( $date_item ) >= strtotime( $now ) ) {
 										$all_dates[] = $date_item;
@@ -511,7 +497,7 @@
 						}
 					}
 				}
-				return $all_dates;
+				return array_values( array_unique( $all_dates ) );
 			}
 			public static function time( $time_infos, $date ) {
 				$day_times    = $time_infos['day_time'] ?? [];
@@ -617,9 +603,11 @@
 			}
 			public static function date_format_js() { return ( ABPET_Date_Config['date_format'] ?? null ) ?: 'D d M , yy'; }
 			public static function date_separate_period( $start_date, $end_date, $repeat = 1 ): DatePeriod {
-				$repeat    = max( $repeat, 1 );
-				$_interval = "P" . $repeat . "D";
-				$end_date  = gmdate( 'Y-m-d', strtotime( $end_date . ' +1 day' ) );
+				$start_date = is_scalar( $start_date ) ? (string) $start_date : '';
+				$end_date   = is_scalar( $end_date ) ? (string) $end_date : '';
+				$repeat     = max( (int) $repeat, 1 );
+				$_interval  = 'P' . $repeat . 'D';
+				$end_date   = gmdate( 'Y-m-d', strtotime( $end_date . ' +1 day' ) );
 				return new DatePeriod( new DateTime( $start_date ), new DateInterval( $_interval ), new DateTime( $end_date ) );
 			}
 			public static function check_time_exit_date( $date ): bool {
@@ -768,6 +756,20 @@
 							break;
 						}
 					}
+				}
+				return $price > 0 ? self::tax_with_price( $post_id, $price ) : 0;
+			}
+			public static function get_min_price( $post_id = 0 ): int|string {
+				$price = 0;
+				if ( ! empty( $post_id ) && $post_id > 0 ) {
+					$price_infos = ABPET_Function::get_post_info( $post_id, 'ticket_infos', [] );
+					$all_price   = [];
+					if ( ! empty( $price_infos ) ) {
+						foreach ( $price_infos as $id => $price_info ) {
+							$all_price[] = $price_info['price'] ?? 0;
+						};
+					}
+					$price = min( $all_price );
 				}
 				return $price > 0 ? self::tax_with_price( $post_id, $price ) : 0;
 			}

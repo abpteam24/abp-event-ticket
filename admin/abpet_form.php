@@ -23,7 +23,7 @@
                     $forms = ABPET_Function::get_option('abpet_form', ABPET_Static::form());
                     ?>
                     <div class="abp_form">
-                        <h4 class="_abp"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Global Client Form Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class="abp"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Global Client Form Configuration', 'abp-event-ticket'); ?></h4>
                         <?php ABPET_Layout::info_text('abpet_form'); ?>
                         <?php $this->passenger_form_settings($forms, true); ?>
                     </div>
@@ -39,7 +39,7 @@
                     $display_single_form = ABPET_Function::on_off('same_attendee') ? $display_single_form : 'off';
                     ?>
                     <div class="tab_item abpet_client_form" data-tabs="#abpet_client_form">
-                        <h4 class=" _abp_color_theme"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Client Forms Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class=" abp_color_theme"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Client Forms Configuration', 'abp-event-ticket'); ?></h4>
                         <div class="_divider_xs"></div>
                         <?php if (ABPET_Function::on_off('custom_attendee')) { ?>
                             <div class="group_setting">
@@ -95,7 +95,7 @@
                 ?>
                 <div class="configuration_content _mar_t_xs">
                     <div class="_ov_auto">
-                        <table class=" _abp">
+                        <table class=" abp">
                             <thead>
                             <tr>
                                 <th class="_text_table_center"><?php esc_html_e('Form Title', 'abp-event-ticket'); ?><sup class="_color_required">*</sup></th>
@@ -129,7 +129,7 @@
                             } ?>
                     </div>
                     <div class="abp_hidden">
-                        <table class=" _abp">
+                        <table class=" abp">
                             <tbody class="hidden_content">
                             <?php $this->form_item(); ?>
                             </tbody>
@@ -148,10 +148,9 @@
                 $active_type = ($type == 'select' || $type == 'checkbox' || $type == 'radio') ? 'abp_active' : '';
                 $active_value = $type != 'date' ? 'abp_active' : '';
                 $date = $type == 'date' ? $d_value : '';
-                $date_format = ABPET_Function::date_format_php();
-                $now = date_i18n($date_format, strtotime(current_time('Y-m-d')));
+                $now = ABPET_Function::date_format(current_time('Y-m-d'));
                 $hidden_date = $date ? gmdate('Y-m-d', strtotime($date)) : '';
-                $visible_date = $date ? date_i18n($date_format, strtotime($date)) : '';
+                $visible_date = $date ? ABPET_Function::date_format($date, 'date') : '';
                 $active_date = $type == 'date' ? 'abp_active' : '';
                 ?>
                 <tr class="delete_area data_single_collapse">

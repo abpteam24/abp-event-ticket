@@ -43,8 +43,7 @@
 						WC()->session->set( 'abpet_cart_success', get_the_title( $post_id ) . ' ' . __( 'Add to cart successfully!', 'abp-event-ticket' ) );
 					}
 				}
-				//echo '<pre>';				print_r($cart_item);				echo '</pre>';				die();
-				return $cart_item;
+			return $cart_item;
 			}
 			public function before_calculate_totals($cart_object): void {
 				foreach ($cart_object->cart_contents as $value) {
@@ -465,10 +464,7 @@ $money = static function ($value): ?string {
 												'billing_email' => sanitize_text_field($billing_email),
 												'billing_phone' => sanitize_text_field($billing_phone),
 												'billing_address' => sanitize_text_field($billing_address),
-												'deposit_total' => null,
-												'due_amount' => null,
 												'payment_status' => null,
-												'deposit_date' => null,
 												'others' => wp_json_encode($others),
 												'created_at' => current_time('Y-m-d H:i'),
 												'updated_at' => current_time('Y-m-d H:i')

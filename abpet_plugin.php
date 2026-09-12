@@ -8,11 +8,11 @@
 	 * Text Domain: abp-event-ticket
 	 * Domain Path: /languages
 	 * WC requires at least: 8.0.0
-	 *  WC tested up to: latest
+	 *  WC tested up to: 9.4
 	 *  Requires PHP: 7.4
 	 *  Requires MySQL: 5.7+
-	 *  License: GPLv3
-	 *  License URI: https://www.gnu.org/licenses/gpl-3.0.html
+	 *  License: GPLv2 or later
+	 *  License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	 */
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit; // Exit if accessed directly
@@ -121,4 +121,87 @@
 				ABPET_Dependencies::deactivate();
 			}
 		} );
+		register_uninstall_hook( __FILE__, 'abpet_uninstall' );
+	}
+
+	/**
+	 * Clean up plugin data on uninstall.
+	 *
+	 * Called automatically by WordPress when the plugin is deleted
+	 * via register_uninstall_hook, and also invoked manually from
+	 * uninstall.php for backward compatibility.
+	 */
+	function abpet_uninstall(): void {
+		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+			return;
+		}
+
+		$abpet_on_off = get_option( 'abpet_on_off', array() );
+		$remove_data  = is_array( $abpet_on_off ) && isset( $abpet_on_off['remove_uninstall'] ) ? sanitize_text_field( $abpet_on_off['remove_uninstall'] ) : 'off';
+
+		if ( 'on' !== $remove_data ) {
+			return;
+		}
+
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $wpdb->prefix . 'abpet_orders' ) );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %i', $wpdb->prefix . 'abpet_sp' ) );
+
+		$abpet_options = array(
+			'abpet_configuration',
+			'abpet_on_off',
+			'abpet_date_config',
+			'abpet_dates',
+			'abpet_category',
+			'abpet_location',
+			'abpet_organizer',
+			'abpet_brand',
+			'abpet_feature',
+			'abpet_ticket',
+			'abpet_ticket_sp',
+			'abpet_decor',
+			'abpet_additional',
+			'abpet_form',
+			'abpet_faq',
+			'abpet_tc',
+			'abpet_color',
+			'abpet_css_var',
+			'abpet_slider',
+			'abpet_contact',
+			'abpet_per_page_item',
+			'abpet_dummy_registry',
+			'abpet_orders_schema_version',
+			'abpet_activation_redirect',
+		);
+
+		foreach ( $abpet_options as $option ) {
+			delete_option( $option );
+		}
+
+		$posts = get_posts( array(
+			'post_type'      => 'abpet_post',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+		) );
+		foreach ( $posts as $post_id ) {
+			wp_delete_post( $post_id, true );
+		}
+
+		$taxonomies = array( 'abpet_category', 'abpet_location', 'abpet_organizer', 'abpet_brand' );
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = get_terms( array(
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => false,
+				'fields'     => 'ids',
+			) );
+			if ( ! is_wp_error( $terms ) ) {
+				foreach ( $terms as $term_id ) {
+					wp_delete_term( $term_id, $taxonomy );
+				}
+			}
+		}
 	}

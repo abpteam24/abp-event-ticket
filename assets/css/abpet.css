@@ -1,25 +1,25 @@
 @charset "utf-8";
 /******************************************************************** Registration, Form  details************************************************/
 @media only screen and (min-width: 10px) {
-	div.abpet_area .global_form{margin: var(--tb_gap) 0 0 0;}
-	#abpet_search_area {background: var(--tb_color_white); border-radius: var(--tb_br); padding: var(--tb_gap); box-shadow: var(--tb_shadow_29); display: -webkit-flex;display: flex; gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
-	#abpet_search_area form {max-width: 100%;gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;}
+	div.abpet_area .global_form {margin: var(--et_gap) 0 0 0;}
+	#abpet_search_area {background: var(--et_color_white); border-radius: var(--et_br); padding: var(--et_gap); box-shadow: var(--et_shadow_29); display: -webkit-flex;display: flex; gap: var(--et_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
+	#abpet_search_area form {max-width: 100%;gap: var(--et_gap_xs); -webkit-flex-direction: column;flex-direction: column;}
 	/**********************************/
 	div.abpet_booking form {display: -webkit-flex;display: flex; min-width: 0; width: 100%;}
-	div.abpet_area .abpet_booking {margin: var(--tb_gap) 0; min-width: 0; width: 100%;}
-	div.abpet_booking .booking_area {display: -webkit-flex;display: flex; flex-wrap: wrap; gap: var(--tb_gap);-webkit-flex-grow: 1;flex-grow: 1; -webkit-flex-shrink: 1; flex-shrink: 1; -webkit-flex-basis: 100%; flex-basis: 100%;min-width: 0; width: 100%;}
+	div.abpet_area .abpet_booking {margin: var(--et_gap) 0; min-width: 0; width: 100%;}
+	div.abpet_booking .booking_area {display: -webkit-flex;display: flex; flex-wrap: wrap; gap: var(--et_gap);-webkit-flex-grow: 1;flex-grow: 1; -webkit-flex-shrink: 1; flex-shrink: 1; -webkit-flex-basis: 100%; flex-basis: 100%;min-width: 0; width: 100%;}
 	div.abpet_booking .booking_area .ticket_item {margin: 0;}
-	div.abpet_booking .booking_area .ticket_left {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 320px;}
-	div.abpet_booking .booking_area .ticket_right {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 280px;}
-	div.abpet_booking .booking_area .ticket_content {display: -webkit-flex;display: flex; gap: var(--tb_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
+	div.abpet_booking .booking_area .ticket_left {display: -webkit-flex;display: flex; gap: var(--et_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 320px;}
+	div.abpet_booking .booking_area .ticket_right {display: -webkit-flex;display: flex; gap: var(--et_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%;min-width: 0; flex: 1 1 280px;}
+	div.abpet_booking .booking_area .ticket_content {display: -webkit-flex;display: flex; gap: var(--et_gap_xs); -webkit-flex-direction: column;flex-direction: column;width: 100%;}
 	div.abpet_booking .seat_selection,
 	div.abpet_booking .total_continue_area,
 	div.abpet_booking .additional_service_area {width: 100%;display: none; }
-	div.abpet_booking .client_info_area {display: -webkit-flex;display: flex; gap: var(--tb_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%; }
-	div.additional_service_area .additional_service { padding: var(--tb_gap);}
-	div.abpet_booking .total_continue {display: -webkit-flex;display: flex;-webkit-justify-content: space-between;justify-content: space-between;-webkit-align-items: center;align-items: center;padding: var(--tb_gap);;}
-	div.client_info_area div.attendee_item {position: relative;display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap; flex-wrap: wrap;-webkit-justify-content: space-between; justify-content: space-between; padding: var(--tb_gap);}
-	div.attendee_item [class*="_input_item"] {display: inline-block;margin: var(--tb_gap_xs) 0 0 0;width: 50%;}
+	div.abpet_booking .client_info_area {display: -webkit-flex;display: flex; gap: var(--et_gap); -webkit-flex-direction: column;flex-direction: column;width: 100%; }
+	div.additional_service_area .additional_service { padding: var(--et_gap);}
+	div.abpet_booking .total_continue {display: -webkit-flex;display: flex;-webkit-justify-content: space-between;justify-content: space-between;-webkit-align-items: center;align-items: center;padding: var(--et_gap);;}
+	div.client_info_area div.attendee_item {position: relative;display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap; flex-wrap: wrap;-webkit-justify-content: space-between; justify-content: space-between; padding: var(--et_gap);}
+	div.attendee_item [class*="_input_item"] {display: inline-block;margin: var(--et_gap_xs) 0 0 0;width: 50%;}
 	div.attendee_item [class*="_input_item"] [class*="_form_control"] {width: 100%;border-radius: 0;min-width: initial; max-width: initial;}
 	div.attendee_item [class*="_input_item"].abpet_textarea,
 	div.attendee_item [class*="_input_item"].custom_checkbox,
@@ -27,80 +27,82 @@
 }
 /******************************************************************** List Grid Property item ************************************************/
 @media only screen and (min-width: 10px) {
-	div.abpet_area .post_top_filter {margin: 0 0 var(--tb_gap) 0; border-radius: var(--tb_br);display: -webkit-flex;display: flex;flex-wrap: wrap;-webkit-justify-content: space-between;justify-content: space-between; -webkit-align-items: center;align-items: center;padding: var(--tb_gap_xs); background: var(--tb_color_4);gap: var(--tb_gap_xs);}
-	div.abpet_area .post_top_filter > label {flex: 1 1 220px; min-width: 0; max-width: 100%; flex-wrap: wrap; white-space: normal;}
+	div.abpet_area .post_top_filter {margin: 0 0 var(--et_gap) 0; border-radius: var(--et_br);display: -webkit-flex;display: flex;flex-wrap: wrap;-webkit-justify-content: space-between;justify-content: space-between; -webkit-align-items: center;align-items: center;padding: var(--et_gap_xs); background: var(--et_color_4);gap: var(--et_gap_xs);}
+	div.abpet_area .post_top_filter > label {flex-wrap: wrap; white-space: normal;}
 	div.abpet_area .item_select {flex-wrap: wrap;}
 	div.abpet_booking ._section_15_xs {max-width: 100%; overflow-x: auto;}
 	/*********************************/
-	.abpet_area .item_head {background: var(--tb_color_4); padding: var(--tb_gap_xs); text-align: center; position: relative;width: 100%;min-height: auto;display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;line-height: 1;}
-	.abpet_area .item_head i {font-size: 75px;padding: var(--tb_gap);min-height: 150px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
-	.abpet_area .item_head .list_title {position: absolute;left: 0;right: 0;bottom: 0;padding: var(--tb_gap_xs);color: var(--tb_color_theme);z-index: 111;text-align: center;font-size: var(--tb_fs_h5);}
-	.abpet_area .item_head .list_title:hover {background-color: var(--tb_color_theme_alter);}
-	div.abpet_area .item_head .list_title img.emoji {height: var(--tb_fs_h5) !important;}
+	.abpet_area .item_head {background: var(--et_color_4); padding: var(--et_gap_xs); text-align: center; position: relative;width: 100%;min-height: auto;display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items: center;align-items: center;line-height: 1;}
+	.abpet_area .item_head i {font-size: 75px;padding: var(--et_gap);min-height: 150px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
+	.abpet_area .item_head .list_title {position: absolute;left: 0;right: 0;bottom: 0;padding: var(--et_gap_xs);color: var(--et_color_theme);z-index: 111;text-align: center;font-size: var(--et_fs_h5);}
+	.abpet_area .item_head .list_title:hover {background-color: var(--et_color_theme_alter);}
+	div.abpet_area .item_head .list_title img.emoji {height: var(--et_fs_h5) !important;}
 	/*********************************************/
-	.abpet_area .item_body {padding: var(--tb_gap_xs);display: -webkit-flex;display: flex; -webkit-flex-direction: column;flex-direction: column;}
-	div.abpet_area .item_spec { margin: var(--tb_gap_xxs) 0;}
-	.abpet_area .pricing_box { background: var(--tb_color_light); padding: var(--tb_gap_xs); border-radius: var(--tb_br);}
-	.abpet_area .price_row {display: flex; justify-content: space-between; align-items: center; font-size: var(--tb_fs_h6); color: #6B7280;}
-	div.abpet_area .price_value {font-weight: 500; color: var(--tb_color_theme);font-size: var(--tb_fs_h5); }
-	.abpet_area .item_condition {font-size: var(--tb_fs); color: #6B7280;margin-top: var(--tb_gap_xs);}
-	.abpet_area .cost_label {font-size: var(--tb_fs_label); color: #6B7280; margin-bottom: var(--tb_gap_xs);}
-	.abpet_area .cost_value {font-size: var(--tb_fs_h2); font-weight: 800; color: var(--tb_color_secondary);}
-	.abpet_area .cost_condition {font-size: var(--tb_fs_h6); font-weight: 800; color: var(--tb_color_secondary);}
-	.abpet_area .item_select {display: flex; align-items: center; justify-content: space-between; gap: var(--tb_gap_xs); cursor: pointer; transition: all 0.3s ease;}
-	.abpet_area .item_select .custom_checkbox {margin: 0 var(--tb_gap_xs) 0 0;}
-	.abpet_area .item_select .custom_checkbox .checkbox_item {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;font-size: var(--tb_fs_h6);gap: var(--tb_gap_xs);}
-	.abpet_area .item_location {font-size: var(--tb_fs_h6);margin-bottom: var(--tb_gap_xs);line-height: 1;display: -webkit-flex;display: flex;}
+	.abpet_area .item_body {padding: var(--et_gap_xs);display: -webkit-flex;display: flex; -webkit-flex-direction: column;flex-direction: column;}
+	div.abpet_area .item_spec { margin: var(--et_gap_xxs) 0;}
+	.abpet_area .pricing_box { background: var(--et_color_light); padding: var(--et_gap_xs); border-radius: var(--et_br);}
+	.abpet_area .price_row {display: flex; justify-content: space-between; align-items: center; font-size: var(--et_fs_h6); color: #6B7280;}
+	div.abpet_area .price_value {font-weight: 500; color: var(--et_color_theme);font-size: var(--et_fs_h5); }
+	.abpet_area .item_condition {font-size: var(--et_fs); color: #6B7280;margin-top: var(--et_gap_xs);}
+	.abpet_area .cost_label {font-size: var(--et_fs_label); color: #6B7280; margin-bottom: var(--et_gap_xs);}
+	.abpet_area .cost_value {font-size: var(--et_fs_h2); font-weight: 800; color: var(--et_color_secondary);}
+	.abpet_area .cost_condition {font-size: var(--et_fs_h6); font-weight: 800; color: var(--et_color_secondary);}
+	.abpet_area .item_select {display: flex; align-items: center; justify-content: space-between; gap: var(--et_gap_xs); cursor: pointer; transition: all 0.3s ease;}
+	.abpet_area .item_select .custom_checkbox {margin: 0 var(--et_gap_xs) 0 0;}
+	.abpet_area .item_select .custom_checkbox .checkbox_item {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;font-size: var(--et_fs_h6);gap: var(--et_gap_xs);}
+	.abpet_area .item_location {font-size: var(--et_fs_h6);margin-bottom: var(--et_gap_xs);line-height: 1;display: -webkit-flex;display: flex;}
 	/*********************************************/
-	div.abpet_area div.pagination_item.abp_close {display: none;}
+	div.abpet_area .pagination_item.abp_close {display: none;}
 	div.abpet_area div.pagination_item::before { content: ""; position: absolute; inset: 0; min-width: 80px; background-size: 200% 100%; pointer-events: none; z-index: 1; transition: ease-in-out 0.3s; }
 	div.abpet_area div.pagination_item::after { content: ""; position: absolute; inset: 0; background: rgba(200, 68, 10, 0); transition: background 0.25s; pointer-events: none; z-index: 2; }
 	div.abpet_area div.pagination_item:hover::after { background: rgba(200, 68, 10, 0.10); }
 	/*********************************************/
-	div.abpet_area .abpet_grid {border-radius: var(--tb_br_xl); display: grid; gap: var(--tb_gap);column-gap: var(--tb_gap);}
-	div.abpet_area .abpet_grid .item_box_1 {break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;}
-	div.abpet_area .abpet_grid .item_head {padding: 0;height: auto;border-radius: var(--tb_br) var(--tb_br) 0 0;}
+	div.abpet_area .abpet_grid {border-radius: var(--et_br_xl); display: grid; gap: var(--et_gap);column-gap: var(--et_gap);}
+	div.abpet_area .abpet_grid .item_box_1:not(.abp_close)  {break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;}
+	div.abpet_area .abpet_grid .item_head {padding: 0;height: auto;border-radius: var(--et_br) var(--et_br) 0 0;}
 	div.abpet_area .abpet_grid .item_body {-webkit-justify-content: space-between;justify-content: space-between;height: 100%;}
-	div.abpet_area .abpet_grid .list_title {padding: 0;color: var(--tb_color_rose_dusty);font-size: var(--tb_fs_h6);}
-	div.abpet_area .abpet_grid .item_body .price_value {font-size: var(--tb_fs_h6); font-weight: 500;}
-	div.abpet_area .abpet_grid .list_title img.emoji {height: var(--tb_fs_h4) !important;}
+	div.abpet_area .abpet_grid .list_title {padding: 0;color: var(--et_color_rose_dusty);font-size: var(--et_fs_h6);}
+	div.abpet_area .abpet_grid .item_body .price_value {font-size: var(--et_fs_h6); font-weight: 500;}
+	div.abpet_area .abpet_grid .list_title img.emoji {height: var(--et_fs_h4) !important;}
 	/**************************************/
 	div.abpet_area .abpet_lists {position: relative;display: -webkit-flex;display: flex; -webkit-flex-direction: column;flex-direction: column;width: 100%;}
-	div.abpet_area .abpet_lists .item_box_1 {position: relative;display: -webkit-flex;display: flex; width: 100%;margin: 0 0 var(--tb_gap) 0;overflow: hidden;}
-	div.abpet_area .abpet_lists .item_head {padding: 0;width: 400px;min-width: 200px;max-width: 40%;overflow: hidden;border-radius: var(--tb_br) 0 0 var(--tb_br);}
-	div.abpet_area .abpet_lists .item_body {-webkit-justify-content: space-between;justify-content: space-between;padding: var(--tb_gap_xs);width: 100%;height: auto;}
-	div.abpet_area .abpet_lists .list_title {padding: 0;color: var(--tb_color_rose_dusty);font-size: var(--tb_fs_h4);}
-	div.abpet_area .abpet_lists .item_body .price_value {font-size: var(--tb_fs_h5); font-weight: 500;}
-	div.abpet_area .abpet_lists .list_title img.emoji {height: var(--tb_fs_h4) !important;}
+	div.abpet_area .abpet_lists .item_box_1 {position: relative;display: -webkit-flex;display: flex; width: 100%;margin: 0 0 var(--et_gap) 0;overflow: hidden;}
+	div.abpet_area .abpet_lists .item_head {padding: 0;width: 400px;min-width: 200px;max-width: 40%;overflow: hidden;border-radius: var(--et_br) 0 0 var(--et_br);}
+	div.abpet_area .abpet_lists .item_body {-webkit-justify-content: space-between;justify-content: space-between;padding: var(--et_gap_xs);width: 100%;height: auto;}
+	div.abpet_area .abpet_lists .list_title {padding: 0;color: var(--et_color_rose_dusty);font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_lists .item_body .price_value {font-size: var(--et_fs_h5); font-weight: 500;}
+	div.abpet_area .abpet_lists .list_title img.emoji {height: var(--et_fs_h4) !important;}
 	/***************************************/
-	div.abpet_area .abpet_missionary {border-radius: var(--tb_br_xl); display: block; column-gap: var(--tb_gap);}
+	div.abpet_area .abpet_missionary {border-radius: var(--et_br_xl); display: block; column-gap: var(--et_gap);}
 	div.abpet_area .abpet_missionary .item_head {padding: 0;}
-	div.abpet_area .abpet_missionary .item_box_1 {position: relative;margin-bottom: var(--tb_gap); break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;}
-	div.abpet_area .abpet_minimal {display: grid; gap: var(--tb_gap_xs);}
-	div.abpet_area .abpet_minimal .minimal_item {display: flex; align-items: center; gap: var(--tb_gap); padding: var(--tb_gap_xs) var(--tb_gap); background: var(--tb_color_white); border: 1px solid var(--tb_color_border); border-radius: var(--tb_br); box-shadow: var(--tb_shadow_4);}
-	div.abpet_area .abpet_minimal .minimal_image {width: 72px; min-width: 72px; height: 54px; border-radius: var(--tb_br); overflow: hidden;}
+	div.abpet_area .abpet_missionary .item_box_1 {position: relative;margin-bottom: var(--et_gap); break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;}
+	/***************************************/
+	div.abpet_area .abpet_minimal {display: grid; gap: var(--et_gap_xs);}
+	div.abpet_area .abpet_minimal .minimal_item:not(.minimal_item.abp_close) {position: relative; display: flex; gap: var(--et_gap_xs); padding: var(--et_gap_xs); background: var(--et_color_white); border: 1px solid var(--et_color_border); border-radius: var(--et_br); box-shadow: var(--et_shadow_29); transition: var(--et_transition);}
+	div.abpet_area .abpet_minimal .minimal_item:hover {border-color: var(--et_color_theme); box-shadow: var(--et_shadow_15); transform: translateY(-2px);}
+	div.abpet_area .abpet_minimal .minimal_image {width: 96px; min-width: 96px; height: 64px; border-radius: var(--et_br); overflow: hidden;}
+	div.abpet_area .abpet_minimal .minimal_image img {height: 100%; object-fit: cover;}
 	div.abpet_area .abpet_minimal .minimal_content {min-width: 0; flex: 1;}
-	div.abpet_area .abpet_minimal .minimal_title {display: block; padding: 0; border: 0; background: transparent; color: var(--tb_color_theme); font-size: var(--tb_fs_h5); font-weight: var(--tb_fw-medium); text-align: left; overflow-wrap: anywhere;}
-	div.abpet_area .abpet_minimal .minimal_meta {margin-top: var(--tb_gap_xxs); color: var(--tb_text_off); font-size: var(--tb_fs_small);}
-	div.abpet_area .abpet_minimal .minimal_action {flex: 0 0 auto; white-space: nowrap;}
+	div.abpet_area .abpet_minimal .list_title {display: block; padding: 0; border: 0; background: transparent; color: var(--et_color_default); font-size: var(--et_fs_h6); font-weight: var(--et_fw-medium); text-align: left; overflow-wrap: anywhere; transition: var(--et_transition);}
+	div.abpet_area .abpet_minimal .price_value {color: var(--et_color_theme); font-weight: var(--et_fw-bold); font-size: var(--et_fs);}
 	/*******************Group property********************/
-	div.abpet_area .group_property {margin: var(--tb_gap) 0 0 0;padding: var(--tb_gap);}
+	div.abpet_area .group_property {margin: var(--et_gap) 0 0 0;padding: var(--et_gap);}
 	div.abpet_area .group_property .ticket_item {display: -webkit-flex;display: flex;-webkit-align-items: stretch;align-items: stretch;}
 	div.abpet_area .group_property .item_head {min-width: 100px;max-width: 200px;padding: 0;min-height: auto;}
-	div.abpet_area .group_property .item_head i {font-size: 50px;padding: var(--tb_gap_xs);min-height: auto;}
-	div.abpet_area .group_property .property_details {padding: 0 0 0 var(--tb_gap_xs);border-left: 2px solid var(--tb_color_border);width: 100%;max-width: 100%;}
+	div.abpet_area .group_property .item_head i {font-size: 50px;padding: var(--et_gap_xs);min-height: auto;}
+	div.abpet_area .group_property .property_details {padding: 0 0 0 var(--et_gap_xs);border-left: 2px solid var(--et_color_border);width: 100%;max-width: 100%;}
 	div.abpet_area .group_property .property_title_price { display: -webkit-flex;display: flex;-webkit-justify-content: space-between;justify-content: space-between; }
-	div.abpet_area .group_property .item_condition { padding: 0 0 var(--tb_gap_xxs) 0;margin: 0;}
-	div.abpet_area .group_property .pricing_box {margin: var(--tb_gap_xxs) var(--tb_gap_xs) var(--tb_gap_xxs) 0;}
+	div.abpet_area .group_property .item_condition { padding: 0 0 var(--et_gap_xxs) 0;margin: 0;}
+	div.abpet_area .group_property .pricing_box {margin: var(--et_gap_xxs) var(--et_gap_xs) var(--et_gap_xxs) 0;}
 	div.abpet_area .group_property .price_row {-webkit-flex-direction: column;flex-direction: column;-webkit-justify-content: center;justify-content: center;min-width: max-content;}
 	div.abpet_area .group_property .price_value {font-weight: bold;}
-	div.abpet_area .group_property .item_select { margin: 0;padding: var(--tb_gap_xxs); }
+	div.abpet_area .group_property .item_select { margin: 0;padding: var(--et_gap_xxs); }
 	div.abpet_area .group_property .ticket_item_bottom {display: -webkit-flex;display: flex;flex-wrap: wrap;-webkit-justify-content: space-between;justify-content: space-between; width: 100%;max-width: 100%;-webkit-align-items: flex-end;align-items: flex-end;}
 	div.abpet_area .group_property .cost_label,
-	div.abpet_area .group_property .cost_value { margin: 0 var(--tb_gap_xxs);font-size: var(--tb_fs);}
+	div.abpet_area .group_property .cost_value { margin: 0 var(--et_gap_xxs);font-size: var(--et_fs);}
 	@media only screen and (max-width: 1000px) {
 		div.abpet_area .group_property .item_head {max-width: 100px;}
-		div.abpet_area .group_property .ticket_item_bottom {-webkit-flex-direction: column;flex-direction: column;-webkit-align-items: flex-start;align-items: flex-start; gap: var(--tb_gap_xs);}
+		div.abpet_area .group_property .ticket_item_bottom {-webkit-flex-direction: column;flex-direction: column;-webkit-align-items: flex-start;align-items: flex-start; gap: var(--et_gap_xs);}
 	}
 	@media only screen and (max-width: 600px) {
 		div.abpet_area .abpet_lists .item_box_1 {position: relative;display: -webkit-flex;display: flex; -webkit-flex-direction: column;flex-direction: column;width: 100%;; }
@@ -109,18 +111,15 @@
 		/********************/
 		div.abpet_area .group_property .item_head {min-width: 80px;max-width: 80px;}
 		div.abpet_area .group_property .property_title_price {-webkit-flex-direction: column;flex-direction: column;}
-		div.abpet_area .group_property .price_row { font-size: var(--tb_fs_h6);}
-		div.abpet_area .group_property .price_value {font-size: var(--tb_fs_h6);margin: 0 0 0 var(--tb_gap_xs);}
-		div.abpet_area .group_property .price_row {-webkit-flex-direction: initial;flex-direction: initial;-webkit-justify-content: flex-start;justify-content: flex-start;margin: var(--tb_gap_xxs) 0;}
+		div.abpet_area .group_property .price_row { font-size: var(--et_fs_h6);}
+		div.abpet_area .group_property .price_value {font-size: var(--et_fs_h6);margin: 0 0 0 var(--et_gap_xs);}
+		div.abpet_area .group_property .price_row {-webkit-flex-direction: initial;flex-direction: initial;-webkit-justify-content: flex-start;justify-content: flex-start;margin: var(--et_gap_xxs) 0;}
 		div.abpet_booking .booking_area,
 		div.abpet_booking .booking_area .ticket_left,
 		div.abpet_booking .booking_area .ticket_right {min-width: 0;width: 100%;}
 		div.abpet_booking .booking_area {flex-direction: column;}
 		div.attendee_item [class*="_input_item"] {width: 100%;}
-		div.abpet_booking .total_continue {flex-wrap: wrap;gap: var(--tb_gap_xs);}
-		div.abpet_area .abpet_minimal .minimal_item {align-items: flex-start; gap: var(--tb_gap_xs);}
-		div.abpet_area .abpet_minimal .minimal_image {width: 56px; min-width: 56px; height: 48px;}
-		div.abpet_area .abpet_minimal .minimal_action {padding-left: var(--tb_gap_xs); padding-right: var(--tb_gap_xs);}
+		div.abpet_booking .total_continue {flex-wrap: wrap;gap: var(--et_gap_xs);}
 	}
 }
 /******************************************************************** ticket_area************************************************/
@@ -134,6 +133,14 @@
 }
 /******************************************************************** ************************************************/
 @media only screen and (min-width: 10px) {
+	.abpet_my_account ._section_card {border: 1px solid var(--et_color_border);border-radius: var(--et_br);padding: var(--et_gap_xs);}
+	.abpet_my_account ul.abp li {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap_xxs);-webkit-align-items: baseline;align-items: baseline;}
+	.abpet_my_account ul.abp li strong {min-width: 150px;display: inline-block;}
+	.abpet_my_account .abp_tag {background: var(--et_color_light);border: 1px solid var(--et_color_border);border-radius: 50px;color: var(--et_color_default);font-size: var(--et_fs_small);padding: var(--et_gap_xxs) var(--et_gap_xs);white-space: nowrap;}
+	.abpet_my_account ._pagination {display: -webkit-flex;display: flex;gap: var(--et_gap_xxs);-webkit-flex-wrap: wrap;flex-wrap: wrap;}
+	.abpet_my_account ._page_link {min-width: 36px;height: 36px;border: 1px solid var(--et_color_border);background: var(--et_color_white);color: var(--et_color_default);border-radius: var(--et_br);display: -webkit-inline-flex;display: inline-flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;text-decoration: none;padding: 0 var(--et_gap_xs);}
+	.abpet_my_account ._page_link:hover {border-color: var(--et_color_theme);color: var(--et_color_theme);}
+	.abpet_my_account ._page_active {background: var(--et_color_theme);border-color: var(--et_color_theme);color: var(--et_color_white);}
 }
 /******************************************************************** Responsive ************************************************/
 @media only screen and (max-width: 1050px) {
@@ -144,18 +151,16 @@
 	flex: 1 1 0;
 	min-width: 0;
 }
-
 .abpet_area .abpet_details_title {
-	color: var(--tb_color_theme);
-	font-size: var(--tb_fs_h4);
-	font-weight: var(--tb_fw-bold);
+	color: var(--et_color_theme);
+	font-size: var(--et_fs_h4);
+	font-weight: var(--et_fw-bold);
 	line-height: 1.15;
-	margin: 0 0 var(--tb_gap_xs);
+	margin: 0 0 var(--et_gap_xs);
 	overflow-wrap: anywhere;
 }
-
 .abpet_area .abpet_details_title small {
-	font-size: var(--tb_fs_small);
+	font-size: var(--et_fs_small);
 }
 .abpet_area .abpet_details_title > span,
 .abpet_area .abpet_details_title > .abp_image {
@@ -177,21 +182,20 @@
 	object-fit: contain;
 	width: 100%;
 }
-
 .abpet_area .abpet_faq_panel,
 .abpet_area .abpet_tc_panel {
 	margin: 0;
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
 }
 .abpet_area .related_item_area {
-	margin-top: var(--tb_gap);
+	margin-top: var(--et_gap);
 }
 .abpet_area .abpet_faq_panel h4,
 .abpet_area .abpet_tc_panel h4 {
 	margin: 0;
 }
 .abpet_area .abpet_faq_panel > ._divider_xs {
-	margin: var(--tb_gap_xs) 0;
+	margin: var(--et_gap_xs) 0;
 }
 .abpet_area .abpet_faq_panel .faq_list {
 	display: flex;
@@ -201,7 +205,7 @@
 }
 .abpet_area .abpet_faq_panel .faq_item {
 	margin: 0;
-	border-bottom: 1px solid var(--tb_color_border);
+	border-bottom: 1px solid var(--et_color_border);
 	border-left: 0;
 	border-right: 0;
 }
@@ -211,68 +215,62 @@
 .abpet_area .abpet_faq_panel .faq_question {
 	align-items: center;
 	display: flex;
-	gap: var(--tb_gap_xs);
+	gap: var(--et_gap_xs);
 	justify-content: space-between;
 	min-height: 44px;
-	padding: var(--tb_gap_xs);
+	padding: var(--et_gap_xs);
 }
 .abpet_area .abpet_faq_panel .faq_question h6 {
 	margin: 0;
 }
 .abpet_area .abpet_faq_panel .faq_answer_content {
-	padding: 0 var(--tb_gap_xs) var(--tb_gap_xs);
+	padding: 0 var(--et_gap_xs) var(--et_gap_xs);
 }
-
 .default_details_page .abpet_faq_panel {
-	border-top: 3px solid var(--tb_color_theme);
+	border-top: 3px solid var(--et_color_theme);
 }
 .default_details_page .abpet_tc_panel {
-	border-left: 3px solid var(--tb_color_theme);
+	border-left: 3px solid var(--et_color_theme);
 }
-
 .abpet_light_details .abpet_faq_panel,
 .abpet_light_details .abpet_tc_panel {
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
 }
 .abpet_light_details .abpet_faq_panel .faq_question {
-	padding: var(--tb_gap_xs);
+	padding: var(--et_gap_xs);
 }
 .abpet_light_details .abpet_tc_panel {
-	border-left: 4px solid var(--tb_color_theme);
+	border-left: 4px solid var(--et_color_theme);
 }
-
 .abpet_modern_details .abpet_faq_panel {
-	border-left: 5px solid var(--tb_color_theme);
-	border-radius: var(--tb_br);
+	border-left: 5px solid var(--et_color_theme);
+	border-radius: var(--et_br);
 }
 .abpet_modern_details .abpet_faq_panel .faq_item {
 	border-bottom-style: dashed;
 }
 .abpet_modern_details .abpet_tc_panel {
-	border: 1px dashed var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
+	border: 1px dashed var(--et_color_border);
+	border-radius: var(--et_br_xl);
 }
 .abpet_modern_details .abpet_tc_panel h4 {
 	letter-spacing: 0.02em;
 	text-transform: uppercase;
 }
-
 .abpet_default_intro {
 	align-items: center;
-	gap: var(--tb_gap);
+	gap: var(--et_gap);
 }
-
 .abpet_default_intro > .abpet_details_column:first-child {
 	min-width: min(100%, 420px);
 }
-
 .default_details_page .abpet_default_intro {
 	align-items: stretch;
 }
 .default_details_page .abpet_default_intro > .abpet_details_column:first-child {
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
 	overflow: hidden;
 }
 .default_details_page .abpet_default_media {
@@ -281,15 +279,13 @@
 .default_details_page .abpet_default_media .abpet_slider {
 	height: 100%;
 }
-
 div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--tb_gap_xxs) var(--tb_gap_xs);
+	gap: var(--et_gap_xxs) var(--et_gap_xs);
 	max-width: 100%;
 }
-
 div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	max-width: 100%;
 	overflow-wrap: anywhere;
@@ -297,21 +293,17 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	white-space: normal;
 	word-break: break-word;
 }
-
 .default_details_page .abpet_default_summary {
 	max-width: 100%;
 	min-width: 0;
 	overflow: hidden;
 }
-
 .default_details_page .abpet_default_summary > * {
 	max-width: 100%;
 }
-
 .default_details_page .abpet_default_media {
 	max-width: 100%;
 }
-
 @media (min-width: 701px) and (max-width: 1024px) {
 	.abpet_default_intro > .abpet_details_column:first-child {
 		flex: 1 1 300px;
@@ -323,7 +315,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 .abpet_schedule_picker {
 	position: relative;
-	margin-top: var(--tb_gap);
+	margin-top: var(--et_gap);
 }
 .abpet_schedule_picker,
 .abpet_schedule_dropdown {
@@ -335,60 +327,56 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 .abpet_schedule_toggle {
 	align-items: center;
 	display: inline-flex;
-	gap: var(--tb_gap_xxs);
+	gap: var(--et_gap_xxs);
 }
 .abpet_schedule_dropdown {
 	position: absolute;
 	left: 0;
-	top: calc(100% + var(--tb_gap_xxs));
+	top: calc(100% + var(--et_gap_xxs));
 	width: min(320px, calc(100vw - 32px));
 	z-index: 20;
 }
 .abpet_schedule_dropdown .abpet_schedule_list {
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br);
-	box-shadow: var(--tb_shadow_23);
-	padding: var(--tb_gap_xs);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
+	box-shadow: var(--et_shadow_23);
+	padding: var(--et_gap_xs);
 }
 .default_details_page .the_post_content,
 .abpet_light_details .the_post_content,
 .abpet_modern_details .the_post_content {
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br);
-	margin: var(--tb_gap) 0;
-	padding: var(--tb_gap);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
+	margin: var(--et_gap) 0;
+	padding: var(--et_gap);
 }
-
 .abpet_light_details .abpet_light_intro {
 	align-items: center;
-	gap: var(--tb_gap);
+	gap: var(--et_gap);
 }
-
 .abpet_light_details .abpet_light_media {
 	order: 2;
 	min-width: min(100%, 360px);
 }
-
 .abpet_light_details .abpet_light_summary {
 	order: 1;
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
 }
-
 .abpet_light_details .abpet_light_booking {
 	order: 3;
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
 }
 .abpet_light_details .abpet_light_summary {
-	border-left: 4px solid var(--tb_color_theme);
-	border-radius: var(--tb_br);
-	box-shadow: var(--tb_shadow_23);
+	border-left: 4px solid var(--et_color_theme);
+	border-radius: var(--et_br);
+	box-shadow: var(--et_shadow_23);
 }
 .abpet_light_details .abpet_details_title {
-	font-size: var(--tb_fs_h4);
+	font-size: var(--et_fs_h4);
 }
 .abpet_light_details .abpet_light_booking {
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
 	padding: 0;
 }
 .abpet_schedule_column {
@@ -407,20 +395,20 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	flex-direction: column;
 	height: 100%;
 	min-height: 0;
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
 }
 .abpet_schedule_list_heading {
 	align-items: center;
-	color: var(--tb_color_theme);
+	color: var(--et_color_theme);
 	display: flex;
-	gap: var(--tb_gap_xs);
-	margin-bottom: var(--tb_gap_xs);
+	gap: var(--et_gap_xs);
+	margin-bottom: var(--et_gap_xs);
 }
 .abpet_schedule_list_items {
 	display: flex;
 	flex: 1 1 auto;
 	flex-direction: column;
-	gap: var(--tb_gap_xs);
+	gap: var(--et_gap_xs);
 	height: 200px;
 	min-height: 0;
 	max-height: 200px;
@@ -431,12 +419,12 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 .abpet_event_schedule_day {
 	display: grid;
-	gap: var(--tb_gap_xxs);
+	gap: var(--et_gap_xxs);
 }
 .abpet_schedule_list_items a {
-	background: var(--tb_color_2);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br);
+	background: var(--et_color_2);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
 	color: inherit;
 	display: block;
 	overflow-wrap: anywhere;
@@ -445,10 +433,10 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 .abpet_schedule_list_items a:hover,
 .abpet_schedule_list_items a.is-active {
-	background: var(--tb_color_theme);
-	border-color: var(--tb_color_theme);
-	color: var(--tb_color_white);
-	font-weight: var(--tb_fw-bold);
+	background: var(--et_color_theme);
+	border-color: var(--et_color_theme);
+	color: var(--et_color_white);
+	font-weight: var(--et_fw-bold);
 }
 .abpet_schedule_list_items time {
 	display: block;
@@ -457,14 +445,12 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	color: rgb(128, 128, 128);
 	margin: auto 0;
 }
-
 .abpet_modern_details .abp_container {
-	max-width: var(--tb_container_max);
+	max-width: var(--et_container_max);
 }
-
 .abpet_modern_details .abpet_modern_media,
 .abpet_modern_details .abpet_modern_summary {
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
 }
 .abpet_modern_details .abpet_modern_media {
 	display: flex;
@@ -477,41 +463,36 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	font-size: clamp(2rem, 5vw, 4rem);
 	letter-spacing: -0.04em;
 }
-
 .abpet_modern_details ._f_equal_f_wrap_gap_section_15 {
 	align-items: stretch;
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
-	gap: var(--tb_gap);
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
+	gap: var(--et_gap);
 	overflow: hidden;
 	padding: 0;
 }
-
 .abpet_modern_details .post_top_filter {
 	align-items: center;
-	background: var(--tb_color_1);
-	border-radius: var(--tb_br);
+	background: var(--et_color_1);
+	border-radius: var(--et_br);
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--tb_gap_xs);
+	gap: var(--et_gap_xs);
 	justify-content: space-between;
-	margin: var(--tb_gap) 0 var(--tb_gap_xs);
-	padding: var(--tb_gap_xs) var(--tb_gap);
+	margin: var(--et_gap) 0 var(--et_gap_xs);
+	padding: var(--et_gap_xs) var(--et_gap);
 }
-
 .abpet_modern_details .abpet_booking {
-	border-radius: var(--tb_br_xl);
-	padding: var(--tb_gap_xs) var(--tb_gap) var(--tb_gap);
+	border-radius: var(--et_br_xl);
+	padding: var(--et_gap_xs) var(--et_gap) var(--et_gap);
 }
-
 .abpet_modern_details .abp_tag {
-	border-radius: var(--tb_br_xl);
-	margin: var(--tb_gap_xxs) var(--tb_gap_xs) var(--tb_gap_xxs) 0;
-	padding: var(--tb_gap_xxs) var(--tb_gap_xs);
+	border-radius: var(--et_br_xl);
+	margin: var(--et_gap_xxs) var(--et_gap_xs) var(--et_gap_xxs) 0;
+	padding: var(--et_gap_xxs) var(--et_gap_xs);
 }
-
 @media (min-width: 701px) and (max-width: 1024px) {
 	div.abpet_area .abpet_light_intro > .abpet_light_summary {
 		flex: 1 1 280px;
@@ -526,22 +507,19 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		height: auto;
 	}
 }
-
 @media (max-width: 700px) {
 	.abpet_area ._f_equal_f_wrap_gap_section_15 {
 		flex-direction: column;
 	}
-
 	.abpet_default_intro > .abpet_details_column:first-child,
 	.abpet_light_details .abpet_light_media {
 		min-width: 0;
 	}
-
 	.abpet_light_details .abpet_light_media,
 	.abpet_light_details .abpet_light_summary,
 	.abpet_light_details .abpet_light_booking {
 		order: initial;
-		padding: var(--tb_gap_xs);
+		padding: var(--et_gap_xs);
 	}
 	.abpet_light_details .abpet_light_booking {
 		padding: 0;
@@ -567,12 +545,10 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		right: auto;
 		width: min(320px, calc(100vw - 32px));
 	}
-
 	.abpet_modern_details .abpet_modern_media,
 	.abpet_modern_details .abpet_modern_summary {
-		padding: var(--tb_gap_xs);
+		padding: var(--et_gap_xs);
 	}
-
 	.abpet_modern_details .post_top_filter {
 		align-items: stretch;
 		flex-direction: column;
@@ -620,27 +596,27 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	overflow-wrap: anywhere;
 }
 #abpet_area.abpet_light_details .post_top_filter {
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_21);
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_21);
 }
 #abpet_area.abpet_light_details .abpet_schedule_list_items {
-	scrollbar-color: var(--tb_color_theme_88) transparent;
+	scrollbar-color: var(--et_color_theme_88) transparent;
 	scrollbar-width: thin;
 }
 #abpet_area.abpet_light_details .abpet_schedule_list_items::-webkit-scrollbar {
 	width: 6px;
 }
 #abpet_area.abpet_light_details .abpet_schedule_list_items::-webkit-scrollbar-thumb {
-	background: var(--tb_color_theme_88);
+	background: var(--et_color_theme_88);
 	border-radius: 6px;
 }
 #abpet_area.abpet_light_details .abpet_schedule_list_items a {
 	padding: 12px 14px;
 }
 #abpet_area.abpet_light_details .abpet_faq_panel .faq_question {
-	padding: var(--tb_gap_xs);
+	padding: var(--et_gap_xs);
 }
 #abpet_area.abpet_light_details .the_post_content img,
 #abpet_area.abpet_light_details .the_post_content video,
@@ -676,7 +652,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		flex-basis: 100%;
 		max-width: 100%;
 		width: 100%;
-		margin-bottom: var(--tb_gap, 10px);
+		margin-bottom: var(--et_gap, 10px);
 	}
 	#abpet_area.abpet_light_details ._f_equal_f_wrap_gap_w_full > .abpet_details_column:last-child {
 		margin-bottom: 0;
@@ -684,11 +660,11 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 @media only screen and (max-width: 700px) {
 	#abpet_area.abpet_light_details .abpet_light_intro {
-		gap: var(--tb_gap);
-		padding: var(--tb_gap_xs);
+		gap: var(--et_gap);
+		padding: var(--et_gap_xs);
 	}
 	#abpet_area.abpet_light_details .abpet_light_media .abp_image {
-		border-radius: var(--tb_br);
+		border-radius: var(--et_br);
 		height: auto;
 		max-height: none;
 		min-height: 0;
@@ -703,7 +679,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		white-space: normal;
 	}
 	#abpet_area.abpet_light_details .abpet_light_booking .abpet_schedule_list {
-		padding: var(--tb_gap_xs);
+		padding: var(--et_gap_xs);
 	}
 	#abpet_area.abpet_light_details .abpet_schedule_list_items {
 		height: 220px;
@@ -724,7 +700,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 @media only screen and (max-width: 480px) {
 	#abpet_area.abpet_light_details .abpet_light_summary {
-		padding: var(--tb_gap) var(--tb_gap_xs);
+		padding: var(--et_gap) var(--et_gap_xs);
 	}
 	#abpet_area.abpet_light_details .total_continue {
 		-webkit-align-items: stretch;
@@ -738,7 +714,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	#abpet_area.abpet_light_details .abpet_faq_panel .faq_question {
 		-webkit-align-items: flex-start;
 		align-items: flex-start;
-		gap: var(--tb_gap_xs);
+		gap: var(--et_gap_xs);
 	}
 	#abpet_area.abpet_light_details .related_item_area ._panel_head {
 		-webkit-flex-wrap: wrap;
@@ -761,13 +737,13 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	align-items: center;
 	gap: 16px;
 	padding: 16px;
-	border: 1px solid #e5e7eb;
+	border: 1px solid #E5E7EB;
 	border-radius: 8px;
 }
 .abpet_customer_order time {
 	display: block;
 	margin-top: 4px;
-	color: #6b7280;
+	color: #6B7280;
 	font-size: 13px;
 }
 .abpet_customer_order > div:nth-child(2) {
@@ -786,167 +762,315 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	}
 }
 /******************************************************************** Details Theme Redesign v2 - default / light / modern ************************************************/
-/* ============ default : Editorial Cover ============ */
-#abpet_area.default_details_page .abpet_default_cover {
-	position: relative;
+/* ============ default : Event Showcase (professional + responsive) ============ */
+#abpet_area.default_details_page {
+	padding: var(--et_gap) 0;
 }
-#abpet_area.default_details_page .abpet_default_cover_media {
-	min-height: clamp(320px, 58vh, 560px);
+#abpet_area.default_details_page .abpet_default_hero {
+	align-items: start;
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
+	display: grid;
+	gap: clamp(24px, 4vw, 48px);
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+	margin-bottom: var(--et_gap);
+	padding: clamp(20px, 3vw, 36px);
+}
+#abpet_area.default_details_page .abpet_default_hero_media {
+	min-width: 0;
 	overflow: hidden;
+	position: sticky;
+	top: var(--et_gap);
 }
-#abpet_area.default_details_page .abpet_default_cover_media .abp_image {
+#abpet_area.default_details_page .abpet_default_hero_media .abp_image {
+	border-radius: var(--et_br);
 	height: 100%;
-	min-height: clamp(320px, 58vh, 560px);
+	max-height: 480px;
+	min-height: 280px;
 	overflow: hidden;
 }
-#abpet_area.default_details_page .abpet_default_cover_media .abp_image img._img_control {
+#abpet_area.default_details_page .abpet_default_hero_media .abp_image img._img_control {
 	display: block;
 	height: 100%;
-	min-height: clamp(320px, 58vh, 560px);
+	max-height: 480px;
+	min-height: 280px;
 	object-fit: cover;
 	object-position: center;
+	transition: transform 0.4s ease;
 }
-#abpet_area.default_details_page .abpet_default_cover_media:hover .abp_image img._img_control {
-	transform: scale(1.02);
+#abpet_area.default_details_page .abpet_default_hero_media:hover .abp_image img._img_control {
+	transform: scale(1.03);
 }
-#abpet_area.default_details_page .abpet_default_cover_overlay {
-	align-items: flex-end;
-	background: linear-gradient(180deg, rgba(10, 12, 22, 0.18) 0%, rgba(10, 12, 22, 0.38) 45%, rgba(8, 10, 18, 0.86) 100%);
+#abpet_area.default_details_page .abpet_default_hero_body {
 	display: flex;
-	inset: 0;
-	padding: clamp(24px, 6vw, 72px) 0;
-	pointer-events: none;
-	position: absolute;
+	flex-direction: column;
+	justify-content: flex-start;
+	min-width: 0;
+	padding: clamp(8px, 1.5vw, 16px) 0;
 }
-#abpet_area.default_details_page .abpet_default_cover_inner {
-	max-width: min(100%, 780px);
-}
-#abpet_area.default_details_page .abpet_default_date_chip {
+#abpet_area.default_details_page .abpet_default_hero_kicker {
 	align-items: center;
-	background: rgba(255, 255, 255, 0.16);
-	border: 1px solid rgba(255, 255, 255, 0.28);
-	border-radius: var(--tb_br_xl);
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
-	color: var(--tb_color_white);
-	display: inline-flex;
-	font-size: var(--tb_fs_small);
-	font-weight: var(--tb_fw-medium);
-	gap: var(--tb_gap_xxs);
-	line-height: 1;
-	margin-bottom: var(--tb_gap_xs);
-	padding: 7px 14px;
-}
-#abpet_area.default_details_page .abpet_default_cover .abpet_details_title {
-	color: var(--tb_color_white);
-	font-size: var(--tb_fs_h4);
-	font-weight: var(--tb_fw-bold);
-	letter-spacing: -0.02em;
-	line-height: 1.12;
-	margin: 0 0 var(--tb_gap_xs) 0;
-	text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
-}
-#abpet_area.default_details_page .abpet_default_subtitle {
-	color: rgba(255, 255, 255, 0.86);
-	font-size: var(--tb_fs_h6);
-	margin: 0;
-	max-width: 640px;
-}
-#abpet_area.default_details_page .abpet_default_metabar {
-	align-items: center;
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--tb_gap_xxs) var(--tb_gap_xs);
-	margin: -28px auto 0;
-	max-width: calc(100% - 48px);
-	padding: var(--tb_gap_xs) var(--tb_gap);
-	position: relative;
-	z-index: 2;
+	gap: var(--et_gap_xs);
+	margin-bottom: var(--et_gap_xs);
+}
+#abpet_area.default_details_page .abpet_default_date_chip,
+#abpet_area.default_details_page .abpet_default_badge_live,
+#abpet_area.default_details_page .abpet_default_badge_off {
+	align-items: center;
+	border-radius: var(--et_br_xl);
+	display: inline-flex;
+	font-size: var(--et_fs_small);
+	font-weight: var(--et_fw-medium);
+	gap: var(--et_gap_xxs);
+	line-height: 1;
+	padding: 7px 14px;
+}
+#abpet_area.default_details_page .abpet_default_date_chip {
+	background: var(--et_color_light);
+	border: 1px solid var(--et_color_border);
+	color: var(--et_color_theme);
+}
+#abpet_area.default_details_page .abpet_default_badge_live {
+	background: rgba(34, 197, 94, 0.12);
+	border: 1px solid rgba(34, 197, 94, 0.25);
+	color: #16A34A;
+}
+#abpet_area.default_details_page .abpet_default_badge_off {
+	background: rgba(239, 68, 68, 0.10);
+	border: 1px solid rgba(239, 68, 68, 0.25);
+	color: #DC2626;
+}
+#abpet_area.default_details_page .abpet_default_hero_body .abpet_details_title {
+	color: var(--et_color_theme);
+	font-size: var(--et_fs_h4);
+	font-weight: var(--et_fw-bold);
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+	margin: 0 0 var(--et_gap_xs) 0;
+}
+#abpet_area.default_details_page .abpet_default_hero_body .abpet_default_subtitle {
+	color: var(--et_text_off);
+	font-size: var(--et_fs_h6);
+	margin: 0 0 var(--et_gap_xs) 0;
+	max-width: 540px;
+}
+#abpet_area.default_details_page .abpet_default_hero_meta {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--et_gap_xxs) var(--et_gap_xs);
+	margin-bottom: var(--et_gap);
+}
+#abpet_area.default_details_page .abpet_default_hero_meta .abp_tag {
+	background: var(--et_color_4);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	max-width: 100%;
+	overflow-wrap: anywhere;
+	padding: var(--et_gap_xxs) var(--et_gap_xs);
+	text-wrap: wrap;
+	white-space: normal;
+	word-break: break-word;
+}
+#abpet_area.default_details_page .abpet_default_hero_content {
+	border-top: 1px solid var(--et_color_border);
+	padding-top: var(--et_gap);
+}
+#abpet_area.default_details_page .abpet_default_hero_content .item_spec {
+	margin-bottom: var(--et_gap_xs);
+}
+#abpet_area.default_details_page .abpet_default_hero_content .abpet_default_schedule {
+	margin-top: var(--et_gap);
+}
+#abpet_area.default_details_page .abpet_default_hero_content .abpet_default_content {
+	margin-top: var(--et_gap);
+}
+#abpet_area.default_details_page .abpet_default_info_strip {
+	display: grid;
+	gap: var(--et_gap);
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	margin-bottom: var(--et_gap);
+}
+#abpet_area.default_details_page .abpet_default_info_card {
+	align-items: center;
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
+	box-shadow: var(--et_shadow_4);
+	display: flex;
+	gap: var(--et_gap_xs);
+	padding: var(--et_gap);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#abpet_area.default_details_page .abpet_default_info_card:hover {
+	box-shadow: var(--et_shadow_21);
+	transform: translateY(-2px);
+}
+#abpet_area.default_details_page .abpet_default_info_icon {
+	align-items: center;
+	background: var(--et_color_light);
+	border-radius: 50%;
+	color: var(--et_color_theme);
+	display: flex;
+	flex: 0 0 44px;
+	font-size: var(--et_fs_h5);
+	height: 44px;
+	justify-content: center;
+	width: 44px;
+}
+#abpet_area.default_details_page .abpet_default_info_text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+#abpet_area.default_details_page .abpet_default_info_label {
+	color: var(--et_text_off);
+	font-size: var(--et_fs_small);
+}
+#abpet_area.default_details_page .abpet_default_info_text strong {
+	color: var(--et_color_theme);
+	font-size: var(--et_fs_h6);
+	font-weight: var(--et_fw-bold);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 #abpet_area.default_details_page .abpet_default_body {
 	align-items: start;
-	gap: var(--tb_gap);
-	margin-top: var(--tb_gap);
+	display: grid;
+	gap: var(--et_gap);
+	grid-template-columns: minmax(0, 1fr) 500px;
+	margin-bottom: var(--et_gap);
 }
 #abpet_area.default_details_page .abpet_default_main {
-	flex: 1 1 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--et_gap);
 	min-width: 0;
+	padding: 0;
 }
 #abpet_area.default_details_page .abpet_default_sidebar {
-	flex: 0 1 360px;
-	min-width: 280px;
+	min-width: 0;
 }
 #abpet_area.default_details_page .abpet_default_booking_sticky {
 	position: sticky;
-	top: var(--tb_gap);
+	top: var(--et_gap);
 }
 #abpet_area.default_details_page .abpet_default_booking_sticky .abpet_booking {
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
 	margin: 0;
-	padding: var(--tb_gap_xs) var(--tb_gap) var(--tb_gap);
+	overflow: hidden;
+	padding: 0 var(--et_gap) var(--et_gap);
 }
-#abpet_area.default_details_page .abpet_default_schedule {
-	margin-top: var(--tb_gap);
+#abpet_area.default_details_page .abpet_default_booking_head {
+	align-items: center;
+	background: var(--et_color_theme);
+	color: var(--et_color_white);
+	display: flex;
+	font-size: var(--et_fs_h6);
+	font-weight: var(--et_fw-bold);
+	gap: var(--et_gap_xs);
+	justify-content: center;
+	margin: 0 calc(-1 * var(--et_gap)) var(--et_gap_xs);
+	padding: var(--et_gap_xs) var(--et_gap);
 }
-#abpet_area.default_details_page .abpet_default_main .abpet_details_title,
+#abpet_area.default_details_page .abpet_default_booking_head i {
+	font-size: var(--et_fs_h5);
+}
+#abpet_area.default_details_page .abpet_default_booking_sticky .post_top_filter {
+	background: transparent;
+	border: 0;
+	border-bottom: 1px dashed var(--et_color_border);
+	border-radius: 0;
+	box-shadow: none;
+	margin: var(--et_gap_xs) 0;
+	padding: var(--et_gap_xs) 0;
+}
+#abpet_area.default_details_page .abpet_default_main .abpet_faq_panel,
+#abpet_area.default_details_page .abpet_default_main .abpet_tc_panel {
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br);
+	box-shadow: var(--et_shadow_4);
+	margin: 0;
+}
 #abpet_area.default_details_page .abpet_default_main .abpet_faq_panel h4,
 #abpet_area.default_details_page .abpet_default_main .abpet_tc_panel h4 {
-	font-size: var(--tb_fs_h4);
+	font-size: var(--et_fs_h4);
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1100px) {
 	#abpet_area.default_details_page .abpet_default_body {
-		flex-direction: column;
-	}
-	#abpet_area.default_details_page .abpet_default_sidebar {
-		flex: 1 1 100%;
-		max-width: 100%;
-		min-width: 0;
+		grid-template-columns: 1fr;
 	}
 	#abpet_area.default_details_page .abpet_default_booking_sticky {
 		position: static;
 	}
-}
-@media only screen and (max-width: 700px) {
-	#abpet_area.default_details_page .abpet_default_cover_media,
-	#abpet_area.default_details_page .abpet_default_cover_media .abp_image,
-	#abpet_area.default_details_page .abpet_default_cover_media .abp_image img._img_control {
-		min-height: clamp(280px, 52vh, 400px);
-	}
-	#abpet_area.default_details_page .abpet_default_overlay,
-	#abpet_area.default_details_page .abpet_default_cover_overlay {
-		padding: 24px 0;
-	}
-	#abpet_area.default_details_page .abpet_default_metabar {
-		margin-top: calc(var(--tb_gap) * -1);
+	#abpet_area.default_details_page .abpet_default_sidebar {
 		max-width: 100%;
+	}
+}
+@media only screen and (max-width: 900px) {
+	#abpet_area.default_details_page .abpet_default_hero {
+		grid-template-columns: 1fr;
+		padding: var(--et_gap);
+	}
+	#abpet_area.default_details_page .abpet_default_hero_media {
+		position: static;
+	}
+	#abpet_area.default_details_page .abpet_default_hero_media .abp_image,
+	#abpet_area.default_details_page .abpet_default_hero_media .abp_image img._img_control {
+		max-height: 360px;
+		min-height: 240px;
+	}
+	#abpet_area.default_details_page .abpet_default_info_strip {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+}
+@media only screen and (max-width: 560px) {
+	#abpet_area.default_details_page .abpet_default_info_strip {
+		grid-template-columns: 1fr;
+	}
+	#abpet_area.default_details_page .abpet_default_hero_body .abpet_details_title {
+		font-size: clamp(1.35rem, 6vw, 1.8rem);
+	}
+	#abpet_area.default_details_page .abpet_default_hero {
+		padding: var(--et_gap_xs);
+	}
+	#abpet_area.default_details_page .abpet_default_booking_sticky .abpet_booking {
+		padding: 0 var(--et_gap_xs) var(--et_gap);
+	}
+	#abpet_area.default_details_page .abpet_default_booking_head {
+		margin: 0 calc(-1 * var(--et_gap_xs)) var(--et_gap_xs);
+		padding: var(--et_gap_xs);
 	}
 }
 /* ============ light : Gallery Lead + booking card ============ */
 #abpet_area.abpet_light_details .abpet_light_lead {
 	align-items: stretch;
-	gap: var(--tb_gap);
+	display: grid;
+	gap: var(--et_gap);
+	grid-template-columns: 1fr 1fr;
 }
 #abpet_area.abpet_light_details .abpet_light_lead_media {
-	flex: 1 1 46%;
-	max-width: 48%;
 	min-width: 0;
+	order: 2;
 }
 #abpet_area.abpet_light_details .abpet_light_lead_body {
-	flex: 1 1 54%;
 	flex-direction: column;
 	justify-content: center;
 	min-width: 0;
+	order: 1;
 }
 #abpet_area.abpet_light_details .abpet_light_lead_media .abp_image {
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
 	height: 100%;
 	max-height: 540px;
 	min-height: 320px;
@@ -964,36 +1088,51 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 #abpet_area.abpet_light_details .abpet_light_lead_kicker {
 	align-items: center;
-	color: var(--tb_color_theme);
+	color: var(--et_color_theme);
 	display: flex;
-	font-size: var(--tb_fs_small);
-	font-weight: var(--tb_fw-bold);
-	gap: var(--tb_gap_xxs);
+	font-size: var(--et_fs_small);
+	font-weight: var(--et_fw-bold);
+	gap: var(--et_gap_xxs);
 	letter-spacing: 0.14em;
-	margin-bottom: var(--tb_gap_xs);
+	margin-bottom: var(--et_gap_xs);
 	text-transform: uppercase;
 }
-#abpet_area.abpet_light_details .abpet_light_lead_date {
+#abpet_area.abpet_light_details .abpet_light_lead_date,
+#abpet_area.abpet_light_details .abpet_light_badge_live,
+#abpet_area.abpet_light_details .abpet_light_badge_off {
 	align-items: center;
-	background: var(--tb_color_light);
-	border-left: 4px solid var(--tb_color_theme);
-	border-radius: var(--tb_br);
-	color: var(--tb_color_theme);
+	border-radius: var(--et_br_xl);
 	display: inline-flex;
-	font-size: var(--tb_fs_h6);
-	font-weight: var(--tb_fw-medium);
-	gap: var(--tb_gap_xxs);
-	margin-top: var(--tb_gap_xs);
-	padding: 8px 14px;
+	font-size: var(--et_fs_small);
+	font-weight: var(--et_fw-medium);
+	gap: var(--et_gap_xxs);
+	line-height: 1;
+	margin-top: var(--et_gap_xs);
+	padding: 7px 14px;
 	width: fit-content;
 }
+#abpet_area.abpet_light_details .abpet_light_lead_date {
+	background: var(--et_color_light);
+	border: 1px solid var(--et_color_border);
+	color: var(--et_color_theme);
+}
+#abpet_area.abpet_light_details .abpet_light_badge_live {
+	background: rgba(34, 197, 94, 0.12);
+	border: 1px solid rgba(34, 197, 94, 0.25);
+	color: #16A34A;
+}
+#abpet_area.abpet_light_details .abpet_light_badge_off {
+	background: rgba(239, 68, 68, 0.10);
+	border: 1px solid rgba(239, 68, 68, 0.25);
+	color: #DC2626;
+}
 #abpet_area.abpet_light_details .abpet_light_schedule_scroll {
-	margin-top: var(--tb_gap);
+	margin-top: var(--et_gap);
 }
 #abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_schedule_list {
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_21);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_21);
 	height: auto;
 }
 #abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_schedule_list_items {
@@ -1002,52 +1141,53 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	max-height: none;
 	overflow-x: auto;
 	overflow-y: hidden;
-	padding: var(--tb_gap_xs) 2px var(--tb_gap_xs) 0;
+	padding: var(--et_gap_xs) 2px var(--et_gap_xs) 0;
 }
 #abpet_area.abpet_light_details .abpet_light_schedule_scroll .abpet_event_schedule_day {
 	display: inline-flex;
 	flex-direction: column;
-	gap: var(--tb_gap_xxs);
+	gap: var(--et_gap_xxs);
 }
 #abpet_area.abpet_light_details .abpet_light_schedule_scroll a {
 	flex: 0 0 auto;
 	white-space: nowrap;
 }
 #abpet_area.abpet_light_details .abpet_light_booking_card {
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
-	margin: var(--tb_gap) auto 0;
-	max-width: 880px;
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
+	margin: var(--et_gap) 0 0;
+	max-width: 100%;
 	overflow: hidden;
-	padding: var(--tb_gap);
+	padding: var(--et_gap);
+	width: 100%;
 }
 #abpet_area.abpet_light_details .abpet_light_booking_head {
 	align-items: center;
-	color: var(--tb_color_theme);
+	color: var(--et_color_theme);
 	display: flex;
-	font-size: var(--tb_fs_h5);
-	font-weight: var(--tb_fw-bold);
-	gap: var(--tb_gap_xs);
+	font-size: var(--et_fs_h5);
+	font-weight: var(--et_fw-bold);
+	gap: var(--et_gap_xs);
 	justify-content: center;
 	letter-spacing: 0.02em;
-	margin-bottom: var(--tb_gap_xs);
+	margin-bottom: var(--et_gap_xs);
 	text-align: center;
 }
 #abpet_area.abpet_light_details .abpet_light_booking_card .abpet_booking {
 	margin: 0;
 }
 #abpet_area.abpet_light_details .abpet_light_booking_card .post_top_filter {
-	background: var(--tb_color_4);
+	background: var(--et_color_4);
 	border: 0;
 	box-shadow: none;
 	margin-top: 0;
 }
 #abpet_area.abpet_light_details .abpet_light_detail {
 	align-items: start;
-	gap: var(--tb_gap);
-	margin-top: var(--tb_gap);
+	gap: var(--et_gap);
+	margin-top: var(--et_gap);
 }
 #abpet_area.abpet_light_details .abpet_light_main {
 	flex: 1 1 58%;
@@ -1058,20 +1198,6 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	min-width: 0;
 }
 @media only screen and (max-width: 900px) {
-	#abpet_area.abpet_light_details .abpet_light_lead {
-		flex-direction: column;
-	}
-	#abpet_area.abpet_light_details .abpet_light_lead_media {
-		flex: 1 1 auto;
-		max-width: 100%;
-	}
-	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image,
-	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image img._img_control {
-		max-height: 420px;
-	}
-	#abpet_area.abpet_light_details .abpet_light_booking_card {
-		max-width: 100%;
-	}
 	#abpet_area.abpet_light_details .abpet_light_detail {
 		flex-direction: column;
 	}
@@ -1082,20 +1208,29 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	}
 }
 @media only screen and (max-width: 700px) {
+	#abpet_area.abpet_light_details .abpet_light_lead {
+		grid-template-columns: 1fr;
+	}
+	#abpet_area.abpet_light_details .abpet_light_lead_media {
+		order: 2;
+	}
+	#abpet_area.abpet_light_details .abpet_light_lead_body {
+		order: 1;
+	}
 	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image,
 	#abpet_area.abpet_light_details .abpet_light_lead_media .abp_image img._img_control {
-		max-height: 300px;
+		max-height: 360px;
 		min-height: 240px;
 	}
 	#abpet_area.abpet_light_details .abpet_light_booking_card {
-		border-radius: var(--tb_br);
-		padding: var(--tb_gap_xs);
+		border-radius: var(--et_br);
+		padding: var(--et_gap);
 	}
 }
 /* ============ modern : Dark Split + floating booking ============ */
 #abpet_area.abpet_modern_details .abpet_modern_banner {
-	background: linear-gradient(135deg, #101322 0%, #171a2c 55%, #0f111f 100%);
-	color: var(--tb_color_white);
+	background: linear-gradient(135deg, #101322 0%, #171A2C 55%, #0F111F 100%);
+	color: var(--et_color_white);
 	padding: clamp(28px, 6vw, 72px) 0;
 }
 #abpet_area.abpet_modern_details .abpet_modern_split {
@@ -1109,7 +1244,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 }
 #abpet_area.abpet_modern_details .abpet_modern_sticky_media .abp_image {
 	border: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: var(--tb_br_xl);
+	border-radius: var(--et_br_xl);
 	height: 100%;
 	max-height: 640px;
 	min-height: 360px;
@@ -1131,17 +1266,17 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--tb_gap_xs);
-	margin-bottom: var(--tb_gap);
+	gap: var(--et_gap_xs);
+	margin-bottom: var(--et_gap);
 }
 #abpet_area.abpet_modern_details .abpet_modern_kicker span {
 	align-items: center;
 	border: 1px solid currentColor;
-	border-radius: var(--tb_br_xl);
+	border-radius: var(--et_br_xl);
 	display: inline-flex;
-	font-size: var(--tb_fs_small);
-	font-weight: var(--tb_fw-medium);
-	gap: var(--tb_gap_xxs);
+	font-size: var(--et_fs_small);
+	font-weight: var(--et_fw-medium);
+	gap: var(--et_gap_xxs);
 	line-height: 1;
 	padding: 7px 13px;
 }
@@ -1151,43 +1286,43 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 #abpet_area.abpet_modern_details .abpet_modern_kicker_live {
 	background: rgba(34, 197, 94, 0.18);
 	border-color: transparent !important;
-	color: #4ade80;
+	color: #4ADE80;
 }
 #abpet_area.abpet_modern_details .abpet_details_title {
-	color: var(--tb_color_white);
-	font-size: clamp(2rem, 5vw, 3.4rem);
+	color: var(--et_color_white);
+	font-size: var(--et_fs_h3);
 	letter-spacing: -0.04em;
 	line-height: 1.04;
-	margin: 0 0 var(--tb_gap_xs) 0;
+	margin: 0 0 var(--et_gap_xs) 0;
 }
 #abpet_area.abpet_modern_details .abpet_modern_subtitle {
 	color: rgba(255, 255, 255, 0.72);
-	font-size: var(--tb_fs_h6);
-	margin: 0 0 var(--tb_gap) 0;
+	font-size: var(--et_fs_h6);
+	margin: 0 0 var(--et_gap) 0;
 	max-width: 620px;
 }
 #abpet_area.abpet_modern_details .abpet_modern_meta {
-	margin-bottom: var(--tb_gap);
+	margin-bottom: var(--et_gap);
 }
 #abpet_area.abpet_modern_details .abpet_modern_meta .abp_tag {
 	background: rgba(255, 255, 255, 0.08);
 	border: 1px solid rgba(255, 255, 255, 0.18);
-	color: var(--tb_color_white);
+	color: var(--et_color_white);
 }
 #abpet_area.abpet_modern_details .abpet_modern_description {
 	color: rgba(255, 255, 255, 0.8);
 	padding: 0;
 }
 #abpet_area.abpet_modern_details .abpet_modern_description .load_more_action {
-	color: var(--tb_color_theme);
+	color: var(--et_color_theme);
 }
 #abpet_area.abpet_modern_details .abpet_modern_booking_card {
-	background: var(--tb_color_white);
-	border: 1px solid var(--tb_color_border);
-	border-radius: var(--tb_br_xl);
-	box-shadow: var(--tb_shadow_23);
-	margin: calc(var(--tb_gap) * -1) 0 0 0;
-	padding: var(--tb_gap);
+	background: var(--et_color_white);
+	border: 1px solid var(--et_color_border);
+	border-radius: var(--et_br_xl);
+	box-shadow: var(--et_shadow_23);
+	margin: calc(var(--et_gap) * -1) 0 0 0;
+	padding: var(--et_gap);
 	position: relative;
 	z-index: 3;
 }
@@ -1195,7 +1330,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	margin: 0;
 }
 #abpet_area.abpet_modern_details .abpet_modern_schedule {
-	margin-bottom: var(--tb_gap_xs);
+	margin-bottom: var(--et_gap_xs);
 }
 #abpet_area.abpet_modern_details .abpet_modern_schedule .abpet_schedule_list {
 	height: auto;
@@ -1207,12 +1342,12 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	max-height: none;
 	overflow-x: auto;
 	overflow-y: hidden;
-	padding: var(--tb_gap_xxs) 2px var(--tb_gap_xxs) 0;
+	padding: var(--et_gap_xxs) 2px var(--et_gap_xxs) 0;
 }
 #abpet_area.abpet_modern_details .abpet_modern_schedule .abpet_event_schedule_day {
 	display: inline-flex;
 	flex-direction: column;
-	gap: var(--tb_gap_xxs);
+	gap: var(--et_gap_xxs);
 }
 #abpet_area.abpet_modern_details .abpet_modern_schedule a {
 	flex: 0 0 auto;
@@ -1241,7 +1376,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		min-height: 240px;
 	}
 	#abpet_area.abpet_modern_details .abpet_modern_booking_card {
-		border-radius: var(--tb_br);
-		padding: var(--tb_gap_xs);
+		border-radius: var(--et_br);
+		padding: var(--et_gap);
 	}
 }

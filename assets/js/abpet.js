@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
     let abpet_booking = abpet_parent.find('div.abpet_booking');
-    abpet_parent.on('click', '.pagination_item .select_post', function (e) {
+    $(document).on('click', 'div.abpet_area .pagination_item .select_post', function (e) {
         e.preventDefault();
         let post_id = parseInt($(this).attr('data-post_id'));
         let target = $(this).closest('div.abpet_area').find('#abpet_search_area .post_selection .dropdown_list li');
@@ -171,7 +171,7 @@
         let qty = get_quantity(parent, seat_type);
         if (max_qty > 0 && qty > max_qty) {
             item_parent.find('[data-checked]').trigger('abp_role_back');
-            abptb_toast_msg(form.find('[name="max_qty"]').attr('data-msg'), 'warn');
+            abpet_toast_msg(form.find('[name="max_qty"]').attr('data-msg'), 'warn');
         } else {
             if (target.length > 0) {
                 target.slideToggle('fast');
@@ -199,7 +199,7 @@
         all_management($(this));
     });
     // Delegate to the stable plugin root so seats added by AJAX remain interactive.
-    abpet_parent.on('click', '.abpet_booking .sp_cell.available', function (e) {
+    $(document).on('click', 'div.abpet_area .abpet_booking .sp_cell.available', function (e) {
         e.preventDefault();
         let current = $(this);
         current.toggleClass('selected').promise().done(function () {

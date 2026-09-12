@@ -20,7 +20,7 @@
                     <div class="group_setting">
                         <div class="setting_item">
                             <label class="_fj_between">
-                                <span class="_abp_label"><?php esc_html_e( 'Ticket Type', 'abp-event-ticket' ); ?></span>
+                                <span class="abp_label"><?php esc_html_e( 'Ticket Type', 'abp-event-ticket' ); ?></span>
 								<?php if ( ABPET_Function::on_off( 'sp' ) ) { ?>
                                     <select class="_form_control " name="seat_type" required>
                                         <option disabled selected> <?php esc_html_e( 'Please Select', 'abp-event-ticket' ); ?></option>
@@ -29,7 +29,7 @@
                                     </select>
 								<?php } else { ?>
                                     <input type="hidden" name="seat_type" value="<?php echo esc_attr( $seat_type ); ?>">
-                                    <span class="_abp_label"><?php esc_html_e( 'Ticket', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Ticket', 'abp-event-ticket' ); ?></span>
 								<?php } ?>
                             </label>
                             <div class="_divider_xxs"></div>
@@ -54,7 +54,7 @@
 						<?php if ( ABPET_Function::on_off( 'min_max' ) ) { ?>
                             <div class="setting_item">
                                 <label class="_fj_between _f_wrap">
-                                    <span class="_abp_label"><?php esc_html_e( 'Min Qty/Order', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Min Qty/Order', 'abp-event-ticket' ); ?></span>
                                     <input class="_form_control validation_number" name="min_qty" value="<?php echo esc_attr( $post_infos['min_qty'] ?? 0 ); ?>" placeholder="<?php esc_attr_e( 'Ex: 1', 'abp-event-ticket' ); ?>"/>
                                 </label>
                                 <div class="_divider_xxs"></div>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="setting_item">
                                 <label class="_fj_between _f_wrap">
-                                    <span class="_abp_label"><?php esc_html_e( 'Max Qty/Order', 'abp-event-ticket' ); ?></span>
+                                    <span class="abp_label"><?php esc_html_e( 'Max Qty/Order', 'abp-event-ticket' ); ?></span>
                                     <input class="_form_control validation_number" name="max_qty" value="<?php echo esc_attr( $post_infos['max_qty'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Ex: 5', 'abp-event-ticket' ); ?>"/>
                                 </label>
                                 <div class="_divider_xxs"></div>
@@ -107,13 +107,12 @@
 				$sp_data             = ABPET_Query::get_sp();
 				$post_id             = $post_infos['post_id'] ?? '';
 				$ticket_infos        = $post_infos['ticket_infos'] ?? [];
-				//echo '<pre>';				print_r( $all_ticket_type );				echo '</pre>';
 				?>
                 <div class="_fj_between">
-                    <h5 class="_abp"><?php esc_html_e( 'Seat Plan Configuration', 'abp-event-ticket' ); ?></h5>
+                    <h5 class="abp"><?php esc_html_e( 'Seat Plan Configuration', 'abp-event-ticket' ); ?></h5>
                     <button type="button" class="_btn_light_active_xs">
 						<?php esc_html_e( 'Total Seat :', 'abp-event-ticket' ); ?>
-                        <span class="_abp_color_theme total_ticket"><?php echo esc_html( ABPET_Function::get_total_qty( $post_id, $post_infos ) ); ?></span>
+                        <span class="abp_color_theme total_ticket"><?php echo esc_html( ABPET_Function::get_total_qty( $post_id, $post_infos ) ); ?></span>
                     </button>
                     <div class="_group_content">
 						<?php ABPET_Layout::button_add( __( 'Add New Seat Label', 'abp-event-ticket' ) ); ?>
@@ -123,7 +122,7 @@
                 <div class="_ov_auto">
                 </div>
                 <div class="_ov_auto _gap">
-                    <table class="_abp">
+                    <table class="abp">
                         <thead>
                         <tr>
                             <th><?php esc_html_e( 'Seat Plan Name', 'abp-event-ticket' ); ?></th>
@@ -148,7 +147,7 @@
                         </tbody>
                     </table>
                     <div class="_max_300">
-                        <table class="_abp">
+                        <table class="abp">
                             <thead>
                             <tr>
                                 <th><?php esc_html_e( 'Name', 'abp-event-ticket' ); ?></th>
@@ -170,7 +169,7 @@
                     </div>
                 </div>
                 <div class="abp_hidden">
-                    <table class="_abp">
+                    <table class="abp">
                         <tbody class="hidden_content">
 						<?php $this->sp_item( $sp_data, $display_ticket_type ); ?>
                         </tbody>
@@ -184,7 +183,7 @@
 				$display_ticket_type = ABPET_Function::on_off( 'ticket_type' ) ? $display_ticket_type : 'off';
 				?>
                 <div class="_fj_between">
-                    <h5 class="_abp"><?php esc_html_e( 'Ticket Configuration', 'abp-event-ticket' ); ?></h5>
+                    <h5 class="abp"><?php esc_html_e( 'Ticket Configuration', 'abp-event-ticket' ); ?></h5>
                     <div class="_group_content">
 						<?php if ( ABPET_Function::on_off( 'ticket_type' ) && $display_ticket_type == 'on' ) {
 							ABPET_Layout::button_add( __( 'Add New item', 'abp-event-ticket' ) );
@@ -194,7 +193,7 @@
                 </div>
                 <div class="_divider_xxs"></div>
                 <div class="_ov_auto">
-                    <table class="_abp">
+                    <table class="abp">
                         <thead>
                         <tr>
                             <th><?php esc_html_e( 'Name', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></th>
@@ -227,7 +226,7 @@
                 </div>
 				<?php if ( $display_ticket_type === 'on' ) { ?>
                     <div class="abp_hidden">
-                        <table class="_abp">
+                        <table class="abp">
                             <tbody class="hidden_content">
 							<?php $this->ticket_item(); ?>
                             </tbody>

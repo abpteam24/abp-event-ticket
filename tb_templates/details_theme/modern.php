@@ -49,6 +49,7 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 						<div class="abpet_modern_meta _gap_xs_mar_t_xs">
 							<?php ABPET_Layout::capacity( $post_infos ); ABPET_Layout::category( $post_infos ); ABPET_Layout::brand( $post_infos ); ABPET_Layout::organizer( $post_infos, 'publish' ); ABPET_Layout::location( $post_infos ); ?>
 						</div>
+						<?php if ( ABPET_Function::on_off( 'feature' ) ) { ABPET_Layout::item_feature( $post_infos['post_feature'] ?? '' ); } ?>
 						<?php ABPET_Layout::description( $post_infos, 'abpet_modern_description' ); ?>
 					</div>
 				</div>
@@ -67,14 +68,14 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 				<?php } else { ABPET_Layout::layout_warning_info( 'sale_close_msg' ); } ?>
 			</div>
 			<?php if ( ! empty( $content ) ) { ?>
-				<div class="_abp_row">
+				<div class="abp_row">
 					<div class="_col_12"><div class="the_post_content"><?php echo wp_kses_post( apply_filters( 'the_content', $content ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter 'the_content'. ?></div></div>
 				</div>
 			<?php } ?>
-			<div class="_abp_row">
+			<div class="abp_row">
 				<div class="_f_equal_f_wrap_gap_w_full">
 					<div class="abpet_details_column">
-						<?php if ( ABPET_Function::on_off( 'feature' ) ) { ABPET_Layout::item_feature( $post_infos['post_feature'] ?? '' ); } ?>
+
 						<?php do_action( 'abpet_faq', $post_infos ); ?>
 					</div>
 					<div class="abpet_details_column">
@@ -83,9 +84,9 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 				</div>
 			</div>
 			<?php if ( empty( $post_infos['abpet_slider'] ) ) { ?>
-				<div class="_abp_row"><div class="_col_12"><?php do_action( 'abpet_slider', $post_infos['abpet_slider'] ?? [] ); ?></div></div>
+				<div class="abp_row"><div class="_col_12"><?php do_action( 'abpet_slider', $post_infos['abpet_slider'] ?? [] ); ?></div></div>
 			<?php } ?>
-			<div class="_abp_row"><div class="_col_12"><?php do_action( 'abpet_related_item', $post_infos['related_item'] ?? '', $post_id ); ?></div></div>
+			<div class="abp_row"><div class="_col_12"><?php do_action( 'abpet_related_item', $post_infos['related_item'] ?? '', $post_id ); ?></div></div>
 		</div>
 	</div>
 	<?php

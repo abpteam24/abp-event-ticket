@@ -16,9 +16,9 @@
 			$params['related']  = 'yes';
             $brand_icon=ABPET_Function::icon();
 			?>
-            <div class="_abp_panel related_item_area">
+            <div class="abp_panel related_item_area">
                 <div class="_panel_head _fj_between">
-                    <h4 class="_abp"><?php ABPET_Layout::image_icon($brand_icon);  ?><?php esc_html_e( 'Related Event', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp"><?php ABPET_Layout::image_icon($brand_icon);  ?><?php esc_html_e( 'Related Event', 'abp-event-ticket' ); ?></h4>
                     <div class="_group_content">
                         <h3 class="related_prev">🔙</h3>
                         <h3 class="related_next">🔜</h3>

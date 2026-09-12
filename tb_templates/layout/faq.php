@@ -19,7 +19,7 @@
             }
             ?>
             <div class="_section_card_xs_w_full faq_area abpet_faq_panel">
-                <h4 class="_abp">
+                <h4 class="abp">
                     <span class="_mar_r_xxs">❓</span>
                     <?php esc_html_e('Frequently Asked Questions', 'abp-event-ticket'); ?>
                 </h4>
@@ -38,7 +38,7 @@
                             ?>
                             <div class="faq_item">
                                 <div class="faq_question faq_target">
-                                    <h6 class="_abp"><?php echo esc_html($title); ?></h6>
+                                    <h6 class="abp"><?php echo esc_html($title); ?></h6>
                                     <span class="faq_icon"></span>
                                 </div>
                                 <div class="faq_answer">

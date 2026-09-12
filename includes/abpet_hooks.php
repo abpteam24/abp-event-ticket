@@ -132,7 +132,7 @@
 									<?php foreach ( $item['times'] as $time ) :
 										$is_active = $item['date'] === $selected_date && $time === $selected_time;
 										?>
-										<a class="<?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'], $time ) ); ?>">
+										<a class="abp <?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'], $time ) ); ?>">
 											<time datetime="<?php echo esc_attr( $item['date'] . 'T' . $time ); ?>"><?php echo esc_html( ABPET_Function::date_format( $item['date'] . ' ' . $time ) ); ?></time>
 										</a>
 									<?php endforeach; ?>

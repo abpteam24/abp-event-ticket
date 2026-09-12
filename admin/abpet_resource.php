@@ -17,7 +17,7 @@
                 if (ABPET_Function::on_off('faq')) {
                     ?>
                     <div class="setting_item faq_configuration _mar_b_xs">
-                        <h5 class="_abp" data-collapse-target="#faq_collapse"><span class="_mar_r_xxs">❓</span><?php esc_html_e('Global FAQ Configuration', 'abp-event-ticket'); ?></h5>
+                        <h5 class="abp" data-collapse-target="#faq_collapse"><span class="_mar_r_xxs">❓</span><?php esc_html_e('Global FAQ Configuration', 'abp-event-ticket'); ?></h5>
                         <div class="abp_active" data-collapse="#faq_collapse">
                             <div class="_divider_xxs"></div>
                             <?php ABPET_Layout::info_text('abpet_faq'); ?>
@@ -31,7 +31,7 @@
                 if (ABPET_Function::on_off('tc')) {
                     ?>
                     <div class="setting_item">
-                        <h5 class="_abp" data-collapse-target="#tc_collapse"><span class="_mar_r_xxs">🤝</span><?php esc_html_e('Global Term & Conditions Configuration', 'abp-event-ticket'); ?></h5>
+                        <h5 class="abp" data-collapse-target="#tc_collapse"><span class="_mar_r_xxs">🤝</span><?php esc_html_e('Global Term & Conditions Configuration', 'abp-event-ticket'); ?></h5>
                         <div class="abp_active" data-collapse="#tc_collapse">
                             <div class="_divider_xxs"></div>
                             <?php ABPET_Layout::info_text('abpet_tc'); ?>
@@ -85,7 +85,7 @@
                 ?>
                 <div class="delete_area faq_item _mar_b_xs <?php echo esc_attr(empty($faq) ? 'active' : ''); ?>">
                     <div class="faq_question">
-                        <h6 class="_abp edit_hook" data-paste="#faq_title"><?php echo esc_html($title); ?></h6>
+                        <h6 class="abp edit_hook" data-paste="#faq_title"><?php echo esc_html($title); ?></h6>
                         <?php ABPET_Layout::button_delete_sort_edit(); ?>
                     </div>
                     <div class="edit_area">
@@ -93,11 +93,11 @@
                             <?php ABPET_Layout::info_text('faq_item'); ?>
                             <div class="_divider_xs"></div>
                             <label class="_f_equal_f_wrap">
-                                <span class="_abp_label"><?php esc_html_e('FAQ Title', 'abp-event-ticket'); ?><sup class="_color_required">*</sup></span>
+                                <span class="abp_label"><?php esc_html_e('FAQ Title', 'abp-event-ticket'); ?><sup class="_color_required">*</sup></span>
                                 <input type="text" class="_form_control" name="faq_title[]" data-pass="#faq_title" placeholder="<?php esc_attr_e('EX: What is the check-in time?', 'abp-event-ticket'); ?>" value="<?php echo esc_attr($title); ?>"/>
                             </label>
                             <div class="_fd_column_mar_t_xs">
-                                <span class="_abp_label"><?php esc_html_e('Description', 'abp-event-ticket'); ?></span>
+                                <span class="abp_label"><?php esc_html_e('Description', 'abp-event-ticket'); ?></span>
                                 <?php
                                     wp_editor(
                                         $description,
@@ -146,7 +146,7 @@
                 $tax_classes = WC_Tax::get_tax_rate_classes();
                 $tax_class = $post_infos['_tax_class'] ?? '';
                 ?>
-                <h5 class="_abp"><span class="_mar_r_xxs">🧾</span> <?php esc_html_e('Tax Configuration', 'abp-event-ticket'); ?></h5>
+                <h5 class="abp"><span class="_mar_r_xxs">🧾</span> <?php esc_html_e('Tax Configuration', 'abp-event-ticket'); ?></h5>
                 <div class="_divider_xs"></div>
                 <?php if (get_option('woocommerce_calc_taxes') == 'yes') { ?>
                     <div class="group_setting">
@@ -191,7 +191,7 @@
                     $faqs = get_post_meta($post_id, 'abpet_faq', true);
                     $faqs = is_array($faqs) ? $faqs : [];
                     ?>
-                    <h5 class="_abp"><span class="_mar_r_xxs">❓</span><?php esc_html_e('FAQs Configuration', 'abp-event-ticket'); ?></h5>
+                    <h5 class="abp"><span class="_mar_r_xxs">❓</span><?php esc_html_e('FAQs Configuration', 'abp-event-ticket'); ?></h5>
                     <div class="_divider_xs"></div>
                     <div class="group_setting">
                         <div class="setting_item">
@@ -234,7 +234,7 @@
                     $display = $post_infos['display_tc'] ?? 'on';
                     $active_global_tc = $post_infos['active_global_tc'] ?? 'on';
                     ?>
-                    <h5 class="_abp"><span class="_mar_r_xxs">🤝</span><?php esc_html_e('Term & Conditions', 'abp-event-ticket'); ?></h5>
+                    <h5 class="abp"><span class="_mar_r_xxs">🤝</span><?php esc_html_e('Term & Conditions', 'abp-event-ticket'); ?></h5>
                     <div class="_divider_xs"></div>
                     <div class="group_setting">
                         <div class="setting_item">
@@ -287,7 +287,7 @@
                 ?>
                 <div class="edit_area">
                     <div class="_fd_column_mar_t_xs">
-                        <span class="_abp_label"><?php esc_html_e('Term & Conditions Content', 'abp-event-ticket'); ?></span>
+                        <span class="abp_label"><?php esc_html_e('Term & Conditions Content', 'abp-event-ticket'); ?></span>
                         <?php
                             wp_editor(
                                 $description,

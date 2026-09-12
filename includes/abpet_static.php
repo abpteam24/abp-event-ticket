@@ -4,23 +4,52 @@
 	}
 	if ( ! class_exists( 'ABPET_Static' ) ) {
 		class ABPET_Static {
+			public function __construct() {
+				add_action( 'abpet_notice', [ $this, 'wc_notice' ] );
+				add_action( 'wp_ajax_abpet_wc_config', array( $this, 'wc_config' ) );
+				add_action( 'wp_ajax_abpet_create_page', array( $this, 'create_page' ) );
+				add_action( 'wp_ajax_abpet_import_dummy', array( $this, 'import_dummy' ) );
+				add_action( 'wp_ajax_abpet_import_remove_dummy', array( $this, 'remove_dummy' ) );
+			}
+			public function wc_notice(): void {
+				if ( ABPET_WC < 2 ) {
+					$type = ABPET_WC == 1 ? 'wc_active' : 'wc_install_active';
+					$btn  = ABPET_WC == 1 ? __( 'Active Now', 'abp-event-ticket' ) : __( 'Install & Active Now', 'abp-event-ticket' );
+					?>
+                    <div class="dash_card dash_wc_setup">
+                        <div class="dash_wc_setup_icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="dash_wc_setup_body">
+                            <h4><?php esc_html_e( 'WooCommerce is required', 'abp-event-ticket' ); ?></h4>
+                            <p><?php echo esc_html( ABPET_Static::array_info( 'must_wc' ) ); ?></p>
+                        </div>
+						<?php
+							$icon = ABPET_WC == 1 ? 'fa-tasks' : 'fa-file-download';
+						?>
+                        <button type="button" class="_btn_warning_xs" onclick="abpet_wc_config('<?php echo esc_attr( $type ); ?>', this)">
+                            <i class="fas <?php echo esc_attr( $icon ); ?>"></i> <?php echo esc_html( $btn ); ?>
+                        </button>
+                    </div>
+                    <div class="_divider"></div>
+					<?php
+				}
+			}
 			public static function array_info( $key ) {
 				$current_date = current_time( 'Y-m-d H:i' );
 				$des          = array(
-					'general_config'    => __( 'Note: Configure the general settings for this Event here. If you do not want to use any specific feature, you can enable or disable it from Main Configuration → On/Off Sections. Disabling a feature will remove it from the entire site.', 'abp-event-ticket' ),
-					'sale_continue'     => __( 'Note: This switch indicate Event Ticket sale close/continue . You can  sale close/continue  by this switch. By default sale will be  continue', 'abp-event-ticket' ),
-					'abpet_template'    => __( 'Note: Here You can change your details page template.', 'abp-event-ticket' ),
-					'post_sku'          => __( 'Note: Here you can add an SKU for this post. You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
-					'post_icon'         => __( 'Note: Set a custom icon or emoji for this post. The selected icon/emoji will be displayed alongside the post title wherever the title appears across the website, helping it stand out and improve visual recognition.', 'abp-event-ticket' ),
-					'sub_title'         => __( 'Note: Add a Sub-title to enable the Post sub-tile. Leave this blank if you dont want to show any Sub-title information for this Post.', 'abp-event-ticket' ),
-					'post_description'  => __( 'Note: Add short description about this Event . Leave this blank if you dont want to show any  description for this Event.', 'abp-event-ticket' ),
-					'display_capacity'  => __( 'Note : Enable this option to display the capacity for this Event on the frontend. This setting only works when the global Event Capacity Display option is enabled.', 'abp-event-ticket' ),
-					'display_organizer' => __( 'Note : This switch indicate Event Organizer . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
-					'display_brand'     => __( 'Note : This switch indicate Event Brand name . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
-					'display_category'  => __( 'Note : This switch indicate Event Category . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
-					'related_item'      => __( 'Note: Select related items to display on the details page. Leave this option empty or disabled if you do not want to show related items.', 'abp-event-ticket' ),
-					'post_feature'      => __( 'Note: If you want to add feature for this Event, you can add Here. These feature will be show with this Event . You may leave this section empty if you do not want to show frontend. ', 'abp-event-ticket' ),
-					'display_slider'    => __( 'Note: If you want to add an image gallery for this Event, you can upload images below.  You may leave this section empty if you do not want to show images. ', 'abp-event-ticket' ),
+					'general_config'              => __( 'Note: Configure the general settings for this Event here. If you do not want to use any specific feature, you can enable or disable it from Main Configuration → On/Off Sections. Disabling a feature will remove it from the entire site.', 'abp-event-ticket' ),
+					'sale_continue'               => __( 'Note: This switch indicate Event Ticket sale close/continue . You can  sale close/continue  by this switch. By default sale will be  continue', 'abp-event-ticket' ),
+					'abpet_template'              => __( 'Note: Here You can change your details page template.', 'abp-event-ticket' ),
+					'post_sku'                    => __( 'Note: Here you can add an SKU for this post. You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
+					'post_icon'                   => __( 'Note: Set a custom icon or emoji for this post. The selected icon/emoji will be displayed alongside the post title wherever the title appears across the website, helping it stand out and improve visual recognition.', 'abp-event-ticket' ),
+					'sub_title'                   => __( 'Note: Add a Sub-title to enable the Post sub-tile. Leave this blank if you dont want to show any Sub-title information for this Post.', 'abp-event-ticket' ),
+					'post_description'            => __( 'Note: Add short description about this Event . Leave this blank if you dont want to show any  description for this Event.', 'abp-event-ticket' ),
+					'display_capacity'            => __( 'Note : Enable this option to display the capacity for this Event on the frontend. This setting only works when the global Event Capacity Display option is enabled.', 'abp-event-ticket' ),
+					'display_organizer'           => __( 'Note : This switch indicate Event Organizer . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
+					'display_brand'               => __( 'Note : This switch indicate Event Brand name . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
+					'display_category'            => __( 'Note : This switch indicate Event Category . You can also show or hide it on the frontend by turning the switch On or Off.', 'abp-event-ticket' ),
+					'related_item'                => __( 'Note: Select related items to display on the details page. Leave this option empty or disabled if you do not want to show related items.', 'abp-event-ticket' ),
+					'post_feature'                => __( 'Note: If you want to add feature for this Event, you can add Here. These feature will be show with this Event . You may leave this section empty if you do not want to show frontend. ', 'abp-event-ticket' ),
+					'display_slider'              => __( 'Note: If you want to add an image gallery for this Event, you can upload images below.  You may leave this section empty if you do not want to show images. ', 'abp-event-ticket' ),
 					//=============================//
 					'seat_type'                   => __( 'Note: Please select your Event seat type . Default is Ticket', 'abp-event-ticket' ),
 					'ticket_type'                 => __( 'Note: You have disabled the Seat Plan System from the Global On/Off Settings, so your ticket types will function as regular tickets only.If you want to use a seat plan, enable Seat Plan System from the Global On/Off Settings. Once enabled, you can turn the Seat Plan feature on or off for each Event individually, allowing you to use either a seat plan or regular tickets as needed.', 'abp-event-ticket' ),
@@ -60,7 +89,7 @@
 					'sale_close_before'           => __( 'Note:  Enter the time in minutes to close ticket sales before the Event starts. If not specified, it will default to 0 (e.g. 1 hour equals 60 minutes). ', 'abp-event-ticket' ),
 					'advance_date_number'         => __( 'Note: Kindly provide the number of days in advance for booking. By default, the advance booking period is set to 28 days.(optional) ', 'abp-event-ticket' ),
 					'date_type'                   => __( 'Note: Please Select your Event operational date type. Default operational date will be Periodic', 'abp-event-ticket' ),
-					'event_type'                   => __( 'Note: Please Select your Event  type. Default Type Offline/Phisical', 'abp-event-ticket' ),
+					'event_type'                  => __( 'Note: Please Select your Event  type. Default Type Offline/Phisical', 'abp-event-ticket' ),
 					'specific_dates'              => __( 'Note: Please add your Event operational Specific Date lists  .', 'abp-event-ticket' ),
 					'operation_time'              => __( 'Note: Configure the time schedule for this event. You can add multiple times and set different times for each event date. This is useful when the event has multiple sessions or different schedules on different dates.', 'abp-event-ticket' ),
 					'periodic_start_date'         => __( 'Note: Please add your Event Launching Date otherwise it will be start today ', 'abp-event-ticket' ),
@@ -493,5 +522,432 @@
 					update_option( 'abpet_ticket_sp', $ticket_infos );
 				}
 			}
+			public function wc_config(): void {
+				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+				}
+				$post_val  = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : $default;
+				$page_type = $post_val( 'type' );
+				if ( $page_type == 'wc_install_active' ) {
+					include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+					include_once( ABSPATH . 'wp-admin/includes/file.php' );
+					include_once( ABSPATH . 'wp-admin/includes/misc.php' );
+					include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+					$plugin = 'woocommerce';
+					$api    = plugins_api( 'plugin_information', array(
+						'slug'   => $plugin,
+						'fields' => array(
+							'short_description' => false,
+							'sections'          => false,
+							'requires'          => false,
+							'rating'            => false,
+							'ratings'           => false,
+							'downloaded'        => false,
+							'last_updated'      => false,
+							'added'             => false,
+							'tags'              => false,
+							'compatibility'     => false,
+							'homepage'          => false,
+							'donate_link'       => false,
+						),
+					) );
+					if ( is_wp_error( $api ) ) {
+						wp_send_json_error( [ 'html' => '', 'msg' => $api->get_error_message() ] );
+					}
+					$title              = 'title';
+					$url                = 'url';
+					$nonce              = 'nonce';
+					$woocommerce_plugin = new Plugin_Upgrader( new Plugin_Installer_Skin( compact( 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
+					$installed          = $woocommerce_plugin->install( $api->download_link );
+					if ( is_wp_error( $installed ) ) {
+						wp_send_json_error( [ 'msg' => $installed->get_error_message(), 'type' => 'warn' ] );
+					}
+					$activated = activate_plugin( 'woocommerce/woocommerce.php' );
+					if ( is_wp_error( $activated ) ) {
+						wp_send_json_error( [ 'msg' => $activated->get_error_message(), 'type' => 'warn' ] );
+					}
+					wp_send_json_success( [ 'msg' => esc_html__( 'WooCommerce installed and activated successfully!', 'abp-event-ticket' ), 'type' => 'success' ], 200 );
+				}
+				if ( $page_type == 'wc_active' ) {
+					if ( defined( 'ABPET_WC' ) && ABPET_WC == 1 ) {
+						$activated = activate_plugin( 'woocommerce/woocommerce.php' );
+						if ( is_wp_error( $activated ) ) {
+							wp_send_json_error( [ 'msg' => $activated->get_error_message(), 'type' => 'warn' ] );
+						}
+						wp_send_json_success( [ 'msg' => esc_html__( 'WooCommerce activated successfully!', 'abp-event-ticket' ), 'type' => 'success' ], 200 );
+					}
+				}
+				wp_send_json_error( [ 'msg' => esc_html__( 'WooCommerce is either not installed or already active.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+			}
+			public function create_page(): void {
+				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+				}
+				$post_val  = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : $default;
+				$page_type = $post_val( 'type' );
+				if ( ! empty( $page_type ) ) {
+					if ( ! ABPET_Function::get_page_by_slug( $page_type ) ) {
+						$label      = ABPET_Function::label();
+						$short_code = '';
+						if ( $page_type == 'tf_booking' ) {
+							$label      = __( 'Booking', 'abp-event-ticket' );
+							$short_code = '[abpet-booking]';
+						}
+						if ( $page_type == 'tf_post' ) {
+							$short_code = '[abpet-post]';
+						}
+						if ( $page_type == 'tf_gallery' ) {
+							$label      = __( 'Gallery', 'abp-event-ticket' );
+							$short_code = '[abpet-gallery]';
+						}
+						$page    = array(
+							'post_type'    => 'page',
+							'post_name'    => $page_type,
+							'post_title'   => $label,
+							'post_content' => $short_code,
+							'post_status'  => 'publish',
+						);
+						$post_id = wp_insert_post( $page );
+						if ( is_wp_error( $post_id ) || 0 === $post_id ) {
+							wp_send_json_error( [ 'type' => 'warn', 'msg' => esc_html__( 'Failed to create page.', 'abp-event-ticket' ) ] );
+						}
+						flush_rewrite_rules();
+						/* translators: %s: Trnasport Label */
+						$translated_format = esc_html__( '%s Page Created successfully.....', 'abp-event-ticket' );
+						$msg               = sprintf( $translated_format, $label );
+						wp_send_json_success( [ 'type' => 'success', 'msg' => $msg ] );
+					}
+					wp_send_json_error( [ 'type' => 'warn', 'msg' => esc_html__( 'Page already exists.', 'abp-event-ticket' ) ] );
+				} else {
+					wp_send_json_error( [ 'type' => 'warn', 'msg' => esc_html__( 'Something Wrong...!', 'abp-event-ticket' ) ] );
+				}
+			}
+			public function import_dummy(): void {
+				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+				}
+				$dummy_infos = $this->dummy_data();
+				$previous_registry = ABPET_Function::get_option( 'abpet_dummy_registry', [] );
+				$registry = [
+					'posts' => array_map( 'absint', $previous_registry['posts'] ?? [] ),
+					'terms' => is_array( $previous_registry['terms'] ?? null ) ? $previous_registry['terms'] : [],
+				];
+				if ( isset( $dummy_infos['taxonomy'] ) ) {
+					foreach ( $dummy_infos['taxonomy'] as $tax => $taxonomy_option ) {
+						if ( taxonomy_exists( $tax ) ) {
+							foreach ( $taxonomy_option as $taxonomy_data ) {
+								$name = sanitize_text_field( $taxonomy_data['name'] ?? '' );
+								if ( empty( $name ) ) {
+									continue;
+								}
+								$existing = get_term_by( 'name', $name, $tax );
+								$term_id  = $existing ? (int) $existing->term_id : 0;
+								if ( ! $term_id ) {
+									$term = wp_insert_term( $name, $tax );
+									if ( ! is_wp_error( $term ) ) {
+										$term_id = (int) $term['term_id'];
+										$registry['terms'][] = [ 'taxonomy' => $tax, 'term_id' => $term_id ];
+									}
+								}
+							}
+						}
+					}
+					do_action( 'abpet_location_update' );
+					do_action( 'abpet_category_update' );
+					do_action( 'abpet_organizer_update' );
+					do_action( 'abpet_brand_update' );
+				}
+				if ( isset( $dummy_infos['options'] ) ) {
+					foreach ( $dummy_infos['options'] as $option => $dummy_option ) {
+						$option_data = get_option( $option );
+						if ( empty( $option_data ) ) {
+							update_option( $option, $dummy_option );
+						}
+					}
+				}
+				if ( isset( $dummy_infos['custom_post'] ) ) {
+					$dummy_posts = $this->dummy();
+					foreach ( $dummy_posts as $dummy_data ) {
+						$args = array();
+						if ( isset( $dummy_data['name'] ) ) {
+							$args['post_title'] = $dummy_data['name'];
+						}
+						$args['post_status'] = 'publish';
+						$args['post_type']   = ABPET_Function::get_cpt();
+						$post_id             = wp_insert_post( $args );
+						if ( is_wp_error( $post_id ) || ! $post_id ) {
+							continue;
+						}
+						$post_data           = $dummy_data['post_data'] ?? [];
+						if ( ! empty( $post_data ) ) {
+							foreach ( $post_data as $meta_key => $data ) {
+								update_post_meta( $post_id, $meta_key, $data );
+							}
+						}
+						$this->sync_event_taxonomies( $post_id, $post_data );
+						$registry['posts'][] = (int) $post_id;
+					}
+				}
+				update_option( 'abpet_dummy_registry', $registry, false );
+				flush_rewrite_rules();
+				wp_send_json_success( [
+					'msg' => esc_html__( 'Dummy data imported successfully!', 'abp-event-ticket' )
+				] );
+			}
+			public function remove_dummy(): void {
+				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
+				}
+				$post_ids = get_posts( [
+					'post_type'      => ABPET_Function::get_cpt(),
+					'post_status'    => 'any',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Fixed plugin dummy-data flag lookup.
+					'meta_key'       => 'dummy',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Fixed plugin dummy-data flag lookup.
+					'meta_value'     => 'on',
+				] );
+				foreach ( $post_ids as $post_id ) {
+					wp_delete_post( (int) $post_id, true );
+				}
+				$registry = ABPET_Function::get_option( 'abpet_dummy_registry', [] );
+				foreach ( ( $registry['terms'] ?? [] ) as $term_data ) {
+					$taxonomy = sanitize_key( $term_data['taxonomy'] ?? '' );
+					$term_id  = absint( $term_data['term_id'] ?? 0 );
+					if ( $taxonomy && $term_id && taxonomy_exists( $taxonomy ) ) {
+						$term = get_term( $term_id, $taxonomy );
+						if ( $term && ! is_wp_error( $term ) && 0 === (int) $term->count ) {
+							wp_delete_term( $term_id, $taxonomy );
+						}
+					}
+				}
+				delete_option( 'abpet_dummy_registry' );
+				flush_rewrite_rules();
+				wp_send_json_success( [ 'msg' => esc_html__( 'Dummy data removed successfully.', 'abp-event-ticket' ), 'type' => 'success' ] );
+			}
+			public function dummy_data(): array {
+				return [
+					'taxonomy'    => [
+						'abpet_location'  => ABPET_Static::location(),
+						'abpet_category'  => ABPET_Static::category(),
+						'abpet_organizer' => ABPET_Static::organizer(),
+						'abpet_brand'     => ABPET_Static::brand(),
+					],
+					'options'     => [
+						'abpet_ticket'     => ABPET_Static::ticket(),
+						'abpet_decor'      => ABPET_Static::decoration(),
+						'abpet_additional' => ABPET_Static::additional(),
+						'abpet_form'       => ABPET_Static::form(),
+						'abpet_faq'        => ABPET_Static::faq(),
+						'abpet_tc'         => ABPET_Static::tc(),
+						'abpet_feature'    => ABPET_Static::feature(),
+					],
+					'custom_post' => []
+				];
+			}
+			public function dummy( $count = 5 ): array {
+				$on_off         = [ 'on', 'off' ];
+				$event_type         = [  'online', 'offline' ];
+				$template       = [ "default", "light" ];
+				$icon           = [ "🎟️", "🎫", "🎪", "🎭", "🎤", "🎬", "🏟️", "🎉", "📅", "💺", "fas fa-ticket", "fas fa-ticket-simple", "fas fa-calendar-days", "fas fa-masks-theater", "fas fa-microphone", "fas fa-music", "fas fa-trophy", "fas fa-champagne-glasses", "fas fa-users", "fas fa-star", ];
+				$all_organizer  = ABPET_Function::get_option( 'abpet_organizer' );
+				$organizer      = [ 'Global Events Group', 'EventPro Productions', 'Premier Events Network', 'Elite Event Management', 'NextGen Events', 'United Event Solutions', ];
+				$all_brands     = ABPET_Function::get_option( 'abpet_brand' );
+				$brand          = [ 'Live Nation', 'Eventbrite', 'AEG Presents', 'Ticketmaster', 'IMG Events', 'C3 Presents', 'Global Events', 'Premier Events', 'EventPro', 'Elite Entertainment', ];
+				$all_categories = ABPET_Function::get_option( 'abpet_category' );
+				$categories     = [ 'Concert', 'Conference', 'Workshop', 'Seminar', 'Festival', 'Sports', 'Theater', 'Exhibition', 'Party', 'Other', ];
+				$features       = ABPET_Function::get_option( 'abpet_feature' );
+				$feature_total  = is_array( $features ) ? sizeof( $features ) : 0;
+				$feature_pick   = $feature_total > 0 ? array_rand( $features, min( 5, $feature_total ) ) : [];
+				$feature_pick   = is_array( $feature_pick ) ? $feature_pick : [ $feature_pick ];
+				$names             = [ 'Summer Music Festival 2026', 'Global Business & Technology Conference', 'International Food & Culture Festival', 'Future Innovation & Startup Summit', 'Live Concert Night 2026', 'Creative Arts & Design Exhibition', 'World Sports & Fitness Expo', 'Professional Leadership Conference', 'Digital Marketing & Growth Summit', 'International Film & Entertainment Festival', ];
+				$subtitles         = [
+					'Experience an unforgettable celebration of music, entertainment, and live performances.',
+					'Connect with industry leaders and explore the future of business and technology.',
+					'Discover delicious flavors, traditions, and cultures from around the world.',
+					'Meet innovators, entrepreneurs, and visionaries shaping the future.',
+					'Enjoy an exciting evening of live music, entertainment, and unforgettable moments.',
+					'Explore inspiring artwork, creative ideas, and modern design from talented artists.',
+					'Discover the latest trends in sports, fitness, health, and active living.',
+					'Learn from experienced professionals and develop the skills to lead with confidence.',
+					'Explore powerful digital strategies, emerging trends, and proven growth techniques.',
+					'Celebrate the best of cinema, entertainment, storytelling, and creative filmmaking.',
+				];
+				$post_descriptions = [
+					'Join us for an exciting summer celebration featuring live music, talented performers, interactive activities, and a vibrant atmosphere. Gather your friends and family for a memorable day filled with entertainment and fun.',
+					'Bring together professionals, entrepreneurs, and technology enthusiasts for an inspiring conference focused on business growth, innovation, emerging technologies, and industry trends. Connect, learn, and discover new opportunities.',
+					'Experience a colorful celebration of global cuisine and culture featuring authentic food, live performances, cultural showcases, and family-friendly activities. Discover new traditions and enjoy flavors from around the world.',
+					'Explore the ideas and technologies shaping tomorrow at this exciting innovation and startup summit. Meet ambitious founders, investors, industry experts, and creative thinkers while discovering new opportunities for growth and collaboration.',
+					'Get ready for an unforgettable night of live music and entertainment featuring exciting performances, talented artists, and an energetic atmosphere. Book your tickets and enjoy a night to remember.',
+					'Discover inspiring artwork, creative concepts, and innovative designs from emerging and established artists. This exhibition brings together creativity, imagination, and modern design in one inspiring experience.',
+					'Explore the latest developments in sports, fitness, wellness, and active living. Meet industry professionals, discover new products, join exciting activities, and get inspired to live a healthier lifestyle.',
+					'Gain valuable insights from experienced leaders and professionals at this leadership-focused conference. Learn practical strategies, exchange ideas, build meaningful connections, and develop the skills needed for professional success.',
+					'Discover the latest digital marketing strategies, technologies, and growth opportunities. Learn from industry experts, explore emerging trends, and gain practical insights to help businesses grow in the digital world.',
+					'Celebrate the art of filmmaking and entertainment with a diverse selection of films, creative showcases, industry discussions, and special presentations. Experience inspiring stories and discover new voices from the world of cinema.',
+				];
+				$all_data          = [];
+				$ticket_infos   = $this->ticket_info( $count );
+				$date_infos    = $this->date_info( $count );
+
+				for ( $i = 0; $i < $count; $i ++ ) {
+					$rand_key = isset( $names[$i] ) ? $i : array_rand( $names );
+					$all_data[ $i ]['name']      = $names[ $rand_key ];
+					$all_data[ $i ]['post_data'] = [
+						'sale_continue'               => 'on',
+						'abpet_template'              => $template[ wp_rand( 0, 1 ) ],
+						'display_sku'                 => 'on',
+						'post_sku'                    => wp_rand( 100, 999 ),
+						'post_icon'                   => $icon[ $rand_key ],
+						'event_type'                  => $event_type[ wp_rand( 0, 1 ) ],
+						'sub_title'                   => $subtitles[ $rand_key ],
+						'post_description'            => $post_descriptions[ $rand_key ],
+						'display_organizer'           => $on_off[ wp_rand( 0, 1 ) ],
+						'abpet_organizer'             => $this->get_id( $all_organizer, $organizer[ array_rand( $organizer ) ] ),
+						'display_brand'               => $on_off[ wp_rand( 0, 1 ) ],
+						'abpet_brand'                 => $this->get_id( $all_brands, $brand[ array_rand( $brand ) ] ),
+						'display_capacity'            => $on_off[ wp_rand( 0, 1 ) ],
+						'display_category'            => $on_off[ wp_rand( 0, 1 ) ],
+						'abpet_category'              => $this->get_id( $all_categories, $categories[ array_rand( $categories ) ] ),
+						'post_feature'                => implode( ',', $feature_pick ),
+						'abpet_slider'                => '10,20,30,40,50,100,60,70,80,90',
+						'abpet_dates'                 => $date_infos[ $i ]??[],
+						'display_additional_services' => 'on',
+						'active_global_additional'    => 'on',
+						'display_client_form'         => 'on',
+						'active_global_form'          => 'on',
+						'display_single_form'         => $on_off[ wp_rand( 0, 1 ) ],
+						'display_faq'                 => 'on',
+						'active_global_faq'           => 'on',
+						'display_tc'                  => 'on',
+						'active_global_tc'            => 'on',
+						'dummy'                       => 'on',
+						'seat_type'                   => $ticket_infos[ $i ]['seat_type']??'ticket',
+						'display_ticket_type'         => 'on',
+						'min_qty'                     => wp_rand( 1, 2 ),
+						'max_qty'                     => wp_rand( 3, 10 ),
+						'ticket_infos'                => $ticket_infos[ $i ]['ticket_infos']??[],
+						'sp_infos'                    => $ticket_infos[ $i ]['sp_infos']??[],
+						'all_ticket_type'             => $ticket_infos[ $i ]['all_ticket_type']??[],
+					];
+				}
+				return $all_data;
+			}
+			public function ticket_info( $count ): array {
+				ABPET_Static::sp();
+				$ticket_options  = ABPET_Function::get_option( 'abpet_ticket' );
+				$ticket_options  = is_array( $ticket_options ) ? $ticket_options : [];
+				$random_num      = sizeof( $ticket_options ) > 4 ? 3 : sizeof( $ticket_options );
+				$all_ticket_type = $random_num > 0 ? array_rand( $ticket_options, $random_num ) : [];
+				$all_ticket_type = is_array( $all_ticket_type ) ? $all_ticket_type : [ $all_ticket_type ];
+				$all_sp_ticket   = ABPET_Function::get_option( 'abpet_ticket_sp' );
+				$sp_id           = [];
+				if ( ! empty( $all_sp_ticket ) ) {
+					$sp_id = array_keys( $all_sp_ticket );
+				}
+				$all_data          = [];
+				$all_data['sp_id'] = ! empty( $sp_id ) ? $sp_id[ array_rand( $sp_id ) ] : '';
+				if ( ! empty( $count ) && $count > 0 ) {
+					for ( $key = 0; $key < $count; $key ++ ) {
+						$seat_type = ! empty( $sp_id ) ? array( 'ticket', 'sp' )[ wp_rand( 0, 1 ) ] : 'ticket';
+						if ( $seat_type == 'sp' ) {
+							$sp_select  = $sp_id[ array_rand( $sp_id ) ];
+							$tickets    = [];
+							$seat_infos = $all_sp_ticket[ $sp_select ] ?? [];
+							if ( ! empty( $seat_infos ) ) {
+								$seat_info = $seat_infos['type'] ?? [];
+								if ( ! empty( $seat_info ) ) {
+									$tickets = array_merge( $tickets, array_keys( $seat_info ) );
+								}
+							}
+							$all_ticket_type                       = array_values( array_unique( $tickets ) );
+							$all_data[ $key ]['sp_infos'][0]['id'] = $sp_select;
+						}
+						foreach ( $all_ticket_type as $type_id ) {
+							$all_data[ $key ]['ticket_infos'][ $type_id ]['price']   = wp_rand( 30, 80 );
+							$all_data[ $key ]['ticket_infos'][ $type_id ]['qty']     = wp_rand( 30, 60 );
+							$all_data[ $key ]['ticket_infos'][ $type_id ]['reserve'] = wp_rand( 5, 10 );
+							$all_data[ $key ]['ticket_infos'][ $type_id ]['min_qty'] = wp_rand( 1, 2 );
+							$all_data[ $key ]['ticket_infos'][ $type_id ]['max_qty'] = wp_rand( 2, 5 );
+						}
+						$all_data[ $key ]['all_ticket_type'] = $all_ticket_type;
+						$all_data[ $key ]['seat_type'] = $seat_type;
+					}
+				}
+				return $all_data;
+			}
+			public function date_info( $count ): array {
+				$date_infos = [];
+				if ( ! empty( $count ) && $count > 0 ) {
+					$times = [
+						0 => [ 'label' => 'Morning', 'value' => '09:15' ],
+						1 => [ 'label' => 'Late Morning', 'value' => '11:30' ],
+						2 => [ 'label' => 'Afternoon', 'value' => '14:00' ],
+						3 => [ 'label' => 'Evening', 'value' => '18:45' ],
+						4 => [ 'label' => 'Night', 'value' => '21:10' ],
+						5 => [ 'label' => 'Morning', 'value' => '08:15' ],
+						6 => [ 'label' => 'Late Morning', 'value' => '10:30' ],
+						7 => [ 'label' => 'Noon', 'value' => '12:00' ],
+						8 => [ 'label' => 'Afternoon', 'value' => '15:45' ],
+						9 => [ 'label' => 'Night', 'value' => '20:10' ],
+					];
+					for ( $key = 0; $key < $count; $key ++ ) {
+						$rand_num = wp_rand( 1, 10 );
+						$date_types                      = [ 'periodic_date', 'specific_date' ];
+						$date_type                       = $date_types[ wp_rand( 0, 1 ) ];
+						$date_infos[ $key ]['date_type'] = $date_type;
+						if ( $date_type == 'periodic_date' ) {
+							$date_infos[ $key ]['periodic_start_date'] = gmdate( 'Y-m-d', strtotime( '+' . $rand_num . ' days', time() ) );
+							$date_infos[ $key ]['periodic_after']      = wp_rand( 1, 4 );
+						} else {
+							for ( $i = 0; $i < $rand_num; $i ++ ) {
+								$rand_num_                                  = wp_rand( 1, 60 );
+								$date_infos[ $key ]['specific_dates'][ $i ] = gmdate( 'Y-m-d', strtotime( '+' . ( $rand_num + $rand_num_ ) . ' days', time() ) );
+							}
+						}
+						$date_infos[ $key ]['time_infos']['time'] = array_intersect_key( $times, array_flip( array_rand( $times, 3 ) ) );
+					}
+				}
+				return $date_infos;
+			}
+			public function get_id( $options = [], $name = '' ): int|string|null {
+				if ( ! empty( $options ) ) {
+					foreach ( $options as $key => $option ) {
+						if ( isset( $option['name'] ) && $option['name'] === $name ) {
+							return $key;
+						}
+					}
+				}
+				return null;
+			}
+			private function dummy_post_count(): int {
+				return count( get_posts( [
+					'post_type'      => ABPET_Function::get_cpt(),
+					'post_status'    => 'any',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Fixed plugin dummy-data flag lookup.
+					'meta_key'       => 'dummy',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Fixed plugin dummy-data flag lookup.
+					'meta_value'     => 'on',
+				] ) );
+			}
+			private function sync_event_taxonomies( int $post_id, array $post_data ): void {
+				foreach ( [
+					'abpet_category'  => 'abpet_category',
+					'abpet_location'  => 'abpet_location',
+					'abpet_organizer' => 'abpet_organizer',
+					'abpet_brand'     => 'abpet_brand',
+				] as $meta_key => $taxonomy ) {
+					if ( ! taxonomy_exists( $taxonomy ) ) {
+						continue;
+					}
+					$value = $post_data[ $meta_key ] ?? '';
+					$ids   = is_array( $value ) ? $value : explode( ',', (string) $value );
+					$ids   = array_values( array_filter( array_map( 'absint', $ids ) ) );
+					wp_set_object_terms( $post_id, $ids, $taxonomy, false );
+				}
+			}
 		}
+		new ABPET_Static();
 	}

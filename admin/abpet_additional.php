@@ -23,7 +23,7 @@
                     $additional_services = ABPET_Function::get_option('abpet_additional', ABPET_Static::additional());
                     ?>
                     <div class="abp_form">
-                        <h4 class="_abp_color_theme"><span class="_mar_r_xxs">💰</span><?php esc_html_e('Global Additional services Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class="abp_color_theme"><span class="_mar_r_xxs">💰</span><?php esc_html_e('Global Additional services Configuration', 'abp-event-ticket'); ?></h4>
                         <?php ABPET_Layout::info_text('abpet_additional'); ?>
                         <div class="_mar_t_xs"></div>
                         <?php $this->additional_service($additional_services, true); ?>
@@ -38,7 +38,7 @@
                     $active_global_additional = $post_infos['active_global_additional'] ?? 'on';
                     ?>
                     <div class="tab_item additional_configuration" data-tabs="#abpet_additional_service">
-                        <h4 class="_abp_color_theme"><span class="_mar_r_xxs">💰</span><?php esc_html_e('Additional services Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class="abp_color_theme"><span class="_mar_r_xxs">💰</span><?php esc_html_e('Additional services Configuration', 'abp-event-ticket'); ?></h4>
                         <div class="group_setting _mar_t_xs">
                             <div class="setting_item">
                                 <div class="_f_wrap_fj_between_fa_center">
@@ -77,7 +77,7 @@
                 ?>
                 <div class="configuration_content additional_service">
                     <div class="_ov_auto">
-                        <table class="_abp">
+                        <table class="abp">
                             <thead>
                             <tr>
                                 <th class="_w_125"><?php esc_html_e('Icon / Image', 'abp-event-ticket'); ?></th>
@@ -109,7 +109,7 @@
                             } ?>
                     </div>
                     <div class="abp_hidden">
-                        <table class="_abp">
+                        <table class="abp">
                             <tbody class="hidden_content">
                             <?php $this->service_item(); ?>
                             </tbody>
@@ -220,7 +220,7 @@
                 if (!check_ajax_referer('abpet_admin_ajax_nonce', 'nonce', false) || !current_user_can('manage_options')) {
                     wp_send_json_error(['msg' => __('Invalid security token or Insufficient permissions.', 'abp-event-ticket'), 'type' => 'warn'], 403);
                 }
-                $additional_services = ABPET_Function::get_option('abpet_additional', ABPET_Status::static_additional());
+                $additional_services = ABPET_Function::get_option('abpet_additional', ABPET_Static::additional());
                 $additional_services = is_array($additional_services) ? $additional_services : [];
                 ob_start();
                 $this->additional_service($additional_services);

@@ -16,7 +16,7 @@
                 <input type="hidden" name="sp_selected_seat_id" value="">
                 <?php if (sizeof($_ticket_infos) > 1) { ?>
                     <label class="_text_nowrap _min_300_mar_auto">
-                        <span class="_abp_label"> <?php esc_html_e('Seat Label :', 'abp-event-ticket'); ?></span>
+                        <span class="abp_label"> <?php esc_html_e('Seat Label :', 'abp-event-ticket'); ?></span>
                         <select class="_form_control" name="sp_id">
                             <?php foreach ($_ticket_infos as $_ticket_info) {
                                 $id = $_ticket_info['id'] ?? '';

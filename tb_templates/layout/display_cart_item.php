@@ -20,9 +20,9 @@
                         <div class="abpet_area">
                             <div class="_section_card_xs _fd_column_gap_xs">
                                 <div class="_cart_details _w_full">
-                                    <h6 class="_abp _color_theme"><?php echo esc_html__('Booking Information ', 'abp-event-ticket') . ' ' . esc_html($return) . ' : '; ?></h6>
+                                    <h6 class="abp _color_theme"><?php echo esc_html__('Booking Information ', 'abp-event-ticket') . ' ' . esc_html($return) . ' : '; ?></h6>
                                     <div class="_divider_xxs"></div>
-                                    <ul class="_abp cart_list">
+                                    <ul class="abp cart_list">
                                         <li class="_gap_xxs">
                                             <span class="fas fa-calendar-check"></span>
                                             <span class="_fs_label"><?php esc_html_e('Event Date : ', 'abp-event-ticket'); ?></span>&nbsp;<?php echo esc_html(ABPET_Function::date_format($event_date)); ?>
@@ -34,9 +34,9 @@
                                     </ul>
                                 </div>
                                 <div class="cart_ticket_info _w_full">
-                                    <h6 class="_abp _color_theme"><?php esc_html_e('Ticket Information : ', 'abp-event-ticket'); ?></h6>
+                                    <h6 class="abp _color_theme"><?php esc_html_e('Ticket Information : ', 'abp-event-ticket'); ?></h6>
                                     <div class="_divider_xxs"></div>
-                                    <ul class="_abp cart_list">
+                                    <ul class="abp cart_list">
                                         <?php foreach ($ticket_infos as $ticket_info) {
                                             $price = $ticket_info['price'] ?? 0;
                                             $qty = $ticket_info['qty'] ?? 1;
@@ -55,9 +55,9 @@
                                 </div>
                                 <?php if (ABPET_Function::on_off('additional_info') && !empty($additional_info) && is_array($additional_info)) { ?>
                                     <div class="cart_additional _w_full">
-                                        <h6 class="_abp _color_theme"><?php esc_html_e('Additional Information : ', 'abp-event-ticket'); ?></h6>
+                                        <h6 class="abp _color_theme"><?php esc_html_e('Additional Information : ', 'abp-event-ticket'); ?></h6>
                                         <div class="_divider_xxs"></div>
-                                        <ul class="_abp cart_list">
+                                        <ul class="abp cart_list">
                                             <?php
                                                 foreach ($additional_info as $additional) {
                                                     if (!is_array($additional) || empty($additional)) {
@@ -81,18 +81,18 @@
                                 <?php } ?>
                                 <?php if (ABPET_Function::on_off('client_info') && !empty($attendee_infos) && is_array($attendee_infos)) { ?>
                                     <div class="cart_client_info _w_full">
-                                        <h6 class="_abp _color_theme"><?php esc_html_e('Client Information : ', 'abp-event-ticket'); ?></h6>
+                                        <h6 class="abp _color_theme"><?php esc_html_e('Client Information : ', 'abp-event-ticket'); ?></h6>
                                         <?php
                                             foreach ($attendee_infos as $attendee_info) {
                                                 if (!empty($attendee_info)) { ?>
                                                     <div class="_divider_xxs"></div>
-                                                    <ul class=" _abp cart_list">
+                                                    <ul class=" abp cart_list">
                                                         <?php foreach ($attendee_info as $attendee) {
                                                             $label = $attendee['label'] ?? '';
                                                             $value = $attendee['value'] ?? '';
                                                             if (!empty($label) && !empty($value)) { ?>
                                                                 <li>
-                                                                    <span class="_abp_label"><?php echo esc_html($label . __(' : ', 'abp-event-ticket')); ?></span>
+                                                                    <span class="abp_label"><?php echo esc_html($label . __(' : ', 'abp-event-ticket')); ?></span>
                                                                     <?php echo esc_html($value); ?>
                                                                 </li>
                                                                 <?php

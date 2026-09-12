@@ -29,15 +29,15 @@
 									do_action( 'abpet_sp_type', $post_infos, $form_data );
 								} ?>
                             </div>
-							<?php do_action( 'abpet_additional', $post_infos ); ?>
+
                         </div>
                         <div class="ticket_right">
-							<?php
-								if ( $seat_type === 'sp' ) {
-									?>
+	                        <?php do_action( 'abpet_additional', $post_infos ); ?>
+	                        <?php do_action( 'abpet_client_form', $post_infos ); ?>
+							<?php								if ( $seat_type === 'sp' ) {									?>
                                     <div class="seat_selection">
                                         <div class="_section_15_xs">
-                                            <table class="_abp">
+                                            <table class="abp">
                                                 <thead>
                                                 <tr>
                                                     <th><?php esc_html_e( 'Seat', 'abp-event-ticket' ); ?></th>
@@ -56,7 +56,7 @@
                                                 </tfoot>
                                             </table>
                                             <div class="abp_hidden">
-                                                <table class="_abp">
+                                                <table class="abp">
                                                     <tbody class="hidden_content">
                                                     <tr class="delete_area">
                                                         <th class="seat_name"></th>
@@ -72,7 +72,6 @@
                                     </div>
 									<?php
 								}
-								do_action( 'abpet_client_form', $post_infos );
 								do_action( 'abpet_total_price', $post_infos, $form_data );
 							?>
                         </div>

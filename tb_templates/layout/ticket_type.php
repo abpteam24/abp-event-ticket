@@ -28,7 +28,7 @@
                     ?>
                     <div class="ticket_item _section_card_xs_w_full">
                         <div class="_fj_between">
-                            <h5 class="_abp_gap_xxs"><?php ABPET_Layout::image_icon(ABPET_Function::ticket_icon($key)); ?><?php echo esc_html(ABPET_Function::ticket_name($key)); ?></h5>
+                            <h5 class="abp_gap_xxs"><?php ABPET_Layout::image_icon(ABPET_Function::ticket_icon($key)); ?><?php echo esc_html(ABPET_Function::ticket_name($key)); ?></h5>
                             <?php if (!empty($price)) { ?>
                                 <div class="abp_tag price_value">
                                     <?php echo ($price > 0) ? wp_kses_post(wc_price($price)) : esc_html__('Free', 'abp-event-ticket'); ?>
@@ -37,9 +37,9 @@
                             <?php } ?>
                         </div>
                         <?php if ( ABPET_Function::on_off( 'display_capacity' ) ) { ?>
-                            <h6 class="_abp"><?php echo esc_html__('Available : ', 'abp-event-ticket') . ' ' . esc_html($available . '/' . $qty); ?></h6>
+                            <h6 class="abp"><?php echo esc_html__('Available : ', 'abp-event-ticket') . ' ' . esc_html($available . '/' . $qty); ?></h6>
                         <?php } ?>
-                        <p class="_abp"><?php echo esc_html($ticket_info['description'] ?? ''); ?></p>
+                        <p class="abp"><?php echo esc_html($ticket_info['description'] ?? ''); ?></p>
                         <?php ABPET_Layout::item_select($ticket_info, $key, $price);?>
                     </div>
                 <?php }

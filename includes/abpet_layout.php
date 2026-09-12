@@ -60,7 +60,7 @@
                     <div class="popup_area">
                         <div class="popup_head _all_center">
                             <div class="abp_dropdown _max_400">
-                                <label class="_abp_all_center">
+                                <label class="abp_all_center">
                                     <input type="hidden" class="abp_icon_search_hidden" name="abp_icon_search" value=""/>
                                     <input type="text" class="_form_control_text_center validation_name abpet_allow abp_icon_search" name="" placeholder="<?php esc_attr_e( 'Search  icon', 'abp-event-ticket' ); ?>" value=""/>
                                 </label>
@@ -69,7 +69,7 @@
                             <span class="popup_close"><i class="fas fa-times"></i></span>
                         </div>
                         <div class="popup_body">
-                            <h4 class="_abp_text_center item_icon_title"></h4>
+                            <h4 class="abp_text_center item_icon_title"></h4>
                             <div class="item_icon_area"></div>
                         </div>
                     </div>
@@ -181,32 +181,32 @@
 			public static function layout_warning_info( $key ): void {
 				$data = ABPET_Static::array_info( $key );
 				if ( $data ) {
-					echo '<div class="_section_bg_warning_mar_zero"><h4 class="_abp_text_center_color_white">' . esc_html( $data ) . '</h4></div>';
+					echo '<div class="_section_bg_warning_mar_zero"><h4 class="abp_text_center_color_white">' . esc_html( $data ) . '</h4></div>';
 				}
 			}
 			public static function layout_warning_info_xs( $key, $data = '' ): void {
 				$data = empty( $data ) ? ABPET_Static::array_info( $key ) : $data;
 				if ( $data ) {
-					echo '<div class="_abp_text_center_color_white_bg_warning_padding_xxs_fs_label">' . esc_html( $data ) . '</div>';
+					echo '<div class="abp_text_center_color_white_bg_warning_padding_xxs_fs_label">' . esc_html( $data ) . '</div>';
 				}
 			}
 			public static function layout_info_xs( $key, $data = '' ): void {
 				$data = empty( $data ) ? ABPET_Static::array_info( $key ) : $data;
 				if ( $data ) {
-					echo '<div class="_abp_bg_info_padding_xxs _all_center _color_5">' . esc_html( $data ) . '</div>';
+					echo '<div class="abp_bg_info_padding_xxs _all_center _color_5">' . esc_html( $data ) . '</div>';
 				}
 			}
 			public static function on(): bool|string {
 				ob_start();
 				?>
-                <strong class="_abp_color_theme"> <?php esc_html_e( 'ON', 'abp-event-ticket' ); ?></strong>
+                <strong class="abp_color_theme"> <?php esc_html_e( 'ON', 'abp-event-ticket' ); ?></strong>
 				<?php
 				return ob_get_clean();
 			}
 			public static function off(): bool|string {
 				ob_start();
 				?>
-                <strong class="_abp_color_theme"> <?php esc_html_e( 'OFF', 'abp-event-ticket' ); ?></strong>
+                <strong class="abp_color_theme"> <?php esc_html_e( 'OFF', 'abp-event-ticket' ); ?></strong>
 				<?php
 				return ob_get_clean();
 			}
@@ -259,10 +259,9 @@
 				}
 			}
 			public static function input_date( $name, $date = '', $label = '', $required = '' ): void {
-				$date_format  = ABPET_Function::date_format_php();
-				$now          = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+				$now          = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 				$hidden_date  = $date ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
-				$visible_date = $date ? date_i18n( $date_format, strtotime( $date ) ) : '';
+				$visible_date = $date ? ABPET_Function::date_format( $date, 'date' ) : '';
 				?>
                 <label class="_input_item">
 					<?php self::input_title( $label, $required ); ?>
@@ -547,7 +546,7 @@
 					}
 					echo esc_html( get_the_title( $post_id ) ); ?>
 					<?php if ( ! empty( $post_sku ) && $display_sku == 'on' && ABPET_Function::on_off( 'sku' ) ) { ?>
-                        <small class="_abp_color_gray">&nbsp;(<?php echo esc_html( $post_sku ); ?>)</small>
+                        <small class="abp_color_gray">&nbsp;(<?php echo esc_html( $post_sku ); ?>)</small>
 					<?php }
 				}
 			}
@@ -556,7 +555,7 @@
 				if ( ABPET_Function::on_off( 'sub_title' ) && $post_id > 0 ) {
 					$value = $post_infos['sub_title'] ?? ABPET_Function::get_post_info( $post_id, 'sub_title' );
 					if ( ! empty( $value ) ) { ?>
-                        <p class="_abp <?php echo esc_attr( $class ); ?>">
+                        <p class="abp <?php echo esc_attr( $class ); ?>">
 							<?php echo esc_html( $value ); ?>
                         </p>
 						<?php
@@ -660,7 +659,7 @@
 				if ( ABPET_Function::on_off( 'post_des' ) && $post_id > 0 ) {
 					$value = $post_infos['post_description'] ?? ABPET_Function::get_post_info( $post_id, 'post_description' );
 					if ( ! empty( $value ) ) { ?>
-                        <div class="_padding_xs <?php echo esc_attr( $class ); ?>">
+                        <div class="<?php echo esc_attr( $class ); ?>">
 							<?php self::load_more( $value ); ?>
                         </div>
 						<?php
@@ -670,11 +669,10 @@
 			public static function start_date( $all_dates, $date = '' ): void {
 				//echo '<pre>';print_r($all_dates);					echo '</pre>';
 				if ( sizeof( $all_dates ) > 0 ) {
-					$date_format  = ABPET_Function::date_format_php();
-					$now          = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+					$now          = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 					$date         = $date ?: current( $all_dates );
 					$hidden_date  = ! empty( $date ) ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
-					$visible_date = ! empty( $date ) ? date_i18n( $date_format, strtotime( $date ) ) : '';
+					$visible_date = ! empty( $date ) ? ABPET_Function::date_format( $date, 'date' ) : '';
 					if ( sizeof( $all_dates ) > 1 ) {
 						?>
                         <label>
@@ -729,6 +727,7 @@
 					if ( empty( $feature_ids ) || ! is_array( $abpet_feature ) ) {
 						return;
 					}
+					//echo '<pre>';print_r($abpet_feature);echo '</pre>';
 					?>
                     <div class="item_spec load_more">
                         <div class="_f_wrap_gap_xxs">
@@ -773,7 +772,7 @@
                         <div class="custom_checkbox">
                             <input type="hidden" name="item_check[]" value="" data-id="<?php echo esc_attr( $collapse_id ); ?>"/>
                             <div class="checkbox_item" data-checked="<?php echo esc_attr( $key ); ?>" data-open-icon="far fa-check-square" data-close-icon="far fa-square">
-                                <h3 class="_abp"><span data-icon class="far fa-square"></span></h3>
+                                <h3 class="abp"><span data-icon class="far fa-square"></span></h3>
 								<?php echo esc_html__( 'Select ', 'abp-event-ticket' ) . ' ' . esc_html( ABPET_Function::ticket_name( $key ) ); ?>
                             </div>
                         </div>
@@ -955,7 +954,7 @@
 			//=============================//
 			public static function ticket_info( $ticket_infos, $post_id, $seat_type = '', $sp_id = 0 ): void {
 				if ( ! empty( $ticket_infos ) && is_array( $ticket_infos ) ) { ?>
-                    <ul class=" _abp">
+                    <ul class=" abp">
 						<?php foreach ( $ticket_infos as $tic_id => $ticket_info ) {
 							if ( ! empty( $ticket_info ) && sizeof( $ticket_info ) > 0 ) {
 								$current_seat_type = $ticket_info['seat_type'] ?? $seat_type;
@@ -979,7 +978,7 @@
 			}
 			public static function additional_info( $additional_infos ): void {
 				if ( ! empty( $additional_infos ) && is_array( $additional_infos ) ) { ?>
-                    <ul class=" _abp">
+                    <ul class=" abp">
 						<?php foreach ( $additional_infos as $ex_info ) {
 							if ( ! empty( $ex_info ) && sizeof( $ex_info ) > 0 ) {
 								$name       = $ex_info['name'] ?? '';
@@ -1005,7 +1004,7 @@
 			}
 			public static function client_info( $passenger_infos ): void {
 				if ( ! empty( $passenger_infos ) && is_array( $passenger_infos ) ) { ?>
-                    <ul class=" _abp">
+                    <ul class=" abp">
 						<?php foreach ( $passenger_infos as $pas_form ) {
 							if ( ! empty( $pas_form ) && sizeof( $pas_form ) > 0 ) {
 								foreach ( $pas_form as $info ) {
@@ -1030,7 +1029,7 @@
 					$billing_phone   = $booking_list['billing_phone'] ?? '';
 					$billing_address = $booking_list['billing_address'] ?? '';
 					?>
-                    <ul class=" _abp">
+                    <ul class=" abp">
 						<?php if ( ! empty( $billing_name ) ) { ?>
                             <li><strong><?php esc_html_e( 'Name :', 'abp-event-ticket' ); ?></strong>&nbsp;<?php echo esc_html( $billing_name ); ?></li>
 						<?php } ?>
@@ -1061,7 +1060,7 @@
                     </label>
 					<?php if ( sizeof( ABPET_ids ) > 0 ) { ?>
                         <div class="dropdown_list">
-                            <ul class="_abp ">
+                            <ul class="abp ">
 								<?php foreach ( ABPET_ids as $all_post_id ) {
 									$sku      = ABPET_Function::get_post_info( $all_post_id, 'post_sku' );
 									$category = ABPET_Function::get_post_info( $all_post_id, 'abpet_category' );
@@ -1074,10 +1073,10 @@
 										} ?>
                                         <span class="_fs_label"><?php echo esc_html( $title ); ?></span>
 										<?php if ( ! empty( $category ) && ABPET_Function::on_off( 'category' ) ) { ?>
-                                            <sub class="_abp_color_gray"> - <?php echo esc_html( $category ); ?></sub>
+                                            <sub class="abp_color_gray"> - <?php echo esc_html( $category ); ?></sub>
 										<?php } ?>
 										<?php if ( ! empty( $sku ) && ABPET_Function::on_off( 'sku' ) ) { ?>
-                                            <sub class="_abp_color_info"> - <?php echo esc_html( $sku ); ?></sub>
+                                            <sub class="abp_color_info"> - <?php echo esc_html( $sku ); ?></sub>
 										<?php } ?>
                                     </li>
 								<?php } ?>
@@ -1088,8 +1087,7 @@
 				<?php
 			}
 			public static function filter_booking_date(): void {
-				$date_format = ABPET_Function::date_format_php();
-				$now         = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+				$now         = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 				?>
                 <div class="_input_item">
                     <label>
@@ -1102,8 +1100,7 @@
 				<?php
 			}
 			public static function filter_booking_date_between(): void {
-				$date_format = ABPET_Function::date_format_php();
-				$now         = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+				$now         = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 				?>
                 <div class="_g_input_input_item_fd_column">
                     <label><span class="_gap_xs"><?php ABPET_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Event Date Between', 'abp-event-ticket' ) ?></span></label>
@@ -1123,8 +1120,7 @@
 				<?php
 			}
 			public static function filter_order_date(): void {
-				$date_format = ABPET_Function::date_format_php();
-				$now         = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+				$now         = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 				?>
                 <div class="_input_item">
                     <label>
@@ -1137,8 +1133,7 @@
 				<?php
 			}
 			public static function filter_order_date_between(): void {
-				$date_format = ABPET_Function::date_format_php();
-				$now         = date_i18n( $date_format, strtotime( current_time( 'Y-m-d' ) ) );
+				$now         = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 				?>
                 <div class="_g_input_input_item_fd_column" data-collapse="#view_more_filter_option">
                     <label class="_mar_b_xxs"><span class="_gap_xs">⏰ <?php esc_html_e( 'Order Date Between', 'abp-event-ticket' ); ?></span></label>
@@ -1170,7 +1165,7 @@
                     </label>
 					<?php if ( ! empty( $all_users ) ) { ?>
                         <div class="dropdown_list">
-                            <ul class="_abp ">
+                            <ul class="abp ">
 								<?php foreach ( $all_users as $user ) { ?>
                                     <li data-value="<?php echo esc_attr( $user->ID ); ?>" data-text="<?php echo esc_attr( $user->display_name ); ?>">
                                         <span class="_fs_label"><?php echo esc_html( $user->display_name ); ?></span>

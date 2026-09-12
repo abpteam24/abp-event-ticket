@@ -1,22 +1,24 @@
 === ABP Event Ticket ===
 Contributors: abpteam
-Tags: event tickets, ticket booking, seat reservation, event registration, WooCommerce
+Tags: event tickets, ticket booking, seat reservation, event registration, seat plan
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
+WC requires at least: 8.0
+WC tested up to: 9.4
 Stable tag: 1.0.0
-License: GPLv3
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce event ticketing with general admission tickets, reserved seating, flexible ticket types, attendee forms, and event schedules.
+Sell event tickets online with WooCommerce using general admission, reserved seats, and attendee forms.
 
 == Description ==
 
-ABP Event Ticket turns WooCommerce into a complete event ticketing and registration system. Create events, configure ticket types and prices, publish event details, collect attendee information, and sell tickets through the standard WooCommerce checkout.
+ABP Event Ticket turns WooCommerce into a complete event ticketing and registration system. Create events, configure ticket types and prices, publish event details, collect attendee information, and sell tickets through the standard WooCommerce checkout. It is the simplest way to sell event tickets, concert tickets, conference tickets, festival tickets, and workshop registration online.
 
-The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated as tickets are booked.
+The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, so you never oversell an event.
 
-Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, and Terms & Conditions. Global configuration can be imported into an individual event and customized when needed.
+Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, and Terms & Conditions. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
 
 == Key Features ==
 
@@ -137,6 +139,10 @@ Minimal event list example:
 
 `[abpet-post style="minimal" show="8" pagination-style="number"]`
 
+== My Account Bookings ==
+
+When used with WooCommerce, a "Bookings" tab is added automatically to the WooCommerce My Account area. Logged-in customers can view their event bookings, event dates, ticket details, additional services, attendee information, and order totals in one place, with pagination for large histories.
+
 == Requirements ==
 
 * WordPress 6.2 or later
@@ -217,14 +223,28 @@ Yes. Use the listing and gallery shortcodes with supported attributes to control
 
 Yes. The plugin uses the WordPress localization system and is translation-ready.
 
-== Support ==
+== Screenshots ==
 
-For help and bug reports:
+1.  Admin Dashboard - overview charts and System Status health check
+2. Event list page - admin events with create, edit, clone, trash, restore actions
+3. Event create / edit page - tickets, prices, quantities, and schedule
+4. Ticket/Seat Plan designer - drag-and-drop seat layout editor
+5.  Global Data - dates, location, category, organizer, brand lists
+6. Configuration - general settings and ON/OFF feature switches
+7. Orders - booking and order management with status and check-in
+8. Frontend event listing - event grid with search and filters
+9.  Frontend event detail - ticket/seat selection and booking form
 
-* Support: https://abp-team.com/support-desk/
-* Support Forum: https://wordpress.org/support/plugin/abp-event-ticket/
-* Bug Reports: https://github.com/abpteam24/abp-event-ticket/issues
-* Email: support@abp-team.com
+
+== Need help or have suggestions? ==
+If you need any further assistance or support, please contact us through the [🎫 support form](https://abp-team.com/support-desk/). We welcome your suggestions, so feel free to tell us anything we can improve in the plugin.
+
+🌐 [Live Demo](https://https://event-ticket.abp-team.com/)
+📖 [Documentation](https://https://event-ticket.abp-team.com/documentation/)
+💬 [Support Forum](https://wordpress.org/support/plugin/abp-event-ticket/)
+🐛 [Bug Reports](https://github.com/abpteam24/abp-event-ticket/issues)
+📧 Email: support@abp-team.com
+
 
 == Changelog ==
 

@@ -201,7 +201,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
                                 __('Define the primary URL slug for rentals. Important: After changing this, you must flush your permalinks by visiting %s and clicking Save Changes.', 'abp-event-ticket'),
-                                '<strong class="_abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
+                                '<strong class="abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
                             ),
                             'type' => 'text',
                             'default' => 'event-ticket'
@@ -212,7 +212,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Dashicons library link */
                                 __('Choose a custom admin menu icon. Please browse the %s, copy the desired icon class name, and paste it here.', 'abp-event-ticket'),
-                                '<a class="_abp" href="https://developer.wordpress.org/resource/dashicons/" target="_blank">' . __('WordPress Dashicons Library', 'abp-event-ticket') . '</a>'
+                                '<a class="abp" href="https://developer.wordpress.org/resource/dashicons/" target="_blank">' . __('WordPress Dashicons Library', 'abp-event-ticket') . '</a>'
                             ),
                             'type' => 'text',
                             'default' => 'dashicons-tickets'
@@ -238,7 +238,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
                                 __('Define the custom URL structure for category archives. Remember to update your rewrite rules under %s after any modifications.', 'abp-event-ticket'),
-                                '<strong class="_abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
+                                '<strong class="abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
                             ),
                             'type' => 'text',
                             'default' => ABPET_Function::category_slug(),
@@ -258,7 +258,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
                                 __('Define the custom URL structure for Organizer archives. Remember to update your rewrite rules under %s after any modifications.', 'abp-event-ticket'),
-                                '<strong class="_abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
+                                '<strong class="abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
                             ),
                             'type' => 'text',
                             'default' => ABPET_Function::organizer_slug(),
@@ -278,7 +278,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
                                 __('Define the custom URL structure for Brand archives. Remember to update your rewrite rules under %s after any modifications.', 'abp-event-ticket'),
-                                '<strong class="_abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
+                                '<strong class="abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
                             ),
                             'type' => 'text',
                             'default' => ABPET_Function::brand_slug(),
@@ -297,7 +297,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
                                 __('Define the custom URL structure for Location archives. Remember to update your rewrite rules under %s after any modifications.', 'abp-event-ticket'),
-                                '<strong class="_abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
+                                '<strong class="abp_color_theme">' . __('Settings → Permalinks', 'abp-event-ticket') . '</strong>'
                             ),
                             'type' => 'text',
                             'default' => ABPET_Function::location_slug(),
@@ -458,6 +458,13 @@
                             'desc' => __('If you do not want to use the FAQs Feature, simply turn this switch OFF. Once disabled, the FAQ Feature field and related FAQ Feature options will be completely removed from the site.', 'abp-event-ticket'),
                             'type' => 'button_switch',
                             'default' => 'on',
+                        ),
+                        array(
+                            'name' => 'remove_uninstall',
+                            'label' => __('Remove All Data on Uninstall', 'abp-event-ticket'),
+                            'desc' => __('When this switch is OFF (recommended), all ABP Event Ticket data is preserved when you uninstall the plugin. You can reinstall the plugin later and keep your existing events, orders, seat plans, and settings. When this switch is ON, all plugin data (events, taxonomy terms, seat plans, the orders table, and all options) is permanently deleted on uninstall.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'off',
                         ),
                     )),
                     'abpet_contact' => array(
@@ -763,7 +770,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <div><?php do_action('abpet_image_selection', ($option['name'] ?? ''), ($option['value'] ?? '')); ?></div>
                     </div>
                     <?php self::description($option); ?>
@@ -855,7 +862,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <div class="custom_radio _group_content">
                             <input type="hidden" class="_form_control" name="<?php echo esc_attr($name); ?>" value="<?php echo esc_attr($value); ?>"/>
                             <?php foreach ($option_data as $key => $data) { ?>
@@ -881,7 +888,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <label>
                             <input type="hidden" name="<?php echo esc_attr($option['name'] ?? ''); ?>" value="off"/>
                             <input type="checkbox" class="checkbox" name="<?php echo esc_attr($option['name'] ?? ''); ?>" value="on" <?php echo esc_attr($checked); ?> />
@@ -910,7 +917,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <div class="custom_checkbox _group_content">
                             <input type="hidden" name="<?php echo esc_attr($option['name'] ?? ''); ?>" value="<?php echo esc_attr($value); ?>"/>
                             <?php foreach ($option_data as $key => $label) { ?>
@@ -931,7 +938,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <label>
                             <input type="text" name="<?php echo esc_attr($option['name'] ?? ''); ?>" disabled class="_form_control abp_color_picker" value="<?php echo esc_attr($option['value'] ?? ''); ?>" data-default-color="<?php echo esc_html($option['default'] ?? ''); ?>"/>
                         </label>
@@ -948,7 +955,7 @@
                 ?>
                 <div class="setting_item <?php echo esc_attr($option['class'] ?? ''); ?>" <?php if (!empty($section_target)) { ?> data-collapse="#<?php echo esc_attr($section_target); ?>"  <?php } ?>>
                     <div class="_f_wrap_fj_between_fa_center">
-                        <span class="_abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
+                        <span class="abp_label"><?php echo esc_html($option['label'] ?? ''); ?></span>
                         <div class="custom_checkbox">
                             <input type="hidden" name="<?php echo esc_attr($option['name'] ?? ''); ?>" value="<?php echo esc_attr($option['value'] ?? ''); ?>"/>
                             <?php foreach ($wp_roles->roles as $key => $label) { ?>
