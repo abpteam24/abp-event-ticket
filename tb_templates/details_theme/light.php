@@ -81,6 +81,7 @@
                             </div>
                         </div>
 					<?php } ?>
+					<?php do_action( 'abpet_map', $post_infos, $post_id, 'light' ); ?>
 					<?php if ( $show_date_list ) { ?>
                         <div class="abp_row">
                             <div class="_col_12">

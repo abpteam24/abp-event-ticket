@@ -84,6 +84,10 @@
 					],
 				] );
 				wp_enqueue_style( 'abpet_admin', ABPET_URL . 'assets/css/abpet_admin.css', array(), time() );
+			$google_map_key = ABPET_Function::get_options( 'abpet_configuration', 'google_map_key', '' );
+			if ( ABPET_Function::on_off( 'google_map' ) && ! empty( $google_map_key ) ) {
+				wp_enqueue_script( 'abpet_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abpet_gmap_init', array(), null, true );
+			}
 				wp_enqueue_script( 'abpet_sp', ABPET_URL . 'assets/js/abpet_sp.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'abpet_sp', 'abpet_sp_config', [
 					'seat_type'  => wp_json_encode( ABPET_Seat_Plan::get_ticket_type_js() ),
@@ -110,9 +114,10 @@
 					wp_enqueue_style( 'select2' );
 					wp_enqueue_script( 'select2' );
 				}
-				wp_enqueue_script( 'abpet_frontend', ABPET_URL . 'assets/js/abpet_frontend.js', array( 'jquery' ), time(), true );
-				wp_enqueue_script( 'abpet_slick', ABPET_URL . 'assets/js/slick.min.js', array( 'jquery' ), ABPET_VERSION, true );
-				$this->global_enqueue();
+			wp_enqueue_style( 'abpet_slick', ABPET_URL . 'assets/css/slick.min.css', array(), ABPET_VERSION );
+			wp_enqueue_script( 'abpet_frontend', ABPET_URL . 'assets/js/abpet_frontend.js', array( 'jquery' ), time(), true );
+			wp_enqueue_script( 'abpet_slick', ABPET_URL . 'assets/js/slick.min.js', array( 'jquery' ), ABPET_VERSION, true );
+			$this->global_enqueue();
 				do_action( 'abpet_frontend_enqueue' );
 			}
 			public function global_enqueue(): void {

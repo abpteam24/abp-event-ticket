@@ -41,6 +41,8 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * Date-wise and day-wise time configuration
 * Advance booking and sale closing buffer controls
 * Location, category, organizer, and brand management
+* Google Location Map with search-and-select admin picker
+* Frontend location map with three display styles (default, light, modern)
 * Event features and related event display
 * Configurable attendee information forms
 * Optional additional services with pricing
@@ -88,6 +90,28 @@ Configure when tickets are available for each event:
 * Advance booking date limits
 * Sale closing buffer time
 * Availability and quantity controls
+
+== Google Location Map ==
+
+Show an interactive Google Map for the locations assigned to an event. The feature is powered by the Google Maps JavaScript API and the Places library.
+
+Setup:
+
+1. Enable Google Location Map under the plugin's global ON/OFF settings.
+2. Paste your Google Maps JavaScript API key into the Google Maps API Key field.
+3. Open a Location in the global data, search for the address or place, and select it on the map to save its latitude, longitude, address, and place data.
+4. Assign that location to an event.
+
+When the global switch is on, a valid API key is saved, the event has a location, and that location has saved map data, the map is displayed on the event details page. If any of these conditions is missing, no map is rendered.
+
+The map appears in the event details templates and includes:
+
+* Search-and-select map picker in the Location admin screen
+* Draggable marker to fine-tune the saved coordinates
+* Per-location map data (latitude, longitude, address, and place ID)
+* Three frontend map styles: default, light, and modern
+* Clickable marker with location name and address info window
+* "Get Directions" links to Google Maps
 
 == Attendee Information and Services ==
 
@@ -219,6 +243,10 @@ Yes. Events support both specific dates and periodic dates, with day-wise and da
 
 Yes. Use the listing and gallery shortcodes with supported attributes to control the displayed event content and layout.
 
+= Can I show a Google Map for event locations? =
+
+Yes. Enable Google Location Map in the global ON/OFF settings, add a Google Maps API key, and save map coordinates for each location. The map is displayed on the event details page when the event location has saved map data. You can choose between default, light, and modern map styles.
+
 = Is the plugin translation-ready? =
 
 Yes. The plugin uses the WordPress localization system and is translation-ready.
@@ -234,6 +262,7 @@ Yes. The plugin uses the WordPress localization system and is translation-ready.
 7. Orders - booking and order management with status and check-in
 8. Frontend event listing - event grid with search and filters
 9.  Frontend event detail - ticket/seat selection and booking form
+10. Location map picker in the admin and the frontend location map
 
 
 == Need help or have suggestions? ==

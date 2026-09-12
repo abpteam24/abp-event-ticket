@@ -67,6 +67,7 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 					<?php do_action( 'abpet_registration', $post_infos, $form_data ); ?>
 				<?php } else { ABPET_Layout::layout_warning_info( 'sale_close_msg' ); } ?>
 			</div>
+			<?php do_action( 'abpet_map', $post_infos, $post_id, 'modern' ); ?>
 			<?php if ( ! empty( $content ) ) { ?>
 				<div class="abp_row">
 					<div class="_col_12"><div class="the_post_content"><?php echo wp_kses_post( apply_filters( 'the_content', $content ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter 'the_content'. ?></div></div>

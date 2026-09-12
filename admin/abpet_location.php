@@ -30,6 +30,7 @@
 				$term_id = isset( $_POST['id'] ) ? absint( wp_unslash( $_POST['id'] ) ) : '';
 				ob_start();
 				$name      = $slug = $des = '';
+				$map_data  = [];
 				$label     = ABPET_Function::location_label();
 				$btn_label = __( 'Save', 'abp-event-ticket' ) . ' ' . $label;
 				$title     = __( 'Add new ', 'abp-event-ticket' ) . ' ' . $label;
@@ -41,8 +42,12 @@
 						$des       = $term->description;
 						$btn_label = __( 'Update', 'abp-event-ticket' ) . ' ' . $label . ' ' . $name;
 						$title     = __( 'Edit ', 'abp-event-ticket' ) . ' ' . $label . ' ' . $name;
+						$map_data  = get_term_meta( $term_id, '_abpet_map', true );
+						$map_data  = is_array( $map_data ) ? $map_data : [];
 					}
 				}
+				$google_map_key = ABPET_Function::get_options( 'abpet_configuration', 'google_map_key', '' );
+				$show_map       = ABPET_Function::on_off( 'google_map' ) && ! empty( $google_map_key );
 				?>
                 <div class="abp_form">
                     <h5 class="abp_gap_xs">📍<?php echo esc_html( $title ); ?></h5>
@@ -73,6 +78,28 @@
                             <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'loc_des' ); ?>
                         </div>
+						<?php if ( $show_map ) {
+							$map_lat = $map_data['lat'] ?? '';
+							$map_lng = $map_data['lng'] ?? '';
+							$map_place = $map_data['place'] ?? '';
+							$map_address = $map_data['address'] ?? '';
+							?>
+                            <div class="setting_item full_width abpet_gmap_wrap <?php echo esc_attr( ! empty( $map_lat ) && ! empty( $map_lng ) ? 'abp_active' : '' ); ?>">
+                                <span class="abp_label"><span class="fas fa-map-marker-alt"></span> <?php esc_html_e( 'Set Location On Google Map', 'abp-event-ticket' ); ?></span>
+                                <div class="_divider_xxs"></div>
+                                <label class="_f_equal_f_wrap">
+                                    <input type="text" class="_form_control abpet_gmap_search" placeholder="<?php esc_attr_e( 'Search address / place on the map', 'abp-event-ticket' ); ?>" autocomplete="off"/>
+                                </label>
+                                <div class="abpet_gmap_canvas"></div>
+                                <div class="_group_content">
+                                    <input type="hidden" name="map_lat" class="abpet_gmap_lat" value="<?php echo esc_attr( $map_lat ); ?>"/>
+                                    <input type="hidden" name="map_lng" class="abpet_gmap_lng" value="<?php echo esc_attr( $map_lng ); ?>"/>
+                                    <input type="hidden" name="map_place" class="abpet_gmap_place" value="<?php echo esc_attr( $map_place ); ?>"/>
+                                    <input type="hidden" name="map_address" class="abpet_gmap_address" value="<?php echo esc_attr( $map_address ); ?>"/>
+                                    <span class="abpet_gmap_show_name"></span>
+                                </div>
+                            </div>
+						<?php } ?>
                     </div>
                     <div class="_divider_xs"></div>
 					<?php ABPET_Layout::button_global_save( 'tax_location', $btn_label ); ?>
@@ -122,6 +149,20 @@
 				if ( $term_id <= 0 ) {
 					wp_send_json_error( [ 'html' => '', 'msg' => __( 'Failed to resolve location context.', 'abp-event-ticket' ), 'type' => 'warn' ] );
 				}
+				$map_lat     = $post_val( 'map_lat' );
+				$map_lng     = $post_val( 'map_lng' );
+				$map_place   = $post_val( 'map_place' );
+				$map_address = $post_val( 'map_address' );
+				if ( ABPET_Function::on_off( 'google_map' ) && ! empty( $map_lat ) && ! empty( $map_lng ) ) {
+					update_term_meta( $term_id, '_abpet_map', [
+						'lat'     => $map_lat,
+						'lng'     => $map_lng,
+						'place'   => $map_place,
+						'address' => $map_address,
+					] );
+				} else {
+					delete_term_meta( $term_id, '_abpet_map' );
+				}
 				$this->update_location();
 				ob_start();
 				$html = '';
@@ -168,6 +209,10 @@
 						$location[ $term_id ]['label']        = $taxonomy->name;
 						$location[ $term_id ]['description'] = $taxonomy->description;
 						$location[ $term_id ]['slug']        = $taxonomy->slug;
+						$map                                 = get_term_meta( $term_id, '_abpet_map', true );
+						if ( is_array( $map ) && ! empty( $map ) ) {
+							$location[ $term_id ]['map'] = $map;
+						}
 					}
 				}
 				ksort( $location );
@@ -191,7 +236,7 @@
                         </thead>
                         <tbody>
 						<?php foreach ( $options as $term_id => $option ) {
-							$name = $option['name'] ?? ''; ?>
+							$name = $option['label'] ?? $option['name'] ?? ''; ?>
                             <tr>
                                 <th><?php echo esc_html( $count ); ?>.</th>
                                 <th><?php echo esc_html( $term_id ); ?></th>

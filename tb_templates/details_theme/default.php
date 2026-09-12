@@ -140,6 +140,8 @@
 						<?php } ?>
                     </section>
 
+					<?php do_action( 'abpet_map', $post_infos, $post_id, 'default' ); ?>
+
                     <div class="abpet_default_body">
                         <div class="abpet_default_main">
 							<?php do_action( 'abpet_faq', $post_infos ); ?>

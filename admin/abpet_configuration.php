@@ -302,6 +302,18 @@
                             'type' => 'text',
                             'default' => ABPET_Function::location_slug(),
                         ),
+                        array(
+                            'name' => 'google_map_key',
+                            'label' => __('Google Maps API Key', 'abp-event-ticket'),
+                            'desc' => sprintf(
+                            /* translators: %s: Google Maps Platform help link */
+                                __('Paste your Google Maps JavaScript API key to enable the Google Location Map feature on the frontend. Get a key from the %s.', 'abp-event-ticket'),
+                                '<a class="abp" href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">' . __('Google Cloud Console', 'abp-event-ticket') . '</a>'
+                            ),
+                            'type' => 'text',
+                            'default' => '',
+                            'on_off_key' => 'google_map',
+                        ),
                     )),
                     'abpet_on_off' => apply_filters('abpet_on_off_filter', array(
                         array(
@@ -378,6 +390,13 @@
                             'name' => 'location',
                             'label' => ABPET_Function::location_label(),
                             'desc' => __('If you do not want to use the Event location, simply turn this switch OFF. Once disabled, the Event location field and related Event location options will be completely removed from the site.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'on',
+                        ),
+                        array(
+                            'name' => 'google_map',
+                            'label' => __('Google Location Map', 'abp-event-ticket'),
+                            'desc' => __('Show a Google Map for each Location on the frontend. When this switch is OFF, no map will be displayed anywhere on the site even if locations have map data saved.', 'abp-event-ticket'),
                             'type' => 'button_switch',
                             'default' => 'on',
                         ),

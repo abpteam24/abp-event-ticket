@@ -22,6 +22,7 @@
 				add_action( 'abpet_slider', [ $this, 'slider' ], 10, 3 );
 				add_action( 'abpet_slider_popup', [ $this, 'slider_popup' ], 10, 3 );
 				add_action( 'abpet_event_schedule_list', [ $this, 'event_schedule_list' ], 10, 6 );
+				add_action( 'abpet_map', [ $this, 'map' ], 10, 3 );
 			}
 			public function details_template( $post_id ): void {
 				require_once ABPET_Function::details_template_path( $post_id );
@@ -104,6 +105,48 @@
 			public function slider_popup( $abpet_slider, $img_ids, $popup_id = '#abpet_slider_' ): void {
 				include_once ABPET_Function::template_path( 'layout/slider_popup.php' );
 				do_action( 'abpet_slider_popup_template', $abpet_slider, $img_ids, $popup_id );
+			}
+			public function map( $post_infos = [], $post_id = 0, $style = 'default' ): void {
+				if ( empty( $post_id ) || $post_id <= 0 || get_post_type( $post_id ) !== ABPET_Function::get_cpt() ) {
+					return;
+				}
+				if ( ! ABPET_Function::on_off( 'google_map' ) || ! ABPET_Function::on_off( 'location' ) ) {
+					return;
+				}
+				$google_map_key = ABPET_Function::get_options( 'abpet_configuration', 'google_map_key', '' );
+				if ( empty( $google_map_key ) ) {
+					return;
+				}
+				$locations           = ABPET_Function::get_post_info( $post_id, 'abpet_location' );
+				$map_locations       = [];
+				if ( ! empty( $locations ) ) {
+					$loc_values      = array_filter( array_map( 'trim', explode( ',', $locations ) ) );
+					foreach ( $loc_values as $loc ) {
+						$map_data       = ABPET_Location[ $loc ]['map'] ?? [];
+						$map_term_meta  = is_numeric( $loc ) ? get_term_meta( (int) $loc, '_abpet_map', true ) : [];
+						$map_data       = is_array( $map_term_meta ) && ! empty( $map_term_meta ) ? $map_term_meta : $map_data;
+						if ( ! empty( $map_data['lat'] ) && ! empty( $map_data['lng'] ) ) {
+							$map_locations[] = [
+								'id'      => $loc,
+								'label'   => ABPET_Location[ $loc ]['label'] ?? $loc,
+								'address' => $map_data['address'] ?? ABPET_Location[ $loc ]['description'] ?? '',
+								'lat'     => $map_data['lat'],
+								'lng'     => $map_data['lng'],
+								'place'   => $map_data['place'] ?? '',
+							];
+						}
+					}
+				}
+				if ( empty( $map_locations ) ) {
+					return;
+				}
+				if ( ! wp_script_is( 'abpet_gmaps', 'enqueued' ) ) {
+					wp_enqueue_script( 'abpet_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&callback=abpet_gmap_frontend_init', array(), null, true );
+				}
+				$style = sanitize_key( $style );
+				$style = in_array( $style, [ 'default', 'light', 'modern' ], true ) ? $style : 'default';
+				include_once ABPET_Function::template_path( 'map/' . $style . '.php' );
+				do_action( 'abpet_map_' . $style . '_template', $map_locations, $post_id );
 			}
 			public function event_schedule_list( int $post_id, array $dates, array $time_infos, string $selected_date = '', string $selected_time = '', string $layout = 'dropdown' ): void {
 				$items = ABPET_Function::event_schedule_items( $post_id, $dates, $time_infos );

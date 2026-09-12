@@ -449,3 +449,12 @@
 		div.abpet_admin .dash_hero_text h2 {font-size: var(--et_fs_h3);}
 	}
 }
+/******************************************************************** Google Location Map ************************************************/
+@media only screen and (min-width: 10px) {
+	div.abpet_admin .abpet_gmap_wrap {background: var(--et_color_4);}
+	div.abpet_admin .abpet_gmap_wrap .abp_label {padding: var(--et_gap_xxs) 0;gap: var(--et_gap_xxs);}
+	div.abpet_admin .abpet_gmap_search {max-width: 100%;min-width: 100%;}
+	div.abpet_admin .abpet_gmap_canvas {height: 280px;width: 100%;min-width: 100%;border: 2px solid var(--et_color_3);border-radius: var(--et_br);background: var(--et_color_white);}
+	div.abpet_admin .abpet_gmap_wrap .abpet_gmap_show_name {display: inline-block;color: var(--et_color_navy_blue);font-size: var(--et_fs);padding: var(--et_gap_xxs) var(--et_gap_xs);background: var(--et_color_white);border-radius: var(--et_br);}
+	div.abpet_admin .abpet_gmap_wrap ._group_content {gap: var(--et_gap_xxs);}
+}
