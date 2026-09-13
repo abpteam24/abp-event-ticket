@@ -20,7 +20,6 @@
 				$linked_id = ABPET_Function::get_post_info($product_id, 'abpet_link_id', $product_id);
 				$post_id = is_string(get_post_status($linked_id)) ? $linked_id : $product_id;
 				if (get_post_type($post_id) == ABPET_Function::get_cpt() && isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
-					$post_val = fn($key, $default = '') => isset($_POST[$key]) ? sanitize_text_field(wp_unslash($_POST[$key])) : $default;
 					$post_infos = ABPET_Function::get_all_meta($post_id);
 					$booking_infos = [];
 					$event_info = self::get_booking_info($post_infos);
@@ -43,6 +42,7 @@
 						WC()->session->set( 'abpet_cart_success', get_the_title( $post_id ) . ' ' . __( 'Add to cart successfully!', 'abp-event-ticket' ) );
 					}
 				}
+				//echo '<pre>';print_r($cart_item);echo '</pre>';die();
 			return $cart_item;
 			}
 			public function before_calculate_totals($cart_object): void {
@@ -96,7 +96,7 @@
 				}
 				return $item_data;
 			}
-			public static function get_booking_info($post_infos = [], $context = '') {
+			public static function get_booking_info($post_infos = []) {
 				$booking_info = [];
 				if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'abpet_registration_nonce')) {
 					$post_int_array = fn($key) => (isset($_POST[$key]) && is_array($_POST[$key])) ? array_map('absint', wp_unslash($_POST[$key])) : [];
@@ -110,6 +110,7 @@
 					$event_date = $event_date ?: $post_val('start_date');
 					$session_time = $post_val('session_time');
 					$session_time = $session_time ?: $post_val('start_time');
+					$session_time=$session_time?:$event_date;
 					$ticket_price = 0;
 					if (!empty($event_date) && !empty($session_time) && !empty($post_id)) {
 						if ($seat_type == 'ticket') {

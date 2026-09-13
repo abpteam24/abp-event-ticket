@@ -52,7 +52,7 @@
 			}
 			public function additional( $post_infos = [] ): void {
 				include_once ABPET_Function::template_path( 'layout/additional_services.php' );
-				do_action( 'abpet_additional_template', $post_infos);
+				do_action( 'abpet_additional_template', $post_infos );
 			}
 			public function client_form( $post_infos = [] ): void {
 				include_once ABPET_Function::template_path( 'layout/client_form.php' );
@@ -114,17 +114,15 @@
 					return;
 				}
 				$google_map_key = ABPET_Function::get_options( 'abpet_configuration', 'google_map_key', '' );
-				if ( empty( $google_map_key ) ) {
-					return;
-				}
-				$locations           = ABPET_Function::get_post_info( $post_id, 'abpet_location' );
-				$map_locations       = [];
+				$map_mode       = empty( $google_map_key ) ? 'iframe' : 'js';
+				$locations      = ABPET_Function::get_post_info( $post_id, 'abpet_location' );
+				$map_locations  = [];
 				if ( ! empty( $locations ) ) {
-					$loc_values      = array_filter( array_map( 'trim', explode( ',', $locations ) ) );
+					$loc_values = array_filter( array_map( 'trim', explode( ',', $locations ) ) );
 					foreach ( $loc_values as $loc ) {
-						$map_data       = ABPET_Location[ $loc ]['map'] ?? [];
-						$map_term_meta  = is_numeric( $loc ) ? get_term_meta( (int) $loc, '_abpet_map', true ) : [];
-						$map_data       = is_array( $map_term_meta ) && ! empty( $map_term_meta ) ? $map_term_meta : $map_data;
+						$map_data      = ABPET_Location[ $loc ]['map'] ?? [];
+						$map_term_meta = is_numeric( $loc ) ? get_term_meta( (int) $loc, '_abpet_map', true ) : [];
+						$map_data      = is_array( $map_term_meta ) && ! empty( $map_term_meta ) ? $map_term_meta : $map_data;
 						if ( ! empty( $map_data['lat'] ) && ! empty( $map_data['lng'] ) ) {
 							$map_locations[] = [
 								'id'      => $loc,
@@ -140,13 +138,13 @@
 				if ( empty( $map_locations ) ) {
 					return;
 				}
-				if ( ! wp_script_is( 'abpet_gmaps', 'enqueued' ) ) {
+				if ( $map_mode === 'js' && ! wp_script_is( 'abpet_gmaps', 'enqueued' ) ) {
 					wp_enqueue_script( 'abpet_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&callback=abpet_gmap_frontend_init', array(), null, true );
 				}
 				$style = sanitize_key( $style );
 				$style = in_array( $style, [ 'default', 'light', 'modern' ], true ) ? $style : 'default';
 				include_once ABPET_Function::template_path( 'map/' . $style . '.php' );
-				do_action( 'abpet_map_' . $style . '_template', $map_locations, $post_id );
+				do_action( 'abpet_map_' . $style . '_template', $map_locations, $post_id, $map_mode );
 			}
 			public function event_schedule_list( int $post_id, array $dates, array $time_infos, string $selected_date = '', string $selected_time = '', string $layout = 'dropdown' ): void {
 				$items = ABPET_Function::event_schedule_items( $post_id, $dates, $time_infos );
@@ -157,35 +155,46 @@
 				$dropdown_id      = 'abpet-schedule-dropdown-' . $post_id;
 				?>
 				<?php if ( ! $is_scroll_layout ) : ?>
-				<div class="abpet_schedule_picker">
-					<button class="_btn_theme_xs abpet_schedule_toggle" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $dropdown_id ); ?>">
-						<span class="fas fa-calendar-alt" aria-hidden="true"></span>
+                    <div class="abpet_schedule_picker">
+                    <button class="_btn_theme_xs abpet_schedule_toggle" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $dropdown_id ); ?>">
+                        <span class="fas fa-calendar-alt" aria-hidden="true"></span>
 						<?php esc_html_e( 'View More Date', 'abp-event-ticket' ); ?>
-					</button>
-					<div id="<?php echo esc_attr( $dropdown_id ); ?>" class="abpet_schedule_dropdown" hidden>
+                    </button>
+                    <div id="<?php echo esc_attr( $dropdown_id ); ?>" class="abpet_schedule_dropdown" hidden>
 				<?php endif; ?>
-					<div class="abpet_schedule_list<?php echo esc_attr( $is_scroll_layout ? ' abpet_schedule_list--scroll' : '' ); ?>">
-						<div class="abpet_schedule_list_heading">
-							<span class="fas fa-calendar-alt" aria-hidden="true"></span>
-							<strong><?php esc_html_e( 'Available Schedule', 'abp-event-ticket' ); ?></strong>
-						</div>
-						<div class="abpet_schedule_list_items">
-							<?php foreach ( $items as $item ) : ?>
-								<div class="abpet_event_schedule_day">
-									<?php foreach ( $item['times'] as $time ) :
-										$is_active = $item['date'] === $selected_date && $time === $selected_time;
+                <div class="abpet_schedule_list<?php echo esc_attr( $is_scroll_layout ? ' abpet_schedule_list--scroll' : '' ); ?>">
+                    <div class="abpet_schedule_list_heading">
+                        <span class="fas fa-calendar-alt" aria-hidden="true"></span>
+                        <strong><?php esc_html_e( 'Available Schedule', 'abp-event-ticket' ); ?></strong>
+                    </div>
+                    <div class="abpet_schedule_list_items">
+						<?php foreach ( $items as $item ) : ?>
+                            <div class="abpet_event_schedule_day">
+								<?php
+									$all_times = $item['times'] ?? [];
+									if ( ! empty( $all_times ) ) {
+										foreach ( $all_times as $time ) :
+											$is_active = $item['date'] === $selected_date && $time === $selected_time;
+											?>
+                                            <a class="abp <?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'], $time ) ); ?>">
+                                                <time datetime="<?php echo esc_attr( $item['date'] . 'T' . $time ); ?>"><?php echo esc_html( ABPET_Function::date_format( $item['date'] . ' ' . $time ) ); ?></time>
+                                            </a>
+										<?php endforeach;
+									} else {
+										$is_active = $item['date'] === $selected_date;
 										?>
-										<a class="abp <?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'], $time ) ); ?>">
-											<time datetime="<?php echo esc_attr( $item['date'] . 'T' . $time ); ?>"><?php echo esc_html( ABPET_Function::date_format( $item['date'] . ' ' . $time ) ); ?></time>
-										</a>
-									<?php endforeach; ?>
-								</div>
-							<?php endforeach; ?>
-						</div>
-					</div>
+                                        <a class="abp <?php echo esc_attr( $is_active ? 'is-active' : '' ); ?>" href="<?php echo esc_url( ABPET_Function::event_schedule_url( $post_id, $item['date'] ) ); ?>">
+                                            <time datetime="<?php echo esc_attr( $item['date'] . 'T' ); ?>"><?php echo esc_html( ABPET_Function::date_format( $item['date'] ) ); ?></time>
+                                        </a>
+										<?php
+									} ?>
+                            </div>
+						<?php endforeach; ?>
+                    </div>
+                </div>
 				<?php if ( ! $is_scroll_layout ) : ?>
-					</div>
-				</div>
+                    </div>
+                    </div>
 				<?php endif; ?>
 				<?php
 			}

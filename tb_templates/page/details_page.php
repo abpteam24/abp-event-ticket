@@ -23,7 +23,9 @@
 		<?php
 	} else {
 		get_header();
-		the_post();
+		if ( have_posts() ) {
+			the_post();
+		}
 	}
 	//do_action( 'woocommerce_before_single_product' );
     $abpet_cart_success = function_exists( 'WC' ) && WC()->session ? WC()->session->get( 'abpet_cart_success' ) : '';

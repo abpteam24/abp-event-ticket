@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,7 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * Date-wise and day-wise time configuration
 * Advance booking and sale closing buffer controls
 * Location, category, organizer, and brand management
-* Google Location Map with search-and-select admin picker
+* Google Location Map with search-and-select admin picker and key-free iframe fallback
 * Frontend location map with three display styles (default, light, modern)
 * Event features and related event display
 * Configurable attendee information forms
@@ -93,7 +93,7 @@ Configure when tickets are available for each event:
 
 == Google Location Map ==
 
-Show an interactive Google Map for the locations assigned to an event. The feature is powered by the Google Maps JavaScript API and the Places library.
+Show a Google Map for the locations assigned to an event. With a Google Maps JavaScript API key the interactive map is rendered via the JavaScript API and Places library. When no API key is saved, the map is rendered as an embedded iframe (no API key required), so the location still displays as long as the global Google Location Map switch is on.
 
 Setup:
 
@@ -102,7 +102,7 @@ Setup:
 3. Open a Location in the global data, search for the address or place, and select it on the map to save its latitude, longitude, address, and place data.
 4. Assign that location to an event.
 
-When the global switch is on, a valid API key is saved, the event has a location, and that location has saved map data, the map is displayed on the event details page. If any of these conditions is missing, no map is rendered.
+When the global switch is on, the event has a location, and that location has saved map data, the map is displayed on the event details page. With an API key saved, the interactive JavaScript map renders; without a key, an embedded iframe map renders instead. If the switch is off or no map data exists for the location, no map is rendered.
 
 The map appears in the event details templates and includes:
 
@@ -277,12 +277,24 @@ If you need any further assistance or support, please contact us through the [ðŸ
 
 == Changelog ==
 
+= 1.0.1 =
+
+* New: Google Location Map feature with ON/OFF switch and Google Maps API key setting.
+* New: Search-and-select map picker in the Location admin screen with draggable marker.
+* New: Per-location map data storage (latitude, longitude, address, and place ID).
+* New: Frontend location map on event details templates with three display styles (default, light, and modern). When no API key is saved, the map loads as an embedded iframe so locations still display.
+* New: `abpet_map` hook for displaying the map on the event details page.
+* Fix: Location list now correctly displays the stored location label.
+* Fix: Event details and category/location/brand/organizer templates no longer call `the_post()` on an empty main query, preventing a PHP "Undefined array key 0" notice when no posts are found.
+
+Released: September 13, 2026
+
 = 1.0.0 =
 
 * Initial release.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 1.0.1 =
 
-Initial release.
+Updated to add the Google Location Map feature for event locations.

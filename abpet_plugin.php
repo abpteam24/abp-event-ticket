@@ -2,7 +2,7 @@
 	/**
 	 * Plugin Name: ABP Event Ticket
 	 * Description: WooCommerce event ticketing system for selling general admission tickets and reserved seats.
-	 * Version: 1.0.0
+	 * Version: 1.0.1
 	 * Author: abpteam
 	 * Author URI: https://abp-team.com
 	 * Text Domain: abp-event-ticket
@@ -45,7 +45,7 @@
 					define( 'ABPET_Plugin_FILE', __FILE__ );
 				}
 				if ( ! defined( 'ABPET_VERSION' ) ) {
-					define( 'ABPET_VERSION', '1.0.0' );
+					define( 'ABPET_VERSION', '1.0.1' );
 				}
 				if ( ! defined( 'ABPET_DIR' ) ) {
 					define( 'ABPET_DIR', plugin_dir_path( __FILE__ ) );

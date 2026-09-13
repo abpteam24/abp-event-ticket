@@ -23,7 +23,9 @@
 		<?php
 	} else {
 		get_header();
-		the_post();
+		if ( have_posts() ) {
+			the_post();
+		}
 	}
 	$term = get_queried_object();
 	if ( $term instanceof WP_Term ) {

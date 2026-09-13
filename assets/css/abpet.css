@@ -1394,18 +1394,21 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map {margin: var(--et_gap) 0 0 0;width: 100%;}
 	div.abpet_area .abpet_map .abpet_map_count {color: var(--et_color_white);background: var(--et_color_theme);padding: var(--et_gap_xxs) var(--et_gap_xs);border-radius: var(--et_br);font-size: var(--et_fs_label);}
 	div.abpet_area .abpet_map .abpet_map_canvas {width: 100%;min-width: 100%;background: var(--et_color_6);border: 1px solid var(--et_color_border);}
+	div.abpet_area .abpet_map .abpet_map_iframe {width: 100%;min-width: 100%;display: block;border: 1px solid var(--et_color_border);background: var(--et_color_6);}
 	/*------------------------------- Default ----------------------------------*/
 	div.abpet_area .abpet_map_default .abpet_map_block {margin: 0 0 var(--et_gap_xs) 0;}
 	div.abpet_area .abpet_map_default .abpet_map_block:last-child {margin: 0;}
 	div.abpet_area .abpet_map_default .abpet_map_name {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xxs);padding: var(--et_gap_xxs) 0;color: var(--et_color_theme);font-size: var(--et_fs_h5);}
 	div.abpet_area .abpet_map_default .abpet_map_name i {color: var(--et_color_theme);}
 	div.abpet_area .abpet_map_default .abpet_map_canvas {height: 320px;border-radius: var(--et_br);}
+	div.abpet_area .abpet_map_default .abpet_map_iframe {height: 320px;border-radius: var(--et_br);}
 	div.abpet_area .abpet_map_default .abpet_map_address {display: -webkit-flex;display: flex;-webkit-align-items: flex-start;align-items: flex-start;gap: var(--et_gap_xxs);padding: var(--et_gap_xs);background: var(--et_color_4);border-radius: var(--et_br);color: var(--et_color_font);font-size: var(--et_fs);}
 	div.abpet_area .abpet_map_default .abpet_map_address i {color: var(--et_color_theme);margin: var(--et_gap_xxs) 0 0 0;}
 	/*------------------------------- Light ----------------------------------*/
 	div.abpet_area .abpet_map_light {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap);}
 	div.abpet_area .abpet_map_light .abpet_map_card {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;-webkit-flex: 1 1 320px;flex: 1 1 320px;min-width: 280px;background: var(--et_color_white);border-radius: var(--et_br_xl);overflow: hidden;border: 2px solid var(--et_color_3);}
 	div.abpet_area .abpet_map_light .abpet_map_canvas {height: 220px;min-height: 220px;}
+	div.abpet_area .abpet_map_light .abpet_map_iframe {height: 220px;min-height: 220px;}
 	div.abpet_area .abpet_map_light .abpet_map_card_body {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap);}
 	div.abpet_area .abpet_map_light .abpet_map_card_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 45px;height: 45px;border-radius: 50%;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_h5);-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_light .abpet_map_card_info {min-width: 0;width: 100%;}
@@ -1422,6 +1425,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map_modern .abpet_map_modern_body {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;gap: var(--et_gap);padding: var(--et_gap) 0 0 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_item {position: relative;}
 	div.abpet_area .abpet_map_modern .abpet_map_canvas {height: 360px;border-radius: var(--et_br);}
+	div.abpet_area .abpet_map_modern .abpet_map_iframe {height: 360px;border-radius: var(--et_br);}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_caption {position: absolute;left: var(--et_gap);right: var(--et_gap);bottom: var(--et_gap);display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);background: var(--et_color_white);border-radius: var(--et_br);box-shadow: var(--et_shadow_29);text-decoration: none;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_pin {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 38px;height: 38px;border-radius: 50%;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_h5);-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text {min-width: 0;width: 100%;display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;}
