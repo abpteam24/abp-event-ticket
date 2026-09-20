@@ -1434,3 +1434,40 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map_modern .abpet_map_modern_go {color: var(--et_color_theme);font-size: var(--et_fs_label);white-space: nowrap;-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_go:hover {text-decoration: underline;}
 }
+/******************************************************************** Event Timeline (Frontend) ************************************************/
+@media only screen and (min-width: 10px) {
+	div.abpet_area .abpet_timeline {margin: var(--et_gap) 0 0 0;width: 100%;}
+	div.abpet_area .abpet_timeline .abpet_tl_list {position: relative;padding: 0 0 0 28px;display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;gap: 0;}
+	div.abpet_area .abpet_timeline .abpet_tl_list:before {content: "";position: absolute;left: 8px;top: 4px;bottom: 4px;width: 2px;background: var(--et_color_theme_aa);}
+	div.abpet_area .abpet_timeline .abpet_tl_item {position: relative;}
+	div.abpet_area .abpet_timeline .abpet_tl_time {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xxs);color: var(--et_color_theme);font-size: var(--et_fs_label);font-weight: 600;}
+	div.abpet_area .abpet_timeline .abpet_tl_time i {font-size: var(--et_fs);}
+	div.abpet_area .abpet_timeline .abpet_tl_title {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_font);font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_timeline .abpet_tl_des {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_font);font-size: var(--et_fs);line-height: 1.7;}
+	div.abpet_area .abpet_timeline .abpet_tl_des p {margin: 0 0 var(--et_gap_xxs) 0;}
+	div.abpet_area .abpet_timeline .abpet_tl_des p:last-child {margin: 0;}
+	/*------------------------------- Default (classic vertical) ----------------------------------*/
+	div.abpet_area .abpet_timeline_default .abpet_tl_item {padding: 0 0 var(--et_gap_xs) var(--et_gap_xs);}
+	div.abpet_area .abpet_timeline_default .abpet_tl_item:last-child {padding-bottom: 0;}
+	div.abpet_area .abpet_timeline_default .abpet_tl_dot {position: absolute;left: -28px;top: 2px;width: 18px;height: 18px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;background: var(--et_color_white);border: 2px solid var(--et_color_theme);border-radius: 50%;}
+	div.abpet_area .abpet_timeline_default .abpet_tl_dot_core {width: 8px;height: 8px;background: var(--et_color_theme);border-radius: 50%;}
+	div.abpet_area .abpet_timeline_default .abpet_tl_content {padding: var(--et_gap_xs);background: var(--et_color_4);border-left: 3px solid var(--et_color_theme);border-radius: var(--et_br);}
+	/*------------------------------- Light (card style) ----------------------------------*/
+	div.abpet_area .abpet_timeline_light .abpet_tl_item {padding: 0 0 var(--et_gap_xs) var(--et_gap_xs);}
+	div.abpet_area .abpet_timeline_light .abpet_tl_item:last-child {padding-bottom: 0;}
+	div.abpet_area .abpet_timeline_light .abpet_tl_marker {position: absolute;left: -28px;top: 2px;width: 18px;height: 18px;background: var(--et_color_theme);border: 3px solid var(--et_color_border);border-radius: 50%;}
+	div.abpet_area .abpet_timeline_light .abpet_tl_marker_core {width: 6px;height: 6px;background: var(--et_color_theme_alter);border-radius: 50%;position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}
+	div.abpet_area .abpet_timeline_light .abpet_tl_card {padding: var(--et_gap_xs);background: var(--et_color_white);border: 1px solid var(--et_color_border);border-radius: var(--et_br);-webkit-box-shadow: var(--et_shadow_29);box-shadow: var(--et_shadow_29);}
+	/*------------------------------- Modern ----------------------------------*/
+	div.abpet_area .abpet_timeline_modern {padding: 0;overflow: hidden;background: var(--et_color_white);border: 1px solid var(--et_color_3);border-radius: var(--et_br_xl);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_head {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);border-bottom: 1px solid var(--et_color_border);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 42px;height: 42px;border-radius: var(--et_br);background: var(--et_color_navy_blue);color: var(--et_color_white);font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_heading span {display: block;color: var(--et_color_theme);font-size: var(--et_fs_label);text-transform: uppercase;letter-spacing: 1px;}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_heading h4 {display: block;margin: 0;color: var(--et_color_font);font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_list {padding: var(--et_gap_xs) var(--et_gap) var(--et_gap_xs) 32px;}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_item {padding: 0 0 var(--et_gap_xs) var(--et_gap_xs);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_item:last-child {padding-bottom: 0;}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_badge {position: absolute;left: -32px;top: 2px;width: 22px;height: 22px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;background: var(--et_color_theme);border-radius: 50%;}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_badge_core {width: 8px;height: 8px;border: 2px solid var(--et_color_theme_alter);border-radius: 50%;}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_card {padding: var(--et_gap_xs);background: var(--et_color_section);border: 1px dashed var(--et_color_border);border-radius: var(--et_br);}
+}

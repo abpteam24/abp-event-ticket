@@ -122,6 +122,9 @@
 					'display_faq'                 => __( 'Use this switch to control whether the FAQ is displayed on the frontend. Turn the switch ON to show the FAQ, and OFF to hide it. By default, this option is set to ON.', 'abp-event-ticket' ),
 					'active_global_faq'           => __( 'Enable this switch to apply the global FAQ to this post. If you want to add custom FAQs specifically for this post, turn the switch OFF and add your custom FAQs below.You can also use the Import button to bring in global FAQs, which you can then edit or delete based on your needs.', 'abp-event-ticket' ),
 					//=============================//
+					'timeline_item'               => __( 'Add the event schedule steps in order: set a time (when this step happens), a short title, and a description. The item is displayed on the frontend timeline when the Title field is filled.', 'abp-event-ticket' ),
+					'display_timeline'            => __( 'Use this switch to control whether the Event Timeline is displayed on the frontend. Turn the switch ON to show the timeline, and OFF to hide it. By default, this option is set to ON.', 'abp-event-ticket' ),
+					//=============================//
 					'search_get_wrong_data_info'  => __( 'Somethings went Wrong ! Please Try again', 'abp-event-ticket' ),
 					'sale_close_msg'              => __( 'This Event sale close shortly. please try another Event.', 'abp-event-ticket' ),
 					'not_date'                    => __( 'No Dates Found !', 'abp-event-ticket' ),

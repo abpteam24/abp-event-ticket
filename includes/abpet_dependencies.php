@@ -86,7 +86,8 @@
 				wp_enqueue_style( 'abpet_admin', ABPET_URL . 'assets/css/abpet_admin.css', array(), time() );
 			$google_map_key = ABPET_Function::get_options( 'abpet_configuration', 'google_map_key', '' );
 			if ( ABPET_Function::on_off( 'google_map' ) && ! empty( $google_map_key ) ) {
-				wp_enqueue_script( 'abpet_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abpet_gmap_init', array(), null, true );
+				// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
+			wp_enqueue_script( 'abpet_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abpet_gmap_init', array(), null, true );
 			}
 				wp_enqueue_script( 'abpet_sp', ABPET_URL . 'assets/js/abpet_sp.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'abpet_sp', 'abpet_sp_config', [
@@ -250,6 +251,7 @@
 					require_once ABPET_DIR . 'admin/abpet_form.php';
 					require_once ABPET_DIR . 'admin/abpet_seat_plan.php';
 					require_once ABPET_DIR . 'admin/abpet_resource.php';
+					require_once ABPET_DIR . 'admin/abpet_timeline.php';
 					require_once ABPET_DIR . 'admin/abpet_configuration.php';
 					require_once ABPET_DIR . 'admin/abpet_documentation.php';
 					require_once ABPET_DIR . 'admin/abpet_category.php';

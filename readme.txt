@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ ABP Event Ticket turns WooCommerce into a complete event ticketing and registrat
 
 The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, so you never oversell an event.
 
-Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, and Terms & Conditions. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
+Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, and event timelines. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
 
 == Key Features ==
 
@@ -47,6 +47,7 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * Configurable attendee information forms
 * Optional additional services with pricing
 * Event FAQs and Terms & Conditions
+* Event Timeline with time, title, and description entries
 * Global and event-specific configuration
 * Feature enable and disable controls
 * Event search, filtering, and pagination
@@ -112,6 +113,26 @@ The map appears in the event details templates and includes:
 * Three frontend map styles: default, light, and modern
 * Clickable marker with location name and address info window
 * "Get Directions" links to Google Maps
+
+== Event Timeline ==
+
+Display a visual event timeline on the event details page showing the schedule of activities in chronological order. Each timeline entry consists of a time, a title, and a rich-text description.
+
+Setup:
+
+1. Enable Event Timeline under the plugin's global ON/OFF settings.
+2. Open an event and go to the Timeline tab.
+3. Turn on the "Active Timeline" switch for that event.
+4. Click "Add New Timeline Item" and fill in the time, title, and description for each schedule entry.
+5. Save the event.
+
+The timeline appears on the event details page when the event has at least one timeline entry with a title. It supports three display styles that match the event details template:
+
+* **Default** - Vertical line with dot markers and a bordered card layout
+* **Light** - Vertical line with circle markers and shadowed card layout
+* **Modern** - Header banner with badge markers and dashed card layout within a rounded container
+
+The timeline section is gated by the global Event Timeline switch. When the switch is OFF, no timeline is displayed anywhere on the site even if events have timeline entries saved. The per-event "Active Timeline" switch controls whether the timeline is shown for that specific event.
 
 == Attendee Information and Services ==
 
@@ -247,6 +268,10 @@ Yes. Use the listing and gallery shortcodes with supported attributes to control
 
 Yes. Enable Google Location Map in the global ON/OFF settings, add a Google Maps API key, and save map coordinates for each location. The map is displayed on the event details page when the event location has saved map data. You can choose between default, light, and modern map styles.
 
+= Can I display an event timeline? =
+
+Yes. Enable Event Timeline in the global ON/OFF settings, then open an event and add timeline entries with a time, title, and description for each schedule item. The timeline is displayed on the event details page in three styles: default, light, and modern.
+
 = Is the plugin translation-ready? =
 
 Yes. The plugin uses the WordPress localization system and is translation-ready.
@@ -263,6 +288,7 @@ Yes. The plugin uses the WordPress localization system and is translation-ready.
 8. Frontend event listing - event grid with search and filters
 9.  Frontend event detail - ticket/seat selection and booking form
 10. Location map picker in the admin and the frontend location map
+11. Event Timeline tab in event settings and frontend timeline display
 
 
 == Need help or have suggestions? ==
@@ -276,6 +302,16 @@ If you need any further assistance or support, please contact us through the [ðŸ
 
 
 == Changelog ==
+
+= 1.0.2 =
+
+* New: Event Timeline feature with global ON/OFF switch and per-event toggle.
+* New: Timeline tab in event post settings with repeatable time, title, and rich-text description entries via WP Editor.
+* New: Frontend event timeline on all three event details templates (default, light, and modern) with clean vertical classic design.
+* New: `abpet_timeline` hook for displaying the timeline on the event details page.
+* New: CSS styles for timeline display across all three template variants.
+
+Released: September 20, 2026
 
 = 1.0.1 =
 
@@ -294,6 +330,10 @@ Released: September 13, 2026
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+
+Updated to add the Event Timeline feature for displaying event schedules on the details page.
 
 = 1.0.1 =
 

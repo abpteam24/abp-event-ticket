@@ -479,6 +479,13 @@
                             'default' => 'on',
                         ),
                         array(
+                            'name' => 'timeline',
+                            'label' => __('Event Timeline', 'abp-event-ticket'),
+                            'desc' => __('Show the Event Timeline section on event details pages. When this switch is OFF, no timeline will be displayed anywhere on the site even if events have timeline entries saved.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'on',
+                        ),
+                        array(
                             'name' => 'remove_uninstall',
                             'label' => __('Remove All Data on Uninstall', 'abp-event-ticket'),
                             'desc' => __('When this switch is OFF (recommended), all ABP Event Ticket data is preserved when you uninstall the plugin. You can reinstall the plugin later and keep your existing events, orders, seat plans, and settings. When this switch is ON, all plugin data (events, taxonomy terms, seat plans, the orders table, and all options) is permanently deleted on uninstall.', 'abp-event-ticket'),
