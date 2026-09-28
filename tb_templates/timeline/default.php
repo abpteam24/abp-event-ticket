@@ -9,7 +9,7 @@
 		?>
         <section class="abpet_timeline abpet_timeline_default">
             <div class="_panel_head _fj_between">
-                <h4 class="abp"><i class="fas fa-stream" aria-hidden="true"></i><?php esc_html_e( 'Event Timeline', 'abp-event-ticket' ); ?></h4>
+                <h4 class="abp_gap_xs"><i class="fas fa-stream" aria-hidden="true"></i><?php esc_html_e( 'Event Timeline', 'abp-event-ticket' ); ?></h4>
             </div>
             <div class="_panel_body_xs">
                 <div class="abpet_tl_list">

@@ -2,6 +2,7 @@ window.abpet_parent = window.abpet_parent || jQuery('div.abpet_admin');
 let abpet_feature = JSON.parse(abpet_admin_data.abpet_feature);
 let abpet_category = JSON.parse(abpet_admin_data.abpet_category);
 let abpet_organizer = JSON.parse(abpet_admin_data.abpet_organizer);
+let abpet_speaker = JSON.parse(abpet_admin_data.abpet_speaker);
 let abpet_brand = JSON.parse(abpet_admin_data.abpet_brand);
 let abpet_location = JSON.parse(abpet_admin_data.abpet_location);
 let abpet_related_info = JSON.parse(abpet_admin_data.related_info);
@@ -190,6 +191,7 @@ window.abpet_popup_open_global = function (action, id = '') {
                         target.html(response.data.html).promise().done(function () {
                             abpet_toast_msg(response.data.msg, response.data.type);
                             abpet_init(target);
+                            abpet_wp_editor_init(target);
                             abpet_gmap_init(target);
                         });
                     }
@@ -267,6 +269,10 @@ window.abpet_save_global = function (action, $_this) {
                             if (action === 'tax_organizer') {
                                 abpet_organizer = response.data.js;
                                 new ABPET_Multi_Selection('div.abpet_admin .abpet_organizer', abpet_organizer);
+                            }
+                            if (action === 'tax_speaker') {
+                                abpet_speaker = response.data.js;
+                                new ABPET_Multi_Selection('div.abpet_admin .post_speaker', abpet_speaker);
                             }
                             if (action === 'tax_brand') {
                                 abpet_brand = response.data.js;
@@ -724,6 +730,7 @@ window.abpet_image_selection = function ($this) {
         new ABPET_Multi_Selection('div.abpet_admin .related_item', abpet_related_info);
         new ABPET_Multi_Selection('div.abpet_admin .abpet_category', abpet_category);
         new ABPET_Multi_Selection('div.abpet_admin .abpet_organizer', abpet_organizer);
+        new ABPET_Multi_Selection('div.abpet_admin .post_speaker', abpet_speaker);
         new ABPET_Multi_Selection('div.abpet_admin .abpet_brand', abpet_brand);
         new ABPET_Multi_Selection('div.abpet_admin .abpet_location', abpet_location);
         //=========Color Picker==============//

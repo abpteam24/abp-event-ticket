@@ -2,7 +2,7 @@
 	/**
 	 * Plugin Name: ABP Event Ticket
 	 * Description: WooCommerce event ticketing system for selling general admission tickets and reserved seats.
-	 * Version: 1.0.2
+	 * Version: 1.0.3
 	 * Author: abpteam
 	 * Author URI: https://abp-team.com
 	 * Text Domain: abp-event-ticket
@@ -45,7 +45,7 @@
 					define( 'ABPET_Plugin_FILE', __FILE__ );
 				}
 				if ( ! defined( 'ABPET_VERSION' ) ) {
-					define( 'ABPET_VERSION', '1.0.2' );
+					define( 'ABPET_VERSION', '1.0.3' );
 				}
 				if ( ! defined( 'ABPET_DIR' ) ) {
 					define( 'ABPET_DIR', plugin_dir_path( __FILE__ ) );
@@ -86,6 +86,9 @@
 				}
 				if ( ! defined( 'ABPET_Brand' ) ) {
 					define( 'ABPET_Brand', ABPET_Function::get_option( 'abpet_brand' ) );
+				}
+				if ( ! defined( 'ABPET_Speaker' ) ) {
+					define( 'ABPET_Speaker', ABPET_Function::get_option( 'abpet_speaker' ) );
 				}
 				if ( ! defined( 'ABPET_ids' ) ) {
 					define( 'ABPET_ids', ABPET_Query::get_post_id());
@@ -158,6 +161,7 @@
 			'abpet_category',
 			'abpet_location',
 			'abpet_organizer',
+			'abpet_speaker',
 			'abpet_brand',
 			'abpet_feature',
 			'abpet_ticket',
@@ -191,7 +195,7 @@
 			wp_delete_post( $post_id, true );
 		}
 
-		$taxonomies = array( 'abpet_category', 'abpet_location', 'abpet_organizer', 'abpet_brand' );
+		$taxonomies = array( 'abpet_category', 'abpet_location', 'abpet_organizer', 'abpet_brand', 'abpet_speaker' );
 		foreach ( $taxonomies as $taxonomy ) {
 			$terms = get_terms( array(
 				'taxonomy'   => $taxonomy,

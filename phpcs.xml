@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="ABP Event Ticket">
+	<description>Coding standards for ABP Event Ticket.</description>
+
+	<!-- Only sniff PHP. Without this the whole plugin tree also reports on CSS/JS. -->
+	<arg name="extensions" value="php"/>
+
+	<rule ref="WordPress"/>
+
+	<!--
+		Declare the prefix explicitly.
+
+		Without this, WordPress.NamingConventions.PrefixAllGlobals infers prefixes by
+		scanning whatever file set it is handed, so the results depend on how you
+		invoke PHPCS. A whole-directory run auto-detects "abpet" and stays quiet,
+		whereas a single-file run cannot detect it and reports every ordinary variable
+		as an unprefixed global. Pinning it here makes every invocation agree.
+	-->
+	<property name="prefixes" value="abpet,ABPET,abp"/>
+
+	<!--
+		Template files are not global scope.
+
+		WordPress includes templates from inside load_template(), so variables such as
+		$name or $bio are function-local at runtime. The sniff cannot see that and
+		treats the top level of a template as global scope, producing false positives
+		on ordinary template variables in every file under tb_templates. Suppressed
+		there only; it still applies everywhere else in the plugin.
+	-->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern type="relative">^tb_templates/*</exclude-pattern>
+	</rule>
+</ruleset>

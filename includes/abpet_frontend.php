@@ -19,7 +19,7 @@
 				return (string) $template;
 			}
 			public function load_taxonomy_page( $template ): string {
-				if ( in_array( get_query_var( 'taxonomy' ), [ 'abpet_category', 'abpet_location', 'abpet_brand', 'abpet_organizer' ], true ) ) {
+				if ( in_array( get_query_var( 'taxonomy' ), [ 'abpet_category', 'abpet_location', 'abpet_brand', 'abpet_organizer', 'abpet_speaker' ], true ) ) {
 					nocache_headers();
 				}
 				if ( is_tax( 'abpet_category' ) ) {
@@ -33,6 +33,9 @@
 				}
 				if ( is_tax( 'abpet_organizer' ) ) {
 					return ABPET_Function::template_path( 'page/organizer.php' );
+				}
+				if ( is_tax( 'abpet_speaker' ) ) {
+					return ABPET_Function::template_path( 'page/speaker.php' );
 				}
 				return (string) $template;
 			}

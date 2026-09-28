@@ -46,6 +46,7 @@
 					'abpet_feature'   => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_feature' ) ),
 					'abpet_category'  => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_category' ) ),
 					'abpet_organizer' => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_organizer' ) ),
+					'abpet_speaker'   => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_speaker' ) ),
 					'abpet_brand'     => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_brand' ) ),
 					'sp_data'         => wp_json_encode( ABPET_Seat_Plan::get_sp_js( $post_id ) ),
 					'abpet_location'  => wp_json_encode( ABPET_Function::option_js( $post_id, 'abpet_location' ) ),
@@ -258,6 +259,7 @@
 					require_once ABPET_DIR . 'admin/abpet_organizer.php';
 					require_once ABPET_DIR . 'admin/abpet_location.php';
 					require_once ABPET_DIR . 'admin/abpet_brand.php';
+					require_once ABPET_DIR . 'admin/abpet_speaker.php';
 					require_once ABPET_DIR . 'admin/abpet_feature.php';
 				}
 				if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) ) {
@@ -384,6 +386,24 @@
 						'rewrite'           => [ 'slug' => ABPET_Function::brand_slug() ],
 						'show_in_rest'      => true,
 						'rest_base'         => 'abpet_brand',
+						'meta_box_cb'       => false,
+					] );
+				}
+				if ( ABPET_Function::on_off( 'speaker' ) ) {
+					register_taxonomy( 'abpet_speaker', $cpt, [
+						'hierarchical'      => false,
+						'public'            => true,
+						'labels'            => [
+							'name'          => ABPET_Function::speaker_label(),
+							'singular_name' => ABPET_Function::speaker_label(),
+						],
+						'show_ui'           => false,
+						'show_admin_column' => false,
+						'show_in_menu'      => false,
+						'query_var'         => true,
+						'rewrite'           => [ 'slug' => ABPET_Function::speaker_slug() ],
+						'show_in_rest'      => true,
+						'rest_base'         => 'abpet_speaker',
 						'meta_box_cb'       => false,
 					] );
 				}

@@ -66,6 +66,7 @@
 				$loc_id = $filters['loc_id'] ?? null;
 				$organizer_id = $filters['organizer_id'] ?? null;
 				$brand_id = $filters['brand_id'] ?? null;
+				$speaker_id = $filters['speaker_id'] ?? null;
 				$meta_query = ['relation' => 'AND'];
 				// Category query
 				if (!empty($cat_id)) {
@@ -79,6 +80,9 @@
 				}
 				if (!empty($brand_id)) {
 					$meta_query[] = ['key' => 'abpet_brand', 'value' => '(^|,)' . absint($brand_id) . '(,|$)', 'compare' => 'REGEXP'];
+				}
+				if (!empty($speaker_id)) {
+					$meta_query[] = ['key' => 'speaker', 'value' => '(^|,)' . absint($speaker_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
 				$order = strtoupper((string) ($filters['sort'] ?? 'ASC')) === 'DESC' ? 'DESC' : 'ASC';
 				$all_data = get_posts(array(

@@ -95,7 +95,7 @@
 				<?php
 			}
 			public function load_global( $abpet_info ): void {
-				$allowed_tabs = [ 'dates', 'additional', 'client_form', 'resource', 'category', 'organizer', 'location', 'feature', 'brand', 'discount' ];
+				$allowed_tabs = [ 'dates', 'additional', 'client_form', 'resource', 'category', 'organizer', 'location', 'feature', 'brand', 'discount','speaker' ];
 				$active_tab   = 'dates';
 				if ( isset( $_GET['_abpet_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_abpet_nonce'] ) ), 'abpet_url_action' ) ) {
 					$active_tab = isset( $_GET['global'] ) ? sanitize_text_field( wp_unslash( $_GET['global'] ) ) : 'dates';
@@ -133,6 +133,9 @@
 							<?php } ?>
 							<?php if ( ABPET_Function::on_off( 'feature' ) ) { ?>
                                 <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'feature' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'feature' ? 'abp_active' : '' ); ?>">🔗<?php echo esc_html( ABPET_Function::feature_label() ); ?></a>
+							<?php } ?>
+							<?php if ( ABPET_Function::on_off( 'speaker' ) ) { ?>
+                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'speaker' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'speaker' ? 'abp_active' : '' ); ?>">🎤<?php echo esc_html( ABPET_Function::speaker_label() ); ?></a>
 							<?php } ?>
 							<?php if ( ABPET_Function::on_off( 'tc' ) || ABPET_Function::on_off( 'faq' ) ) { ?>
                                 <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'resource' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'resource' ? 'abp_active' : '' ); ?>">📚<?php esc_html_e( 'Resources', 'abp-event-ticket' ); ?></a>

@@ -212,7 +212,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Dashicons library link */
                                 __('Choose a custom admin menu icon. Please browse the %s, copy the desired icon class name, and paste it here.', 'abp-event-ticket'),
-                                '<a class="abp" href="https://developer.wordpress.org/resource/dashicons/" target="_blank">' . __('WordPress Dashicons Library', 'abp-event-ticket') . '</a>'
+                                '<a class="abp" href="https://developer.wordpress.org/resource/dashicons/" target="_blank" rel="noopener noreferrer">' . __('WordPress Dashicons Library', 'abp-event-ticket') . '</a>'
                             ),
                             'type' => 'text',
                             'default' => 'dashicons-tickets'
@@ -308,7 +308,7 @@
                             'desc' => sprintf(
                             /* translators: %s: Google Maps Platform help link */
                                 __('Paste your Google Maps JavaScript API key to enable the Google Location Map feature on the frontend. Get a key from the %s.', 'abp-event-ticket'),
-                                '<a class="abp" href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">' . __('Google Cloud Console', 'abp-event-ticket') . '</a>'
+                                '<a class="abp" href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank" rel="noopener noreferrer">' . __('Google Cloud Console', 'abp-event-ticket') . '</a>'
                             ),
                             'type' => 'text',
                             'default' => '',
@@ -482,6 +482,13 @@
                             'name' => 'timeline',
                             'label' => __('Event Timeline', 'abp-event-ticket'),
                             'desc' => __('Show the Event Timeline section on event details pages. When this switch is OFF, no timeline will be displayed anywhere on the site even if events have timeline entries saved.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'on',
+                        ),
+                        array(
+                            'name' => 'speaker',
+                            'label' => __('Event Speaker', 'abp-event-ticket'),
+                            'desc' => __('Enable speaker profiles and event-speaker linking. When this switch is OFF, speaker features are completely hidden from the site.', 'abp-event-ticket'),
                             'type' => 'button_switch',
                             'default' => 'on',
                         ),

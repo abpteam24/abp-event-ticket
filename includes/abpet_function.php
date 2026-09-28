@@ -97,6 +97,297 @@
 			public static function location_label() { return ( ABPET_Configuration['location_label'] ?? null ) ?: __( 'Location', 'abp-event-ticket' ); }
 			public static function location_slug() { return ( ABPET_Configuration['location_slug'] ?? null ) ?: 'location'; }
 			public static function location_value( $id ) { return ( ABPET_Location[ $id ]['label'] ?? null ) ?: $id; }
+			public static function speaker_label() { return ( ABPET_Configuration['speaker_label'] ?? null ) ?: __( 'Speaker', 'abp-event-ticket' ); }
+			public static function speaker_slug() { return ( ABPET_Configuration['speaker_slug'] ?? null ) ?: 'speaker'; }
+			public static function speaker_value( $id ) { return ( ABPET_Speaker[ $id ]['label'] ?? null ) ?: $id; }
+			/**
+			 * Icon/label map for the social networks a speaker can link to.
+			 *
+			 * @return array
+			 */
+			public static function speaker_social_defs(): array {
+				return [
+					'twitter'   => [ 'icon' => 'fab fa-twitter', 'label' => 'Twitter/X' ],
+					'linkedin'  => [ 'icon' => 'fab fa-linkedin', 'label' => 'LinkedIn' ],
+					'facebook'  => [ 'icon' => 'fab fa-facebook', 'label' => 'Facebook' ],
+					'instagram' => [ 'icon' => 'fab fa-instagram', 'label' => 'Instagram' ],
+				];
+			}
+			/**
+			 * Resolve a speaker photo to a URL that is guaranteed to exist.
+			 *
+			 * wp_get_attachment_image_url() returns false when the requested size
+			 * was never generated, which happens on servers with no GD/Imagick, for
+			 * formats WordPress cannot resize, and for images smaller than the size
+			 * threshold. Templates gated on that return value silently dropped the
+			 * photo, so fall back through the other sizes and then the original.
+			 *
+			 * @param int    $photo_id Attachment ID.
+			 * @param string $size     Preferred image size.
+			 * @return string URL, or an empty string when no file exists.
+			 */
+			public static function speaker_photo_url( $photo_id, string $size = 'medium_large' ): string {
+				$photo_id = absint( $photo_id );
+				if ( $photo_id <= 0 || ! get_post( $photo_id ) ) {
+					return '';
+				}
+				// Reject attachments whose file is gone or was never written, e.g. an
+				// upload the server refused. wp_get_attachment_url() still returns a
+				// URL for those, which would render as a broken image.
+				$file = get_attached_file( $photo_id );
+				if ( ! $file || ! file_exists( $file ) ) {
+					return '';
+				}
+				$full = wp_get_attachment_url( $photo_id );
+				$full = is_string( $full ) ? $full : '';
+				// WordPress does not resize SVGs and image_downsize() can hand back a
+				// URL without the filename for them, so always use the original file.
+				if ( 'image/svg+xml' === get_post_mime_type( $photo_id ) ) {
+					return $full;
+				}
+				foreach ( array_unique( array_filter( [ $size, 'large', 'medium', 'thumbnail', 'full' ] ) ) as $candidate ) {
+					$url = wp_get_attachment_image_url( $photo_id, $candidate );
+					if ( is_string( $url ) && '' !== $url ) {
+						return $url;
+					}
+				}
+				return $full;
+			}
+			/**
+			 * Build the speaker photo <img> tag.
+			 *
+			 * Width/height attributes are only emitted when WordPress actually
+			 * measured the file. Without an image library it reports 1x1, and
+			 * browsers honour those attributes, so the photo renders as a single
+			 * pixel and looks like a missing image.
+			 *
+			 * @param int    $photo_id Attachment ID.
+			 * @param string $size     Preferred image size.
+			 * @param string $alt      Alt text, usually the speaker name.
+			 * @param string $class    Optional class attribute.
+			 * @return string Img markup, or an empty string when no file exists.
+			 */
+			public static function speaker_photo_img( $photo_id, string $size = 'medium_large', string $alt = '', string $class = '' ): string {
+				$photo_id = absint( $photo_id );
+				$url      = self::speaker_photo_url( $photo_id, $size );
+				if ( '' === $url ) {
+					return '';
+				}
+				$meta   = wp_get_attachment_metadata( $photo_id );
+				$width  = ! empty( $meta['width'] ) ? (int) $meta['width'] : 0;
+				$height = ! empty( $meta['height'] ) ? (int) $meta['height'] : 0;
+				$html   = '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $alt ) . '"';
+				if ( '' !== $class ) {
+					$html .= ' class="' . esc_attr( $class ) . '"';
+				}
+				$html .= ' loading="lazy" decoding="async"';
+				if ( $width > 1 && $height > 1 ) {
+					$html .= ' width="' . $width . '" height="' . $height . '"';
+				}
+				return $html . ' />';
+			}
+			/**
+			 * Build the render-ready speaker list for an event.
+			 *
+			 * Reads the `abpet_speaker` term relations first and falls back to the
+			 * `speaker` post meta, so events saved before the taxonomy relation was
+			 * synced still resolve. Returns an empty array when nothing is linked.
+			 *
+			 * @param int $post_id Event post ID.
+			 * @return array List of normalised speaker items.
+			 */
+			public static function speaker_items( $post_id ): array {
+				$post_id = absint( $post_id );
+				if ( $post_id <= 0 ) {
+					return [];
+				}
+				$terms = get_the_terms( $post_id, 'abpet_speaker' );
+				if ( empty( $terms ) || is_wp_error( $terms ) ) {
+					$raw_ids = self::get_post_info( $post_id, 'speaker' );
+					$raw_ids = array_filter( array_map( 'absint', explode( ',', (string) $raw_ids ) ) );
+					if ( empty( $raw_ids ) ) {
+						return [];
+					}
+					$terms = [];
+					foreach ( $raw_ids as $raw_id ) {
+						$term = get_term( $raw_id, 'abpet_speaker' );
+						if ( $term instanceof WP_Term ) {
+							$terms[] = $term;
+						}
+					}
+				}
+				$items = [];
+				foreach ( $terms as $term ) {
+					$items[] = self::speaker_profile( $term );
+				}
+				return $items;
+			}
+			/**
+			 * Normalise a single speaker term into a render-ready profile array.
+			 *
+			 * @param WP_Term|int $term Speaker term or term ID.
+			 * @return array Profile array, or an empty array when the term is invalid.
+			 */
+			public static function speaker_profile( $term ): array {
+				if ( is_numeric( $term ) ) {
+					$term = get_term( absint( $term ), 'abpet_speaker' );
+				}
+				if ( ! ( $term instanceof WP_Term ) ) {
+					return [];
+				}
+				$social_defs = self::speaker_social_defs();
+				$meta   = get_term_meta( $term->term_id, '_abpet_speaker_meta', true );
+				$meta   = is_array( $meta ) ? $meta : [];
+				$photo  = isset( $meta['photo'] ) ? absint( $meta['photo'] ) : 0;
+				$stored = isset( $meta['social'] ) && is_array( $meta['social'] ) ? $meta['social'] : [];
+				$social = [];
+				foreach ( $social_defs as $key => $def ) {
+					$url = isset( $stored[ $key ] ) ? esc_url_raw( $stored[ $key ] ) : '';
+					if ( ! empty( $url ) ) {
+						$social[] = [
+							'key'   => $key,
+							'icon'  => $def['icon'],
+							'label' => $def['label'],
+							'url'   => $url,
+						];
+					}
+				}
+				$website   = isset( $meta['website'] ) ? esc_url_raw( $meta['website'] ) : '';
+				$designation = isset( $meta['designation'] ) ? sanitize_text_field( $meta['designation'] ) : '';
+				$company   = isset( $meta['company'] ) ? sanitize_text_field( $meta['company'] ) : '';
+				$term_link = get_term_link( $term );
+				$profile   = [
+					'id'          => (int) $term->term_id,
+					'name'        => $term->name,
+					'slug'        => $term->slug,
+					'description' => $term->description,
+					'designation' => $designation,
+					'company'     => $company,
+					'website'     => $website,
+					'social'      => $social,
+					'photo_id'    => $photo,
+					'photo_url'   => self::speaker_photo_url( $photo ),
+					'link'        => is_wp_error( $term_link ) ? '' : $term_link,
+				];
+				/**
+				 * Filters the normalised speaker profile.
+				 *
+				 * Add fields stored outside the built-in term meta, or reshape the
+				 * values, without replacing the templates that consume this array.
+				 *
+				 * @param array   $profile Profile array.
+				 * @param WP_Term $term    Speaker term.
+				 */
+				return (array) apply_filters( 'abpet_speaker_profile', $profile, $term );
+			}
+			/**
+			 * Build the complete view model for a single speaker page.
+			 *
+			 * Every value the template prints is assembled here and passed through a
+			 * filter before the template sees it, so a site can surface data it
+			 * stores itself (pronouns, session title, a second link, custom term
+			 * meta) by adding to these arrays, with no template override needed.
+			 *
+			 * Filters, each receiving the profile so callbacks can key off it:
+			 *  - abpet_speaker_page_data  the finished view model
+			 *  - abpet_speaker_initials   fallback avatar initials
+			 *  - abpet_speaker_role       designation/company line parts
+			 *  - abpet_speaker_facts      key/value rows shown in the hero card
+			 *  - abpet_speaker_socials    social icon links
+			 *  - abpet_speaker_photo_img  hero photo markup
+			 *
+			 * @param WP_Term|int $term Speaker term or term ID.
+			 * @return array View model, or an empty array when the term is not a speaker.
+			 */
+			public static function speaker_page_data( $term ): array {
+				if ( is_numeric( $term ) ) {
+					$term = get_term( absint( $term ), 'abpet_speaker' );
+				}
+				if ( ! ( $term instanceof WP_Term ) ) {
+					return [];
+				}
+				$profile = self::speaker_profile( $term );
+				if ( empty( $profile ) ) {
+					return [];
+				}
+				$name = (string) ( $profile['name'] ?? '' );
+				$bio  = (string) ( $profile['description'] ?? '' );
+
+				// Up to two letters for the avatar placeholder, taken from the first
+				// two words so "Dr. Sarah Chen" reads as SC rather than DS.
+				$plain_name = trim( wp_strip_all_tags( $name ) );
+				$initials   = '';
+				foreach ( preg_split( '/\s+/', $plain_name ) as $name_part ) {
+					if ( '' !== $name_part ) {
+						$initials .= mb_substr( $name_part, 0, 1 );
+						if ( mb_strlen( $initials ) >= 2 ) {
+							break;
+						}
+					}
+				}
+				$initials = (string) apply_filters( 'abpet_speaker_initials', mb_strtoupper( $initials ), $name, $profile );
+
+				$role_parts = array_map( 'esc_html', array_filter( [ $profile['designation'] ?? '', $profile['company'] ?? '' ] ) );
+				/** This filter is documented in the method docblock. */
+				$role_parts = (array) apply_filters( 'abpet_speaker_role', $role_parts, $profile );
+
+				// Only rows the admin actually filled in, so a sparse profile stays
+				// compact rather than showing a wall of empty labels.
+				$rows = [
+					'designation' => [ 'icon' => 'fas fa-user-tie', 'label' => __( 'Designation', 'abp-event-ticket' ) ],
+					'company'     => [ 'icon' => 'fas fa-building', 'label' => __( 'Company', 'abp-event-ticket' ) ],
+				];
+				$facts = [];
+				foreach ( $rows as $key => $row ) {
+					$value = (string) ( $profile[ $key ] ?? '' );
+					if ( '' !== $value ) {
+						$facts[] = [
+							'icon'  => $row['icon'],
+							'label' => $row['label'],
+							'value' => $value,
+							'url'   => '',
+						];
+					}
+				}
+				$website = (string) ( $profile['website'] ?? '' );
+				if ( '' !== $website ) {
+					$facts[] = [
+						'icon'  => 'fas fa-globe',
+						'label' => __( 'Website', 'abp-event-ticket' ),
+						// Host only: the full URL duplicates the link text underneath it.
+						'value' => (string) ( wp_parse_url( $website, PHP_URL_HOST ) ?: $website ),
+						'url'   => $website,
+					];
+				}
+				/** This filter is documented in the method docblock. */
+				$facts = (array) apply_filters( 'abpet_speaker_facts', $facts, $profile );
+
+				/** This filter is documented in the method docblock. */
+				$socials = (array) apply_filters( 'abpet_speaker_socials', (array) ( $profile['social'] ?? [] ), $profile );
+
+				$photo_id  = (int) ( $profile['photo_id'] ?? 0 );
+				$photo_img = self::speaker_photo_img( $photo_id, 'medium_large', $name, 'attachment-medium_large size-medium_large' );
+				/** This filter is documented in the method docblock. */
+				$photo_img = (string) apply_filters( 'abpet_speaker_photo_img', $photo_img, $profile );
+
+				$data = [
+					'id'         => (int) ( $profile['id'] ?? 0 ),
+					'name'       => $name,
+					'slug'       => (string) ( $profile['slug'] ?? '' ),
+					'link'       => (string) ( $profile['link'] ?? '' ),
+					'photo_id'   => $photo_id,
+					'photo_img'  => $photo_img,
+					'initials'   => $initials,
+					'role_parts' => $role_parts,
+					'facts'      => $facts,
+					'socials'    => $socials,
+					'bio'        => $bio,
+					'has_bio'    => '' !== trim( wp_strip_all_tags( $bio ) ),
+					'profile'    => $profile,
+				];
+				/** This filter is documented in the method docblock. */
+				return (array) apply_filters( 'abpet_speaker_page_data', $data, $profile );
+			}
 			public static function ticket_name( $id ) { return ( ABPET_Ticket[ $id ]['label'] ?? null ) ?: __( 'Ticket/Seat', 'abp-event-ticket' ); }
 			public static function ticket_icon( $id ) { return ( ABPET_Ticket[ $id ]['icon'] ?? null ) ?: ''; }
 			public static function ticket_color( $id ) { return ( ABPET_Ticket[ $id ]['color'] ?? null ) ?: 'inherit'; }

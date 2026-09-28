@@ -382,13 +382,34 @@
                                 <div class="_fj_between_fa_center">
                                     <span class="abp_label"><?php esc_html_e( 'Feature', 'abp-event-ticket' ); ?></span>
                                     <div class="_group_content">
-										<?php ABPET_Layout::selection_area();
-											ABPET_Layout::button_global_popup( 'option_feature', __( 'Add New', 'abp-event-ticket' ) . ' ' . ABPET_Function::feature_label() ); ?>
+										<?php ABPET_Layout::selection_area(); ?>
+										<?php ABPET_Layout::button_global_popup( 'option_feature', __( 'Add New', 'abp-event-ticket' ) . ' ' . ABPET_Function::feature_label() ); ?>
                                     </div>
                                 </div>
                                 <div class="_divider_xxs"></div>
 								<?php ABPET_Layout::info_text( 'post_feature' );
 									ABPET_Layout::selected_area( 'post_feature', ( $post_infos['post_feature'] ?? '' ) ); ?>
+                            </div>
+						<?php } ?>
+                        <?php if ( ABPET_Function::on_off( 'speaker' ) ) { ?>
+                            <div class="setting_item post_speaker">
+                                <div class="_fj_between_fa_center">
+                                    <span class="abp_label"><?php esc_html_e( 'Speaker', 'abp-event-ticket' ); ?></span>
+                                    <div class="_group_content">
+										<?php ABPET_Layout::selection_area(); ?>
+										<?php ABPET_Layout::button_global_popup( 'tax_speaker', __( 'Add New', 'abp-event-ticket' ) . ' ' . ABPET_Function::speaker_label() ); ?>
+                                    </div>
+                                </div>
+                                <div class="_divider_xxs"></div>
+								<div class="_f_wrap_fj_between_fa_center">
+									<label>
+										<?php ABPET_Layout::switch_checkbox( 'display_speaker', $post_infos['display_speaker'] ?? 'on' ); ?>
+										<span><?php esc_html_e( 'Active Speaker?', 'abp-event-ticket' ); ?></span>
+									</label>
+								</div>
+                                <div class="_divider_xxs"></div>
+								<?php ABPET_Layout::info_text( 'display_speaker' );
+									ABPET_Layout::selected_area( 'speaker', ( $post_infos['speaker'] ?? '' ) ); ?>
                             </div>
 						<?php } ?>
                         <div class="setting_item full_width">
@@ -643,6 +664,9 @@
 						'display_tc'                  => $display_tc,
 						'active_global_tc'            => $active_global_tc,
 						'abpet_tc'                    => $abpet_tc,
+						//================//
+						'speaker'                     => $post_val( 'speaker' ),
+						'display_speaker'             => isset( $_POST['display_speaker'] ) ? sanitize_text_field( wp_unslash( $_POST['display_speaker'] ) ) : 'on',
 					];
 					$validation_errors           = $this->validate_event_configuration(
 						$post_id,
@@ -680,6 +704,7 @@
 							'abpet_location'  => 'abpet_location',
 							'abpet_organizer' => 'abpet_organizer',
 							'abpet_brand'     => 'abpet_brand',
+							'speaker'         => 'abpet_speaker',
 						] as $meta_key => $taxonomy
 					) {
 						if ( taxonomy_exists( $taxonomy ) ) {

@@ -286,7 +286,6 @@ let abpet_decor_item = abpet_sp_config.decor_item ? JSON.parse(abpet_sp_config.d
             applyGroupToCell(targetCell);
         } else if (lastClickedIndex === null && !activeGroup) {
             activeGroup = (type === 'seat') ? abpet_ticket_type.find(g => String(g.id) === String(id)) : abpet_decor_item.find(g => String(g.id) === String(id));
-            console.log(activeGroup);
             lastClickedIndex = currentIndex;
             sp_parent.find('.sp_tab, .sp_tab_content').removeClass('abp_active');
             sp_parent.find('[data-tab="' + target_tab + '"]').addClass('abp_active');

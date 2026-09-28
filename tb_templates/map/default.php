@@ -11,7 +11,7 @@
 		?>
         <section class="abpet_map abpet_map_default">
             <div class="_panel_head _fj_between">
-                <h4 class="abp"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><?php echo esc_html( __( 'Event', 'abp-event-ticket' ) . ' ' . $title ); ?></h4>
+                <h4 class="abp_gap_xs"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><?php echo esc_html( __( 'Event', 'abp-event-ticket' ) . ' ' . $title ); ?></h4>
                 <?php if ( count( $map_locations ) > 1 ) { ?>
                     <span class="abpet_map_count"><?php echo esc_html( count( $map_locations ) ); ?> <?php echo esc_html( $title ); ?></span>
                 <?php } ?>

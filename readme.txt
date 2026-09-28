@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ ABP Event Ticket turns WooCommerce into a complete event ticketing and registrat
 
 The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, so you never oversell an event.
 
-Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, and event timelines. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
+Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, event timelines, and speakers. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
 
 == Key Features ==
 
@@ -48,6 +48,7 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * Optional additional services with pricing
 * Event FAQs and Terms & Conditions
 * Event Timeline with time, title, and description entries
+* Event Speakers with full profiles (bio, photo, designation, company, website, social links)
 * Global and event-specific configuration
 * Feature enable and disable controls
 * Event search, filtering, and pagination
@@ -133,6 +134,90 @@ The timeline appears on the event details page when the event has at least one t
 * **Modern** - Header banner with badge markers and dashed card layout within a rounded container
 
 The timeline section is gated by the global Event Timeline switch. When the switch is OFF, no timeline is displayed anywhere on the site even if events have timeline entries saved. The per-event "Active Timeline" switch controls whether the timeline is shown for that specific event.
+
+== Event Speakers ==
+
+Create and manage reusable speaker profiles with rich information including bio, photo, designation, company, website, and social media links (Twitter/X, LinkedIn, Facebook, Instagram). A speaker can be linked to any number of events.
+
+Setup:
+
+1. Enable Event Speaker under the plugin's global ON/OFF settings.
+2. Open the plugin's Global Data section and go to the Speaker tab.
+3. Click "Add New Speaker" and fill in the name, bio, photo, designation, company, website, and social links.
+4. Save the speaker.
+5. Open an event and go to the event edit screen.
+6. In the Speaker section, search and select one or more speakers to associate with the event.
+7. Save the event.
+
+Speaker management includes:
+
+* Add, edit, and delete speakers from the Global Data > Speaker tab
+* Rich-text speaker bio
+* Speaker photo upload with image selection and removal
+* Designation and company fields
+* Website URL
+* Social profile URLs for Twitter/X, LinkedIn, Facebook, and Instagram
+* Optional per-speaker slug, used for the speaker profile page URL
+* A speaker picker in the event editor with multi-select, so a single speaker can be reused across many events
+* A per-event "Active Speaker" switch to show or hide the speaker section for that event
+* A global Event Speaker switch that hides all speaker features when turned OFF
+
+Speakers are stored as terms in the `abpet_speaker` taxonomy, which is registered against the Event post type. Per-speaker data such as photo, designation, company, website, and social links is stored in speaker meta.
+
+= Frontend Display =
+
+Linked speakers are displayed automatically on the event details page, directly below the event timeline. No shortcode is required.
+
+The section follows the active event details template, so it matches your site automatically:
+
+* Default - vertical list with a round photo, name, designation, company, bio, and social links
+* Light - responsive card grid with a large photo, centred text, and a social footer
+* Modern - centred avatar row inside a bordered panel
+
+A speaker with no photo shows their initials in a coloured circle instead. Speakers with no bio, website, or social links render cleanly without empty gaps.
+
+The section is skipped entirely when the event has no speakers linked, when the global Event Speaker switch is OFF, or when the per-event "Active Speaker" switch is OFF. The per-event switch is ON by default, so speakers appear as soon as you link them.
+
+= Speaker Page =
+
+Every speaker has its own page at `/speaker/{speaker-slug}/`, for example `/speaker/dr-sarah-chen/`.
+
+Unlike the other taxonomy pages, the speaker page does not run an event list. It is a dedicated profile page that shows only the speaker information entered in the admin:
+
+* Photo, or the speaker's initials in a coloured circle when no photo is set
+* Name
+* Designation and company
+* Website
+* Full bio, with rich text formatting preserved
+* Every saved social profile, shown with its network name and icon
+
+Sections with no data are omitted entirely, so a speaker with only a name shows only their name.
+
+The page template can be overridden the same way as the other templates: copy `page/speaker.php` from the plugin's `tb_templates` folder into `wp-content/tb_templates/page/`.
+
+To list a speaker's events somewhere, for example on a normal WordPress page or inside your own template, use the shortcode:
+
+`[abpet-post speaker_id="TERM_ID"]`
+
+The term ID is shown in the Global Data > Speaker list.
+
+= Display Hook =
+
+If you want to place the speaker section somewhere else, or restyle it, use the `abpet_speaker` action:
+
+`<?php do_action( 'abpet_speaker', $post_infos, $post_id, 'default' ); ?>`
+
+Accepted arguments: the event meta array, the event post ID, and the style (`default`, `light`, or `modern`).
+
+Each style also fires its own template action after rendering, for example `abpet_speaker_default_template`.
+
+= Template Overrides =
+
+All three designs live in separate template files and can be overridden without touching the plugin:
+
+1. Create a `tb_templates/speaker` folder inside your `wp-content` directory.
+2. Copy `default.php`, `light.php`, or `modern.php` from the plugin's `tb_templates/speaker` folder into it.
+3. Edit your copy. The plugin uses your file instead of its own.
 
 == Attendee Information and Services ==
 
@@ -272,6 +357,12 @@ Yes. Enable Google Location Map in the global ON/OFF settings, add a Google Maps
 
 Yes. Enable Event Timeline in the global ON/OFF settings, then open an event and add timeline entries with a time, title, and description for each schedule item. The timeline is displayed on the event details page in three styles: default, light, and modern.
 
+= Can I add speakers to events? =
+
+Yes. Enable Event Speaker in the global ON/OFF settings, then create speaker profiles in the Global Data > Speaker tab. Assign one or more speakers to an event from the event edit screen. A speaker can be reused across any number of events.
+
+Assigned speakers appear automatically on the event details page below the event timeline, and each speaker gets a public profile page at `/speaker/{speaker-slug}/`. Both are included in 1.0.3.
+
 = Is the plugin translation-ready? =
 
 Yes. The plugin uses the WordPress localization system and is translation-ready.
@@ -289,19 +380,39 @@ Yes. The plugin uses the WordPress localization system and is translation-ready.
 9.  Frontend event detail - ticket/seat selection and booking form
 10. Location map picker in the admin and the frontend location map
 11. Event Timeline tab in event settings and frontend timeline display
+12. Event Speaker management in Global Data and speaker assignment in event settings
 
 
 == Need help or have suggestions? ==
 If you need any further assistance or support, please contact us through the [🎫 support form](https://abp-team.com/support-desk/). We welcome your suggestions, so feel free to tell us anything we can improve in the plugin.
 
-🌐 [Live Demo](https://https://event-ticket.abp-team.com/)
-📖 [Documentation](https://https://event-ticket.abp-team.com/documentation/)
+🌐 [Live Demo](https://event-ticket.abp-team.com/)
+📖 [Documentation](https://event-ticket.abp-team.com/documentation/)
 💬 [Support Forum](https://wordpress.org/support/plugin/abp-event-ticket/)
 🐛 [Bug Reports](https://github.com/abpteam24/abp-event-ticket/issues)
 📧 Email: support@abp-team.com
 
 
 == Changelog ==
+
+= 1.0.3 =
+
+* New: Event Speaker feature with a global ON/OFF switch.
+* New: Speaker management in the Global Data admin area, with a dedicated Speaker tab and an AJAX add/edit/delete interface.
+* New: Speaker profiles with name, optional slug, rich-text bio, photo upload, designation, company, website, and social profile URLs for Twitter/X, LinkedIn, Facebook, and Instagram.
+* New: `abpet_speaker` taxonomy registered against the Event post type, so a speaker can be linked to any number of events.
+* New: Speaker picker in the event editor with multi-select assignment.
+* New: Every speaker gets a public profile page at `/speaker/{slug}/`. Unlike the other taxonomy pages it runs no event list and shows only the speaker's own admin-entered details: photo or initials, name, designation, company, website, rich-text bio, and every saved social profile.
+* New: `[abpet-post speaker_id="TERM_ID"]` shortcode attribute, for listing a speaker's events on a normal page or in your own template.
+* New: Speakers are displayed on the event details page below the event timeline, in a separate section that matches the active details template.
+* New: Three built-in speaker designs (Default, Light, Modern), each in its own template file that can be overridden from `wp-content/tb_templates/speaker`.
+* New: `abpet_speaker` action to place or restyle the speaker section, plus per-style template actions.
+* New: Per-event "Active Speaker" switch to hide the section for a single event.
+* New: Speakers without a photo show their initials instead.
+* New: Per-speaker data is stored in speaker meta, and the global speaker list is cached for fast admin rendering.
+* Improved: Rich-text fields inside global admin popups are now initialized and submitted correctly, which also benefits existing global data forms.
+
+Released: September 28, 2026
 
 = 1.0.2 =
 
@@ -330,6 +441,10 @@ Released: September 13, 2026
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+
+Added: Event Speaker feature for creating speaker profiles, linking them to events, displaying them on the event details page, and giving each speaker a public profile page.
 
 = 1.0.2 =
 

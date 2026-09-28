@@ -24,6 +24,7 @@
 				add_action( 'abpet_event_schedule_list', [ $this, 'event_schedule_list' ], 10, 6 );
 				add_action( 'abpet_map', [ $this, 'map' ], 10, 3 );
 				add_action( 'abpet_timeline', [ $this, 'timeline' ], 10, 3 );
+				add_action( 'abpet_speaker', [ $this, 'speaker' ], 10, 3 );
 			}
 			public function details_template( $post_id ): void {
 				require_once ABPET_Function::details_template_path( $post_id );
@@ -170,6 +171,25 @@
 				$style = in_array( $style, [ 'default', 'light', 'modern' ], true ) ? $style : 'default';
 				include_once ABPET_Function::template_path( 'timeline/' . $style . '.php' );
 				do_action( 'abpet_timeline_' . $style . '_template', $timeline_items, $post_id );
+			}
+			public function speaker( $post_infos = [], $post_id = 0, $style = 'default' ): void {
+				if ( empty( $post_id ) || $post_id <= 0 || get_post_type( $post_id ) !== ABPET_Function::get_cpt() ) {
+					return;
+				}
+				if ( ! ABPET_Function::on_off( 'speaker' ) ) {
+					return;
+				}
+				if ( ( $post_infos['display_speaker'] ?? 'on' ) === 'off' ) {
+					return;
+				}
+				$speakers = ABPET_Function::speaker_items( $post_id );
+				if ( empty( $speakers ) ) {
+					return;
+				}
+				$style = sanitize_key( $style );
+				$style = in_array( $style, [ 'default', 'light', 'modern' ], true ) ? $style : 'default';
+				include_once ABPET_Function::template_path( 'speaker/' . $style . '.php' );
+				do_action( 'abpet_speaker_' . $style . '_template', $speakers, $post_id );
 			}
 			public function event_schedule_list( int $post_id, array $dates, array $time_infos, string $selected_date = '', string $selected_time = '', string $layout = 'dropdown' ): void {
 				$items = ABPET_Function::event_schedule_items( $post_id, $dates, $time_infos );

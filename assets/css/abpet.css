@@ -1022,8 +1022,9 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 		position: static;
 	}
 	#abpet_area.default_details_page .abpet_default_sidebar {
-		max-width: 100%;
+		max-width: 100%;order: 1;
 	}
+	#abpet_area.default_details_page .abpet_default_main{order: 2;}
 }
 @media only screen and (max-width: 900px) {
 	#abpet_area.default_details_page .abpet_default_hero {
@@ -1402,7 +1403,7 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map_default .abpet_map_name i {color: var(--et_color_theme);}
 	div.abpet_area .abpet_map_default .abpet_map_canvas {height: 320px;border-radius: var(--et_br);}
 	div.abpet_area .abpet_map_default .abpet_map_iframe {height: 320px;border-radius: var(--et_br);}
-	div.abpet_area .abpet_map_default .abpet_map_address {display: -webkit-flex;display: flex;-webkit-align-items: flex-start;align-items: flex-start;gap: var(--et_gap_xxs);padding: var(--et_gap_xs);background: var(--et_color_4);border-radius: var(--et_br);color: var(--et_color_font);font-size: var(--et_fs);}
+	div.abpet_area .abpet_map_default .abpet_map_address {display: -webkit-flex;display: flex;-webkit-align-items: flex-start;align-items: flex-start;gap: var(--et_gap_xxs);padding: var(--et_gap_xs);background: var(--et_color_4);border-radius: var(--et_br);color: var(--et_color_default);font-size: var(--et_fs);}
 	div.abpet_area .abpet_map_default .abpet_map_address i {color: var(--et_color_theme);margin: var(--et_gap_xxs) 0 0 0;}
 	/*------------------------------- Light ----------------------------------*/
 	div.abpet_area .abpet_map_light {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap);}
@@ -1413,15 +1414,15 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map_light .abpet_map_card_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 45px;height: 45px;border-radius: 50%;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_h5);-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_light .abpet_map_card_info {min-width: 0;width: 100%;}
 	div.abpet_area .abpet_map_light .abpet_map_eyebrow {display: block;color: var(--et_color_theme);font-size: var(--et_fs_label);text-transform: uppercase;letter-spacing: 1px;}
-	div.abpet_area .abpet_map_light .abpet_map_card_title {margin: 0;color: var(--et_color_font);font-size: var(--et_fs_h4);}
-	div.abpet_area .abpet_map_light .abpet_map_card_text {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_font);font-size: var(--et_fs);}
+	div.abpet_area .abpet_map_light .abpet_map_card_title {margin: 0;color: var(--et_color_default);font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_map_light .abpet_map_card_text {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_default);font-size: var(--et_fs);}
 	div.abpet_area .abpet_map_light .abpet_map_dir {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 38px;height: 38px;border-radius: var(--et_br);background: var(--et_color_navy_blue);color: var(--et_color_white);font-size: var(--et_fs_h5);-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_light .abpet_map_dir:hover {background: var(--et_color_theme);color: var(--et_color_theme_alter);}
 	/*------------------------------- Modern ----------------------------------*/
 	div.abpet_area .abpet_map_modern .abpet_map_modern_head {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);border-bottom: 1px solid var(--et_color_border);}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 42px;height: 42px;border-radius: var(--et_br);background: var(--et_color_navy_blue);color: var(--et_color_white);font-size: var(--et_fs_h5);}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_heading span {display: block;color: var(--et_color_theme);font-size: var(--et_fs_label);text-transform: uppercase;letter-spacing: 1px;}
-	div.abpet_area .abpet_map_modern .abpet_map_modern_heading h4 {display: block;margin: 0;color: var(--et_color_font);font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_map_modern .abpet_map_modern_heading h4 {display: block;margin: 0;color: var(--et_color_default);font-size: var(--et_fs_h4);}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_body {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;gap: var(--et_gap);padding: var(--et_gap) 0 0 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_item {position: relative;}
 	div.abpet_area .abpet_map_modern .abpet_map_canvas {height: 360px;border-radius: var(--et_br);}
@@ -1429,21 +1430,21 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_map_modern .abpet_map_modern_caption {position: absolute;left: var(--et_gap);right: var(--et_gap);bottom: var(--et_gap);display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);background: var(--et_color_white);border-radius: var(--et_br);box-shadow: var(--et_shadow_29);text-decoration: none;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_pin {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 38px;height: 38px;border-radius: 50%;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_h5);-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text {min-width: 0;width: 100%;display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;}
-	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text strong {color: var(--et_color_font);font-size: var(--et_fs_h5);}
-	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text span {color: var(--et_color_font);font-size: var(--et_fs);}
+	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text strong {color: var(--et_color_default);font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_map_modern .abpet_map_modern_caption_text span {color: var(--et_color_default);font-size: var(--et_fs);}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_go {color: var(--et_color_theme);font-size: var(--et_fs_label);white-space: nowrap;-webkit-flex-shrink: 0;flex-shrink: 0;}
 	div.abpet_area .abpet_map_modern .abpet_map_modern_go:hover {text-decoration: underline;}
 }
 /******************************************************************** Event Timeline (Frontend) ************************************************/
 @media only screen and (min-width: 10px) {
-	div.abpet_area .abpet_timeline {margin: var(--et_gap) 0 0 0;width: 100%;}
+	div.abpet_area .abpet_timeline {width: 100%;}
 	div.abpet_area .abpet_timeline .abpet_tl_list {position: relative;padding: 0 0 0 28px;display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;gap: 0;}
 	div.abpet_area .abpet_timeline .abpet_tl_list:before {content: "";position: absolute;left: 8px;top: 4px;bottom: 4px;width: 2px;background: var(--et_color_theme_aa);}
 	div.abpet_area .abpet_timeline .abpet_tl_item {position: relative;}
 	div.abpet_area .abpet_timeline .abpet_tl_time {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xxs);color: var(--et_color_theme);font-size: var(--et_fs_label);font-weight: 600;}
 	div.abpet_area .abpet_timeline .abpet_tl_time i {font-size: var(--et_fs);}
-	div.abpet_area .abpet_timeline .abpet_tl_title {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_font);font-size: var(--et_fs_h5);}
-	div.abpet_area .abpet_timeline .abpet_tl_des {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_font);font-size: var(--et_fs);line-height: 1.7;}
+	div.abpet_area .abpet_timeline .abpet_tl_title {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_default);font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_timeline .abpet_tl_des {margin: var(--et_gap_xxs) 0 0 0;color: var(--et_color_default);font-size: var(--et_fs);line-height: 1.7;}
 	div.abpet_area .abpet_timeline .abpet_tl_des p {margin: 0 0 var(--et_gap_xxs) 0;}
 	div.abpet_area .abpet_timeline .abpet_tl_des p:last-child {margin: 0;}
 	/*------------------------------- Default (classic vertical) ----------------------------------*/
@@ -1463,11 +1464,131 @@ div.abpet_area .abpet_details_column > [class*="_mar_t_xs"] [class*="abp_tag"] {
 	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_head {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);border-bottom: 1px solid var(--et_color_border);}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 42px;height: 42px;border-radius: var(--et_br);background: var(--et_color_navy_blue);color: var(--et_color_white);font-size: var(--et_fs_h5);}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_heading span {display: block;color: var(--et_color_theme);font-size: var(--et_fs_label);text-transform: uppercase;letter-spacing: 1px;}
-	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_heading h4 {display: block;margin: 0;color: var(--et_color_font);font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_timeline_modern .abpet_tl_modern_heading h4 {display: block;margin: 0;color: var(--et_color_default);font-size: var(--et_fs_h4);}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_list {padding: var(--et_gap_xs) var(--et_gap) var(--et_gap_xs) 32px;}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_item {padding: 0 0 var(--et_gap_xs) var(--et_gap_xs);}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_item:last-child {padding-bottom: 0;}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_badge {position: absolute;left: -32px;top: 2px;width: 22px;height: 22px;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;background: var(--et_color_theme);border-radius: 50%;}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_badge_core {width: 8px;height: 8px;border: 2px solid var(--et_color_theme_alter);border-radius: 50%;}
 	div.abpet_area .abpet_timeline_modern .abpet_tl_card {padding: var(--et_gap_xs);background: var(--et_color_section);border: 1px dashed var(--et_color_border);border-radius: var(--et_br);}
+}
+/******************************************************************** Event Speaker (Frontend) ************************************************/
+@media only screen and (min-width: 10px) {
+	div.abpet_area .abpet_speaker {margin: var(--et_gap) 0 0 0;width: 100%;}
+	div.abpet_area .abpet_speaker a {text-decoration: none;}
+	div.abpet_area .abpet_speaker .abpet_sp_name a:hover,
+	div.abpet_area .abpet_speaker .abpet_sp_card_name a:hover,
+	div.abpet_area .abpet_speaker .abpet_sp_modern_name a:hover {color: var(--et_color_theme);}
+	div.abpet_area .abpet_speaker img {display: block;max-width: 100%;}
+	div.abpet_area .abpet_speaker .abpet_sp_bio p,
+	div.abpet_area .abpet_speaker .abpet_sp_card_bio p,
+	div.abpet_area .abpet_speaker .abpet_sp_modern_bio p {margin: 0 0 var(--et_gap_xxs) 0;}
+	div.abpet_area .abpet_speaker .abpet_sp_bio p:last-child,
+	div.abpet_area .abpet_speaker .abpet_sp_card_bio p:last-child,
+	div.abpet_area .abpet_speaker .abpet_sp_modern_bio p:last-child {margin: 0;}
+	/* Initials fallback when no photo is set */
+	div.abpet_area .abpet_speaker .abpet_sp_initials {width: 100%;height: 100%;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;border-radius: 50%;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_h5);font-weight: 700;letter-spacing: 1px;}
+	/* Social / website link pills */
+	div.abpet_area .abpet_speaker .abpet_sp_link {display: -webkit-inline-flex;display: inline-flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 32px;height: 32px;border-radius: 50%;background: var(--et_color_4);color: var(--et_color_muted);font-size: var(--et_fs_label);-webkit-transition: all .3s ease;transition: all .3s ease;}
+	div.abpet_area .abpet_speaker .abpet_sp_link:hover {background: var(--et_color_theme);color: var(--et_color_white);-webkit-transform: translateY(-2px);transform: translateY(-2px);}
+	div.abpet_area .abpet_speaker .screen-reader-text {position: absolute !important;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0, 0, 0, 0);white-space: nowrap;border: 0;}
+	/*------------------------------- Default (vertical list) ----------------------------------*/
+	div.abpet_area .abpet_speaker_default .abpet_sp_count {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;min-width: 24px;height: 24px;padding: 0 8px;border-radius: 12px;background: var(--et_color_theme);color: var(--et_color_theme_alter);font-size: var(--et_fs_label);font-weight: 700;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_list {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;gap: var(--et_gap_xs);}
+	div.abpet_area .abpet_speaker_default .abpet_sp_item {display: -webkit-flex;display: flex;gap: var(--et_gap_xs);padding: var(--et_gap_xs);background: var(--et_color_4);border-left: 3px solid var(--et_color_theme);border-radius: var(--et_br);}
+	div.abpet_area .abpet_speaker_default .abpet_sp_photo {width: 72px;height: 72px;-webkit-flex: 0 0 72px;flex: 0 0 72px;border-radius: 50%;overflow: hidden;background: var(--et_color_white);}
+	div.abpet_area .abpet_speaker_default .abpet_sp_photo img {width: 100%;height: 100%;object-fit: cover;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_content {min-width: 0;-webkit-flex: 1 1 auto;flex: 1 1 auto;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_name {margin: 0;color: inherit;font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_speaker_default .abpet_sp_role {margin-top: var(--et_gap_xxs);color: var(--et_color_theme);font-size: var(--et_fs_label);font-weight: 600;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_bio {margin-top: var(--et_gap_xxs);color: var(--et_color_muted);font-size: var(--et_fs);line-height: 1.7;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_links {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap_xxs);margin-top: var(--et_gap_xs);}
+	/*------------------------------- Light (card grid) ----------------------------------*/
+	div.abpet_area .abpet_speaker_light .abpet_sp_light_head {margin: 0 0 var(--et_gap_xs) 0;display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;-webkit-align-items: baseline;align-items: baseline;gap: var(--et_gap_xs);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_light_title {margin: 0;font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_light_sub {color: var(--et_color_muted);font-size: var(--et_fs_label);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_cards {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: var(--et_gap);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;background: var(--et_color_white);border: 1px solid var(--et_color_border);border-radius: var(--et_br);-webkit-box-shadow: var(--et_shadow_29);box-shadow: var(--et_shadow_29);overflow: hidden;-webkit-transition: all .3s ease;transition: all .3s ease;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card:hover {-webkit-transform: translateY(-4px);transform: translateY(-4px);-webkit-box-shadow: 0 12px 30px rgba(0, 0, 0, .12);box-shadow: 0 12px 30px rgba(0, 0, 0, .12);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_media {height: 180px;background: var(--et_color_4);overflow: hidden;display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_media img {width: 100%;height: 100%;object-fit: cover;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_body {padding: var(--et_gap_xs);text-align: center;-webkit-flex: 1 1 auto;flex: 1 1 auto;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_name {margin: 0;font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_designation {margin-top: var(--et_gap_xxs);color: var(--et_color_theme);font-size: var(--et_fs_label);font-weight: 600;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_company {color: var(--et_color_muted);font-size: var(--et_fs_label);}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_bio {margin-top: var(--et_gap_xxs);color: var(--et_color_muted);font-size: var(--et_fs);line-height: 1.7;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_card_foot {display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap_xxs);padding: var(--et_gap_xs);border-top: 1px solid var(--et_color_border);}
+	/*------------------------------- Modern (avatar row) ----------------------------------*/
+	div.abpet_area .abpet_speaker_modern {background: var(--et_color_white);border: 1px solid var(--et_color_3);border-radius: var(--et_br_xl);overflow: hidden;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_head {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;gap: var(--et_gap_xs);padding: var(--et_gap_xs);border-bottom: 1px solid var(--et_color_border);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_icon {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;width: 42px;height: 42px;-webkit-flex: 0 0 42px;flex: 0 0 42px;border-radius: var(--et_br);background: var(--et_color_navy_blue);color: var(--et_color_white);font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_heading span {display: block;color: var(--et_color_theme);font-size: var(--et_fs_label);text-transform: uppercase;letter-spacing: 1px;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_heading h4 {margin: 0;font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_row {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;-webkit-justify-content: center;justify-content: center;gap: var(--et_gap);padding: var(--et_gap);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_item {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;-webkit-align-items: center;align-items: center;text-align: center;max-width: 220px;-webkit-flex: 1 1 160px;flex: 1 1 160px;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_photo {width: 96px;height: 96px;border-radius: 50%;overflow: hidden;border: 3px solid var(--et_color_theme);background: var(--et_color_4);display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_photo img {width: 100%;height: 100%;object-fit: cover;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_name {margin: var(--et_gap_xs) 0 0 0;font-size: var(--et_fs_h5);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_role {color: var(--et_color_muted);font-size: var(--et_fs_label);}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_bio {margin-top: var(--et_gap_xxs);color: var(--et_color_muted);font-size: var(--et_fs);line-height: 1.7;}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_links {display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-flex-wrap: wrap;flex-wrap: wrap;gap: var(--et_gap_xxs);margin-top: var(--et_gap_xs);}
+}
+@media only screen and (max-width: 700px) {
+	div.abpet_area .abpet_speaker_default .abpet_sp_item {-webkit-flex-wrap: wrap;flex-wrap: wrap;}
+	div.abpet_area .abpet_speaker_default .abpet_sp_content {-webkit-flex: 1 1 100%;flex: 1 1 100%;}
+	div.abpet_area .abpet_speaker_light .abpet_sp_cards {grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));}
+	div.abpet_area .abpet_speaker_modern .abpet_sp_modern_item {max-width: 100%;}
+}
+/******************************************************************** Speaker Profile Page ************************************************/
+@media only screen and (min-width: 10px) {
+	div.abpet_area.abpet_speaker_profile_page {margin: var(--et_gap) 0 0 0;width: 100%;}
+	/* Compact centred speaker card */
+	div.abpet_area .abpet_speaker_card {max-width: 620px;margin: 0 auto;padding: var(--et_gap) var(--et_gap) var(--et_gap_xs);border: 1px solid var(--et_color_border);border-radius: var(--et_br_xl);background: var(--et_color_white);-webkit-box-shadow: var(--et_shadow_29);box-shadow: var(--et_shadow_29);text-align: center;}
+	div.abpet_area .abpet_speaker_card_head {display: -webkit-flex;display: flex;-webkit-flex-direction: column;flex-direction: column;-webkit-align-items: center;align-items: center;}
+	/* Portrait */
+	div.abpet_area .abpet_speaker_hero_ring {width: 132px;height: 132px;margin: 0 0 var(--et_gap_xs) 0;padding: 5px;border-radius: 50%;background: var(--et_color_white);-webkit-box-shadow: 0 0 0 3px var(--et_color_theme), var(--et_shadow_17);box-shadow: 0 0 0 3px var(--et_color_theme), var(--et_shadow_17);}
+	div.abpet_area .abpet_speaker_hero_photo {width: 100%;height: 100%;border-radius: 50%;overflow: hidden;background: var(--et_color_light);display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;}
+	div.abpet_area .abpet_speaker_hero_photo img {width: 100%;height: 100%;object-fit: cover;display: block;}
+	div.abpet_area .abpet_speaker_hero_photo .abpet_sp_initials {color: var(--et_color_theme);font-size: 46px;font-weight: 700;line-height: 1;}
+	/* Name and role */
+	div.abpet_area .abpet_speaker_hero_kicker {display: inline-block;margin: 0 0 var(--et_gap_xxs) 0;padding: 3px 11px;border-radius: 999px;background: var(--et_color_theme);color: var(--et_color_white);font-size: var(--et_fs_small);font-weight: 700;letter-spacing: 1.3px;text-transform: uppercase;}
+	div.abpet_area .abpet_speaker_hero_name {margin: 0;color: var(--et_color_default, inherit);font-size: var(--et_fs_h2);font-weight: 700;line-height: 1.25;}
+	div.abpet_area .abpet_speaker_hero_role {margin-top: 3px;color: var(--et_color_muted);font-size: var(--et_fs);font-weight: 500;line-height: 1.55;}
+	div.abpet_area .abpet_speaker_hero_role span {color: var(--et_color_theme);}
+	/* Compact inline details: Designation / Company / Website */
+	div.abpet_area .abpet_speaker_facts {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;-webkit-justify-content: center;justify-content: center;gap: 6px 18px;margin: var(--et_gap_xs) 0 0 0;padding: 0;}
+	div.abpet_area .abpet_speaker_fact {display: -webkit-inline-flex;display: inline-flex;-webkit-align-items: center;align-items:center;gap: 6px;margin: 0;font-size: var(--et_fs_label);line-height: 1.7;}
+	div.abpet_area .abpet_speaker_fact_icon {color: var(--et_color_theme);font-size: var(--et_fs_label);display: -webkit-inline-flex;display: inline-flex;}
+	div.abpet_area .abpet_speaker_fact_label {margin: 0;color: var(--et_color_muted);font-weight: 500;}
+	div.abpet_area .abpet_speaker_fact_value {margin: 0;color: var(--et_color_default, inherit);font-weight: 600;}
+	div.abpet_area .abpet_speaker_fact_value::before {content: ":";margin-right: 3px;color: var(--et_color_muted);font-weight: 500;}
+	div.abpet_area .abpet_speaker_fact_link {color: var(--et_color_theme);text-decoration: none;}
+	div.abpet_area .abpet_speaker_fact_link:hover {text-decoration: underline;}
+	/* Social pills */
+	div.abpet_area .abpet_speaker_hero_socials {display: -webkit-flex;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;-webkit-justify-content: center;justify-content: center;gap: 6px;margin-top: var(--et_gap_xs);}
+	div.abpet_area .abpet_speaker_social {display: inline-flex;display: -webkit-inline-flex;-webkit-align-items: center;align-items:center;gap: 5px;padding: 5px 11px;border: 1px solid var(--et_color_border);border-radius: 999px;background: var(--et_color_light);color: var(--et_color_muted);font-size: var(--et_fs_small);font-weight: 600;text-decoration: none;-webkit-transition: all .25s ease;transition: all .25s ease;}
+	div.abpet_area .abpet_speaker_social i {color: var(--et_color_theme);-webkit-transition: color .25s ease;transition: color .25s ease;}
+	div.abpet_area .abpet_speaker_social:hover {border-color: var(--et_color_theme);background: var(--et_color_theme);color: var(--et_color_white);}
+	div.abpet_area .abpet_speaker_social:hover i {color: var(--et_color_white);}
+	/* Biography: editorial column with a drop cap */
+	div.abpet_area .abpet_speaker_bio_wrap {margin-top: var(--et_gap_xs);padding-top: var(--et_gap_xs);border-top: 1px solid var(--et_color_border);}
+	div.abpet_area .abpet_speaker_block_title {display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;gap: 7px;margin: 0 0 var(--et_gap_xs) 0;color: var(--et_color_muted);font-size: var(--et_fs_small);font-weight: 700;letter-spacing: 1.6px;text-transform: uppercase;}
+	div.abpet_area .abpet_speaker_block_icon {color: var(--et_color_theme);font-size: var(--et_fs_label);}
+	div.abpet_area .abpet_speaker_bio {max-width: 56ch;margin: 0 auto;color: var(--et_color_default, inherit);font-size: var(--et_fs);line-height: 1.9;text-align: left;}
+	div.abpet_area .abpet_speaker_bio p {margin: 0 0 var(--et_gap_xs) 0;}
+	div.abpet_area .abpet_speaker_bio p:last-child {margin: 0;}
+	div.abpet_area .abpet_speaker_bio > p:first-of-type::first-letter {float: left;margin: 4px 8px 0 0;color: var(--et_color_theme);font-size: 3em;font-weight: 700;line-height: .84;}
+	div.abpet_area .abpet_speaker_bio a {color: var(--et_color_theme);}
+	div.abpet_area .abpet_speaker_bio ul,
+	div.abpet_area .abpet_speaker_bio ol {margin: 0 0 var(--et_gap_xs) 0;padding-left: 22px;}
+	div.abpet_area .abpet_speaker_bio blockquote {margin: 0 0 var(--et_gap_xs) 0;padding-left: var(--et_gap_xs);border-left: 3px solid var(--et_color_border);color: var(--et_color_muted);font-style: italic;}
+}
+@media only screen and (max-width: 700px) {
+	div.abpet_area .abpet_speaker_card {padding: var(--et_gap_xs) var(--et_gap_xs) var(--et_gap_xxs);border-radius: var(--et_br);}
+	div.abpet_area .abpet_speaker_hero_ring {width: 104px;height: 104px;padding: 4px;}
+	div.abpet_area .abpet_speaker_hero_photo .abpet_sp_initials {font-size: 36px;}
+	div.abpet_area .abpet_speaker_hero_name {font-size: var(--et_fs_h4);}
+	div.abpet_area .abpet_speaker_facts {gap: 5px 12px;}
+	div.abpet_area .abpet_speaker_bio {line-height: 1.8;}
+	div.abpet_area .abpet_speaker_bio > p:first-of-type::first-letter {font-size: 2.5em;}
 }

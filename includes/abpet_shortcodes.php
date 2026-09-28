@@ -132,6 +132,7 @@
 					"loc_id"           => '',
 					"organizer_id"     => '',
 					"brand_id"         => '',
+					"speaker_id"       => '',
 					"style"            => 'grid',
 					"slider_style"     => 'gallery',
 					"show"             => '',
@@ -149,6 +150,7 @@
 				$params['loc_id']           = absint( $params['loc_id'] );
 				$params['organizer_id']     = absint( $params['organizer_id'] );
 				$params['brand_id']         = absint( $params['brand_id'] );
+				$params['speaker_id']       = absint( $params['speaker_id'] );
 				$params['column']           = min( 10, max( 1, absint( $params['column'] ) ?: 3 ) );
 				$params['show']             = min( 100, max( 0, absint( $params['show'] ) ) );
 				$params['style']            = in_array( $params['style'], array( 'grid', 'list', 'missionary', 'minimal' ), true ) ? $params['style'] : 'grid';

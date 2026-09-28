@@ -153,7 +153,7 @@
 				if ( ABPET_Function::on_off( 'client_info' ) ) {
 					$actions[] = array( 'fas fa-user', __( 'Client Form', 'abp-event-ticket' ), __( 'Manage client form fields', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'client_form' ] ), 'purple' );
 				}
-				$actions[] = array( 'fas fa-route', __( 'Stops Configuration', 'abp-event-ticket' ), __( 'Manage stops / locations', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'location' ] ), 'navy' );
+				$actions[] = array( 'fas fa-route', __( 'Location Configuration', 'abp-event-ticket' ), __( 'Manage  locations', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'location' ] ), 'navy' );
 				if ( defined( 'ABPET_DIR_PRO' ) ) {
 					if ( ABPET_Function::on_off( 'partial_payment' ) ) {
 						$actions[] = array( 'fas fa-hand-holding-dollar', __( 'Partial Payment', 'abp-event-ticket' ), __( 'Configure partial payment', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'partial_payment' ] ), 'success' );

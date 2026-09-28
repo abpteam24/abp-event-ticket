@@ -14,7 +14,7 @@
                 if (ABPET_Function::on_off('feature')) {
                     $label = ABPET_Function::feature_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="abp"><span class="_mar_r_xs">🔗</span><?php echo esc_html($label); ?></h5>
+                        <h5 class="abp_gap_xs">🔗<?php echo esc_html($label); ?></h5>
                         <?php ABPET_Layout::button_global_popup('option_feature', __('Add New', 'abp-event-ticket') . ' ' . $label); ?>
                     </div>
                     <?php ABPET_Layout::info_text('abpet_feature'); ?>

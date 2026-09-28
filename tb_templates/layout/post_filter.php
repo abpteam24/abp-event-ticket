@@ -24,7 +24,7 @@
 			?>
             <div class="post_top_filter">
 				<?php if ( $cat_count > 1 ) {
-					if ( $cat_count > 4 && is_array( ABPET_Category ) ) { ?>
+					if ( is_array( ABPET_Category ) ) { ?>
                         <label>
                             <select class="_form_control" name="cat_id">
                                 <option value="" selected><?php echo esc_html__( 'All ', 'abp-event-ticket' ) . ' ' . esc_html( ABPET_Function::category_label() ); ?></option>
@@ -37,29 +37,7 @@
 								} ?>
                             </select>
                         </label>
-					<?php } else { ?>
-                        <div class="custom_radio _group_content">
-                            <input type="hidden" name="cat_id" value=""/>
-                            <div class="radio_item">
-                                <button type="button" class="_btn_light_info_xs_fs_h6 abp_active" data-radio="" data-open-icon="fa-check-circle" data-close-icon="fa-circle">
-                                    <span data-icon class="_mar_r_xs far fa-check-circle"></span><?php echo esc_html__( 'All ', 'abp-event-ticket' ) . ' ' . esc_html( ABPET_Function::category_label() ); ?>
-                                </button>
-                            </div>
-							<?php foreach ( $categories as $current_cat_id ) {
-								$name = ABPET_Category[ $current_cat_id ]['label'] ?? '';
-								if ( $name !== '' ) { ?>
-                                    <div class="radio_item">
-                                        <button type="button" class="_btn_light_info_xs_fs_h6" data-radio="<?php echo esc_attr( $current_cat_id ); ?>" data-open-icon="far fa-check-circle" data-close-icon="far fa-circle">
-                                            <span data-icon class="_mar_r_xxs far fa-circle"></span><?php echo esc_html( $name ); ?>
-                                        </button>
-                                    </div>
-									<?php
-								}
-							}
-							?>
-                        </div>
-						<?php
-					}
+					<?php }
 				}
 					if ( $style === 'grid' || $style === 'list' ) { ?>
                         <div class="_group_content">

@@ -188,6 +188,9 @@ function abpet_spinner_remove(parent = abpet_parent) {
 }
 function abpet_get_form_data(form_area) {
     let formData = new FormData();
+    if (typeof tinymce !== 'undefined' && tinymce.triggerSave) {
+        tinymce.triggerSave();
+    }
     form_area.find('input, select, textarea').each(function () {
         let name = jQuery(this).attr('name');
         let value = jQuery(this).val();
