@@ -28,6 +28,11 @@
 	div.abpet_admin .abpet_on_off .group_setting > .full_width,
 	div.abpet_admin .abpet_on_off .group_setting .full_width {-webkit-flex-basis: 100%; flex-basis: 100%;}
 	div.abpet_admin [class*="_form_control"] {max-width: max-content;min-width: 200px;}
+	@media only screen and (max-width: 782px) {
+		div.abpet_admin .setting_item {min-width: 0;}
+		div.abpet_admin [class*="_form_control"] {min-width: 0;max-width: 100%;}
+		div.abpet_admin .group_setting > * {-webkit-flex-basis: 100%;flex-basis: 100%;}
+	}
 	div.abpet_admin [class*="_form_control"][class*="_w_full"] {max-width: 100%;min-width: 100%;}
 	div.abpet_admin textarea[class*="_form_control"] {max-width: 100%;}
 	div.abpet_admin input[class*="_form_control"][type="time"] {max-width: 120px;text-align: center;min-width: 120px;}

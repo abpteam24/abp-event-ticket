@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -377,23 +377,32 @@ Yes. The plugin uses the WordPress localization system and is translation-ready.
 6. Configuration - general settings and ON/OFF feature switches
 7. Orders - booking and order management with status and check-in
 8. Frontend event listing - event grid with search and filters
-9.  Frontend event detail - ticket/seat selection and booking form
-10. Location map picker in the admin and the frontend location map
-11. Event Timeline tab in event settings and frontend timeline display
-12. Event Speaker management in Global Data and speaker assignment in event settings
-
+9.  Frontend event detail
+10. Frontend event detail
+11. Frontend event detail
 
 == Need help or have suggestions? ==
 If you need any further assistance or support, please contact us through the [🎫 support form](https://abp-team.com/support-desk/). We welcome your suggestions, so feel free to tell us anything we can improve in the plugin.
 
-🌐 [Live Demo](https://event-ticket.abp-team.com/)
-📖 [Documentation](https://event-ticket.abp-team.com/documentation/)
+🌐 [Live Demo](https://demo-et.abp-team.com/)
+📖 [Documentation](https://demo-et.abp-team.com/documentation/)
 💬 [Support Forum](https://wordpress.org/support/plugin/abp-event-ticket/)
 🐛 [Bug Reports](https://github.com/abpteam24/abp-event-ticket/issues)
 📧 Email: support@abp-team.com
 
 
 == Changelog ==
+
+= 1.0.4 =
+
+* New: `abpet_speaker_page_data` filter that passes the complete speaker profile data to the speaker templates.
+* New: `abpet_speaker_profile` filter for customizing a single speaker profile.
+* New: Additional filters for speaker initials, role, fact rows, social links, and photo markup.
+* Fix: Speaker photo, bio, designation, company, website, and social URLs are now sanitized before saving.
+* Fix: Speaker templates now use prefixed variables, so a shortcode or theme output elsewhere on the same page can no longer collide with them.
+* Fix: Admin settings and configuration grids no longer force a 400px minimum width, removing horizontal scrolling on phones and small tablets.
+
+Released: October 2, 2026
 
 = 1.0.3 =
 
@@ -441,6 +450,10 @@ Released: September 13, 2026
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+
+Fixed: Admin settings and configuration screens now fit small phone and tablet screens without horizontal scrolling.
 
 = 1.0.3 =
 
