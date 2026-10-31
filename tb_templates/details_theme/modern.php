@@ -63,7 +63,7 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 					</div>
 				<?php } ?>
 				<?php if ( $sale_continue === 'on' ) { ?>
-					<div class="post_top_filter"><?php ABPET_Layout::start_date( $all_dates, $start_date ); ABPET_Layout::start_time( $form_data ); ?></div>
+					<div class="post_top_filter"><?php ABPET_Layout::start_date( $all_dates, $start_date, $all_times, $time_infos, $post_id, $start_time ); ABPET_Layout::start_time( $form_data ); ?></div>
 					<?php do_action( 'abpet_registration', $post_infos, $form_data ); ?>
 				<?php } else { ABPET_Layout::layout_warning_info( 'sale_close_msg' ); } ?>
 			</div>

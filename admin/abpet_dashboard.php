@@ -145,21 +145,21 @@
 			private function quick_actions(): void {
 				$actions = array(
 					array( 'fas fa-toggle-on', __( 'ON/OFF Configuration', 'abp-event-ticket' ), __( 'Enable & disable features', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'on_off' ] ), 'warning' ),
-					array( 'fas fa-calendar-days', __( 'Global Date', 'abp-event-ticket' ), __( 'Manage global dates', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'dates' ] ), 'theme' ),
+					array( 'fas fa-calendar-days', __( 'Global Date', 'abp-event-ticket' ), __( 'Manage global dates', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'dates' ] ), 'theme' ),
 				);
 				if ( ABPET_Function::on_off( 'additional_info' ) ) {
-					$actions[] = array( 'fas fa-list-check', __( 'Additional Services', 'abp-event-ticket' ), __( 'Manage additional services', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'additional' ] ), 'success' );
+					$actions[] = array( 'fas fa-list-check', __( 'Additional Services', 'abp-event-ticket' ), __( 'Manage additional services', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'additional' ] ), 'success' );
 				}
 				if ( ABPET_Function::on_off( 'client_info' ) ) {
-					$actions[] = array( 'fas fa-user', __( 'Client Form', 'abp-event-ticket' ), __( 'Manage client form fields', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'client_form' ] ), 'purple' );
+					$actions[] = array( 'fas fa-user', __( 'Client Form', 'abp-event-ticket' ), __( 'Manage client form fields', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'client_form' ] ), 'purple' );
 				}
-				$actions[] = array( 'fas fa-route', __( 'Location Configuration', 'abp-event-ticket' ), __( 'Manage  locations', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'location' ] ), 'navy' );
+				$actions[] = array( 'fas fa-route', __( 'Location Configuration', 'abp-event-ticket' ), __( 'Manage  locations', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'location' ] ), 'navy' );
 				if ( defined( 'ABPET_DIR_PRO' ) ) {
 					if ( ABPET_Function::on_off( 'partial_payment' ) ) {
-						$actions[] = array( 'fas fa-hand-holding-dollar', __( 'Partial Payment', 'abp-event-ticket' ), __( 'Configure partial payment', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'partial_payment' ] ), 'success' );
+						$actions[] = array( 'fas fa-hand-holding-dollar', __( 'Partial Payment', 'abp-event-ticket' ), __( 'Configure partial payment', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'partial_payment' ] ), 'success' );
 					}
 					if ( ( ABPET_Function::on_off( 'seasonal' ) && ABPET_Function::on_off( 'seasonal_global' ) ) || ( ABPET_Function::on_off( 'early_bird' ) && ABPET_Function::on_off( 'early_bird_global' ) ) ) {
-						$actions[] = array( 'fas fa-percent', __( 'Global Discount', 'abp-event-ticket' ), __( 'Configure global discounts', 'abp-event-ticket' ), ABPET_Function::build_url( 'global', [ 'global' => 'discount' ] ), 'info' );
+						$actions[] = array( 'fas fa-percent', __( 'Global Discount', 'abp-event-ticket' ), __( 'Configure global discounts', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'discount' ] ), 'info' );
 					}
 					if ( ABPET_Function::on_off( 'cancel_request' ) ) {
 						$actions[] = array( 'fas fa-ban', __( 'Cancel Request', 'abp-event-ticket' ), __( 'Manage cancellation requests', 'abp-event-ticket' ), ABPET_Function::build_url( 'cancel_requests' ), 'warning' );

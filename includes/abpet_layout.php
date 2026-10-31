@@ -666,14 +666,29 @@
 					}
 				}
 			}
-			public static function start_date( $all_dates, $date = '' ): void {
-				//echo '<pre>';print_r($all_dates);					echo '</pre>';
+			public static function date_select_limit(): int {
+				return max( 1, (int) apply_filters( 'abpet_date_select_limit', 7 ) );
+			}
+			public static function use_date_select( int $count ): bool {
+				return $count > 1 && $count <= self::date_select_limit();
+			}
+			public static function use_date_picker( int $count ): bool {
+				return $count > self::date_select_limit();
+			}
+			public static function start_date( $all_dates, $date = '', $all_times = [], $time_infos = [], $post_id = 0, $start_time = '' ): void {
+				$all_dates  = is_array( $all_dates ) ? array_values( $all_dates ) : [];
+				$all_times  = is_array( $all_times ) ? array_values( array_filter( array_map( 'strval', $all_times ), 'strlen' ) ) : [];
+				$time_infos = is_array( $time_infos ) ? $time_infos : [];
+				$post_id    = absint( $post_id );
+				$start_time = is_scalar( $start_time ) ? (string) $start_time : '';
 				if ( sizeof( $all_dates ) > 0 ) {
 					$now          = ABPET_Function::date_format( current_time( 'Y-m-d' ) );
 					$date         = $date ?: current( $all_dates );
 					$hidden_date  = ! empty( $date ) ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
 					$visible_date = ! empty( $date ) ? ABPET_Function::date_format( $date, 'date' ) : '';
-					if ( sizeof( $all_dates ) > 1 ) {
+					$date_count   = sizeof( $all_dates );
+					if ( $date_count > 1 && ! self::use_date_select( $date_count ) ) {
+						// Too many dates for a dropdown: use the jQuery UI date picker.
 						?>
                         <label>
                             <span class="_gap_xxs"><?php ABPET_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Select Event Date', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
@@ -683,12 +698,49 @@
                         </label>
 						<?php
 						do_action( 'abpet_load_date_picker', '#start_date', $all_dates );
+					} elseif ( $date_count > 1 ) {
+						// 2 - date_select_limit() dates: a compact select. When the event has
+						// session times the value carries both: "Y-m-d|H:i".
+						?>
+                        <label>
+                            <span class="_gap_xxs"><?php ABPET_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Select Event Date', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
+                            <select id="abpet_start_date_select" name="start_date" class="_form_control" data-alert="<?php esc_attr_e( 'Please Select Event Date', 'abp-event-ticket' ); ?>" required>
+								<?php foreach ( $all_dates as $available_date ) {
+									$date_value = gmdate( 'Y-m-d', strtotime( $available_date ) );
+									$date_times = [];
+									if ( $post_id > 0 && ! empty( $time_infos ) ) {
+										$date_times = ABPET_Function::available_times( $post_id, $time_infos, $date_value );
+									}
+									if ( empty( $date_times ) ) { ?>
+                                        <option value="<?php echo esc_attr( $date_value ); ?>" <?php selected( $date_value, $hidden_date ); ?>><?php echo esc_html( ABPET_Function::date_format( $date_value, 'date' ) ); ?></option>
+									<?php } else {
+										foreach ( $date_times as $date_time ) {
+											$option_value = $date_value . '|' . $date_time;
+											$is_selected  = $date_value === $hidden_date && ( '' === $start_time || $date_time === $start_time ); ?>
+                                            <option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $is_selected, true ); ?>><?php echo esc_html( ABPET_Function::date_format( $date_value . ' ' . $date_time, 'full' ) ); ?></option>
+										<?php }
+									}
+								} ?>
+                            </select>
+                        </label>
+						<?php
 					} else {
+						// A single available date: show it as read-only text (plus the time when
+						// the event only has one session).
+						$single_time  = 1 === sizeof( $all_times ) ? (string) $all_times[0] : '';
+						$display_date = $visible_date;
+						if ( $single_time !== '' ) {
+							$base_date    = gmdate( 'Y-m-d', strtotime( $date ) );
+							$display_date = ABPET_Function::date_format( $base_date . ' ' . $single_time, 'full' );
+						}
 						?>
                         <label>
                             <span class="_gap_xxs"><?php ABPET_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Event Date', 'abp-event-ticket' ); ?></span>
                             <input type="hidden" name="start_date" value="<?php echo esc_attr( $hidden_date ); ?>" required/>
-                            <span class="_color_theme_fs_h5"><?php echo esc_html( $visible_date ); ?></span>
+							<?php if ( $single_time !== '' ) { ?>
+                                <input type="hidden" name="session_time" value="<?php echo esc_attr( $single_time ); ?>"/>
+							<?php } ?>
+                            <span class="_color_theme_fs_h5"><?php echo esc_html( $display_date ); ?></span>
                         </label>
 						<?php
 					}
@@ -698,23 +750,45 @@
 			}
 			public static function start_time( $form_data=[]): void {
 				$all_times  = $form_data['all_times'] ?? [];
+				$all_times  = is_array( $all_times ) ? array_values( array_filter( array_map( 'strval', $all_times ), 'strlen' ) ) : [];
 				$start_date = $form_data['start_date'] ?? '';
 				$start_time = $form_data['start_time'] ?? '';
-				if ( ! empty( $all_times ) && sizeof( $all_times ) > 0 ) { ?>
-                    <label class="_text_nowrap">
+				$date_count = is_array( $form_data['all_dates'] ?? null ) ? count( $form_data['all_dates'] ) : 0;
+				// No bookable date at all: start_date() already printed the warning, so a
+				// lone time dropdown would be misleading.
+				if ( array_key_exists( 'all_dates', $form_data ) && 0 === $date_count ) {
+					return;
+				}
+				// The select already carries the time (date|time), and a single date with a
+				// single time is rendered inline by start_date().
+				if ( $date_count > 1 && self::use_date_select( $date_count ) ) {
+					return;
+				}
+				if ( empty( $all_times ) ) {
+					return;
+				}
+				$selected_time = in_array( $start_time, $all_times, true ) ? $start_time : (string) $all_times[0];
+				$base_date     = ! empty( $start_date ) ? gmdate( 'Y-m-d', strtotime( $start_date ) ) : current_time( 'Y-m-d' );
+				if ( 1 === sizeof( $all_times ) && 1 === $date_count ) {
+					return;
+				}
+				?>
+                    <label class="_text_nowrap abpet_top_time">
                         <span class="_gap_xxs">⏰ <?php esc_html_e( 'Time :', 'abp-event-ticket' ); ?></span>
 						<?php if ( sizeof( $all_times ) > 1 ) { ?>
                             <select class="_form_control" name="session_time">
 								<?php foreach ( $all_times as $time ) { ?>
-                                    <option value="<?php echo esc_attr( $time ); ?>" <?php selected( $time, $start_time ) ?>><?php echo esc_html( ABPET_Function::date_format( $start_date . ' ' . $time ) ); ?></option>
+                                    <option value="<?php echo esc_attr( $time ); ?>" <?php selected( $time, $selected_time ) ?>><?php echo esc_html( ABPET_Function::date_format( $base_date . ' ' . $time ) ); ?></option>
 								<?php } ?>
                             </select>
-						<?php } else { ?>
-							<?php echo esc_html( ABPET_Function::date_format( $start_date . ' ' . $start_time ) ); ?>
-                            <input type="hidden" name="session_time" value="<?php echo esc_attr( $start_time ); ?>">
+						<?php } else {
+							$time_label = $base_date . ' ' . $selected_time;
+							?>
+                            <input type="hidden" name="session_time" value="<?php echo esc_attr( $selected_time ); ?>"/>
+                            <span class="_color_theme_fs_h5"><?php echo esc_html( ABPET_Function::date_format( $time_label, 'time' ) ); ?></span>
 						<?php } ?>
                     </label>
-				<?php }
+				<?php
 			}
 
 			public static function item_feature( $features = '' ): void {
@@ -892,7 +966,7 @@
 					$sale          = false;
 					if ( ! empty( $event_date ) && ! empty( $session_time ) && ! empty( $post_id ) && $post_id > 0 ) {
 						foreach ( $meta_info as $tic_id => $ticket_num ) {
-							$price_info[ $tic_id ] = ABPET_Function::get_price( $post_infos, $tic_id, $session_time );
+							$price_info[ $tic_id ] = ABPET_Function::get_price( $post_infos, $tic_id, $event_date );
 						}
 						$form_data['sp_id'] = $id;
 						$sold_seat          = ABPET_Query::get_sold_seat( $form_data );

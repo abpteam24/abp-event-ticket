@@ -18,8 +18,8 @@
                 add_filter('pre_update_option_abpet_csv', array($this, 'update_sanitize'), 10, 3);
             }
             public function admin_init(): void {
-                foreach ($this->configuration_section() as $section) {
-                    register_setting($section['id'], $section['id'], array($this, 'sanitize_options'));
+                foreach ($this->configuration_data() as $section_id => $section) {
+                    register_setting($section_id, $section_id, array($this, 'sanitize_options'));
                 }
             }
             public function permalink_flush(): void {
@@ -66,22 +66,22 @@
                 $current_section = [];
                 ?>
                 <div id="abpet_configuration" class="global_config">
-                    <div class="_section_card">
-                        <div class="_group_content_w_full_f_equal_f_wrap">
+                    <div class="abp_tabs tab_left">
+                        <ul class="abp tab_lists">
                             <?php foreach ($all_sections as $tab) {
                                 $tab_id = $tab['id'] ?? '';
                                 if (!empty($tab_id)) {
                                     $key = preg_replace('/^abpet_/', '', $tab_id);
                                     $current_section = $key == $active_tab ? $tab : $current_section; ?>
-                                    <a href="<?php echo esc_url(ABPET_Function::build_url('configuration', ['configuration' => $key])); ?>" class="_btn_light_active_xs  <?php echo esc_attr($active_tab == $key ? 'abp_active' : ''); ?>">
+                                    <li data-href="<?php echo esc_url(ABPET_Function::build_url('configuration', ['configuration' => $key])); ?>" class="<?php echo esc_attr($active_tab == $key ? 'abp_active' : ''); ?>">
                                         <?php ABPET_Layout::image_icon($tab['icon'] ?? '');
+                                            ABPET_Static::icon_svg($tab['svg'] ?? '');
                                             echo esc_html($tab['menu'] ?? ''); ?>
-                                    </a>
+                                    </li>
                                 <?php }
                             } ?>
-                        </div>
-                        <div class="_divider_xs"></div>
-                        <div class="<?php echo esc_attr($section_id); ?>">
+                        </ul>
+                        <div class="tab_content <?php echo esc_attr($section_id); ?>">
                             <?php if (sizeof($fields) > 0) {
                                 $title = $current_section['menu'] ?? '';
                                 ABPET_Layout::info_text($section_id);
@@ -142,7 +142,9 @@
                                     <div class="_divider_xs"></div>
                                     <button type="submit" class="_btn_theme" value="submit"><?php ABPET_Static::icon_svg('save');?><?php echo esc_html(__('Save', 'abp-event-ticket') . ' ' . $title . ' ' . __('Configuration', 'abp-event-ticket')); ?></button>
                                 </form>
-                            <?php } ?>
+                            <?php } else {
+                                do_action('abpet_global_' . $active_tab);
+                            } ?>
                         </div>
                     </div>
                 </div>
@@ -167,9 +169,41 @@
             public function configuration_section(): array {
                 $label = ABPET_Function::label();
                 $brand_icon = ABPET_Function::icon();
-                $configuration = apply_filters('abpet_configuration_after', array(array('id' => 'abpet_configuration', 'icon' => $brand_icon, 'menu' => $label)));
+                $configuration = array(
+                    array('id' => 'abpet_configuration', 'icon' => $brand_icon, 'menu' => $label),
+                    array('id' => 'abpet_on_off', 'icon' => 'fa-solid fa-toggle-on', 'menu' => __('Feature ON/OFF', 'abp-event-ticket')),
+                    array('id' => 'abpet_dates', 'svg' => 'date_1', 'menu' => __('Dates', 'abp-event-ticket')),
+                );
+                if (ABPET_Function::on_off('additional_info')) {
+                    $configuration[] = array('id' => 'abpet_additional', 'icon' => '💰', 'menu' => __('Additional services', 'abp-event-ticket'));
+                }
+                if (ABPET_Function::on_off('client_info')) {
+                    $configuration[] = array('id' => 'abpet_client_form', 'icon' => '📋', 'menu' => __('Client Form', 'abp-event-ticket'));
+                }
+                $configuration = apply_filters('abpet_configuration_after', $configuration);
+                $configuration[] = array('id' => 'abpet_location', 'icon' => 'fas fa-map-marker-alt', 'menu' => ABPET_Function::location_label());
+                if (ABPET_Function::on_off('category')) {
+                    $configuration[] = array('id' => 'abpet_category', 'svg' => 'category_1', 'menu' => ABPET_Function::category_label());
+                }
+                if (ABPET_Function::on_off('organizer')) {
+                    $configuration[] = array('id' => 'abpet_organizer', 'icon' => '🏢', 'menu' => ABPET_Function::organizer_label());
+                }
+                if (ABPET_Function::on_off('brand')) {
+                    $configuration[] = array('id' => 'abpet_brand', 'icon' => '🏷️', 'menu' => ABPET_Function::brand_label());
+                }
+                if (ABPET_Function::on_off('feature')) {
+                    $configuration[] = array('id' => 'abpet_feature', 'icon' => '🔗', 'menu' => ABPET_Function::feature_label());
+                }
+                if (ABPET_Function::on_off('speaker')) {
+                    $configuration[] = array('id' => 'abpet_speaker', 'icon' => '🎤', 'menu' => ABPET_Function::speaker_label());
+                }
+                if (ABPET_Function::on_off('faq')) {
+                    $configuration[] = array('id' => 'abpet_faq', 'icon' => '❓', 'menu' => __('FAQ', 'abp-event-ticket'));
+                }
+                if (ABPET_Function::on_off('tc')) {
+                    $configuration[] = array('id' => 'abpet_tc', 'icon' => '🤝', 'menu' => __('Term & Conditions', 'abp-event-ticket'));
+                }
                 $contact = apply_filters('abpet_contact_after', array(
-                    array('id' => 'abpet_on_off', 'icon' => 'fa-solid fa-toggle-on', 'menu' => __('ON/OFF', 'abp-event-ticket')),
                     array('id' => 'abpet_slider', 'icon' => 'fas fa-photo-video', 'menu' => __('Slider', 'abp-event-ticket')),
                     array('id' => 'abpet_contact', 'icon' => 'fas fa-id-card-alt', 'menu' => __('Contact Information', 'abp-event-ticket')),
                     array('id' => 'abpet_css_var', 'icon' => 'fas fa-drafting-compass', 'menu' => __('CSS Property', 'abp-event-ticket')),

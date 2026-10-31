@@ -101,7 +101,7 @@ Setup:
 
 1. Enable Google Location Map under the plugin's global ON/OFF settings.
 2. Paste your Google Maps JavaScript API key into the Google Maps API Key field.
-3. Open a Location in the global data, search for the address or place, and select it on the map to save its latitude, longitude, address, and place data.
+3. Open a Location in the Global Configuration, search for the address or place, and select it on the map to save its latitude, longitude, address, and place data.
 4. Assign that location to an event.
 
 When the global switch is on, the event has a location, and that location has saved map data, the map is displayed on the event details page. With an API key saved, the interactive JavaScript map renders; without a key, an embedded iframe map renders instead. If the switch is off or no map data exists for the location, no map is rendered.
@@ -142,7 +142,7 @@ Create and manage reusable speaker profiles with rich information including bio,
 Setup:
 
 1. Enable Event Speaker under the plugin's global ON/OFF settings.
-2. Open the plugin's Global Data section and go to the Speaker tab.
+2. Open the plugin's Global Configuration section and go to the Speaker tab.
 3. Click "Add New Speaker" and fill in the name, bio, photo, designation, company, website, and social links.
 4. Save the speaker.
 5. Open an event and go to the event edit screen.
@@ -151,7 +151,7 @@ Setup:
 
 Speaker management includes:
 
-* Add, edit, and delete speakers from the Global Data > Speaker tab
+* Add, edit, and delete speakers from the Global Configuration > Speaker tab
 * Rich-text speaker bio
 * Speaker photo upload with image selection and removal
 * Designation and company fields
@@ -199,7 +199,7 @@ To list a speaker's events somewhere, for example on a normal WordPress page or 
 
 `[abpet-post speaker_id="TERM_ID"]`
 
-The term ID is shown in the Global Data > Speaker list.
+The term ID is shown in the Global Configuration > Speaker list.
 
 = Display Hook =
 
@@ -359,7 +359,7 @@ Yes. Enable Event Timeline in the global ON/OFF settings, then open an event and
 
 = Can I add speakers to events? =
 
-Yes. Enable Event Speaker in the global ON/OFF settings, then create speaker profiles in the Global Data > Speaker tab. Assign one or more speakers to an event from the event edit screen. A speaker can be reused across any number of events.
+Yes. Enable Event Speaker in the global ON/OFF settings, then create speaker profiles in the Global Configuration > Speaker tab. Assign one or more speakers to an event from the event edit screen. A speaker can be reused across any number of events.
 
 Assigned speakers appear automatically on the event details page below the event timeline, and each speaker gets a public profile page at `/speaker/{speaker-slug}/`. Both are included in 1.0.3.
 

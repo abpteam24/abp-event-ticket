@@ -37,19 +37,19 @@
 										);
 										$this->step_card(
 											'2',
-											__( 'Configuration ON/OFF', 'abp-event-ticket' ),
+											__( 'Feature ON/OFF', 'abp-event-ticket' ),
 											__( 'Decide which features you need.', 'abp-event-ticket' ),
-											__( 'Configuration → ON/OFF turns features on/off for the whole site (Category, Organizer, Brand, Seat Plan, Additional Services, FAQ, Terms…). The defaults work out of the box, so you can skip this step.', 'abp-event-ticket' ),
+											__( 'Global Configuration → Feature ON/OFF turns features on/off for the whole site (Category, Organizer, Brand, Seat Plan, Additional Services, FAQ, Terms…). The defaults work out of the box, so you can skip this step.', 'abp-event-ticket' ),
 											'configuration',
-											__( 'Open Configuration', 'abp-event-ticket' )
+											__( 'Open Global Configuration', 'abp-event-ticket' )
 										);
 										$this->step_card(
 											'3',
 											__( 'Create Global Lists', 'abp-event-ticket' ),
 											__( 'Build the reusable lists every event shares.', 'abp-event-ticket' ),
-											__( 'Global Data holds Dates & Schedules, Locations, and (if enabled) Categories, Organizers, Brands, Features, Additional Services, Client Forms, and Resources. Create them once — they appear as dropdowns when creating an event.', 'abp-event-ticket' ),
-											'global',
-											__( 'Open Global Data', 'abp-event-ticket' )
+											__( 'Global Configuration holds the shared lists: Dates, Locations, and (if enabled) Categories, Organizers, Brands, Features, Speaker, Additional Services, Client Forms, FAQs, and Terms & Conditions. Create them once — they appear as dropdowns when creating an event.', 'abp-event-ticket' ),
+											'configuration',
+											__( 'Open Global Configuration', 'abp-event-ticket' )
 										);
 										$this->step_card(
 											'4',
@@ -92,7 +92,7 @@
                                 <h4><span class="dash_step">🔛</span> <?php esc_html_e( 'The ON/OFF tab — what it is and why it matters', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
-                                <p class="dash_body_text"><?php esc_html_e( 'Configuration → ON/OFF is the master control panel of the plugin. Every feature is listed there with a simple switch. Each switch controls a whole feature area of the site — not just one event.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text"><?php esc_html_e( 'Global Configuration → Feature ON/OFF is the master control panel of the plugin. Every feature is listed there with a simple switch. Each switch controls a whole feature area of the site — not just one event.', 'abp-event-ticket' ); ?></p>
                                 <div class="_grid_400">
                                     <div class="dash_card">
                                         <div class="dash_card_body">
@@ -154,24 +154,24 @@
                                 <p class="dash_body_text">• <b><?php echo esc_html( ABPET_Function::label() ); ?> List</b> — <?php esc_html_e( 'all your events: create, edit, clone, trash, restore, and permanently delete events.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Orders', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'every customer purchase with booking details, status, check-in, and totals.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Ticket/Seat Plan', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'create reusable ticket types, seat plans, and decor (non-seat) cells for assigned seating.', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Global Data', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'shared reusable lists used by all events (see the sub-tabs list below).', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Configuration', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'global settings: general (label, slug, currency…), the ON/OFF switches, contact information, colors, and CSS.', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Dashboard', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'overview and charts, plus a System Status health check with quick tools: install WooCommerce, create the booking/list/gallery pages, and import or remove demo data.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'Global Configuration', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'everything global in one place: general settings (label, slug, dashboard icon, taxonomy labels and slugs, Google Maps key…), the ON/OFF switches, shared reusable lists (Dates, Locations, Categories…), contact information, colors, and CSS.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'Dashboard', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'overview of KPI cards, today\'s sessions, quick actions, recent orders and system status, plus a System Status health check with quick tools: install WooCommerce, create the booking/list/gallery pages, and import or remove demo data.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Documentation', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'this guide.', 'abp-event-ticket' ); ?></p>
                             </div>
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🌍</span> <?php esc_html_e( 'Inside Global Data', 'abp-event-ticket' ); ?></h4>
+                                <h4><span class="dash_step">🌍</span> <?php esc_html_e( 'Inside Global Configuration', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Dates', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'global date and time formatting, sale buffer, and advance booking horizon.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Location', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable venue list used by every event.', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Category / Organizer / Brand', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'optional classifications; they only appear here when switched ON in Configuration.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'Category / Organizer / Brand', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'optional classifications; they only appear here when switched ON in Global Configuration.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Features', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'highlight badges shown on the event page (e.g. E-Ticket, VIP Access, Parking).', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Additional Services', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'optional add-ons with their own prices (meals, merchandise, transfers).', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Client Form', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'attendee fields collected at checkout (name, email, phone…).', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Resources', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable FAQ and Terms & Conditions blocks.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'FAQ', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable question and answer blocks.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'Term & Conditions', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable terms and conditions content.', 'abp-event-ticket' ); ?></p>
                             </div>
                         </div>
                         <div class="dash_card">
@@ -189,11 +189,11 @@
                                 <h4><span class="dash_step">✅</span> <?php esc_html_e( 'Good to know', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
-                                <p class="dash_body_text">• <?php esc_html_e( 'The booked order status (Configuration → General → Booked Status) decides when seats are deducted from inventory. Set it to the statuses you consider "paid".', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'The booked order status (Global Configuration → Events (first tab, named after the Label field) → Booked Status) decides when seats are deducted from inventory. Set it to the statuses you consider "paid".', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'Customers pick a date and time from the schedule shown on the event page before choosing tickets.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'You can configure a global attendee form and additional services once, then import them into any event and fine-tune them there.', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <?php esc_html_e( 'The event post type and taxonomies support Gutenberg and Polylang, so events can be edited in the block editor and translated for multilingual sites.', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <?php esc_html_e( 'When you uninstall the plugin, your data is preserved by default so you can reinstall later without losing anything. Turn ON "Remove All Data on Uninstall" in Configuration → ON/OFF only if you really want to delete everything.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'The event post type uses the classic editor and supports Polylang, so events are edited on the classic event screen and can be translated for multilingual sites.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'When you uninstall the plugin, your data is preserved by default so you can reinstall later without losing anything. Turn ON "Remove All Data on Uninstall" in Global Configuration → Feature ON/OFF only if you really want to delete everything.', 'abp-event-ticket' ); ?></p>
                             </div>
                         </div>
                     </div>

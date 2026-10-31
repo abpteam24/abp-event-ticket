@@ -20,10 +20,11 @@
 	            $sold_infos = ABPET_Query::get_sold_ticket($form_data);
                 foreach ($ticket_infos as $key => $ticket_info) {
                     $price = ABPET_Function::get_price($post_infos, $key, $start_date);
-                    $sold = $sold_infos[$key] ?? 0;
-                    $qty = $ticket_info['qty'] ?? 0;
-                    $reserve = $ticket_info['reserve'] ?? 0;
-                    $available = $qty - $sold - $reserve;
+                    $sold = (int) ($sold_infos[$key] ?? 0);
+                    $qty = (int) ($ticket_info['qty'] ?? 0);
+                    $reserve = (int) ($ticket_info['reserve'] ?? 0);
+                    // Never show a negative balance when an order oversells the ticket.
+                    $available = max(0, $qty - $sold - $reserve);
                     $ticket_info['available'] = $available;
                     ?>
                     <div class="ticket_item _section_card_xs_w_full">

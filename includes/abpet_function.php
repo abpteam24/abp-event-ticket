@@ -658,54 +658,81 @@
 				}
 				return $all_dates;
 			}
+			public static function date_type( $date_infos ): string {
+				$date_infos = is_array( $date_infos ) ? $date_infos : [];
+				$date_type  = $date_infos['date_type'] ?? 'periodic_date';
+				$date_type  = is_scalar( $date_type ) ? (string) $date_type : '';
+				if ( 'periodic_date' === $date_type || 'specific_date' === $date_type ) {
+					return $date_type;
+				}
+				// Tolerate legacy or partially saved meta where date_type was stored empty/0.
+				$periodic_start = $date_infos['periodic_start_date'] ?? '';
+				$periodic_start = is_scalar( $periodic_start ) ? (string) $periodic_start : '';
+				$specific_dates = $date_infos['specific_dates'] ?? [];
+				if ( '' === $periodic_start && ! empty( $specific_dates ) && is_array( $specific_dates ) ) {
+					return 'specific_date';
+				}
+				return 'periodic_date';
+			}
 			public static function date( $post_id, $date_infos = [], $_date = '' ): array {
 				$all_dates = [];
 				if ( ! empty( $post_id ) && $post_id > 0 ) {
 					if ( empty( $date_infos ) ) {
 						$date_infos = self::get_post_info( $post_id, 'abpet_dates', [] );
 					}
-					$date_type = $date_infos['date_type'] ?? 'periodic_date';
-					$now       = current_time( 'Y-m-d' );
-					if ( $date_type == 'specific_date' ) {
+					$date_infos = is_array( $date_infos ) ? $date_infos : [];
+					$date_type  = self::date_type( $date_infos );
+					$now        = current_time( 'Y-m-d' );
+					if ( $date_type === 'specific_date' ) {
 						$specific_dates = $date_infos['specific_dates'] ?? [];
 						if ( is_array( $specific_dates ) && sizeof( $specific_dates ) > 0 ) {
 							foreach ( $specific_dates as $date_item ) {
-								if ( ! empty( $date_item ) ) {
-									$date_item = gmdate( 'Y-m-d', strtotime( $date_item ) );
-									if ( strtotime( $date_item ) >= strtotime( $now ) ) {
-										$all_dates[] = $date_item;
-									}
+								if ( ! is_scalar( $date_item ) || '' === (string) $date_item ) {
+									continue;
+								}
+								$date_item = gmdate( 'Y-m-d', strtotime( (string) $date_item ) );
+								if ( strtotime( $date_item ) >= strtotime( $now ) ) {
+									$all_dates[] = $date_item;
 								}
 							}
 						}
 					} else {
-						$start_date    = $date_infos['periodic_start_date'] ?? '';
-						$start_date    = ! empty( $_date ) ? $_date : $start_date;
-						$start_date    = $start_date ?: $now;
-						$sale_end_date = $date_infos['periodic_end_date'] ?? '';
-						$sale_end_date = $sale_end_date ? gmdate( 'Y-m-d', strtotime( $sale_end_date ) ) : '';
-						$active_days   = ( ABPET_Date_Config['advance_date_number'] ?? null ) ?: 28;
-						if ( strtotime( $now ) >= strtotime( $start_date ) ) {
-							$start_date = $now;
+						$anchor     = $date_infos['periodic_start_date'] ?? '';
+						$anchor     = is_scalar( $anchor ) && '' !== (string) $anchor ? gmdate( 'Y-m-d', strtotime( (string) $anchor ) ) : '';
+						$start_date = is_scalar( $_date ) && '' !== (string) $_date ? gmdate( 'Y-m-d', strtotime( (string) $_date ) ) : $anchor;
+						$start_date = $start_date ?: $now;
+						$active_days = ( ABPET_Date_Config['advance_date_number'] ?? null ) ?: 28;
+						$repeat      = max( (int) ( $date_infos['periodic_after'] ?? 1 ), 1 );
+						// Keep the periodic cadence anchored to periodic_start_date instead of
+						// restarting from today, so skipped days stay aligned.
+						if ( strtotime( $now ) > strtotime( $start_date ) ) {
+							$day_diff   = (int) floor( ( strtotime( $now ) - strtotime( $start_date ) ) / DAY_IN_SECONDS );
+							$steps      = (int) ceil( $day_diff / $repeat );
+							$start_date = gmdate( 'Y-m-d', strtotime( $start_date . ' +' . ( $steps * $repeat ) . ' day' ) );
 						}
-						$end_date = gmdate( 'Y-m-d', strtotime( $start_date . ' +' . $active_days . ' day' ) );
+						$end_date      = gmdate( 'Y-m-d', strtotime( $start_date . ' +' . $active_days . ' day' ) );
+						$sale_end_date = $date_infos['periodic_end_date'] ?? '';
+						$sale_end_date = is_scalar( $sale_end_date ) && '' !== (string) $sale_end_date ? gmdate( 'Y-m-d', strtotime( (string) $sale_end_date ) ) : '';
 						if ( $sale_end_date && strtotime( $sale_end_date ) < strtotime( $end_date ) ) {
 							$end_date = $sale_end_date;
 						}
 						$all_dates = self::date_list_modify( $start_date, $end_date, $date_infos );
 					}
-					$all_dates = sizeof( $all_dates ) > 1 ? array_unique( $all_dates ) : $all_dates;
+					$all_dates    = sizeof( $all_dates ) > 1 ? array_unique( $all_dates ) : $all_dates;
 					usort( $all_dates, "ABPET_Function::sort_date" );
 					$current_date = current( $all_dates );
 					$now          = strtotime( current_time( 'Y-m-d' ) );
-					if ( $now == strtotime( $current_date ) ) {
+					if ( $current_date && $now == strtotime( $current_date ) ) {
 						$time_infos = self::get_post_info( $post_id, 'time_infos', [] );
 						$time_info  = self::time( $time_infos, $current_date );
 						if ( ! empty( $time_info ) ) {
 							$exit        = false;
-							$buffer_time = ABPET_Dates['sale_close_after'] ?? 0;
+							$buffer_time = (int) ( ABPET_Date_Config['sale_close_before'] ?? 0 ) * 60;
 							$now_time    = strtotime( current_time( 'Y-m-d H:i' ) );
 							foreach ( $time_info as $_time ) {
+								if ( ! is_scalar( $_time ) || '' === (string) $_time ) {
+									continue;
+								}
 								$date = $current_date . ' ' . $_time;
 								$date = $buffer_time > 0 ? strtotime( $date ) - $buffer_time : strtotime( $date );
 								if ( $now_time < $date ) {
@@ -718,7 +745,7 @@
 						}
 					}
 				}
-				return $all_dates;
+				return array_values( $all_dates );
 			}
 			public static function date_list_modify( $start_date, $end_date, $date_infos ): array {
 				$start_date = is_scalar( $start_date ) ? (string) $start_date : '';
@@ -744,7 +771,7 @@
 							}
 						}
 					}
-					if ( in_array( 'specific_of_date', $date_rule_array ) ) {
+					if ( in_array( 'specific_off_dates', $date_rule_array ) ) {
 						$particular_off_dates = $date_infos['specific_off_dates'] ?? [];
 						if ( is_array( $particular_off_dates ) && sizeof( $particular_off_dates ) > 0 ) {
 							foreach ( $particular_off_dates as $particular_off_date ) {
@@ -761,7 +788,7 @@
 						$off_days      = $date_infos['weekend'] ?? '';
 						$off_day_array = is_string( $off_days ) && $off_days ? explode( ',', $off_days ) : [];
 					}
-					$repeat = $date_infos['periodic_after'] ?? 1;
+					$repeat = max( (int) ( $date_infos['periodic_after'] ?? 1 ), 1 );
 					$dates  = self::date_separate_period( $start_date, $end_date, $repeat );
 					foreach ( $dates as $date ) {
 						$date = $date->format( 'Y-m-d' );
@@ -791,33 +818,46 @@
 				return array_values( array_unique( $all_dates ) );
 			}
 			public static function time( $time_infos, $date ) {
+				$time_infos   = is_array( $time_infos ) ? $time_infos : [];
 				$day_times    = $time_infos['day_time'] ?? [];
 				$date_times   = $time_infos['date_times'] ?? [];
 				$default_time = $time_infos['time'] ?? [];
-				if ( ! empty( $day_times ) ) {
+				$time_info    = [];
+				if ( ! empty( $day_times ) && is_array( $day_times ) ) {
 					foreach ( $day_times as $day_key => $day_time ) {
 						if ( ! empty( $day_time ) ) {
-							$time_info[ strtolower( $day_key ) ] = $day_time;
+							$time_info[ strtolower( (string) $day_key ) ] = $day_time;
 						}
 					}
 				}
-				if ( ! empty( $date_times ) ) {
+				if ( ! empty( $date_times ) && is_array( $date_times ) ) {
 					foreach ( $date_times as $date_time ) {
-						$date = $date_time['date'] ?? '';
-						$time = $date_time['time'] ?? [];
-						if ( ! empty( $date ) && ! empty( $time ) ) {
-							$time_info[ $date ] = $time;
+						if ( ! is_array( $date_time ) ) {
+							continue;
+						}
+						$_date = $date_time['date'] ?? '';
+						$time  = $date_time['time'] ?? [];
+						if ( is_scalar( $_date ) && (string) $_date !== '' && ! empty( $time ) && strtotime( (string) $_date ) !== false ) {
+							$time_info[ gmdate( 'Y-m-d', strtotime( (string) $_date ) ) ] = $time;
 						}
 					}
 				}
-				if ( ! empty( $time_info[ $date ] ) ) {
-					return $time_info[ $date ];
+				$date     = is_scalar( $date ) ? (string) $date : '';
+				$date_key = $date !== '' && strtotime( $date ) !== false ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
+				if ( $date_key !== '' && ! empty( $time_info[ $date_key ] ) ) {
+					return $time_info[ $date_key ];
 				}
-				$day_name = strtolower( gmdate( 'l', strtotime( $date ) ) );
-				if ( ! empty( $time_info[ $day_name ] ) ) {
+				$day_name = $date_key !== '' ? strtolower( gmdate( 'l', strtotime( $date_key ) ) ) : '';
+				if ( $day_name !== '' && ! empty( $time_info[ $day_name ] ) ) {
 					return $time_info[ $day_name ];
 				}
 				return $default_time;
+			}
+			public static function available_times( int $post_id, array $time_infos, string $date ): array {
+				$times = self::time( $time_infos, $date );
+				$times = array_filter( (array) $times, 'is_scalar' );
+				$times = array_map( 'sanitize_text_field', array_map( 'strval', $times ) );
+				return array_values( array_unique( array_filter( $times, 'strlen' ) ) );
 			}
 			public static function time_difference( $start_time, $end_time ): string {
 				$text = '';
@@ -982,14 +1022,12 @@
 				return false;
 			}
 			public static function booking_buffer( $time, $end = '' ): string {
-				$date_infos = ABPET_Dates;
+				$date_infos = ABPET_Date_Config;
 				if ( ! empty( $end ) ) {
-					$buffer_time = $date_infos['sale_close_after'] ?? 0;
-					$buffer_time = $buffer_time * 60;
+					$buffer_time = (int) ( $date_infos['sale_close_after'] ?? 0 ) * 60;
 					$time        = gmdate( 'Y-m-d H:i', strtotime( $time ) + $buffer_time );
 				} else {
-					$buffer_time = $date_infos['sale_close_before'] ?? 0;
-					$buffer_time = $buffer_time * 60;
+					$buffer_time = (int) ( $date_infos['sale_close_before'] ?? 0 ) * 60;
 					$time        = gmdate( 'Y-m-d H:i', strtotime( $time ) - $buffer_time );
 				}
 				return $time;
@@ -1028,7 +1066,11 @@
 						$type                = $display_ticket_type == 'on' ? $type : 'price';
 						$price_infos         = $post_infos['ticket_infos'] ?? ABPET_Function::get_post_info( $post_id, 'ticket_infos', [] );
 						if ( ! empty( $price_infos ) && array_key_exists( $type, $price_infos ) ) {
-							$price = $price_infos[ $type ]['price'] ?? ( current( $price_infos['price'] ) ?? 0 );
+							$price = $price_infos[ $type ]['price'] ?? '';
+							if ( '' === $price || null === $price ) {
+								$legacy_prices = $price_infos['price'] ?? [];
+								$price         = is_array( $legacy_prices ) ? ( current( $legacy_prices ) ?: 0 ) : 0;
+							}
 							$price = $price > 0 ? apply_filters( 'abpet_filter_price', $price, $date ) : $price;
 						}
 					}

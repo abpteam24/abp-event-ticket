@@ -251,7 +251,8 @@
 					require_once ABPET_DIR . 'admin/abpet_additional.php';
 					require_once ABPET_DIR . 'admin/abpet_form.php';
 					require_once ABPET_DIR . 'admin/abpet_seat_plan.php';
-					require_once ABPET_DIR . 'admin/abpet_resource.php';
+					require_once ABPET_DIR . 'admin/abpet_faq.php';
+					require_once ABPET_DIR . 'admin/abpet_tc.php';
 					require_once ABPET_DIR . 'admin/abpet_timeline.php';
 					require_once ABPET_DIR . 'admin/abpet_configuration.php';
 					require_once ABPET_DIR . 'admin/abpet_documentation.php';

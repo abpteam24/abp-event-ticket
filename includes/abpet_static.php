@@ -136,7 +136,7 @@
 					'speaker_social_linkedin'     => __( 'Enter the speaker\'s LinkedIn profile URL.', 'abp-event-ticket' ),
 					'speaker_social_facebook'     => __( 'Enter the speaker\'s Facebook profile URL.', 'abp-event-ticket' ),
 					'speaker_social_instagram'    => __( 'Enter the speaker\'s Instagram profile URL.', 'abp-event-ticket' ),
-					'display_speaker'             => __( 'Use this switch to control whether the linked speakers are displayed on the event details page. Turn the switch ON to show the speaker section, and OFF to hide it. By default, this option is set to ON. Select one or more speakers for this Event. Speakers are created and managed from the Global Data section of the plugin. A speaker can be assigned to any number of Events.', 'abp-event-ticket' ),
+					'display_speaker'             => __( 'Use this switch to control whether the linked speakers are displayed on the event details page. Turn the switch ON to show the speaker section, and OFF to hide it. By default, this option is set to ON. Select one or more speakers for this Event. Speakers are created and managed from the Global Configuration section of the plugin. A speaker can be assigned to any number of Events.', 'abp-event-ticket' ),
 					'no_speaker'                  => __( 'No Speaker Found ! Click Add New to create one.', 'abp-event-ticket' ),
 					'sale_close_msg'              => __( 'This Event sale close shortly. please try another Event.', 'abp-event-ticket' ),
 					'not_date'                    => __( 'No Dates Found !', 'abp-event-ticket' ),

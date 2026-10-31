@@ -6,7 +6,6 @@
 		class ABPET_ADMIN {
 			public function __construct() {
 				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-				add_action( 'abpet_load_global', array( $this, 'load_global' ) );
 			}
 			public function admin_menu(): void {
 				$label = ABPET_Function::label();
@@ -25,7 +24,7 @@
 				$icon         = ABPET_Function::icon();
 				$total_post   = $abpet_info['total_post'] ?? 0;
 				$total_order  = $abpet_info['total_order'] ?? 0;
-				$allowed_tabs = [ 'dashboard', 'posts', 'orders', 'sp', 'global', 'configuration', 'documentation', 'admin_order' ];
+				$allowed_tabs = [ 'dashboard', 'posts', 'orders', 'sp', 'configuration', 'documentation', 'admin_order' ];
 				$active_tab   = 'dashboard';
 				if ( isset( $_GET['_abpet_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_abpet_nonce'] ) ), 'abpet_url_action' ) ) {
 					$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'posts';
@@ -60,13 +59,9 @@
 									esc_html_e( 'Ticket/Seat Plan', 'abp-event-ticket' ); ?>
                             </a>
 							<?php do_action( 'abpet_add_admin_menu_tab_middle', $active_tab ); ?>
-                            <a href="<?php echo esc_url( ABPET_Function::build_url( 'global' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'global' ? 'abp_active' : '' ); ?>">
-								<?php ABPET_Static::icon_svg( 'globe' );
-									esc_html_e( 'Global Data', 'abp-event-ticket' ); ?>
-                            </a>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'configuration' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'configuration' ? 'abp_active' : '' ); ?>">
 								<?php ABPET_Static::icon_svg( 'setting' );
-									esc_html_e( 'Configuration', 'abp-event-ticket' ); ?>
+									esc_html_e( 'Global Configuration', 'abp-event-ticket' ); ?>
                             </a>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'documentation' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'documentation' ? 'abp_active' : '' ); ?>">
                                 <span>📘</span><?php esc_html_e( 'Documentation', 'abp-event-ticket' ); ?>
@@ -91,59 +86,6 @@
                             do_action( 'abpet_load_' . $active_tab, $abpet_info ); ?>
                     </div>
 					<?php ABPET_Layout::load_admin_globally(); ?>
-                </div>
-				<?php
-			}
-			public function load_global( $abpet_info ): void {
-				$allowed_tabs = [ 'dates', 'additional', 'client_form', 'resource', 'category', 'organizer', 'location', 'feature', 'brand', 'discount','speaker' ];
-				$active_tab   = 'dates';
-				if ( isset( $_GET['_abpet_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_abpet_nonce'] ) ), 'abpet_url_action' ) ) {
-					$active_tab = isset( $_GET['global'] ) ? sanitize_text_field( wp_unslash( $_GET['global'] ) ) : 'dates';
-				}
-				if ( ! in_array( $active_tab, $allowed_tabs, true ) ) {
-					$active_tab = 'dates';
-				}
-				?>
-                <div class="_max_1200_mar_auto">
-                    <div class="_section_card_w_full">
-                        <div class="_group_content_w_full_f_equal_f_wrap">
-                            <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'dates' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'dates' ? 'abp_active' : '' ); ?>">
-								<?php ABPET_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Dates', 'abp-event-ticket' ); ?>
-                            </a>
-							<?php if ( ABPET_Function::on_off( 'additional_info' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'additional' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'additional' ? 'abp_active' : '' ); ?>">💰<?php esc_html_e( 'Additional services', 'abp-event-ticket' ); ?></a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'client_info' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'client_form' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'client_form' ? 'abp_active' : '' ); ?>">📋<?php esc_html_e( 'Client Form', 'abp-event-ticket' ); ?></a>
-							<?php } ?>
-							<?php do_action( 'abpet_add_admin_global_tab', $active_tab ); ?>
-                            <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'location' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'location' ? 'abp_active' : '' ); ?>">
-                                <span class="fas fa-map-marker-alt"></span><?php echo esc_html( ABPET_Function::location_label() ); ?>
-                            </a>
-							<?php if ( ABPET_Function::on_off( 'category' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'category' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'category' ? 'abp_active' : '' ); ?>">
-									<?php ABPET_Static::icon_svg( 'category_1' ); ?><?php echo esc_html( ABPET_Function::category_label() ); ?>
-                                </a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'organizer' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'organizer' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'organizer' ? 'abp_active' : '' ); ?>">🏢<?php echo esc_html( ABPET_Function::organizer_label() ); ?></a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'brand' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'brand' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'brand' ? 'abp_active' : '' ); ?>">🏷️<?php echo esc_html( ABPET_Function::brand_label() ); ?></a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'feature' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'feature' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'feature' ? 'abp_active' : '' ); ?>">🔗<?php echo esc_html( ABPET_Function::feature_label() ); ?></a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'speaker' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'speaker' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'speaker' ? 'abp_active' : '' ); ?>">🎤<?php echo esc_html( ABPET_Function::speaker_label() ); ?></a>
-							<?php } ?>
-							<?php if ( ABPET_Function::on_off( 'tc' ) || ABPET_Function::on_off( 'faq' ) ) { ?>
-                                <a href="<?php echo esc_url( ABPET_Function::build_url( 'global', [ 'global' => 'resource' ] ) ); ?>" class="_btn_light_green_pale_xs  <?php echo esc_attr( $active_tab == 'resource' ? 'abp_active' : '' ); ?>">📚<?php esc_html_e( 'Resources', 'abp-event-ticket' ); ?></a>
-							<?php } ?>
-                        </div>
-                        <div class="_divider_xs"></div>
-						<?php do_action( 'abpet_global_' . $active_tab, $abpet_info ); ?>
-                    </div>
                 </div>
 				<?php
 			}

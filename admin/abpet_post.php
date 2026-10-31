@@ -176,12 +176,19 @@
                                         <li data-tabs-target="#abpet_client_form"><span class="_mar_r_xxs">📋</span><?php esc_html_e( 'Client Form', 'abp-event-ticket' ); ?></li>
 									<?php } ?>
 									<?php do_action( 'abpet_post_tab_menu', $post_infos ); ?>
-                                    <li data-tabs-target="#abpet_resource"><span class="_mar_r_xxs">📚</span><?php esc_html_e( 'Resources', 'abp-event-ticket' ); ?></li>
+                                    <li data-tabs-target="#abpet_tax"><span class="_mar_r_xxs">🧾</span><?php esc_html_e( 'Tax', 'abp-event-ticket' ); ?></li>
+									<?php if ( ABPET_Function::on_off( 'faq' ) ) { ?>
+                                    <li data-tabs-target="#abpet_faq"><span class="_mar_r_xxs">❓</span><?php esc_html_e( 'FAQs', 'abp-event-ticket' ); ?></li>
+									<?php } ?>
+									<?php if ( ABPET_Function::on_off( 'tc' ) ) { ?>
+                                    <li data-tabs-target="#abpet_tc"><span class="_mar_r_xxs">🤝</span><?php esc_html_e( 'Term & Conditions', 'abp-event-ticket' ); ?></li>
+									<?php } ?>
                                 </ul>
                             </div>
                             <div class="tab_content _panel_body">
 								<?php
 									$this->general_configuration( $post_infos );
+									$this->tax_configuration( $post_infos );
 									do_action( 'abpet_post_content', $post_infos );
 								?>
                             </div>
@@ -420,6 +427,50 @@
 							<?php do_action( 'abpet_add_image_multiple', 'abpet_slider', ( $post_infos['abpet_slider'] ?? '' ) ); ?>
                         </div>
                     </div>
+                </div>
+				<?php
+			}
+			public function tax_configuration( $post_infos = [] ): void {
+				$tax_status  = $post_infos['_tax_status'] ?? '';
+				$tax_classes = WC_Tax::get_tax_rate_classes();
+				$tax_class   = $post_infos['_tax_class'] ?? '';
+				?>
+                <div class="tab_item" data-tabs="#abpet_tax">
+                    <h4 class="abp_color_theme_gap_xxs">🧾<?php esc_html_e( 'Tax Configuration', 'abp-event-ticket' ); ?></h4>
+                    <div class="_divider_xxs"></div>
+					<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) { ?>
+                        <div class="group_setting">
+                            <div class="setting_item">
+                                <label class="_f_equal_f_wrap">
+                                    <span><?php esc_html_e( 'Tax Status', 'abp-event-ticket' ); ?></span>
+                                    <select class="_form_control" name="_tax_status">
+                                        <option disabled selected><?php esc_html_e( 'Please Select', 'abp-event-ticket' ); ?></option>
+                                        <option value="taxable" <?php echo esc_attr( $tax_status == 'taxable' ? 'selected' : '' ); ?>><?php esc_html_e( 'Taxable', 'abp-event-ticket' ); ?></option>
+                                        <option value="shipping" <?php echo esc_attr( $tax_status == 'shipping' ? 'selected' : '' ); ?>><?php esc_html_e( 'Shipping only', 'abp-event-ticket' ); ?></option>
+                                        <option value="none" <?php echo esc_attr( $tax_status == 'none' ? 'selected' : '' ); ?>><?php esc_html_e( 'None', 'abp-event-ticket' ); ?></option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="setting_item">
+                                <label class="_f_equal_f_wrap">
+                                    <span><?php esc_html_e( 'Tax Class', 'abp-event-ticket' ); ?></span>
+                                    <select class="_form_control" name="_tax_class">
+                                        <option disabled selected><?php esc_html_e( 'Please Select', 'abp-event-ticket' ); ?></option>
+                                        <option value="standard" <?php echo esc_attr( $tax_class == 'standard' ? 'selected' : '' ); ?>><?php esc_html_e( 'Standard', 'abp-event-ticket' ); ?></option>
+										<?php if ( sizeof( $tax_classes ) > 0 ) { ?>
+											<?php foreach ( $tax_classes as $class ) { ?>
+                                                <option value="<?php echo esc_attr( $class->slug ); ?>" <?php echo esc_attr( $tax_class == $class->slug ? 'selected' : '' ); ?>> <?php echo esc_html( $class->name ); ?> </option>
+											<?php } ?>
+										<?php } ?>
+                                    </select>
+                                </label>
+                                <div class="_divider_xs"></div>
+								<?php ABPET_Layout::info_text( '_tax_class' ); ?>
+                            </div>
+                        </div>
+					<?php } else {
+						ABPET_Layout::layout_warning_info( 'enable_tax_msg' );
+					} ?>
                 </div>
 				<?php
 			}

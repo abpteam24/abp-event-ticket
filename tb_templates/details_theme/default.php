@@ -157,7 +157,7 @@
                                                 <span><?php esc_html_e( 'Get Tickets', 'abp-event-ticket' ); ?></span>
                                             </div>
                                             <div class="post_top_filter">
-												<?php ABPET_Layout::start_date( $all_dates, $start_date );
+												<?php ABPET_Layout::start_date( $all_dates, $start_date, $all_times, $time_infos, $post_id, $start_time );
 													ABPET_Layout::start_time( $form_data ); ?>
                                             </div>
 											<?php

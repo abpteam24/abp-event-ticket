@@ -1,7 +1,6 @@
 @charset "utf-8";
 /******************************************************************** configuration ************************************************/
 @media only screen and (min-width: 10px) {
-	div.abpet_admin table {border: 2px solid var(--et_color_muted_2);}
 	div.abpet_admin table thead,
 	div.abpet_admin table tfoot {background: var(--et_color_muted_2);}
 	div.abpet_admin table tbody tr:nth-child(even) {background: var(--et_color_6);}

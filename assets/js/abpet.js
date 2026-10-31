@@ -58,7 +58,7 @@
             if ($.trim(form_area.find('[name="start_date"]').val()).length === 0) {
                 setTimeout(function () {
                     abpet_toast_msg(abpet_infos.msg.select_start_date);
-                    form_area.find('#start_date').focus();
+                    form_area.find('#start_date, #abpet_start_date_select').focus();
                 }, 100);
                 return;
             }
@@ -91,10 +91,12 @@
         });
     });
     // Refresh ticket/seat availability for the selected event date and session.
-    abpet_parent.on('change', '#abpet_search_area [name="start_date"], .post_top_filter [name="start_date"]', function () {
-        let date = $(this).val();
+    abpet_parent.on('change', '#abpet_search_area [name="start_date"], .post_top_filter [name="start_date"], #abpet_start_date_select', function () {
+        let values = String($(this).val() || '').split('|');
+        let date = values[0] || '';
+        let time = values.length > 1 ? values[1] : '';
         abpet_booking.find('form [name="event_date"]').val(date);
-        abpet_booking.find('form [name="session_time"]').val('');
+        abpet_booking.find('form [name="session_time"]').val(time);
         abpet_booking.find('form [name="session_time"]').first().trigger('change');
     });
     abpet_booking.on('change', "[name='session_time'] , [name='sp_id'] ", function (e) {
@@ -140,6 +142,15 @@
                             field.val(response.data.selected_time || '');
                         }
                     });
+                }
+                if (response.data && typeof response.data.time_html === 'string') {
+                    let topFilter = booking_area.find('.post_top_filter').first();
+                    let topTime = topFilter.find('.abpet_top_time').first();
+                    if (topTime.length) {
+                        topTime.replaceWith(response.data.time_html);
+                    } else if (response.data.time_html) {
+                        topFilter.append(response.data.time_html);
+                    }
                 }
                 if (response.data && response.data.hasOwnProperty('html') && target_html.length > 0) {
                     target_html.html(response.data.html).promise().done(function () {

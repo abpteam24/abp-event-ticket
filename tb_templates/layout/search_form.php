@@ -21,6 +21,10 @@
         $all_dates = ABPET_Function::date_all($all_post_ids);
         $upcoming_date = current($all_dates);
         $upcoming_date = !empty($upcoming_date) ? gmdate('Y-m-d', strtotime($upcoming_date)) : '';
+        $search_time_infos = $post_id > 0 ? ABPET_Function::get_post_info($post_id, 'time_infos', []) : [];
+        $search_time_infos = is_array($search_time_infos) ? $search_time_infos : [];
+        $search_all_times = $post_id > 0 && !empty($upcoming_date) ? ABPET_Function::available_times($post_id, $search_time_infos, $upcoming_date) : [];
+        $search_start_time = !empty($search_all_times) ? current($search_all_times) : '';
         //echo '<pre>';        print_r($all_dates);        echo '</pre>';
         ?>
         <div id="abpet_search_area">
@@ -35,7 +39,7 @@
                 }
                 ?>
                 <div class="start_date _input_item">
-                    <?php ABPET_Layout::start_date($all_dates, $upcoming_date); ?>
+                    <?php ABPET_Layout::start_date($all_dates, $upcoming_date, $search_all_times, $search_time_infos, $post_id, $search_start_time); ?>
                 </div>
                 <div class="_input_item_fj_between_fd_column">
                     <span></span>

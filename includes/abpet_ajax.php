@@ -21,6 +21,12 @@
                 $post_val = fn($key, $default = '') => isset($_POST[$key]) ? sanitize_text_field(wp_unslash($_POST[$key])) : $default;
                 $post_id = $post_int('post_id');
                 $start_date = $post_val('start_date');
+                $start_time = $post_val('session_time') ?: $post_val('start_time');
+                if ( strpos( $start_date, '|' ) !== false ) {
+                    [ $start_date, $date_time ] = array_pad( explode( '|', $start_date, 2 ), 2, '' );
+                    $start_date = trim( $start_date );
+                    $start_time = $start_time ?: trim( $date_time );
+                }
                 $form_data['post_id'] = $post_id;
                 $msg = '';
                 ob_start();
@@ -37,12 +43,15 @@
                             }
 
                             $time_infos=$post_infos['time_infos']??[];
-                            $all_times = ABPET_Function::time($time_infos, $start_date);
-	                        $start_time = !empty($all_times) ? current($all_times) : '';
+                            $time_infos = is_array($time_infos) ? $time_infos : [];
+                            $all_times = ABPET_Function::available_times($post_id, $time_infos, $start_date);
+                            $start_time = in_array($start_time, $all_times, true) ? $start_time : (!empty($all_times) ? current($all_times) : '');
                             $upcoming_date='';
                             if(!empty($start_date)) {
 	                            $upcoming_date=!empty($start_time) ? gmdate('Y-m-d H:i', strtotime($start_date.' '.$start_time)) : $start_date;
                             }
+	                        $form_data['all_dates'] = !empty($all_dates) ? $all_dates : ABPET_Function::date($post_id);
+	                        $form_data['all_times'] = $all_times;
 	                        $form_data['start_date'] = $start_date;
 	                        $form_data['start_time'] = $start_time;
 	                        $form_data['session_time'] = $start_time;
@@ -112,10 +121,16 @@
                     $post_infos = ABPET_Function::get_all_meta($post_id);
                     $form_data['post_id'] = $post_id;
                     $sale_continue = $post_infos['sale_continue'] ?? 'on';
+                    $time_html = '';
                     ob_start();
                     if ($sale_continue == 'on') {
 	                    $start_date = $post_val('event_date') ?: $post_val('start_date');
 	                    $session_time = $post_val('session_time') ?: $post_val('start_time');
+	                    if ( strpos( $start_date, '|' ) !== false ) {
+		                    [ $start_date, $date_time ] = array_pad( explode( '|', $start_date, 2 ), 2, '' );
+		                    $start_date   = trim( $start_date );
+		                    $session_time = $session_time ?: trim( $date_time );
+	                    }
 	                    if(empty($start_date)) {
 		                    $all_dates = ABPET_Function::date($post_id);
 		                    $start_date = current($all_dates);
@@ -123,16 +138,27 @@
 	                    }
 
 	                    $time_infos=$post_infos['time_infos']??[];
-	                    $all_times = ABPET_Function::time($time_infos, $start_date);
-	                    $session_time = $session_time ?: (!empty($all_times) ? current($all_times) : '');
+	                    $time_infos = is_array($time_infos) ? $time_infos : [];
+	                    $all_times = ABPET_Function::available_times($post_id, $time_infos, $start_date);
+	                    if (!isset($all_dates) || !is_array($all_dates)) {
+		                    $all_dates = ABPET_Function::date($post_id);
+	                    }
+	                    if (!in_array($session_time, $all_times, true)) {
+		                    $session_time = !empty($all_times) ? current($all_times) : '';
+	                    }
 	                    $upcoming_date='';
 	                    if(!empty($start_date)) {
 		                    $upcoming_date=!empty($session_time) ? gmdate('Y-m-d H:i', strtotime($start_date.' '.$session_time)) : $start_date;
 	                    }
+	                    $form_data['all_dates'] = $all_dates;
+	                    $form_data['all_times'] = $all_times;
 	                    $form_data['start_date'] = $start_date;
 	                    $form_data['start_time'] = $session_time;
 	                    $form_data['event_date'] = $start_date;
 	                    $form_data['session_time'] = $session_time;
+	                    ob_start();
+	                    ABPET_Layout::start_time( $form_data );
+	                    $time_html = ob_get_clean();
 	                    $selected_sp_id = $post_int( 'sp_id', 0 );
 	                    if ( $selected_sp_id > 0 ) {
 	                        $available_sp_ids = array_map(
@@ -164,6 +190,7 @@
                     }
                     wp_send_json_success([
                         'html' => $html,
+                        'time_html' => $time_html,
                         'times' => $time_options,
                         'selected_time' => $session_time,
                         'msg' => (get_the_title($post_id) . ' ' . __('data loaded....!', 'abp-event-ticket')),
@@ -182,12 +209,16 @@
                 $all_dates = !empty($post_id) && $post_id > 0 ? ABPET_Function::date($post_id) : ABPET_Function::date_all();
                 $upcoming_date = current($all_dates);
                 $upcoming_date = !empty($upcoming_date) ? gmdate('Y-m-d', strtotime($upcoming_date)) : '';
+                $post_infos = !empty($post_id) && $post_id > 0 ? ABPET_Function::get_all_meta($post_id) : [];
+                $time_infos = is_array($post_infos['time_infos'] ?? []) ? $post_infos['time_infos'] : [];
+                $all_times  = !empty($upcoming_date) ? ABPET_Function::available_times($post_id, $time_infos, $upcoming_date) : [];
+                $start_time = !empty($all_times) ? current($all_times) : '';
                 ob_start();
                 //echo '<pre>';                    print_r($post_id);                    echo '</pre>';
                 //echo '<pre>';                    print_r($all_dates);                    echo '</pre>';
-                ABPET_Layout::start_date($all_dates, $upcoming_date);
+                ABPET_Layout::start_date($all_dates, $upcoming_date, $all_times, $time_infos, $post_id, $start_time);
                 $html_journey = ob_get_clean();
-                $new_picker_config = !empty($all_dates) ? ABPET_Layout::create_datepicker_array($all_dates) : '';
+                $new_picker_config = ABPET_Layout::use_date_picker(count($all_dates)) ? ABPET_Layout::create_datepicker_array($all_dates) : '';
                 wp_send_json_success([
                     'html_journey' => $html_journey, 'type' => 'success',
                     'msg' => esc_html__('Date Loaded successfully.', 'abp-event-ticket'),

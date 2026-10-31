@@ -631,11 +631,14 @@
 /******************************************************************** Tabs section ************************************************/
 @media only screen and (min-width: 10px) {
 	div.abpet_area .abp_tabs .tab_lists { display: -webkit-flex; display: flex; background-color: var(--et_color_white);font-size: var(--et_fs_label); width: 100%; }
+	div.abpet_area .tab_lists li,
 	div.abpet_area .tab_lists [data-tabs-target] {
-		display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-flex-wrap: nowrap; flex-wrap: nowrap;
+		display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-flex-wrap: nowrap; flex-wrap: nowrap;gap: var(--et_gap_xs);
 		position: relative; text-align: left; cursor: pointer; padding: var(--et_gap_xs) var(--et_gap); color: var(--et_color_default);-webkit-transition: var(--et_transition); transition: var(--et_transition);
 	}
+	div.abpet_area .tab_lists li:hover,
 	div.abpet_area .tab_lists [data-tabs-target]:hover { font-weight: var(--et_fw-medium); border-color: var(--et_color_theme); color: var(--et_color_theme) }
+	div.abpet_area .tab_lists li.abp_active,
 	div.abpet_area .tab_lists [data-tabs-target].abp_active { font-weight: var(--et_fw-medium); background-color: var(--et_color_theme); color: var(--et_color_theme_alter); font-size: var(--et_fs_h6);}
 	div.abpet_area .tab_lists span { margin: 0 var(--et_gap_xxs) 0 0; }
 	div.abpet_area .abp_tabs .tab_content { position: relative; overflow: auto; width: 100%;padding: var(--et_gap); }
@@ -648,6 +651,7 @@
 	/*=============================*/
 	div.abpet_area .abp_tabs.tab_left { display: -webkit-flex; display: flex; background-color: var(--et_color_white);}
 	div.abpet_area .abp_tabs.tab_left .tab_lists { -webkit-flex-flow: column; flex-flow: column; width: 40%; max-width: 250px; border-right: var(--et_gap_xxs) solid var(--et_color_theme);}
+	div.abpet_area .tab_left .tab_lists li,
 	div.abpet_area .tab_left .tab_lists [data-tabs-target] { border-bottom: 1px solid var(--et_color_border); }
 	/*=============================*/
 	div.abpet_area .abp_tabs.tab_border > .tab_lists li { display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center; -webkit-align-items: center; align-items: center;-webkit-flex: 1; flex: 1; }
