@@ -26,7 +26,7 @@
                         <div class="_f_equal_f_wrap_gap_section_15 abpet_light_lead">
                             <div class="abpet_details_column abpet_light_lead_body">
                                 <div class="abpet_light_lead_kicker">
-									<?php ABPET_Static::icon_svg( 'location_1' ); ?>
+									<?php ABPET_Static::svg( 'location_1' ); ?>
                                     <span><?php esc_html_e( 'Event Highlights', 'abp-event-ticket' ); ?></span>
                                 </div>
                                 <h1 class="abpet_details_title"><?php ABPET_Layout::title( $post_infos ); ?></h1>
@@ -41,7 +41,7 @@
                                 </div>
 								<?php if ( ! empty( $upcoming_date ) ) { ?>
                                     <div class="abpet_light_lead_date">
-										<?php ABPET_Static::icon_svg( 'date_1' ); ?>
+										<?php ABPET_Static::svg( 'date_1' ); ?>
                                         <span><?php echo esc_html( ABPET_Function::date_format( $upcoming_date ) ); ?></span>
                                     </div>
 								<?php } ?>

@@ -8,6 +8,8 @@
 				add_action( 'abpet_load_documentation', array( $this, 'load_documentation' ) );
 			}
 			public function load_documentation(): void {
+				$pro_installed = defined( 'ABPET_DIR_PRO' );
+				$pro_enabled   = $pro_installed && class_exists( 'ABPET_License' ) && ! ABPET_License::core_locked();
 				?>
                 <div class="abp_panel_max_1200_mar_auto abp_documentation">
                     <div class="_panel_head">
@@ -18,11 +20,23 @@
                             <div class="dash_card_body">
                                 <p class="dash_body_lead"><?php esc_html_e( 'Set up and start selling tickets in ~15 minutes.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text"><?php esc_html_e( 'This guide explains the plugin step by step: what every menu does, in which order to set things up, and how tickets and seat plans work.', 'abp-event-ticket' ); ?></p>
+                                <div class="et_doc_actions">
+                                    <?php if ( ! $pro_installed ) { ?>
+                                        <a class="_btn_light_active_xs" href="https://abp-team.com/downloads/abp-event-ticket-pro/" target="_blank" rel="noopener"><i class="fas fa-crown"></i> <?php esc_html_e( 'Get PRO', 'abp-event-ticket' ); ?></a>
+                                    <?php } else { ?>
+                                        <span class="et_doc_badge et_doc_badge_pro"><i class="fas fa-crown"></i> <?php esc_html_e( 'PRO Installed', 'abp-event-ticket' ); ?></span>
+                                        <span class="et_doc_badge <?php echo esc_attr( $pro_enabled ? 'et_doc_badge_enabled' : 'et_doc_badge_license' ); ?>">
+                                            <?php echo esc_html( $pro_enabled ? __( 'PRO Features Enabled', 'abp-event-ticket' ) : __( 'License Needed', 'abp-event-ticket' ) ); ?>
+                                        </span>
+                                    <?php } ?>
+                                    <a class="_btn_light_active_xs" href="https://demo-et.abp-team.com/documentation/" target="_blank" rel="noopener"><i class="fas fa-book"></i> <?php esc_html_e( 'Full Documentation', 'abp-event-ticket' ); ?></a>
+                                </div>
                             </div>
                         </div>
+                        <div class="et_doc_phase et_doc_phase_free"><i class="fas fa-heart"></i> <?php esc_html_e( 'FREE PLUGIN — Events, tickets, schedules, seat plans, and WooCommerce bookings', 'abp-event-ticket' ); ?></div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🚀</span> <?php esc_html_e( 'Quick Start — Follow these steps in order', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🚀<?php esc_html_e( 'Quick Start — Follow these steps in order', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <div class="_grid_400">
@@ -47,7 +61,7 @@
 											'3',
 											__( 'Create Global Lists', 'abp-event-ticket' ),
 											__( 'Build the reusable lists every event shares.', 'abp-event-ticket' ),
-											__( 'Global Configuration holds the shared lists: Dates, Locations, and (if enabled) Categories, Organizers, Brands, Features, Speaker, Additional Services, Client Forms, FAQs, and Terms & Conditions. Create them once — they appear as dropdowns when creating an event.', 'abp-event-ticket' ),
+											__( 'Global Configuration holds the shared lists: Dates, Locations, and (if enabled) Categories, Organizers, Brands, Features, Speaker, Additional Services, Attendee Forms, FAQs, and Terms & Conditions. Create them once — they appear as dropdowns when creating an event.', 'abp-event-ticket' ),
 											'configuration',
 											__( 'Open Global Configuration', 'abp-event-ticket' )
 										);
@@ -89,7 +103,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🔛</span> <?php esc_html_e( 'The ON/OFF tab — what it is and why it matters', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🔛<?php esc_html_e( 'The ON/OFF tab — what it is and why it matters', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text"><?php esc_html_e( 'Global Configuration → Feature ON/OFF is the master control panel of the plugin. Every feature is listed there with a simple switch. Each switch controls a whole feature area of the site — not just one event.', 'abp-event-ticket' ); ?></p>
@@ -118,7 +132,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🎟️</span> <?php esc_html_e( 'Ticket Type vs Seat Plan — made clear', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🎟️<?php esc_html_e( 'Ticket Type vs Seat Plan — made clear', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text"><?php esc_html_e( 'Every event sells tickets in one of two ways. You choose this on the event edit page in the Ticket Type settings:', 'abp-event-ticket' ); ?></p>
@@ -148,7 +162,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🗂️</span> <?php esc_html_e( 'Every menu explained', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🗂️ <?php esc_html_e( 'Every menu explained', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php echo esc_html( ABPET_Function::label() ); ?> List</b> — <?php esc_html_e( 'all your events: create, edit, clone, trash, restore, and permanently delete events.', 'abp-event-ticket' ); ?></p>
@@ -161,7 +175,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🌍</span> <?php esc_html_e( 'Inside Global Configuration', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🌍<?php esc_html_e( 'Inside Global Configuration', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Dates', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'global date and time formatting, sale buffer, and advance booking horizon.', 'abp-event-ticket' ); ?></p>
@@ -169,14 +183,14 @@
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Category / Organizer / Brand', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'optional classifications; they only appear here when switched ON in Global Configuration.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Features', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'highlight badges shown on the event page (e.g. E-Ticket, VIP Access, Parking).', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Additional Services', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'optional add-ons with their own prices (meals, merchandise, transfers).', 'abp-event-ticket' ); ?></p>
-                                <p class="dash_body_text">• <b><?php esc_html_e( 'Client Form', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'attendee fields collected at checkout (name, email, phone…).', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <b><?php esc_html_e( 'Attendee Form', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'attendee fields collected at checkout (name, email, phone…).', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'FAQ', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable question and answer blocks.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Term & Conditions', 'abp-event-ticket' ); ?></b> — <?php esc_html_e( 'reusable terms and conditions content.', 'abp-event-ticket' ); ?></p>
                             </div>
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🔑</span> <?php esc_html_e( 'Shortcodes you can place anywhere', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">🔑<?php esc_html_e( 'Shortcodes you can place anywhere', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <code>[abpet-booking]</code> — <?php esc_html_e( 'full event listing with search, filters, ticket selection, and booking flow. Ideal for your Booking page.', 'abp-event-ticket' ); ?></p>
@@ -186,7 +200,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">✅</span> <?php esc_html_e( 'Good to know', 'abp-event-ticket' ); ?></h4>
+                                <h4 class="abp_color_theme_gap_xs">✅<?php esc_html_e( 'Good to know', 'abp-event-ticket' ); ?></h4>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <?php esc_html_e( 'The booked order status (Global Configuration → Events (first tab, named after the Label field) → Booked Status) decides when seats are deducted from inventory. Set it to the statuses you consider "paid".', 'abp-event-ticket' ); ?></p>
@@ -194,6 +208,37 @@
                                 <p class="dash_body_text">• <?php esc_html_e( 'You can configure a global attendee form and additional services once, then import them into any event and fine-tune them there.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'The event post type uses the classic editor and supports Polylang, so events are edited on the classic event screen and can be translated for multilingual sites.', 'abp-event-ticket' ); ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'When you uninstall the plugin, your data is preserved by default so you can reinstall later without losing anything. Turn ON "Remove All Data on Uninstall" in Global Configuration → Feature ON/OFF only if you really want to delete everything.', 'abp-event-ticket' ); ?></p>
+                            </div>
+                        </div>
+                        <div class="et_doc_phase et_doc_phase_pro"><i class="fas fa-crown"></i> <?php esc_html_e( 'PRO ADD-ON — Optional tools that require ABP Event Ticket PRO and an active license/trial', 'abp-event-ticket' ); ?></div>
+                        <div class="dash_card et_doc_pro_card">
+                            <div class="dash_card_head">
+                                <h4 class="abp_color_theme_gap_xs">👑<?php esc_html_e( 'Install PRO & Activate', 'abp-event-ticket' ); ?></h4>
+                                <span class="et_doc_badge et_doc_badge_pro"><?php esc_html_e( 'PRO', 'abp-event-ticket' ); ?></span>
+                            </div>
+                            <div class="dash_card_body">
+                                <p class="dash_body_text"><?php esc_html_e( 'PRO is an add-on; keep WooCommerce and the free ABP Event Ticket plugin active. Install the PRO ZIP from Plugins → Add New → Upload Plugin, then open the Event Ticket Dashboard and activate your license in the PRO License card. Install ABP PDF Tools as well if you need PDF tickets or attendee lists.', 'abp-event-ticket' ); ?></p>
+                                <div class="et_doc_actions">
+                                    <?php if ( ! $pro_installed ) { ?>
+                                        <a class="_btn_light_active_xs" href="https://abp-team.com/downloads/abp-event-ticket-pro/" target="_blank" rel="noopener"><i class="fas fa-shopping-cart"></i> <?php esc_html_e( 'Get Event Ticket PRO', 'abp-event-ticket' ); ?></a>
+                                    <?php } else { ?>
+                                        <a class="_btn_light_active_xs" href="<?php echo esc_url( ABPET_Function::build_url( 'dashboard' ) ); ?>"><i class="fas fa-key"></i> <?php esc_html_e( 'Open PRO License', 'abp-event-ticket' ); ?></a>
+                                    <?php } ?>
+                                    <a class="_btn_light_active_xs" href="https://demo-et.abp-team.com/documentation/" target="_blank" rel="noopener"><i class="fas fa-book"></i> <?php esc_html_e( 'PRO Setup Guide', 'abp-event-ticket' ); ?></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dash_card et_doc_pro_card">
+                            <div class="dash_card_head">
+                                <h4 class="abp_color_theme_gap_xs">✨<?php esc_html_e( 'What PRO adds', 'abp-event-ticket' ); ?></h4>
+                                <span class="et_doc_badge et_doc_badge_pro"><?php esc_html_e( 'PRO', 'abp-event-ticket' ); ?></span>
+                            </div>
+                            <div class="dash_card_body">
+                                <p class="dash_body_text">• <?php esc_html_e( 'Seasonal and Early Bird discounts, globally or per event.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'Partial payments, balance tracking, and customer balance payments.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'Customer cancellation requests with an event-time cutoff and admin approval.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'PDF tickets and attendee lists, customizable booking emails and resend tools.', 'abp-event-ticket' ); ?></p>
+                                <p class="dash_body_text">• <?php esc_html_e( 'Admin-created/edited bookings, CSV export, session statistics, and ticket check-in.', 'abp-event-ticket' ); ?></p>
                             </div>
                         </div>
                     </div>
@@ -205,7 +250,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><span class="dash_step"><?php echo esc_html( $step ); ?></span><?php echo esc_html( $title ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><?php echo esc_html( $step ); ?><?php echo esc_html( $title ); ?></h4>
 						<?php if ( $url && $btn_label ) { ?>
                             <a class="_btn_light_active_xs" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $btn_label ); ?></a>
 						<?php } ?>

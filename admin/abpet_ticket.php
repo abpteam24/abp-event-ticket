@@ -341,7 +341,7 @@
                     <td>
                         <div class="_all_center">
                             <div class="_group_content">
-                                <button type="button" class="_btn_light_theme_xxs sp_id_change" onclick="abpet_popup_open_global('view_sp','<?php echo esc_attr( $id ); ?>')" title="<?php esc_attr_e( 'View : Seat Plan', 'abp-event-ticket' ); ?>"><?php ABPET_Static::icon_svg( 'view_1' ); ?></button>
+                                <button type="button" class="_btn_light_theme_xxs sp_id_change" onclick="abpet_popup_open_global('view_sp','<?php echo esc_attr( $id ); ?>')" title="<?php esc_attr_e( 'View : Seat Plan', 'abp-event-ticket' ); ?>"><?php ABPET_Static::svg( 'view_1' ); ?></button>
 								<?php
 									ABPET_Layout::button_sort();
 									ABPET_Layout::button_delete();

@@ -6,6 +6,7 @@
 		class ABPET_ADMIN {
 			public function __construct() {
 				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+				add_action( 'abpet_load_global', array( $this, 'forward_global' ) );
 			}
 			public function admin_menu(): void {
 				$label = ABPET_Function::label();
@@ -24,7 +25,7 @@
 				$icon         = ABPET_Function::icon();
 				$total_post   = $abpet_info['total_post'] ?? 0;
 				$total_order  = $abpet_info['total_order'] ?? 0;
-				$allowed_tabs = [ 'dashboard', 'posts', 'orders', 'sp', 'configuration', 'documentation', 'admin_order' ];
+				$allowed_tabs = [ 'dashboard', 'posts', 'orders', 'sp', 'global', 'configuration', 'documentation', 'admin_order' ,'cancel_requests','order_edit'];
 				$active_tab   = 'dashboard';
 				if ( isset( $_GET['_abpet_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_abpet_nonce'] ) ), 'abpet_url_action' ) ) {
 					$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'posts';
@@ -50,17 +51,17 @@
                                 <sup class="_color_theme">( <?php echo esc_html( $total_post ); ?> )</sup>
                             </a>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'orders' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'orders' ? 'abp_active' : '' ); ?>">
-								<?php ABPET_Static::icon_svg( 'order' );
+								<?php ABPET_Static::svg( 'order' );
 									esc_html_e( 'Orders', 'abp-event-ticket' ); ?>
                                 <sup class="_color_theme">( <?php echo esc_html( $total_order ); ?> )</sup>
                             </a>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'sp' ) ); ?>" class="_btn_xs  <?php echo esc_attr( $active_tab == 'sp' ? 'abp_active' : '' ); ?>">
-								<?php ABPET_Static::icon_svg( 'seat' );
+								<?php ABPET_Static::svg( 'seat' );
 									esc_html_e( 'Ticket/Seat Plan', 'abp-event-ticket' ); ?>
                             </a>
 							<?php do_action( 'abpet_add_admin_menu_tab_middle', $active_tab ); ?>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'configuration' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'configuration' ? 'abp_active' : '' ); ?>">
-								<?php ABPET_Static::icon_svg( 'setting' );
+								<?php ABPET_Static::svg( 'setting' );
 									esc_html_e( 'Global Configuration', 'abp-event-ticket' ); ?>
                             </a>
                             <a href="<?php echo esc_url( ABPET_Function::build_url( 'documentation' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'documentation' ? 'abp_active' : '' ); ?>">
@@ -71,7 +72,7 @@
 						<?php if ( ABPET_WC == 2 ) { ?>
                             <div class="_group_content">
                                 <button type="button" class="_btn_xs" data-href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPET_Function::get_cpt() ) ); ?>" data-blank="_blank">
-									<?php ABPET_Static::icon_svg( 'plus' );
+									<?php ABPET_Static::svg( 'plus' );
 										echo esc_html( $label ); ?>
                                 </button>
 								<?php ABPET_Layout::button_global_popup( 'tax_location', ABPET_Function::location_label(), '_btn_xs' );
@@ -88,6 +89,9 @@
 					<?php ABPET_Layout::load_admin_globally(); ?>
                 </div>
 				<?php
+			}
+			public function forward_global( $abpet_info = [] ): void {
+				do_action( 'abpet_load_configuration', $abpet_info );
 			}
 		}
 		new ABPET_ADMIN();

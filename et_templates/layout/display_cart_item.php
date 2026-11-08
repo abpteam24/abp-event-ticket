@@ -81,7 +81,7 @@
                                 <?php } ?>
                                 <?php if (ABPET_Function::on_off('client_info') && !empty($attendee_infos) && is_array($attendee_infos)) { ?>
                                     <div class="cart_client_info _w_full">
-                                        <h6 class="abp _color_theme"><?php esc_html_e('Client Information : ', 'abp-event-ticket'); ?></h6>
+                                        <h6 class="abp _color_theme"><?php esc_html_e('Attendee Information : ', 'abp-event-ticket'); ?></h6>
                                         <?php
                                             foreach ($attendee_infos as $attendee_info) {
                                                 if (!empty($attendee_info)) { ?>

@@ -24,10 +24,10 @@
 		WordPress includes templates from inside load_template(), so variables such as
 		$name or $bio are function-local at runtime. The sniff cannot see that and
 		treats the top level of a template as global scope, producing false positives
-		on ordinary template variables in every file under tb_templates. Suppressed
+		on ordinary template variables in every file under et_templates. Suppressed
 		there only; it still applies everywhere else in the plugin.
 	-->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<exclude-pattern type="relative">^tb_templates/*</exclude-pattern>
+		<exclude-pattern type="relative">^et_templates/*</exclude-pattern>
 	</rule>
 </ruleset>

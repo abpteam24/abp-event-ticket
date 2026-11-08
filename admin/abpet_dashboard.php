@@ -55,10 +55,10 @@
                     </div>
                     <div class="dash_hero_side">
                         <div class="dash_hero_actions">
-                            <a class="dash_btn dash_btn_solid" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPET_Function::get_cpt() ) ); ?>">
+                            <a class="_btn_light_navy_blue" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPET_Function::get_cpt() ) ); ?>">
                                 <i class="fas fa-plus"></i> <?php echo esc_html( $label ); ?>
                             </a>
-                            <a class="dash_btn dash_btn_ghost" href="<?php echo esc_url( ABPET_Function::build_url( 'orders' ) ); ?>">
+                            <a class="_btn_light_theme" href="<?php echo esc_url( ABPET_Function::build_url( 'orders' ) ); ?>">
                                 <i class="fas fa-file-invoice"></i> <?php esc_html_e( 'Orders', 'abp-event-ticket' ); ?>
                             </a>
                         </div>
@@ -94,7 +94,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4 class="abp"><i class="fas fa-calendar-day _color_theme"></i> <?php esc_html_e( "Today's Sessions", 'abp-event-ticket' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-calendar-day"></i> <?php esc_html_e( "Today's Sessions", 'abp-event-ticket' ); ?></h4>
                         <a class="_btn_light_theme_xs" href="<?php echo esc_url( ABPET_Function::build_url( 'orders' ) ); ?>"><?php esc_html_e( 'View All', 'abp-event-ticket' ); ?> <i class="fas fa-angle-right"></i></a>
                     </div>
                     <div class="dash_card_body dash_card_body_plain">
@@ -151,7 +151,7 @@
 					$actions[] = array( 'fas fa-list-check', __( 'Additional Services', 'abp-event-ticket' ), __( 'Manage additional services', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'additional' ] ), 'success' );
 				}
 				if ( ABPET_Function::on_off( 'client_info' ) ) {
-					$actions[] = array( 'fas fa-user', __( 'Client Form', 'abp-event-ticket' ), __( 'Manage client form fields', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'client_form' ] ), 'purple' );
+					$actions[] = array( 'fas fa-user', __( 'Attendee Form', 'abp-event-ticket' ), __( 'Manage Attendee form fields', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'client_form' ] ), 'purple' );
 				}
 				$actions[] = array( 'fas fa-route', __( 'Location Configuration', 'abp-event-ticket' ), __( 'Manage  locations', 'abp-event-ticket' ), ABPET_Function::build_url( 'configuration', [ 'configuration' => 'location' ] ), 'navy' );
 				if ( defined( 'ABPET_DIR_PRO' ) ) {
@@ -168,7 +168,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><i class="fas fa-bolt"></i> <?php esc_html_e( 'Quick Actions', 'abp-event-ticket' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-bolt"></i> <?php esc_html_e( 'Quick Actions', 'abp-event-ticket' ); ?></h4>
                     </div>
                     <div class="dash_card_body">
                         <div class="dash_action_grid">
@@ -193,7 +193,7 @@
 				?>
                 <div class="dash_card dash_orders_card">
                     <div class="dash_card_head ">
-                        <h4 class="abp_gap_xs"><i class="fas fa-receipt"></i> <?php esc_html_e( 'Recent Orders', 'abp-event-ticket' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-receipt"></i> <?php esc_html_e( 'Recent Orders', 'abp-event-ticket' ); ?></h4>
                         <div class="_group_content">
                             <button type="button" class="_btn_light_theme_xs abp_active dash_order_tab" data-dtab="recent"><i class="fas fa-list-ul"></i> <?php esc_html_e( 'Last 10 Orders', 'abp-event-ticket' ); ?></button>
                             <button type="button" class="_btn_light_theme_xs dash_order_tab" data-dtab="today"><i class="fas fa-calendar-day"></i> <?php esc_html_e( "Today's Orders", 'abp-event-ticket' ); ?></button>
@@ -524,7 +524,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4 class="abp_gap_xs"><i class="fas fa-server"></i> <?php esc_html_e( 'System Status', 'abp-event-ticket' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-server"></i> <?php esc_html_e( 'System Status', 'abp-event-ticket' ); ?></h4>
                     </div>
                     <div class="dash_card_body dash_card_body_plain">
                         <div class="dash_kv_list">
@@ -639,7 +639,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><i class="fas fa-layer-group"></i> <?php esc_html_e( 'Content Breakdown', 'abp-event-ticket' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-layer-group"></i> <?php esc_html_e( 'Content Breakdown', 'abp-event-ticket' ); ?></h4>
                     </div>
                     <div class="dash_card_body">
                         <div class="dash_bar">

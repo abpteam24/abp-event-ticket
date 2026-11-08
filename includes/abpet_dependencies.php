@@ -245,6 +245,7 @@
 					require_once ABPET_DIR . 'admin/abpet_admin.php';
 					require_once ABPET_DIR . 'admin/abpet_dashboard.php';
 					require_once ABPET_DIR . 'admin/abpet_post.php';
+					require_once ABPET_DIR . 'admin/abpet_post_configuration.php';
 					require_once ABPET_DIR . 'admin/abpet_ticket.php';
 					require_once ABPET_DIR . 'admin/abpet_orders.php';
 					require_once ABPET_DIR . 'admin/abpet_dates.php';
@@ -253,7 +254,6 @@
 					require_once ABPET_DIR . 'admin/abpet_seat_plan.php';
 					require_once ABPET_DIR . 'admin/abpet_faq.php';
 					require_once ABPET_DIR . 'admin/abpet_tc.php';
-					require_once ABPET_DIR . 'admin/abpet_timeline.php';
 					require_once ABPET_DIR . 'admin/abpet_configuration.php';
 					require_once ABPET_DIR . 'admin/abpet_documentation.php';
 					require_once ABPET_DIR . 'admin/abpet_category.php';

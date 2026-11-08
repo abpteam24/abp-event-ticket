@@ -22,11 +22,14 @@
 					$post_infos = ABPET_Function::get_all_meta( $post_id );
 					$cat_id     = $post_infos['abpet_category'] ?? '';
 					$loc_id     = $post_infos['abpet_location'] ?? '';
+					$org_id     = $post_infos['abpet_organizer'] ?? '';
+					$brand_id   = $post_infos['abpet_brand'] ?? '';
+					$speaker_id = $post_infos['speaker'] ?? '';
 					$url        = get_the_permalink( $post_id );
 					$show_class = $show_post >= $post_count ? '' : 'abp_close';
 					//echo '<pre>';print_r($filter_args);echo '</pre>';
 					?>
-                    <div class="pagination_item item_box_1 <?php echo esc_attr( $show_class ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>">
+                    <div class="pagination_item item_box_1 <?php echo esc_attr( $show_class ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>" data-organizer_id="<?php echo esc_attr( $org_id ); ?>" data-brand_id="<?php echo esc_attr( $brand_id ); ?>" data-speaker_id="<?php echo esc_attr( $speaker_id ); ?>">
                         <div class="item_head">
 							<?php
 								ABPET_Layout::image( $post_id );

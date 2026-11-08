@@ -16,7 +16,7 @@
 				if ( ABPET_Function::on_off( 'category' ) ) {
 					$label = ABPET_Function::category_label(); ?>
                     <div class="_fj_between_mar_b_xs">
-                        <h5 class="abp_gap_xxs"><?php ABPET_Static::icon_svg( 'category_1' ); ?><?php echo esc_html( $label ); ?></h5>
+                        <h5 class="abp_gap_xxs"><?php ABPET_Static::svg( 'category_1' ); ?><?php echo esc_html( $label ); ?></h5>
 						<?php ABPET_Layout::button_global_popup( 'tax_category', __( 'Add New', 'abp-event-ticket' ) . ' ' . $label ); ?>
                     </div>
 					<?php ABPET_Layout::info_text( 'abpet_category' ); ?>
@@ -48,7 +48,7 @@
 				}
 				?>
                 <div class="abp_form">
-                    <h5 class="abp_gap_xxs"><?php ABPET_Static::icon_svg( 'category' ); ?><?php echo esc_html( $title ); ?></h5>
+                    <h5 class="abp_gap_xxs"><?php ABPET_Static::svg( 'category' ); ?><?php echo esc_html( $title ); ?></h5>
                     <div class="_divider_xs"></div>
                     <input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
                     <div class="group_setting">
@@ -191,8 +191,8 @@
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'close_1' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'close_1' ); ?></button>
                                         </div>
                                     </div>
                                 </th>

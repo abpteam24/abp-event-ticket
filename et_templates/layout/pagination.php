@@ -8,7 +8,7 @@
 		$per_page = $args['page_item'] ?? $total;
 		$style    = ( $args['style'] ?? 'live' ) ?: 'live';
 		if ( $total > $per_page ) { ?>
-            <div class="pagination_area _all_center">
+            <div class="pagination_area">
 				<?php if ( $style == 'live' ) { ?>
                     <button type="button" class="_btn_theme_min_200 live_pagination" data-load-more="0"><?php esc_html_e( 'View More', 'abp-event-ticket' ); ?></button>
                     <input type="hidden" name="page_item" value="<?php echo esc_attr( $per_page ); ?>"/>

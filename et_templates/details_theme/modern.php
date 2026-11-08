@@ -38,7 +38,7 @@ add_action( 'abpet_details_modern_template', function ( $post_id, $form_data = [
 					<div class="abpet_modern_copy">
 						<div class="abpet_modern_kicker">
 							<?php if ( ! empty( $form_data['event_date'] ) ) { ?>
-								<span class="abpet_modern_kicker_date"><?php ABPET_Static::icon_svg( 'date_1' ); ?><?php echo esc_html( ABPET_Function::date_format( $form_data['event_date'] ) ); ?></span>
+								<span class="abpet_modern_kicker_date"><?php ABPET_Static::svg( 'date_1' ); ?><?php echo esc_html( ABPET_Function::date_format( $form_data['event_date'] ) ); ?></span>
 							<?php } ?>
 							<?php if ( $sale_continue === 'on' ) { ?>
 								<span class="abpet_modern_kicker_live"><?php esc_html_e( 'Booking Open', 'abp-event-ticket' ); ?></span>

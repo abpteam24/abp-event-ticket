@@ -179,7 +179,7 @@
                         </thead>
                         <tbody>
 						<?php foreach ( $all_organizer as $term_id => $organizer ) {
-							$name        = $organizer['name'] ?? '';
+							$name        = $organizer['label'] ?? $organizer['name'] ?? '';
 							$description = $organizer['description'] ?? '';
 							?>
                             <tr>
@@ -191,8 +191,8 @@
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'close_1' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'close_1' ); ?></button>
                                         </div>
                                     </div>
                                 </th>

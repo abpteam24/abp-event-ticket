@@ -1,25 +1,23 @@
-# Copyright (C) ABP Event Ticket
-# This file is distributed under the same license as the ABP Event Ticket plugin.
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ABP Event Ticket\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 12:22+0000\n"
+"POT-Creation-Date: 2026-11-07 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
 "Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Domain: abp-event-ticket\n"
-"\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.9; wp-7.1.4; php-8.2.12\n"
+"X-Domain: abp-event-ticket"
 
 #. %s = Days
-#: includes/abpet_function.php:836 includes/abpet_function.php:950
+#: includes/abpet_function.php:895 includes/abpet_function.php:1009
 #, php-format
 msgid " %s Day"
 msgid_plural " %s Days"
@@ -27,7 +25,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Hours
-#: includes/abpet_function.php:841 includes/abpet_function.php:955
+#: includes/abpet_function.php:900 includes/abpet_function.php:1014
 #, php-format
 msgid " %s Hour"
 msgid_plural " %s Hours"
@@ -35,7 +33,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Minutes
-#: includes/abpet_function.php:846 includes/abpet_function.php:960
+#: includes/abpet_function.php:905 includes/abpet_function.php:1019
 #, php-format
 msgid " %s Minute"
 msgid_plural " %s Minutes"
@@ -43,7 +41,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Months
-#: includes/abpet_function.php:945
+#: includes/abpet_function.php:1004
 #, php-format
 msgid " %s Month"
 msgid_plural " %s Months"
@@ -51,7 +49,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Seconds
-#: includes/abpet_function.php:965
+#: includes/abpet_function.php:1024
 #, php-format
 msgid " %s Second"
 msgid_plural " %s Seconds"
@@ -59,20 +57,20 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s =Years
-#: includes/abpet_function.php:940
+#: includes/abpet_function.php:999
 #, php-format
 msgid " %s Year"
 msgid_plural " %s Years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tb_templates/layout/display_cart_item.php:50
-#: tb_templates/layout/display_cart_item.php:75
-#: tb_templates/layout/display_cart_item.php:95
+#: et_templates/layout/display_cart_item.php:50
+#: et_templates/layout/display_cart_item.php:75
+#: et_templates/layout/display_cart_item.php:95
 msgid " : "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:200
+#: admin/abpet_seat_plan.php:202
 msgid " Remove Last Row"
 msgstr ""
 
@@ -83,20 +81,20 @@ msgid "%s List Page"
 msgstr ""
 
 #. %s: Trnasport Label
-#: includes/abpet_static.php:632
+#: includes/abpet_static.php:671
 #, php-format
 msgid "%s Page Created successfully....."
 msgstr ""
 
 #. %s: number of event speakers.
-#: tb_templates/speaker/light.php:15
+#: et_templates/speaker/light.php:15
 #, php-format
 msgid "%s speaker"
 msgid_plural "%s speakers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tb_templates/layout/display_cart_item.php:109
+#: et_templates/layout/display_cart_item.php:109
 msgid "( Return )"
 msgstr ""
 
@@ -104,28 +102,26 @@ msgstr ""
 msgid ".... Less "
 msgstr ""
 
-#: admin/abpet_orders.php:180 admin/abpet_orders.php:188
-#: admin/abpet_orders.php:188 includes/abpet_layout.php:166
+#: admin/abpet_orders.php:194 includes/abpet_layout.php:166
 #: includes/abpet_layout.php:166 includes/abpet_layout.php:176
-#: includes/abpet_layout.php:176 includes/abpet_layout.php:752
-#: includes/abpet_layout.php:752
+#: includes/abpet_layout.php:176 includes/abpet_layout.php:825
+#: includes/abpet_layout.php:825
 msgid ".... More"
 msgstr ""
 
-#: admin/abpet_orders.php:180 admin/abpet_orders.php:188
-#: includes/abpet_layout.php:752
+#: admin/abpet_orders.php:194 includes/abpet_layout.php:825
 msgid "....Less "
 msgstr ""
 
-#: admin/abpet_orders.php:180
+#: admin/abpet_orders.php:194
 msgid "....More"
 msgstr ""
 
-#: tb_templates/layout/ticket_type.php:35
+#: et_templates/layout/ticket_type.php:36
 msgid "/Ticket"
 msgstr ""
 
-#: includes/abpet_function.php:828
+#: includes/abpet_function.php:887
 msgid "0 Min"
 msgstr ""
 
@@ -137,7 +133,7 @@ msgstr ""
 msgid "2. Cancel : To Cancel ."
 msgstr ""
 
-#: admin/abpet_documentation.php:140
+#: admin/abpet_documentation.php:154
 msgid ""
 "A reusable category with a label, a color, an icon, and a seat prefix used "
 "for automatic numbering (e.g. VIP-01, B-01). Create them in Ticket/Seat Plan "
@@ -153,16 +149,16 @@ msgid "abpteam"
 msgstr ""
 
 #: admin/abpet_additional.php:90 admin/abpet_brand.php:177
-#: admin/abpet_category.php:179 admin/abpet_feature.php:53
+#: admin/abpet_category.php:179 admin/abpet_feature.php:79
 #: admin/abpet_form.php:110 admin/abpet_location.php:234
-#: admin/abpet_orders.php:108 admin/abpet_organizer.php:177
-#: admin/abpet_seat_plan.php:645 admin/abpet_seat_plan.php:826
-#: admin/abpet_speaker.php:275 admin/abpet_ticket.php:134
-#: admin/abpet_ticket.php:206 tb_templates/layout/registration.php:45
+#: admin/abpet_orders.php:109 admin/abpet_organizer.php:177
+#: admin/abpet_seat_plan.php:647 admin/abpet_seat_plan.php:828
+#: admin/abpet_speaker.php:301 admin/abpet_ticket.php:134
+#: admin/abpet_ticket.php:206 et_templates/layout/registration.php:45
 msgid "Action"
 msgstr ""
 
-#: admin/abpet_post.php:86 admin/abpet_seat_plan.php:94
+#: admin/abpet_post.php:77 admin/abpet_seat_plan.php:95
 msgid "Actions"
 msgstr ""
 
@@ -170,60 +166,55 @@ msgstr ""
 msgid "Active Additional services ?"
 msgstr ""
 
-#: admin/abpet_resource.php:201
+#: admin/abpet_faq.php:118
 msgid "Active FAQs ?"
 msgstr ""
 
-#: admin/abpet_dashboard.php:620 includes/abpet_static.php:17
+#: admin/abpet_dashboard.php:620 includes/abpet_static.php:21
 msgid "Active Now"
 msgstr ""
 
-#: admin/abpet_post.php:407
-msgid "Active Speaker?"
-msgstr ""
-
-#: admin/abpet_resource.php:244
+#: admin/abpet_tc.php:77
 msgid "Active Term & Conditions ?"
-msgstr ""
-
-#: admin/abpet_timeline.php:34
-msgid "Active Timeline ?"
 msgstr ""
 
 #: includes/abpet_layout.php:431
 msgid "Add  Image"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:634
+#: admin/abpet_seat_plan.php:636
 msgid "ADD / Edit Ticket Type"
 msgstr ""
 
-#: includes/abpet_static.php:130
+#: includes/abpet_static.php:156
 msgid ""
 "Add a detailed biography or description of the speaker. Supports rich text "
 "formatting."
 msgstr ""
 
-#: admin/abpet_post.php:722
+#: admin/abpet_post_configuration.php:731
 msgid "Add an event title before publishing."
 msgstr ""
 
-#: admin/abpet_post.php:760
+#: admin/abpet_post_configuration.php:769
 msgid "Add at least one ticket type with a valid price and quantity."
 msgstr ""
 
 #: admin/abpet_brand.php:19 admin/abpet_category.php:20
-#: admin/abpet_feature.php:18 admin/abpet_location.php:18
-#: admin/abpet_organizer.php:21 admin/abpet_post.php:310
-#: admin/abpet_post.php:327 admin/abpet_post.php:344 admin/abpet_post.php:361
-#: admin/abpet_post.php:386 admin/abpet_post.php:400 admin/abpet_speaker.php:19
-#: includes/abpet_layout.php:83 includes/abpet_layout.php:150
+#: admin/abpet_feature.php:27 admin/abpet_feature.php:44
+#: admin/abpet_location.php:18 admin/abpet_organizer.php:21
+#: admin/abpet_post_configuration.php:198
+#: admin/abpet_post_configuration.php:215
+#: admin/abpet_post_configuration.php:232
+#: admin/abpet_post_configuration.php:249 admin/abpet_speaker.php:28
+#: admin/abpet_speaker.php:45 includes/abpet_layout.php:83
+#: includes/abpet_layout.php:150
 msgid "Add New"
 msgstr ""
 
 #: admin/abpet_brand.php:37 admin/abpet_category.php:38
-#: admin/abpet_feature.php:38 admin/abpet_location.php:36
-#: admin/abpet_organizer.php:39 admin/abpet_speaker.php:38
+#: admin/abpet_feature.php:64 admin/abpet_location.php:36
+#: admin/abpet_organizer.php:39 admin/abpet_speaker.php:64
 msgid "Add new "
 msgstr ""
 
@@ -231,23 +222,23 @@ msgstr ""
 msgid "Add New Additional services"
 msgstr ""
 
-#: admin/abpet_dates.php:407
+#: admin/abpet_dates.php:409
 msgid "Add New Date Wise Operation Time"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:47 admin/abpet_seat_plan.php:843
+#: admin/abpet_seat_plan.php:47 admin/abpet_seat_plan.php:845
 msgid "Add New Decor Item"
 msgstr ""
 
-#: admin/abpet_post.php:42
+#: admin/abpet_post.php:40
 msgid "Add New Event"
 msgstr ""
 
-#: admin/abpet_resource.php:67
+#: admin/abpet_faq.php:49
 msgid "Add New FAQ Item"
 msgstr ""
 
-#: admin/abpet_feature.php:62
+#: admin/abpet_feature.php:88
 msgid "Add New Feature Item"
 msgstr ""
 
@@ -271,11 +262,11 @@ msgstr ""
 msgid "Add New Ticket Type"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:662
+#: admin/abpet_seat_plan.php:664
 msgid "Add New Ticket Type Item"
 msgstr ""
 
-#: admin/abpet_timeline.php:63
+#: admin/abpet_post_configuration.php:365
 msgid "Add New Timeline Item"
 msgstr ""
 
@@ -287,16 +278,16 @@ msgstr ""
 msgid "Add Operation Time"
 msgstr ""
 
-#: admin/abpet_dates.php:474
+#: admin/abpet_dates.php:476
 msgid "Add Operation Time "
 msgstr ""
 
-#: includes/abpet_dependencies.php:289 includes/abpet_dependencies.php:290
-#: includes/abpet_dependencies.php:291
+#: includes/abpet_dependencies.php:290 includes/abpet_dependencies.php:291
+#: includes/abpet_dependencies.php:292
 msgid "Add Post"
 msgstr ""
 
-#: admin/abpet_documentation.php:72
+#: admin/abpet_documentation.php:86
 msgid "Add Shortcodes & Pages"
 msgstr ""
 
@@ -312,7 +303,7 @@ msgstr ""
 msgid "Add Specific Off Date"
 msgstr ""
 
-#: includes/abpet_static.php:125
+#: includes/abpet_static.php:151
 msgid ""
 "Add the event schedule steps in order: set a time (when this step happens), "
 "a short title, and a description. The item is displayed on the frontend "
@@ -323,23 +314,23 @@ msgstr ""
 msgid "Add to cart successfully!"
 msgstr ""
 
-#: admin/abpet_documentation.php:65
+#: admin/abpet_documentation.php:79
 msgid "Add your first event and set its tickets or seats."
 msgstr ""
 
-#: tb_templates/layout/total_price.php:41
+#: et_templates/layout/total_price.php:41
 msgid "Added to Cart Successfully"
 msgstr ""
 
-#: admin/abpet_orders.php:118
+#: admin/abpet_orders.php:120
 msgid "Additional "
 msgstr ""
 
-#: tb_templates/layout/total_price.php:26
+#: et_templates/layout/total_price.php:26
 msgid "Additional : "
 msgstr ""
 
-#: admin/abpet_orders.php:114
+#: admin/abpet_orders.php:116
 msgid "Additional Info"
 msgstr ""
 
@@ -347,21 +338,21 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: tb_templates/layout/display_cart_item.php:58
+#: et_templates/layout/display_cart_item.php:58
 msgid "Additional Information : "
 msgstr ""
 
-#: admin/abpet_dashboard.php:151 admin/abpet_documentation.php:113
-#: admin/abpet_documentation.php:172
+#: admin/abpet_dashboard.php:151 admin/abpet_documentation.php:127
+#: admin/abpet_documentation.php:185
 msgid "Additional Services"
 msgstr ""
 
-#: admin/abpet_admin.php:114 admin/abpet_configuration.php:462
-#: admin/abpet_post.php:173
+#: admin/abpet_configuration.php:184 admin/abpet_configuration.php:495
+#: admin/abpet_post_configuration.php:40
 msgid "Additional services"
 msgstr ""
 
-#: tb_templates/layout/additional_services.php:14
+#: et_templates/layout/additional_services.php:14
 msgid "Additional services ( Optional ) : "
 msgstr ""
 
@@ -377,11 +368,11 @@ msgstr ""
 msgid "Additional services Imported Successfully ..... !! "
 msgstr ""
 
-#: admin/abpet_configuration.php:514 admin/abpet_location.php:76
+#: admin/abpet_configuration.php:547 admin/abpet_location.php:76
 msgid "Address"
 msgstr ""
 
-#: includes/abpet_layout.php:1043
+#: includes/abpet_layout.php:1132
 msgid "Address :"
 msgstr ""
 
@@ -389,12 +380,20 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: admin/abpet_post.php:34
+#: admin/abpet_documentation.php:241
+msgid ""
+"Admin-created/edited bookings, CSV export, session statistics, and ticket "
+"check-in."
+msgstr ""
+
+#: admin/abpet_post.php:32
 msgid "All"
 msgstr ""
 
-#: tb_templates/layout/post_filter.php:30
-msgid "All "
+#. %s: taxonomy label, for example "Category".
+#: et_templates/layout/post_filter.php:106
+#, php-format
+msgid "All %s"
 msgstr ""
 
 #: admin/abpet_orders.php:77 admin/abpet_orders.php:78
@@ -405,13 +404,17 @@ msgstr ""
 msgid "All Orders"
 msgstr ""
 
-#: admin/abpet_documentation.php:154
+#: admin/abpet_documentation.php:168
 msgid ""
 "all your events: create, edit, clone, trash, restore, and permanently delete "
 "events."
 msgstr ""
 
-#: admin/abpet_configuration.php:628
+#: includes/abpet_layout.php:878
+msgid "Already Checked By"
+msgstr ""
+
+#: admin/abpet_configuration.php:661
 msgid "Alternate Color"
 msgstr ""
 
@@ -419,7 +422,7 @@ msgstr ""
 msgid "An error occurred. Please try again."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:211 admin/abpet_seat_plan.php:221
+#: admin/abpet_seat_plan.php:213 admin/abpet_seat_plan.php:223
 msgid "Apply"
 msgstr ""
 
@@ -435,23 +438,53 @@ msgstr ""
 msgid "Are you sure you want to delete this Seat Plan?"
 msgstr ""
 
-#: admin/abpet_post.php:763
+#: admin/abpet_post_configuration.php:772
 msgid "Assign at least one seat plan to this event."
 msgstr ""
 
-#: admin/abpet_documentation.php:173
+#: admin/abpet_orders.php:190
+msgid "Attendee Details "
+msgstr ""
+
+#: admin/abpet_documentation.php:186
 msgid "attendee fields collected at checkout (name, email, phone…)."
 msgstr ""
 
-#: admin/abpet_configuration.php:447
+#: admin/abpet_configuration.php:187 admin/abpet_configuration.php:473
+#: admin/abpet_configuration.php:488 admin/abpet_dashboard.php:154
+#: admin/abpet_documentation.php:186 admin/abpet_post_configuration.php:43
 msgid "Attendee Form"
 msgstr ""
 
-#: admin/abpet_documentation.php:114
+#: admin/abpet_documentation.php:128
 msgid "Attendee Form (Custom Attendee)"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:136
+#: admin/abpet_form.php:50
+msgid "Attendee Form ?"
+msgstr ""
+
+#: admin/abpet_form.php:250
+msgid "Attendee Form Configuration Saved Successfully..... !! "
+msgstr ""
+
+#: admin/abpet_form.php:42
+msgid "Attendee Forms Configuration"
+msgstr ""
+
+#: et_templates/layout/client_form.php:11
+msgid "Attendee Info : "
+msgstr ""
+
+#: includes/abpet_woocommerce.php:266 includes/abpet_woocommerce.php:346
+msgid "Attendee Information"
+msgstr ""
+
+#: et_templates/layout/display_cart_item.php:84
+msgid "Attendee Information : "
+msgstr ""
+
+#: et_templates/details_theme/default.php:135
 msgid "Attendees"
 msgstr ""
 
@@ -464,12 +497,12 @@ msgstr ""
 msgid "Avail %d"
 msgstr ""
 
-#: admin/abpet_dashboard.php:352 admin/abpet_seat_plan.php:499
+#: admin/abpet_dashboard.php:352 admin/abpet_seat_plan.php:501
 #: includes/abpet_layout.php:46
 msgid "Available"
 msgstr ""
 
-#: includes/abpet_layout.php:917
+#: includes/abpet_layout.php:1006
 msgid "Available !"
 msgstr ""
 
@@ -478,77 +511,85 @@ msgstr ""
 msgid "Available %d"
 msgstr ""
 
-#: tb_templates/layout/ticket_type.php:40
+#: et_templates/layout/ticket_type.php:41
 msgid "Available : "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:528
+#: admin/abpet_seat_plan.php:530
 msgid "Available Color"
 msgstr ""
 
-#: includes/abpet_hooks.php:213
+#: includes/abpet_hooks.php:207
 msgid "Available Schedule"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:88
+#: admin/abpet_seat_plan.php:89
 msgid "Background"
 msgstr ""
 
-#: admin/abpet_configuration.php:621
+#: admin/abpet_configuration.php:654
 msgid "Base Color"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:184 admin/abpet_seat_plan.php:305
+#: admin/abpet_seat_plan.php:186 admin/abpet_seat_plan.php:307
 msgid "Bg Color"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:179 admin/abpet_seat_plan.php:296
+#: admin/abpet_seat_plan.php:181 admin/abpet_seat_plan.php:298
 msgid "Bg Image"
 msgstr ""
 
-#: includes/abpet_layout.php:1204 includes/abpet_layout.php:1205
+#: admin/abpet_orders.php:126
+msgid "Billing & Attendee  Info"
+msgstr ""
+
+#: includes/abpet_layout.php:1313 includes/abpet_layout.php:1314
+msgid "Billing Address"
+msgstr ""
+
+#: includes/abpet_layout.php:1323 includes/abpet_layout.php:1324
+msgid "Billing Amount"
+msgstr ""
+
+#: includes/abpet_layout.php:1293 includes/abpet_layout.php:1294
 msgid "Billing Email"
 msgstr ""
 
-#: admin/abpet_orders.php:123
-msgid "Billing Info"
-msgstr ""
-
-#: includes/abpet_layout.php:1194 includes/abpet_layout.php:1195
+#: includes/abpet_layout.php:1283 includes/abpet_layout.php:1284
 msgid "Billing Name"
 msgstr ""
 
-#: includes/abpet_layout.php:1214 includes/abpet_layout.php:1215
+#: includes/abpet_layout.php:1303 includes/abpet_layout.php:1304
 msgid "Billing phone"
 msgstr ""
 
-#: admin/abpet_speaker.php:75
+#: admin/abpet_speaker.php:101
 msgid "Bio"
 msgstr ""
 
-#: tb_templates/page/speaker.php:88
+#: et_templates/page/speaker.php:88
 msgid "Biography"
 msgstr ""
 
-#: tb_templates/list/default.php:59 tb_templates/list/default.php:63
-#: tb_templates/list/minimal.php:45 tb_templates/list/minimal.php:49
-#: tb_templates/list/missionary.php:50 tb_templates/list/missionary.php:52
+#: et_templates/list/default.php:62 et_templates/list/default.php:66
+#: et_templates/list/minimal.php:48 et_templates/list/minimal.php:52
+#: et_templates/list/missionary.php:53 et_templates/list/missionary.php:55
 msgid "Book Now"
 msgstr ""
 
-#: tb_templates/details_theme/light.php:101
+#: et_templates/details_theme/light.php:98
 msgid "Book Your Ticket"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:501
+#: admin/abpet_seat_plan.php:503
 msgid "Booked"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:548
+#: admin/abpet_seat_plan.php:550
 msgid "Booked Color"
 msgstr ""
 
-#: admin/abpet_configuration.php:184
+#: admin/abpet_configuration.php:224
 msgid "Booked Status"
 msgstr ""
 
@@ -556,12 +597,12 @@ msgstr ""
 msgid "Booked Today"
 msgstr ""
 
-#: includes/abpet_static.php:609
+#: includes/abpet_static.php:648
 msgid "Booking"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:54
-#: tb_templates/details_theme/light.php:56
+#: et_templates/details_theme/default.php:54
+#: et_templates/details_theme/light.php:56
 msgid "Booking Closed"
 msgstr ""
 
@@ -577,13 +618,13 @@ msgstr ""
 msgid "Booking Information"
 msgstr ""
 
-#: tb_templates/layout/display_cart_item.php:23
+#: et_templates/layout/display_cart_item.php:23
 msgid "Booking Information "
 msgstr ""
 
-#: tb_templates/details_theme/default.php:49
-#: tb_templates/details_theme/light.php:51
-#: tb_templates/details_theme/modern.php:44
+#: et_templates/details_theme/default.php:49
+#: et_templates/details_theme/light.php:51
+#: et_templates/details_theme/modern.php:44
 msgid "Booking Open"
 msgstr ""
 
@@ -596,13 +637,13 @@ msgstr ""
 msgid "Bookings"
 msgstr ""
 
-#: includes/abpet_static.php:121
+#: includes/abpet_static.php:147
 msgid ""
 "Both the Title and Description fields are required. If either field is left "
 "empty, this FAQ item will not be displayed on the frontend."
 msgstr ""
 
-#: admin/abpet_configuration.php:583
+#: admin/abpet_configuration.php:616
 msgid "Bottom"
 msgstr ""
 
@@ -610,11 +651,11 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: admin/abpet_configuration.php:269
+#: admin/abpet_configuration.php:309
 msgid "Brand Label"
 msgstr ""
 
-#: admin/abpet_configuration.php:277
+#: admin/abpet_configuration.php:317
 msgid "Brand Slug"
 msgstr ""
 
@@ -622,23 +663,27 @@ msgstr ""
 msgid "Buffer time in MIN (Optional)"
 msgstr ""
 
-#: admin/abpet_documentation.php:49
+#: admin/abpet_documentation.php:63
 msgid "Build the reusable lists every event shares."
 msgstr ""
 
-#: admin/abpet_configuration.php:729
+#: admin/abpet_configuration.php:762
 msgid "Button Background Color"
 msgstr ""
 
-#: admin/abpet_configuration.php:714
+#: admin/abpet_configuration.php:747
 msgid "Button Font Size"
 msgstr ""
 
-#: admin/abpet_configuration.php:722
+#: admin/abpet_configuration.php:755
 msgid "Button Text Color"
 msgstr ""
 
-#: tb_templates/layout/search_form.php:28
+#: includes/abpet_static.php:48
+msgid "Buy PRO Now"
+msgstr ""
+
+#: et_templates/layout/search_form.php:32
 msgid "BUY TICKET"
 msgstr ""
 
@@ -646,11 +691,11 @@ msgstr ""
 msgid "Cancel Request"
 msgstr ""
 
-#: admin/abpet_configuration.php:363
+#: admin/abpet_configuration.php:403
 msgid "Capacity / Available Qty"
 msgstr ""
 
-#: admin/abpet_configuration.php:545
+#: admin/abpet_configuration.php:578
 msgid "Carousel Slider"
 msgstr ""
 
@@ -658,47 +703,51 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: admin/abpet_documentation.php:112 admin/abpet_documentation.php:170
+#: admin/abpet_documentation.php:126 admin/abpet_documentation.php:183
 msgid "Category / Organizer / Brand"
 msgstr ""
 
-#: admin/abpet_configuration.php:229
+#: admin/abpet_configuration.php:269
 msgid "Category Label"
 msgstr ""
 
-#: includes/abpet_dependencies.php:306
+#: includes/abpet_dependencies.php:307
 msgid "Category list navigation"
 msgstr ""
 
-#: admin/abpet_configuration.php:237
+#: admin/abpet_configuration.php:277
 msgid "Category Slug"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:215
+#: admin/abpet_seat_plan.php:217
 msgid "Cell  Control (Cols × Rows x Text x Font size)"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:93
+#: admin/abpet_seat_plan.php:94
 msgid "Cell Dimension Width X Height X Gap in px"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:329
+#: admin/abpet_seat_plan.php:331
 msgid "Cell Height"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:324
+#: admin/abpet_seat_plan.php:326
 msgid "Cell Width"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:205
+#: admin/abpet_seat_plan.php:207
 msgid "Cell Width X Height X Gap X Radius in px"
 msgstr ""
 
-#: tb_templates/layout/search_form.php:44
+#: et_templates/layout/search_form.php:48
 msgid "Check Availability"
 msgstr ""
 
-#: admin/abpet_documentation.php:32
+#: admin/abpet_orders.php:123
+msgid "Check In "
+msgstr ""
+
+#: admin/abpet_documentation.php:46
 msgid "Check Status"
 msgstr ""
 
@@ -706,29 +755,33 @@ msgstr ""
 msgid "Checkbox"
 msgstr ""
 
+#: includes/abpet_layout.php:879
+msgid "Checked"
+msgstr ""
+
 #. %s: Dashicons library link
-#: admin/abpet_configuration.php:214
+#: admin/abpet_configuration.php:254
 #, php-format
 msgid ""
 "Choose a custom admin menu icon. Please browse the %s, copy the desired icon "
 "class name, and paste it here."
 msgstr ""
 
-#: admin/abpet_configuration.php:577
+#: admin/abpet_configuration.php:610
 msgid ""
 "Choose the geometric layout alignment position anchor for the slide tracking "
 "dot interface elements."
 msgstr ""
 
 #: admin/abpet_form.php:200 includes/abpet_layout.php:270
-#: includes/abpet_layout.php:682 includes/abpet_layout.php:1097
-#: includes/abpet_layout.php:1111 includes/abpet_layout.php:1116
-#: includes/abpet_layout.php:1130 includes/abpet_layout.php:1144
-#: includes/abpet_layout.php:1149
+#: includes/abpet_layout.php:697 includes/abpet_layout.php:1186
+#: includes/abpet_layout.php:1200 includes/abpet_layout.php:1205
+#: includes/abpet_layout.php:1219 includes/abpet_layout.php:1233
+#: includes/abpet_layout.php:1238
 msgid "Clear Date"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:241
+#: admin/abpet_seat_plan.php:243
 msgid "Clear Layout"
 msgstr ""
 
@@ -740,97 +793,53 @@ msgstr ""
 msgid "Click a session to see its booking details."
 msgstr ""
 
+#: includes/abpet_layout.php:882
+msgid "Click to Check In"
+msgstr ""
+
 #: admin/abpet_dashboard.php:112
 msgid "Click to view session bookings"
-msgstr ""
-
-#: admin/abpet_admin.php:117 admin/abpet_dashboard.php:154
-#: admin/abpet_documentation.php:173 admin/abpet_post.php:176
-msgid "Client Form"
-msgstr ""
-
-#: admin/abpet_form.php:50
-msgid "Client Form ?"
-msgstr ""
-
-#: admin/abpet_form.php:250
-msgid "Client Form Configuration Saved Successfully..... !! "
-msgstr ""
-
-#: admin/abpet_form.php:42
-msgid "Client Forms Configuration"
-msgstr ""
-
-#: tb_templates/layout/client_form.php:11
-msgid "Client Info : "
-msgstr ""
-
-#: includes/abpet_woocommerce.php:266 includes/abpet_woocommerce.php:346
-msgid "Client Information"
-msgstr ""
-
-#: tb_templates/layout/display_cart_item.php:84
-msgid "Client Information : "
 msgstr ""
 
 #: admin/abpet_orders.php:40
 msgid "Close Options"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:643 admin/abpet_seat_plan.php:825
+#: admin/abpet_seat_plan.php:645 admin/abpet_seat_plan.php:827
 msgid "Color"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:570
+#: admin/abpet_seat_plan.php:572
 msgid "Color Combination Form Loaded Successfully .....! "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:587
+#: admin/abpet_seat_plan.php:589
 msgid "Color Combination Saved Successfully..........!!"
 msgstr ""
 
-#: admin/abpet_speaker.php:112 admin/abpet_speaker.php:274
+#: admin/abpet_speaker.php:138 admin/abpet_speaker.php:300
 #: includes/abpet_function.php:338
 msgid "Company"
 msgstr ""
 
-#: admin/abpet_configuration.php:506
+#: admin/abpet_configuration.php:539
 msgid "Company Name"
 msgstr ""
 
-#: admin/abpet_speaker.php:113
+#: admin/abpet_speaker.php:139
 msgid "Company/Organization"
 msgstr ""
 
-#: admin/abpet_admin.php:69 admin/abpet_configuration.php:143
-#: admin/abpet_documentation.php:158 admin/abpet_post.php:55
-#: includes/abpet_dependencies.php:508
+#: admin/abpet_feature.php:19 admin/abpet_post_configuration.php:14
+#: admin/abpet_speaker.php:20 includes/abpet_dependencies.php:509
 msgid "Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:40
-msgid "Configuration ON/OFF"
-msgstr ""
-
-#: admin/abpet_documentation.php:95
-msgid ""
-"Configuration → ON/OFF is the master control panel of the plugin. Every "
-"feature is listed there with a simple switch. Each switch controls a whole "
-"feature area of the site — not just one event."
-msgstr ""
-
-#: admin/abpet_documentation.php:42
-msgid ""
-"Configuration → ON/OFF turns features on/off for the whole site (Category, "
-"Organizer, Brand, Seat Plan, Additional Services, FAQ, Terms…). The defaults "
-"work out of the box, so you can skip this step."
-msgstr ""
-
-#: admin/abpet_post.php:740
+#: admin/abpet_post_configuration.php:749
 msgid "Configure at least one valid event date."
 msgstr ""
 
-#: admin/abpet_post.php:753
+#: admin/abpet_post_configuration.php:762
 msgid "Configure at least one valid event session time."
 msgstr ""
 
@@ -842,13 +851,13 @@ msgstr ""
 msgid "Configure partial payment"
 msgstr ""
 
-#: admin/abpet_configuration.php:659
+#: admin/abpet_configuration.php:692
 msgid ""
 "Configure the responsive text scale sizing applied strictly to forms, field "
 "labels, and identifier descriptions."
 msgstr ""
 
-#: includes/abpet_static.php:150
+#: includes/abpet_static.php:176
 msgid ""
 "Configure the ticket or seat type with a name, color, prefix, and optional "
 "image, icon, or emoji. These settings will be applied automatically to all "
@@ -856,11 +865,11 @@ msgid ""
 "consistent identification."
 msgstr ""
 
-#: admin/abpet_configuration.php:174
+#: admin/abpet_configuration.php:214
 msgid "Contact Information"
 msgstr ""
 
-#: admin/abpet_configuration.php:521
+#: admin/abpet_configuration.php:554
 msgid "Contact Number"
 msgstr ""
 
@@ -868,19 +877,19 @@ msgstr ""
 msgid "Content Breakdown"
 msgstr ""
 
-#: tb_templates/layout/total_price.php:42
+#: et_templates/layout/total_price.php:42
 msgid "Continue"
 msgstr ""
 
 #. %1$s: HTML markup for OFF Popup Image Indicator switch, %2$s: HTML markup for ON layout switch, %3$s: Default status Popup Image Indicator layout
-#: admin/abpet_configuration.php:608
+#: admin/abpet_configuration.php:641
 #, php-format
 msgid ""
 "Control navigation pagination tracking assets inside the lightbox modal "
 "container view. Toggle %1$s to hide or %2$s to reveal. (Default: %3$s)"
 msgstr ""
 
-#: admin/abpet_configuration.php:448
+#: admin/abpet_configuration.php:474
 msgid ""
 "Control the Attendee Form feature globally. Disable it to turn the feature "
 "off for all Events. Enable it to allow each Event to enable or disable the "
@@ -888,7 +897,7 @@ msgid ""
 "this switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:455
+#: admin/abpet_configuration.php:481
 msgid ""
 "Control the Same Attendee feature globally. Disable it to turn the feature "
 "off for all Events. Enable it to allow each Event to enable or disable the "
@@ -896,7 +905,11 @@ msgid ""
 "this switch back ON."
 msgstr ""
 
-#: admin/abpet_post.php:124 admin/abpet_seat_plan.php:118
+#: includes/abpet_static.php:47
+msgid "Copy Code"
+msgstr ""
+
+#: admin/abpet_post.php:115 admin/abpet_seat_plan.php:119
 msgid "Copy/Clone : "
 msgstr ""
 
@@ -906,75 +919,80 @@ msgid ""
 "review and try again."
 msgstr ""
 
-#: admin/abpet_documentation.php:64
+#: admin/abpet_documentation.php:78
 msgid "Create an Event"
 msgstr ""
 
-#: admin/abpet_documentation.php:48
+#: admin/abpet_documentation.php:62
 msgid "Create Global Lists"
 msgstr ""
 
-#: admin/abpet_documentation.php:156
+#: admin/abpet_documentation.php:170
 msgid ""
 "create reusable ticket types, seat plans, and decor (non-seat) cells for "
 "assigned seating."
 msgstr ""
 
-#: admin/abpet_documentation.php:57
+#: admin/abpet_documentation.php:71
 msgid "Create the ticket categories and seat layouts."
 msgstr ""
 
-#: admin/abpet_configuration.php:175
+#: admin/abpet_configuration.php:215
 msgid "CSS Property"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:163
+#: admin/abpet_seat_plan.php:165
 msgid "Ctrl+Click "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:219
+#: admin/abpet_seat_plan.php:221
 msgid "Custom Text"
 msgstr ""
 
-#: admin/abpet_documentation.php:135
+#: admin/abpet_documentation.php:239
+msgid ""
+"Customer cancellation requests with an event-time cutoff and admin approval."
+msgstr ""
+
+#: admin/abpet_documentation.php:149
 msgid ""
 "Customers buy a quantity of a ticket type (Adult, Child, VIP) without a "
 "fixed seat. Best for festivals, conferences, workshops, and online events."
 msgstr ""
 
-#: admin/abpet_documentation.php:129
+#: admin/abpet_documentation.php:143
 msgid ""
 "Customers buy a specific seat. You build a visual layout (theater, bus, hall)"
 " once, assign a ticket type to each seat area, and the customer picks their "
 "seat on the event page. Best for concerts, theaters, buses, and stadiums."
 msgstr ""
 
-#: admin/abpet_documentation.php:193
+#: admin/abpet_documentation.php:207
 msgid ""
 "Customers pick a date and time from the schedule shown on the event page "
 "before choosing tickets."
 msgstr ""
 
-#: admin/abpet_configuration.php:194
+#: admin/abpet_configuration.php:234
 msgid ""
 "Customize the display label for the plugin menu item in the admin dashboard "
 "side navigation."
 msgstr ""
 
-#: admin/abpet_admin.php:47 admin/abpet_documentation.php:159
+#: admin/abpet_admin.php:47 admin/abpet_documentation.php:172
 msgid "Dashboard"
 msgstr ""
 
-#: admin/abpet_configuration.php:211
+#: admin/abpet_configuration.php:251
 msgid "Dashboard Menu Icon"
 msgstr ""
 
-#: includes/abpet_ajax.php:55 includes/abpet_ajax.php:169
+#: includes/abpet_ajax.php:64 includes/abpet_ajax.php:198
 msgid "data loaded....!"
 msgstr ""
 
-#: admin/abpet_form.php:181 admin/abpet_post.php:171
-#: tb_templates/details_theme/default.php:92
+#: admin/abpet_form.php:181 admin/abpet_post_configuration.php:38
+#: et_templates/details_theme/default.php:91
 msgid "Date"
 msgstr ""
 
@@ -990,11 +1008,11 @@ msgstr ""
 msgid "Date Format"
 msgstr ""
 
-#: includes/abpet_ajax.php:193
+#: includes/abpet_ajax.php:226
 msgid "Date Loaded successfully."
 msgstr ""
 
-#: includes/abpet_static.php:324
+#: includes/abpet_static.php:363
 msgid "Date of Birth"
 msgstr ""
 
@@ -1002,7 +1020,7 @@ msgstr ""
 msgid "Date Type"
 msgstr ""
 
-#: admin/abpet_dates.php:406
+#: admin/abpet_dates.php:408
 msgid "Date Wise Operation Time (Optional) "
 msgstr ""
 
@@ -1010,11 +1028,11 @@ msgstr ""
 msgid "Date Wise Time"
 msgstr ""
 
-#: admin/abpet_admin.php:111 admin/abpet_documentation.php:168
+#: admin/abpet_configuration.php:181 admin/abpet_documentation.php:181
 msgid "Dates"
 msgstr ""
 
-#: admin/abpet_dates.php:362
+#: admin/abpet_dates.php:363
 msgid "Day Wise Operation Time (Optional) "
 msgstr ""
 
@@ -1023,50 +1041,50 @@ msgid "Day Wise Time"
 msgstr ""
 
 #. %1$s: HTML markup for OFF layout switch, %2$s: HTML markup for ON layout switch, %3$s: Default status Visible Popup layout
-#: admin/abpet_configuration.php:595
+#: admin/abpet_configuration.php:628
 #, php-format
 msgid ""
 "Decide whether clicking on layout thumbnails triggers a full-screen image "
 "lightbox popup. Toggle %1$s to disable or %2$s to enable. (Default: %3$s)"
 msgstr ""
 
-#: admin/abpet_documentation.php:41
+#: admin/abpet_documentation.php:55
 msgid "Decide which features you need."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:923
+#: admin/abpet_seat_plan.php:925
 msgid "Decor Item Deleted Successfully!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:857
+#: admin/abpet_seat_plan.php:859
 msgid "Decor item Form Loaded Successfully .....! "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:824
+#: admin/abpet_seat_plan.php:826
 msgid "Decor Name"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:816
+#: admin/abpet_seat_plan.php:818
 msgid "Decoration Item List"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:896
+#: admin/abpet_seat_plan.php:898
 msgid "Decoration Item Saved Successfully..........!!"
 msgstr ""
 
-#: admin/abpet_configuration.php:642
+#: admin/abpet_configuration.php:675
 msgid "Default Border Radius"
 msgstr ""
 
-#: admin/abpet_configuration.php:635
+#: admin/abpet_configuration.php:668
 msgid "Default Color"
 msgstr ""
 
-#: admin/abpet_configuration.php:650
+#: admin/abpet_configuration.php:683
 msgid "Default Font Size"
 msgstr ""
 
-#: admin/abpet_post.php:216
+#: admin/abpet_post_configuration.php:104
 msgid "Default Template"
 msgstr ""
 
@@ -1074,14 +1092,14 @@ msgstr ""
 msgid "Default Value"
 msgstr ""
 
-#: admin/abpet_configuration.php:629
+#: admin/abpet_configuration.php:662
 msgid ""
 "Define a secondary tone reserved mainly for high-contrast foreground text "
 "typography layers sitting over a Base Color background layout block."
 msgstr ""
 
 #. %s: Permalinks settings page link layout
-#: admin/abpet_configuration.php:280
+#: admin/abpet_configuration.php:320
 #, php-format
 msgid ""
 "Define the custom URL structure for Brand archives. Remember to update your "
@@ -1089,7 +1107,7 @@ msgid ""
 msgstr ""
 
 #. %s: Permalinks settings page link layout
-#: admin/abpet_configuration.php:240
+#: admin/abpet_configuration.php:280
 #, php-format
 msgid ""
 "Define the custom URL structure for category archives. Remember to update "
@@ -1097,7 +1115,7 @@ msgid ""
 msgstr ""
 
 #. %s: Permalinks settings page link layout
-#: admin/abpet_configuration.php:299
+#: admin/abpet_configuration.php:339
 #, php-format
 msgid ""
 "Define the custom URL structure for Location archives. Remember to update "
@@ -1105,7 +1123,7 @@ msgid ""
 msgstr ""
 
 #. %s: Permalinks settings page link layout
-#: admin/abpet_configuration.php:260
+#: admin/abpet_configuration.php:300
 #, php-format
 msgid ""
 "Define the custom URL structure for Organizer archives. Remember to update "
@@ -1113,14 +1131,14 @@ msgid ""
 msgstr ""
 
 #. %s: Permalinks settings page link layout
-#: admin/abpet_configuration.php:203
+#: admin/abpet_configuration.php:243
 #, php-format
 msgid ""
 "Define the primary URL slug for rentals. Important: After changing this, you "
 "must flush your permalinks by visiting %s and clicking Save Changes."
 msgstr ""
 
-#: admin/abpet_configuration.php:737
+#: admin/abpet_configuration.php:770
 msgid ""
 "Define the system default color block layout rule reserved for error outputs,"
 " alerts, or pending notices."
@@ -1131,12 +1149,12 @@ msgid "Delete This Item"
 msgstr ""
 
 #: admin/abpet_brand.php:151 admin/abpet_category.php:152
-#: admin/abpet_location.php:200 admin/abpet_orders.php:257
-#: admin/abpet_organizer.php:151 admin/abpet_speaker.php:246
+#: admin/abpet_location.php:200 admin/abpet_orders.php:263
+#: admin/abpet_organizer.php:151 admin/abpet_speaker.php:272
 msgid "Deleted Successfully !"
 msgstr ""
 
-#: admin/abpet_feature.php:141
+#: admin/abpet_feature.php:167
 msgid "Deleted Successfully!"
 msgstr ""
 
@@ -1146,9 +1164,9 @@ msgstr ""
 
 #: admin/abpet_additional.php:89 admin/abpet_brand.php:73
 #: admin/abpet_brand.php:175 admin/abpet_category.php:74
-#: admin/abpet_category.php:177 admin/abpet_organizer.php:75
-#: admin/abpet_organizer.php:175 admin/abpet_resource.php:100
-#: admin/abpet_ticket.php:205 admin/abpet_timeline.php:100
+#: admin/abpet_category.php:177 admin/abpet_faq.php:82
+#: admin/abpet_organizer.php:75 admin/abpet_organizer.php:175
+#: admin/abpet_post_configuration.php:402 admin/abpet_ticket.php:205
 msgid "Description"
 msgstr ""
 
@@ -1157,58 +1175,62 @@ msgstr ""
 msgid "Description(Optional)"
 msgstr ""
 
-#: admin/abpet_speaker.php:104 admin/abpet_speaker.php:273
+#: admin/abpet_speaker.php:130 admin/abpet_speaker.php:299
 #: includes/abpet_function.php:337
 msgid "Designation"
 msgstr ""
 
-#: admin/abpet_configuration.php:744
+#: admin/abpet_configuration.php:777
 msgid ""
 "Determine the fallback structural base background color applied to global "
 "layout wrapper segment panels."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:92
+#: admin/abpet_seat_plan.php:93
 msgid "Dimension (R x C)"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:192
+#: admin/abpet_seat_plan.php:194
 msgid "Dimension (Rows X Columns)"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:319
+#: admin/abpet_seat_plan.php:321
 msgid "Dimension Columns"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:314
+#: admin/abpet_seat_plan.php:316
 msgid "Dimension Rows"
 msgstr ""
 
-#: admin/abpet_post.php:295
+#: includes/abpet_static.php:49
+msgid "Dismiss"
+msgstr ""
+
+#: admin/abpet_post_configuration.php:183
 msgid "Display Capacity"
 msgstr ""
 
-#: admin/abpet_documentation.php:184
+#: admin/abpet_documentation.php:198
 msgid "displays event images in a gallery or slider."
 msgstr ""
 
-#: admin/abpet_admin.php:72 admin/abpet_documentation.php:160
+#: admin/abpet_admin.php:68 admin/abpet_documentation.php:173
 msgid "Documentation"
 msgstr ""
 
-#: admin/abpet_documentation.php:14
+#: admin/abpet_documentation.php:16
 msgid "Documentation — How to Use ABP Event Ticket"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:160
+#: admin/abpet_seat_plan.php:162
 msgid "Double-Click"
 msgstr ""
 
-#: admin/abpet_dashboard.php:631 admin/abpet_post.php:37
+#: admin/abpet_dashboard.php:631 admin/abpet_post.php:35
 msgid "Draft"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:157
+#: admin/abpet_seat_plan.php:159
 msgid "Drag Cells"
 msgstr ""
 
@@ -1220,11 +1242,11 @@ msgstr ""
 msgid "Dummy "
 msgstr ""
 
-#: includes/abpet_static.php:710
+#: includes/abpet_static.php:749
 msgid "Dummy data imported successfully!"
 msgstr ""
 
-#: includes/abpet_static.php:743
+#: includes/abpet_static.php:782
 msgid "Dummy data removed successfully."
 msgstr ""
 
@@ -1232,46 +1254,46 @@ msgstr ""
 msgid "Dummy Import"
 msgstr ""
 
-#: admin/abpet_configuration.php:529 admin/abpet_form.php:175
-#: includes/abpet_static.php:321
+#: admin/abpet_configuration.php:562 admin/abpet_form.php:175
+#: includes/abpet_static.php:360
 msgid "E-Mail"
 msgstr ""
 
-#: includes/abpet_layout.php:1037
+#: includes/abpet_layout.php:1126
 msgid "E-Mail :"
 msgstr ""
 
-#: admin/abpet_configuration.php:525
+#: admin/abpet_configuration.php:558
 msgid "e.g., +1 (234) 567-8901"
 msgstr ""
 
-#: admin/abpet_configuration.php:517
+#: admin/abpet_configuration.php:550
 msgid "e.g., 450 Greene St, New York, NY 10003, USA"
 msgstr ""
 
-#: admin/abpet_speaker.php:105
+#: admin/abpet_speaker.php:131
 msgid "e.g., CEO, CTO, Professor"
 msgstr ""
 
-#: admin/abpet_configuration.php:510
+#: admin/abpet_configuration.php:543
 msgid "e.g., Event Forge Ltd."
 msgstr ""
 
 #: admin/abpet_brand.php:45 admin/abpet_category.php:46
 #: admin/abpet_location.php:44 admin/abpet_organizer.php:47
-#: admin/abpet_speaker.php:46
+#: admin/abpet_speaker.php:72
 msgid "Edit "
 msgstr ""
 
 #: admin/abpet_brand.php:192 admin/abpet_category.php:194
-#: admin/abpet_feature.php:159 admin/abpet_location.php:249
-#: admin/abpet_organizer.php:194 admin/abpet_post.php:129
-#: admin/abpet_seat_plan.php:119 admin/abpet_seat_plan.php:610
-#: admin/abpet_seat_plan.php:798 admin/abpet_speaker.php:300
+#: admin/abpet_feature.php:185 admin/abpet_location.php:249
+#: admin/abpet_organizer.php:194 admin/abpet_post.php:120
+#: admin/abpet_seat_plan.php:120 admin/abpet_seat_plan.php:612
+#: admin/abpet_seat_plan.php:800 admin/abpet_speaker.php:326
 msgid "Edit : "
 msgstr ""
 
-#: includes/abpet_dependencies.php:292
+#: includes/abpet_dependencies.php:293
 msgid "Edit Post"
 msgstr ""
 
@@ -1279,7 +1301,7 @@ msgstr ""
 msgid "Edit This Item"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:503
+#: admin/abpet_seat_plan.php:505
 msgid "Edit/Modify"
 msgstr ""
 
@@ -1287,13 +1309,13 @@ msgstr ""
 msgid "Enable & disable features"
 msgstr ""
 
-#: admin/abpet_configuration.php:491
+#: admin/abpet_configuration.php:524
 msgid ""
 "Enable speaker profiles and event-speaker linking. When this switch is OFF, "
 "speaker features are completely hidden from the site."
 msgstr ""
 
-#: includes/abpet_static.php:123
+#: includes/abpet_static.php:149
 msgid ""
 "Enable this switch to apply the global FAQ to this post. If you want to add "
 "custom FAQs specifically for this post, turn the switch OFF and add your "
@@ -1301,7 +1323,7 @@ msgid ""
 " which you can then edit or delete based on your needs."
 msgstr ""
 
-#: includes/abpet_static.php:119
+#: includes/abpet_static.php:145
 msgid ""
 "Enable this switch to apply the global Term & Condition to this post. If you "
 "want to add custom Term & Condition specifically for this post, turn the "
@@ -1310,185 +1332,189 @@ msgid ""
 "or delete based on your needs."
 msgstr ""
 
-#: includes/abpet_static.php:128
+#: includes/abpet_static.php:154
 msgid ""
 "Enter the full name of the speaker. This will be displayed on the event "
 "details page and the speaker profile page."
 msgstr ""
 
-#: admin/abpet_configuration.php:707
+#: admin/abpet_configuration.php:740
 msgid ""
 "Enter the lowest micro-metadata element typographical scale sizing target "
 "for nested H6 headers."
 msgstr ""
 
-#: admin/abpet_configuration.php:507
+#: admin/abpet_configuration.php:540
 msgid ""
 "Enter the official commercial or business name used for invoice branding."
 msgstr ""
 
-#: includes/abpet_static.php:133
+#: includes/abpet_static.php:159
 msgid "Enter the speaker's company or organization name."
 msgstr ""
 
-#: includes/abpet_static.php:137
+#: includes/abpet_static.php:163
 msgid "Enter the speaker's Facebook profile URL."
 msgstr ""
 
-#: includes/abpet_static.php:138
+#: includes/abpet_static.php:164
 msgid "Enter the speaker's Instagram profile URL."
 msgstr ""
 
-#: includes/abpet_static.php:132
+#: includes/abpet_static.php:158
 msgid ""
 "Enter the speaker's job title or role (e.g., CEO, CTO, Professor, Author)."
 msgstr ""
 
-#: includes/abpet_static.php:136
+#: includes/abpet_static.php:162
 msgid "Enter the speaker's LinkedIn profile URL."
 msgstr ""
 
-#: includes/abpet_static.php:134
+#: includes/abpet_static.php:160
 msgid ""
 "Enter the speaker's personal or company website URL (must start with http:// "
 "or https://)."
 msgstr ""
 
-#: includes/abpet_static.php:135
+#: includes/abpet_static.php:161
 msgid "Enter the speaker's Twitter/X profile URL."
 msgstr ""
 
-#: admin/abpet_configuration.php:691
+#: admin/abpet_configuration.php:724
 msgid ""
 "Enter the typographical scale size target for contextual metadata tracking "
 "level H4 header assets."
 msgstr ""
 
-#: admin/abpet_configuration.php:699
+#: admin/abpet_configuration.php:732
 msgid ""
 "Enter the typographical scale size target for inner card grid elements level "
 "H5 header assets."
 msgstr ""
 
-#: admin/abpet_configuration.php:683
+#: admin/abpet_configuration.php:716
 msgid ""
 "Enter the typographical scale size target for inner panel modular level H3 "
 "header assets."
 msgstr ""
 
-#: admin/abpet_configuration.php:675
+#: admin/abpet_configuration.php:708
 msgid ""
 "Enter the typographical scale size target for subsection level H2 header "
 "assets."
 msgstr ""
 
-#: admin/abpet_configuration.php:667
+#: admin/abpet_configuration.php:700
 msgid ""
 "Enter the typographical scale size target for the primary page-level H1 "
 "header assets."
 msgstr ""
 
-#: admin/abpet_configuration.php:636
+#: admin/abpet_configuration.php:669
 msgid ""
 "Establish the primary body text typography canvas hexadecimal hex color code."
 msgstr ""
 
-#: admin/abpet_dashboard.php:299 tb_templates/map/default.php:14
+#: admin/abpet_dashboard.php:299 et_templates/map/default.php:14
 msgid "Event"
 msgstr ""
 
-#: includes/abpet_layout.php:689 includes/abpet_layout.php:1094
+#: includes/abpet_layout.php:738 includes/abpet_layout.php:1183
 #: includes/abpet_my_account.php:115 includes/abpet_woocommerce.php:237
 #: includes/abpet_woocommerce.php:318
 msgid "Event Date"
 msgstr ""
 
-#: admin/abpet_orders.php:111
-msgid "Event Date / Session"
-msgstr ""
-
-#: tb_templates/layout/display_cart_item.php:28
+#: et_templates/layout/display_cart_item.php:28
 msgid "Event Date : "
 msgstr ""
 
-#: admin/abpet_configuration.php:349
+#: admin/abpet_configuration.php:389
 msgid "Event Date and Time List"
 msgstr ""
 
-#: includes/abpet_layout.php:1106
+#: includes/abpet_layout.php:1195
 msgid "Event Date Between"
 msgstr ""
 
-#: admin/abpet_configuration.php:342
+#: admin/abpet_configuration.php:382
 msgid "Event Description"
 msgstr ""
 
-#: tb_templates/details_theme/light.php:30
+#: et_templates/details_theme/light.php:30
 msgid "Event Highlights"
 msgstr ""
 
-#: admin/abpet_configuration.php:328 admin/abpet_post.php:242
+#: admin/abpet_configuration.php:368 admin/abpet_post_configuration.php:130
 msgid "Event Icon"
 msgstr ""
 
-#: admin/abpet_post.php:232
+#: admin/abpet_post_configuration.php:120
 msgid "Event ID"
 msgstr ""
 
-#: admin/abpet_documentation.php:183
+#: admin/abpet_documentation.php:197
 msgid ""
 "event listing without the booking wrapper. Ideal for your Event List page."
 msgstr ""
 
-#: admin/abpet_configuration.php:490
+#: admin/abpet_configuration.php:523
 msgid "Event Speaker"
 msgstr ""
 
-#: admin/abpet_configuration.php:335 admin/abpet_post.php:254
+#: admin/abpet_configuration.php:375 admin/abpet_post_configuration.php:142
 msgid "Event Sub Title"
 msgstr ""
 
-#: admin/abpet_configuration.php:222
+#: admin/abpet_configuration.php:262
 msgid "Event Ticket Icon"
 msgstr ""
 
-#: includes/abpet_static.php:154
+#: includes/abpet_static.php:180
 msgid ""
 "Event Ticket Plugin is entirely dependent on the WooCommerce plugin. Please "
 "install and activate the WooCommerce plugin otherwise the plugin will not "
 "work. Installing this tool may take some time"
 msgstr ""
 
-#: admin/abpet_configuration.php:483 tb_templates/timeline/default.php:12
-#: tb_templates/timeline/light.php:12 tb_templates/timeline/modern.php:15
+#: admin/abpet_configuration.php:516 et_templates/timeline/default.php:12
+#: et_templates/timeline/light.php:12 et_templates/timeline/modern.php:15
 msgid "Event Timeline"
 msgstr ""
 
-#: admin/abpet_post.php:273
+#: admin/abpet_post_configuration.php:161
 msgid "Event Type"
 msgstr ""
 
-#: admin/abpet_post.php:776
+#: admin/abpet_post.php:146
 msgid "Event was saved as draft because its configuration is incomplete:"
 msgstr ""
 
-#: admin/abpet_configuration.php:196 includes/abpet_function.php:83
+#: admin/abpet_configuration.php:236 includes/abpet_function.php:83
 msgid "Events"
 msgstr ""
 
-#: admin/abpet_documentation.php:155
+#: admin/abpet_documentation.php:169
 msgid ""
 "every customer purchase with booking details, status, check-in, and totals."
 msgstr ""
 
-#: admin/abpet_documentation.php:124
+#: admin/abpet_documentation.php:138
 msgid ""
 "Every event sells tickets in one of two ways. You choose this on the event "
 "edit page in the Ticket Type settings:"
 msgstr ""
 
-#: admin/abpet_documentation.php:151
+#: admin/abpet_documentation.php:165
 msgid "Every menu explained"
+msgstr ""
+
+#: admin/abpet_documentation.php:171
+msgid ""
+"everything global in one place: general settings (label, slug, dashboard "
+"icon, taxonomy labels and slugs, Google Maps key…), the ON/OFF switches, "
+"shared reusable lists (Dates, Locations, Categories…), contact information, "
+"colors, and CSS."
 msgstr ""
 
 #: admin/abpet_ticket.php:271
@@ -1499,7 +1525,7 @@ msgstr ""
 msgid "Ex: 1"
 msgstr ""
 
-#: admin/abpet_timeline.php:92
+#: admin/abpet_post_configuration.php:394
 msgid "EX: 10:00 AM"
 msgstr ""
 
@@ -1514,24 +1540,24 @@ msgstr ""
 msgid "Ex: 5"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:763
+#: admin/abpet_seat_plan.php:765
 msgid "EX: A"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:935
+#: admin/abpet_seat_plan.php:937
 msgid "EX: Decor item Name"
 msgstr ""
 
-#: admin/abpet_additional.php:163 admin/abpet_post.php:265
+#: admin/abpet_additional.php:163 admin/abpet_post_configuration.php:153
 #: admin/abpet_ticket.php:281
 msgid "EX: Description"
 msgstr ""
 
-#: admin/abpet_feature.php:181
+#: admin/abpet_feature.php:207
 msgid "EX: Feature Title"
 msgstr ""
 
-#: admin/abpet_feature.php:186
+#: admin/abpet_feature.php:212
 msgid "EX: Feature Value"
 msgstr ""
 
@@ -1539,15 +1565,15 @@ msgstr ""
 msgid "EX: Lower Deck"
 msgstr ""
 
-#: admin/abpet_timeline.php:97
+#: admin/abpet_post_configuration.php:399
 msgid "EX: Registration Opens"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:175
+#: admin/abpet_seat_plan.php:177
 msgid "EX: Scania AC Double Decker"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:753
+#: admin/abpet_seat_plan.php:755
 msgid "EX: Ticket Name"
 msgstr ""
 
@@ -1555,11 +1581,11 @@ msgstr ""
 msgid "EX: Water Bottle"
 msgstr ""
 
-#: admin/abpet_resource.php:97
+#: admin/abpet_faq.php:79
 msgid "EX: What is the check-in time?"
 msgstr ""
 
-#: includes/abpet_static.php:628
+#: includes/abpet_static.php:667
 msgid "Failed to create page."
 msgstr ""
 
@@ -1567,55 +1593,64 @@ msgstr ""
 msgid "Failed to resolve location context."
 msgstr ""
 
-#: admin/abpet_speaker.php:215
+#: admin/abpet_speaker.php:241
 msgid "Failed to resolve speaker context."
 msgstr ""
 
-#: admin/abpet_configuration.php:476
+#: admin/abpet_configuration.php:207 admin/abpet_configuration.php:509
+#: admin/abpet_documentation.php:187
 msgid "FAQ"
 msgstr ""
 
-#: admin/abpet_documentation.php:115
+#: admin/abpet_documentation.php:129
 msgid "FAQ / Terms & Conditions"
 msgstr ""
 
-#: admin/abpet_resource.php:364
+#: admin/abpet_faq.php:193
 msgid "FAQ Imported Successfully ..... !! "
 msgstr ""
 
-#: admin/abpet_resource.php:96
+#: admin/abpet_faq.php:78
 msgid "FAQ Title"
 msgstr ""
 
-#: admin/abpet_resource.php:194
+#: admin/abpet_post_configuration.php:61
+msgid "FAQs"
+msgstr ""
+
+#: admin/abpet_faq.php:111
 msgid "FAQs Configuration"
 msgstr ""
 
-#: admin/abpet_resource.php:131
+#: admin/abpet_faq.php:159
 msgid "FAQs Configuration Saved Successfully..... !! "
 msgstr ""
 
-#: admin/abpet_post.php:383 includes/abpet_function.php:87
+#: includes/abpet_function.php:87
 msgid "Feature"
 msgstr ""
 
-#: admin/abpet_feature.php:121
+#: admin/abpet_configuration.php:180 admin/abpet_documentation.php:54
+msgid "Feature ON/OFF"
+msgstr ""
+
+#: admin/abpet_feature.php:147
 msgid "Feature Saved Successfully..........!!"
 msgstr ""
 
-#: admin/abpet_configuration.php:419 admin/abpet_documentation.php:171
+#: admin/abpet_documentation.php:184
 msgid "Features"
 msgstr ""
 
-#: includes/abpet_dependencies.php:307
+#: includes/abpet_dependencies.php:308
 msgid "Filter Post List"
 msgstr ""
 
-#: tb_templates/map/modern.php:16
+#: et_templates/map/modern.php:16
 msgid "Find Us"
 msgstr ""
 
-#: includes/abpet_static.php:319
+#: includes/abpet_static.php:358
 msgid "First Name"
 msgstr ""
 
@@ -1627,33 +1662,33 @@ msgstr ""
 msgid "Fix"
 msgstr ""
 
-#: admin/abpet_configuration.php:666
+#: admin/abpet_configuration.php:699
 msgid "Font Size H1"
 msgstr ""
 
-#: admin/abpet_configuration.php:674
+#: admin/abpet_configuration.php:707
 msgid "Font Size H2"
 msgstr ""
 
-#: admin/abpet_configuration.php:682
+#: admin/abpet_configuration.php:715
 msgid "Font Size H3"
 msgstr ""
 
-#: admin/abpet_configuration.php:690
+#: admin/abpet_configuration.php:723
 msgid "Font Size H4"
 msgstr ""
 
-#: admin/abpet_configuration.php:698
+#: admin/abpet_configuration.php:731
 msgid "Font Size H5"
 msgstr ""
 
-#: admin/abpet_configuration.php:706
+#: admin/abpet_configuration.php:739
 msgid "Font Size H6"
 msgstr ""
 
 #: admin/abpet_brand.php:84 admin/abpet_category.php:85
-#: admin/abpet_feature.php:76 admin/abpet_location.php:109
-#: admin/abpet_organizer.php:86 admin/abpet_speaker.php:154
+#: admin/abpet_feature.php:102 admin/abpet_location.php:109
+#: admin/abpet_organizer.php:86 admin/abpet_speaker.php:180
 msgid "Form Loaded Successfully .....! "
 msgstr ""
 
@@ -1665,30 +1700,36 @@ msgstr ""
 msgid "Form Type"
 msgstr ""
 
-#: admin/abpet_dashboard.php:261 admin/abpet_orders.php:168
-#: admin/abpet_orders.php:170 admin/abpet_orders.php:172
-#: admin/abpet_orders.php:200 admin/abpet_orders.php:202
-#: admin/abpet_orders.php:204 includes/abpet_dependencies.php:232
-#: includes/abpet_layout.php:971 includes/abpet_layout.php:992
+#: admin/abpet_dashboard.php:261 admin/abpet_orders.php:171
+#: admin/abpet_orders.php:174 admin/abpet_orders.php:179
+#: admin/abpet_orders.php:204 admin/abpet_orders.php:206
+#: admin/abpet_orders.php:208 includes/abpet_dependencies.php:232
+#: includes/abpet_layout.php:1060 includes/abpet_layout.php:1081
 #: includes/abpet_my_account.php:140 includes/abpet_woocommerce.php:243
 #: includes/abpet_woocommerce.php:244 includes/abpet_woocommerce.php:258
 #: includes/abpet_woocommerce.php:259 includes/abpet_woocommerce.php:324
 #: includes/abpet_woocommerce.php:325 includes/abpet_woocommerce.php:338
 #: includes/abpet_woocommerce.php:340
-#: tb_templates/layout/display_cart_item.php:43
-#: tb_templates/layout/display_cart_item.php:44
-#: tb_templates/layout/display_cart_item.php:70
-#: tb_templates/layout/display_cart_item.php:71
+#: et_templates/layout/display_cart_item.php:43
+#: et_templates/layout/display_cart_item.php:44
+#: et_templates/layout/display_cart_item.php:70
+#: et_templates/layout/display_cart_item.php:71
 msgid "FREE"
 msgstr ""
 
-#: tb_templates/layout/additional_services.php:68
-#: tb_templates/layout/ticket_type.php:34 tb_templates/list/default.php:55
-#: tb_templates/list/minimal.php:41 tb_templates/list/missionary.php:47
+#: et_templates/layout/additional_services.php:68
+#: et_templates/layout/ticket_type.php:35 et_templates/list/default.php:58
+#: et_templates/list/minimal.php:44 et_templates/list/missionary.php:50
 msgid "Free"
 msgstr ""
 
-#: tb_templates/layout/faq.php:24
+#: admin/abpet_documentation.php:36
+msgid ""
+"FREE PLUGIN — Events, tickets, schedules, seat plans, and WooCommerce "
+"bookings"
+msgstr ""
+
+#: et_templates/layout/faq.php:24
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -1708,41 +1749,58 @@ msgstr ""
 msgid "Full Address(optional)"
 msgstr ""
 
-#: admin/abpet_documentation.php:182
+#: admin/abpet_documentation.php:32
+msgid "Full Documentation"
+msgstr ""
+
+#: admin/abpet_documentation.php:196
 msgid ""
 "full event listing with search, filters, ticket selection, and booking flow. "
 "Ideal for your Booking page."
 msgstr ""
 
-#: admin/abpet_post.php:416 includes/abpet_static.php:616
+#: admin/abpet_post_configuration.php:58 admin/abpet_post_configuration.php:289
+#: includes/abpet_static.php:655
 msgid "Gallery"
 msgstr ""
 
-#: admin/abpet_configuration.php:546
+#: admin/abpet_configuration.php:579
 msgid "Gallery / Masonry"
+msgstr ""
+
+#: admin/abpet_post_configuration.php:285
+msgid "Gallery Configuration"
 msgstr ""
 
 #: admin/abpet_dashboard.php:576
 msgid "Gallery Page"
 msgstr ""
 
-#: includes/abpet_static.php:323
+#: includes/abpet_static.php:362
 msgid "Gender"
 msgstr ""
 
-#: admin/abpet_post.php:169
+#: admin/abpet_post_configuration.php:36
 msgid "General"
 msgstr ""
 
-#: admin/abpet_post.php:199
+#: admin/abpet_post_configuration.php:87
 msgid "General Configuration"
 msgstr ""
 
-#: tb_templates/map/modern.php:35
+#: et_templates/map/modern.php:35
 msgid "Get Directions"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:160
+#: admin/abpet_documentation.php:223
+msgid "Get Event Ticket PRO"
+msgstr ""
+
+#: admin/abpet_documentation.php:25
+msgid "Get PRO"
+msgstr ""
+
+#: et_templates/details_theme/default.php:157
 msgid "Get Tickets"
 msgstr ""
 
@@ -1751,30 +1809,45 @@ msgid "Global Additional services Configuration"
 msgstr ""
 
 #: admin/abpet_form.php:26
-msgid "Global Client Form Configuration"
+msgid "Global Attendee Form Configuration"
 msgstr ""
 
 #: admin/abpet_form.php:262
-msgid "Global Client Form Imported Successfully ..... !! "
+msgid "Global Attendee Form Imported Successfully ..... !! "
 msgstr ""
 
-#: admin/abpet_admin.php:65 admin/abpet_documentation.php:157
-msgid "Global Data"
+#: admin/abpet_admin.php:65 admin/abpet_configuration.php:90
+#: admin/abpet_configuration.php:91 admin/abpet_documentation.php:171
+msgid "Global Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:50
+#: admin/abpet_documentation.php:64
 msgid ""
-"Global Data holds Dates & Schedules, Locations, and (if enabled) Categories, "
-"Organizers, Brands, Features, Additional Services, Client Forms, and "
-"Resources. Create them once — they appear as dropdowns when creating an "
-"event."
+"Global Configuration holds the shared lists: Dates, Locations, and (if "
+"enabled) Categories, Organizers, Brands, Features, Speaker, Additional "
+"Services, Attendee Forms, FAQs, and Terms & Conditions. Create them once — "
+"they appear as dropdowns when creating an event."
+msgstr ""
+
+#: admin/abpet_documentation.php:109
+msgid ""
+"Global Configuration → Feature ON/OFF is the master control panel of the "
+"plugin. Every feature is listed there with a simple switch. Each switch "
+"controls a whole feature area of the site — not just one event."
+msgstr ""
+
+#: admin/abpet_documentation.php:56
+msgid ""
+"Global Configuration → Feature ON/OFF turns features on/off for the whole "
+"site (Category, Organizer, Brand, Seat Plan, Additional Services, FAQ, "
+"Terms…). The defaults work out of the box, so you can skip this step."
 msgstr ""
 
 #: admin/abpet_dashboard.php:148
 msgid "Global Date"
 msgstr ""
 
-#: admin/abpet_documentation.php:168
+#: admin/abpet_documentation.php:181
 msgid ""
 "global date and time formatting, sale buffer, and advance booking horizon."
 msgstr ""
@@ -1791,37 +1864,31 @@ msgstr ""
 msgid "Global Discount"
 msgstr ""
 
-#: admin/abpet_resource.php:20
+#: admin/abpet_faq.php:18
 msgid "Global FAQ Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:158
-msgid ""
-"global settings: general (label, slug, currency…), the ON/OFF switches, "
-"contact information, colors, and CSS."
-msgstr ""
-
-#: admin/abpet_resource.php:353
+#: admin/abpet_tc.php:131
 msgid "Global Term & Conditions  Imported Successfully ..... !! "
 msgstr ""
 
-#: admin/abpet_resource.php:34
+#: admin/abpet_tc.php:17
 msgid "Global Term & Conditions Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:189
+#: admin/abpet_documentation.php:203
 msgid "Good to know"
 msgstr ""
 
-#: admin/abpet_configuration.php:311
+#: admin/abpet_configuration.php:351
 msgid "Google Cloud Console"
 msgstr ""
 
-#: admin/abpet_configuration.php:398
+#: admin/abpet_configuration.php:431
 msgid "Google Location Map"
 msgstr ""
 
-#: admin/abpet_configuration.php:307
+#: admin/abpet_configuration.php:347
 msgid "Google Maps API Key"
 msgstr ""
 
@@ -1831,7 +1898,7 @@ msgstr ""
 msgid "Here is what is happening with your %s business today."
 msgstr ""
 
-#: includes/abpet_static.php:156
+#: includes/abpet_static.php:182
 msgid ""
 "Here you can create and manage dynamic ticket types that can be used across "
 "all Events. Examples include Economy, Business Class, VIP, Sleeper, Cabin, "
@@ -1844,13 +1911,17 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: admin/abpet_documentation.php:171
+#: includes/abpet_static.php:152
+msgid "HereYou Can Add  Timeline for this Event."
+msgstr ""
+
+#: admin/abpet_documentation.php:184
 msgid ""
 "highlight badges shown on the event page (e.g. E-Ticket, VIP Access, Parking)"
 "."
 msgstr ""
 
-#: admin/abpet_documentation.php:141
+#: admin/abpet_documentation.php:155
 msgid "How to create a Seat Plan:"
 msgstr ""
 
@@ -1858,11 +1929,11 @@ msgstr ""
 msgid "https://abp-team.com"
 msgstr ""
 
-#: admin/abpet_speaker.php:121
+#: admin/abpet_speaker.php:147
 msgid "https://example.com"
 msgstr ""
 
-#: admin/abpet_feature.php:50
+#: admin/abpet_feature.php:76
 msgid "Icon"
 msgstr ""
 
@@ -1872,38 +1943,32 @@ msgstr ""
 
 #: admin/abpet_brand.php:174 admin/abpet_category.php:176
 #: admin/abpet_location.php:230 admin/abpet_organizer.php:174
-#: admin/abpet_seat_plan.php:87 admin/abpet_speaker.php:272
+#: admin/abpet_seat_plan.php:88 admin/abpet_speaker.php:298
 msgid "ID"
 msgstr ""
 
-#: admin/abpet_post.php:113
+#: admin/abpet_post.php:104
 msgid "ID : "
 msgstr ""
 
 #: admin/abpet_brand.php:141 admin/abpet_category.php:142
 #: admin/abpet_location.php:190 admin/abpet_organizer.php:141
-#: admin/abpet_speaker.php:235
+#: admin/abpet_speaker.php:261
 msgid "id Invalid...!"
 msgstr ""
 
-#: admin/abpet_post.php:229
+#: admin/abpet_post_configuration.php:117
 msgid "ID/SKU"
 msgstr ""
 
-#: admin/abpet_configuration.php:371
-msgid ""
-"If you do not want to display Location across the entire frontend of your "
-"site, turn this switch Off."
-msgstr ""
-
-#: admin/abpet_configuration.php:364
+#: admin/abpet_configuration.php:404
 msgid ""
 "If you do not want to display post capacity across the entire frontend of "
 "your site, turn this switch Off. When enabled, you can control the post "
 "capacity display individually for each Event."
 msgstr ""
 
-#: admin/abpet_configuration.php:463
+#: admin/abpet_configuration.php:496
 msgid ""
 "If you do not want to use Additional services, simply turn this switch OFF. "
 "This will completely disable the Additional services feature across the "
@@ -1911,22 +1976,14 @@ msgid ""
 "re-enable it at any time by turning the switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:406
+#: admin/abpet_configuration.php:439
 msgid ""
 "If you do not want to use Category , simply turn this switch OFF. Once "
 "disabled, Category Title field and related Category options will be "
 "completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:420
-msgid ""
-"If you do not want to use Features, simply turn this switch OFF. This will "
-"completely disable the Features across the entire website, including all "
-"related , settings, and functionality. You can re-enable it at any time by "
-"turning the switch back ON."
-msgstr ""
-
-#: admin/abpet_configuration.php:427
+#: admin/abpet_configuration.php:453
 msgid ""
 "If you do not want to use Multiple Ticket Type, simply turn this switch OFF. "
 "This will completely disable the Multiple Ticket Type feature across the "
@@ -1934,14 +1991,14 @@ msgid ""
 "enable it at any time by turning the switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:357
+#: admin/abpet_configuration.php:397
 msgid ""
 "If you do not want to use Organizer , simply turn this switch OFF. Once "
 "disabled, Organizer Title field and related Organizer options will be "
 "completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:343
+#: admin/abpet_configuration.php:383
 msgid ""
 "If you do not want to use Post Description simply turn this switch OFF. This "
 "will completely disable the Post Description across the entire website, "
@@ -1949,7 +2006,7 @@ msgid ""
 "any time by turning the switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:329
+#: admin/abpet_configuration.php:369
 msgid ""
 "If you do not want to use Post Icon simply turn this switch OFF. This will "
 "completely disable the Post Icon across the entire website, including all "
@@ -1957,35 +2014,42 @@ msgid ""
 "turning the switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:378
+#: admin/abpet_configuration.php:489
+msgid ""
+"If you do not want to use the Attendee Form, simply turn this switch OFF. "
+"Once disabled, the Attendee Form field and related Attendee Form options "
+"will be completely removed from the site."
+msgstr ""
+
+#: admin/abpet_configuration.php:411
 msgid ""
 "If you do not want to use the Brand Feature, simply turn this switch OFF. "
 "Once disabled, the Brand Feature field and related Brand Feature options "
 "will be completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:385
+#: admin/abpet_configuration.php:418
 msgid ""
 "If you do not want to use the Event Feature, simply turn this switch OFF. "
 "Once disabled, the Event Feature field and related Event Feature options "
 "will be completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:392
+#: admin/abpet_configuration.php:425
 msgid ""
 "If you do not want to use the Event location, simply turn this switch OFF. "
 "Once disabled, the Event location field and related Event location options "
 "will be completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:477
+#: admin/abpet_configuration.php:510
 msgid ""
 "If you do not want to use the FAQs Feature, simply turn this switch OFF. "
 "Once disabled, the FAQ Feature field and related FAQ Feature options will be "
 "completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:441
+#: admin/abpet_configuration.php:467
 msgid ""
 "If you do not want to use the Min & Max feature, simply turn this switch OFF."
 " This will completely disable the Event Min & Max feature for all Events "
@@ -1993,7 +2057,7 @@ msgid ""
 "by turning this switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:322
+#: admin/abpet_configuration.php:362
 msgid ""
 "If you do not want to use the Post SKU ID feature, simply turn this switch "
 "OFF. Once disabled, the Post SKU field and related SKU options will be "
@@ -2001,14 +2065,14 @@ msgid ""
 "generated for posts."
 msgstr ""
 
-#: admin/abpet_configuration.php:336
+#: admin/abpet_configuration.php:376
 msgid ""
 "If you do not want to use the Post Sub Title , simply turn this switch OFF. "
 "Once disabled, the Post Sub Title field and related  options will be "
 "completely removed from the site."
 msgstr ""
 
-#: admin/abpet_configuration.php:434
+#: admin/abpet_configuration.php:460
 msgid ""
 "If you do not want to use the Seat Plan feature, simply turn this switch OFF."
 " This will completely disable the Seat Plan feature for all Events across "
@@ -2017,48 +2081,48 @@ msgid ""
 "time by turning this switch back ON."
 msgstr ""
 
-#: admin/abpet_configuration.php:470
+#: admin/abpet_configuration.php:503
 msgid ""
 "If you do not want to use the Term & Conditions Feature, simply turn this "
 "switch OFF. Once disabled, the Term & Conditions Feature field and related "
 "Term & Conditions Feature options will be completely removed from the site."
 msgstr ""
 
-#: includes/abpet_static.php:116
+#: includes/abpet_static.php:142
 msgid ""
 "If you want to get single traveller/attendee info for multiple ticket  then "
 "active this button .Default is on"
 msgstr ""
 
-#: admin/abpet_configuration.php:270
+#: admin/abpet_configuration.php:310
 msgid "If you wish to modify the Brand label, you can do so here. "
 msgstr ""
 
-#: admin/abpet_configuration.php:230
+#: admin/abpet_configuration.php:270
 msgid "If you wish to modify the category label, you can do so here. "
 msgstr ""
 
-#: admin/abpet_configuration.php:290
+#: admin/abpet_configuration.php:330
 msgid "If you wish to modify the Location label, you can do so here. "
 msgstr ""
 
-#: admin/abpet_configuration.php:250
+#: admin/abpet_configuration.php:290
 msgid "If you wish to modify the Organizer label, you can do so here. "
 msgstr ""
 
-#: admin/abpet_post.php:82
+#: admin/abpet_post.php:73
 msgid "Image"
 msgstr ""
 
-#: admin/abpet_configuration.php:562
+#: admin/abpet_configuration.php:595
 msgid "Image Indicator?"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:641 admin/abpet_seat_plan.php:823
+#: admin/abpet_seat_plan.php:643 admin/abpet_seat_plan.php:825
 msgid "image/Icon"
 msgstr ""
 
-#: admin/abpet_configuration.php:551
+#: admin/abpet_configuration.php:584
 msgid "Images Per Row"
 msgstr ""
 
@@ -2067,14 +2131,14 @@ msgid "Import Additional Service"
 msgstr ""
 
 #: admin/abpet_form.php:63
-msgid "Import Global Client Form"
+msgid "Import Global Attendee Form"
 msgstr ""
 
-#: admin/abpet_resource.php:214
+#: admin/abpet_faq.php:131
 msgid "Import Global FAQ"
 msgstr ""
 
-#: admin/abpet_resource.php:257
+#: admin/abpet_tc.php:90
 msgid "Import Global Term & Conditions"
 msgstr ""
 
@@ -2106,37 +2170,41 @@ msgstr ""
 msgid "Importing........"
 msgstr ""
 
-#: admin/abpet_configuration.php:576
+#: admin/abpet_configuration.php:609
 msgid "Indicator Position"
 msgstr ""
 
-#: admin/abpet_configuration.php:530
+#: admin/abpet_configuration.php:563
 msgid ""
 "Input the standard commercial email address reserved for direct customer "
 "support correspondence."
 msgstr ""
 
-#: includes/abpet_dependencies.php:303
+#: includes/abpet_dependencies.php:304
 msgid "Insert  Post"
 msgstr ""
 
-#: admin/abpet_documentation.php:165
-msgid "Inside Global Data"
+#: admin/abpet_documentation.php:178
+msgid "Inside Global Configuration"
 msgstr ""
 
 #: admin/abpet_dashboard.php:620
 msgid "Install & Activate"
 msgstr ""
 
-#: includes/abpet_static.php:17
+#: includes/abpet_static.php:21
 msgid "Install & Active Now"
 msgstr ""
 
-#: admin/abpet_post.php:812 admin/abpet_post.php:833
+#: admin/abpet_documentation.php:216
+msgid "Install PRO & Activate"
+msgstr ""
+
+#: admin/abpet_post.php:182 admin/abpet_post.php:203
 msgid "Invalid  ID ..... !! "
 msgstr ""
 
-#: admin/abpet_post.php:788
+#: admin/abpet_post.php:158
 msgid "Invalid ID ..... !! "
 msgstr ""
 
@@ -2144,27 +2212,27 @@ msgstr ""
 #: admin/abpet_brand.php:30 admin/abpet_brand.php:88 admin/abpet_brand.php:133
 #: admin/abpet_category.php:31 admin/abpet_category.php:89
 #: admin/abpet_category.php:134 admin/abpet_dashboard.php:285
-#: admin/abpet_dates.php:217 admin/abpet_feature.php:29
-#: admin/abpet_feature.php:80 admin/abpet_feature.php:127
-#: admin/abpet_form.php:246 admin/abpet_form.php:254
-#: admin/abpet_location.php:28 admin/abpet_location.php:113
-#: admin/abpet_location.php:183 admin/abpet_orders.php:217
-#: admin/abpet_orders.php:233 admin/abpet_organizer.php:32
-#: admin/abpet_organizer.php:90 admin/abpet_organizer.php:134
-#: admin/abpet_post.php:784 admin/abpet_post.php:800 admin/abpet_post.php:816
-#: admin/abpet_post.php:837 admin/abpet_resource.php:122
-#: admin/abpet_resource.php:311 admin/abpet_resource.php:347
-#: admin/abpet_resource.php:357 admin/abpet_seat_plan.php:134
-#: admin/abpet_seat_plan.php:255 admin/abpet_seat_plan.php:350
-#: admin/abpet_seat_plan.php:358 admin/abpet_seat_plan.php:416
-#: admin/abpet_seat_plan.php:509 admin/abpet_seat_plan.php:574
-#: admin/abpet_seat_plan.php:628 admin/abpet_seat_plan.php:680
-#: admin/abpet_seat_plan.php:724 admin/abpet_seat_plan.php:811
-#: admin/abpet_seat_plan.php:861 admin/abpet_seat_plan.php:903
-#: admin/abpet_speaker.php:30 admin/abpet_speaker.php:158
-#: admin/abpet_speaker.php:228 admin/abpet_ticket.php:86
-#: includes/abpet_static.php:543 includes/abpet_static.php:600
-#: includes/abpet_static.php:643 includes/abpet_static.php:715
+#: admin/abpet_dates.php:217 admin/abpet_faq.php:150 admin/abpet_faq.php:186
+#: admin/abpet_feature.php:55 admin/abpet_feature.php:106
+#: admin/abpet_feature.php:153 admin/abpet_form.php:246
+#: admin/abpet_form.php:254 admin/abpet_location.php:28
+#: admin/abpet_location.php:113 admin/abpet_location.php:183
+#: admin/abpet_orders.php:223 admin/abpet_orders.php:239
+#: admin/abpet_organizer.php:32 admin/abpet_organizer.php:90
+#: admin/abpet_organizer.php:134 admin/abpet_post.php:154
+#: admin/abpet_post.php:170 admin/abpet_post.php:186 admin/abpet_post.php:207
+#: admin/abpet_seat_plan.php:136 admin/abpet_seat_plan.php:257
+#: admin/abpet_seat_plan.php:352 admin/abpet_seat_plan.php:360
+#: admin/abpet_seat_plan.php:418 admin/abpet_seat_plan.php:511
+#: admin/abpet_seat_plan.php:576 admin/abpet_seat_plan.php:630
+#: admin/abpet_seat_plan.php:682 admin/abpet_seat_plan.php:726
+#: admin/abpet_seat_plan.php:813 admin/abpet_seat_plan.php:863
+#: admin/abpet_seat_plan.php:905 admin/abpet_speaker.php:56
+#: admin/abpet_speaker.php:184 admin/abpet_speaker.php:254
+#: admin/abpet_tc.php:110 admin/abpet_tc.php:125 admin/abpet_ticket.php:86
+#: includes/abpet_static.php:56 includes/abpet_static.php:582
+#: includes/abpet_static.php:639 includes/abpet_static.php:682
+#: includes/abpet_static.php:754
 msgid "Invalid security token or Insufficient permissions."
 msgstr ""
 
@@ -2176,11 +2244,11 @@ msgstr ""
 msgid "Item Deleted Successfully............. !"
 msgstr ""
 
-#: admin/abpet_configuration.php:193 admin/abpet_feature.php:51
+#: admin/abpet_configuration.php:233 admin/abpet_feature.php:77
 msgid "Label"
 msgstr ""
 
-#: admin/abpet_configuration.php:658
+#: admin/abpet_configuration.php:691
 msgid "Label Font Size"
 msgstr ""
 
@@ -2188,7 +2256,7 @@ msgstr ""
 msgid "Last 10 Orders"
 msgstr ""
 
-#: includes/abpet_static.php:320
+#: includes/abpet_static.php:359
 msgid "Last Name"
 msgstr ""
 
@@ -2200,15 +2268,23 @@ msgstr ""
 msgid "Layout clear successfully.............!"
 msgstr ""
 
-#: admin/abpet_configuration.php:584
+#: admin/abpet_configuration.php:617
 msgid "Left"
 msgstr ""
 
-#: admin/abpet_post.php:217
+#: admin/abpet_documentation.php:29
+msgid "License Needed"
+msgstr ""
+
+#: admin/abpet_post_configuration.php:105
 msgid "Light Template"
 msgstr ""
 
-#: includes/abpet_ajax.php:99
+#: includes/abpet_static.php:41
+msgid "Limited Time Offer - 50% OFF!"
+msgstr ""
+
+#: includes/abpet_ajax.php:110
 msgid "List Loaded Successfully.....! "
 msgstr ""
 
@@ -2236,29 +2312,36 @@ msgstr ""
 msgid "Loading..............!"
 msgstr ""
 
-#: admin/abpet_configuration.php:370 admin/abpet_documentation.php:169
-#: includes/abpet_function.php:97
+#: admin/abpet_documentation.php:182 includes/abpet_function.php:97
 msgid "Location"
 msgstr ""
 
-#: admin/abpet_configuration.php:289
+#: admin/abpet_dashboard.php:156
+msgid "Location Configuration"
+msgstr ""
+
+#: admin/abpet_configuration.php:329
 msgid "Location Label"
 msgstr ""
 
-#: admin/abpet_configuration.php:296
+#: admin/abpet_configuration.php:336
 msgid "Location Slug"
+msgstr ""
+
+#: admin/abpet_dashboard.php:156
+msgid "Manage  locations"
 msgstr ""
 
 #: admin/abpet_dashboard.php:151
 msgid "Manage additional services"
 msgstr ""
 
-#: admin/abpet_dashboard.php:165
-msgid "Manage cancellation requests"
+#: admin/abpet_dashboard.php:154
+msgid "Manage Attendee form fields"
 msgstr ""
 
-#: admin/abpet_dashboard.php:154
-msgid "Manage client form fields"
+#: admin/abpet_dashboard.php:165
+msgid "Manage cancellation requests"
 msgstr ""
 
 #: admin/abpet_dashboard.php:148
@@ -2266,15 +2349,11 @@ msgid "Manage global dates"
 msgstr ""
 
 #. %1$s: HTML markup for OFF layout switch, %2$s: HTML markup for ON layout switch, %3$s: Default status indicator layout
-#: admin/abpet_configuration.php:565
+#: admin/abpet_configuration.php:598
 #, php-format
 msgid ""
 "Manage pagination dot indicators on the slide viewport canvas. Toggle %1$s "
 "to hide or %2$s to display. (Default: %3$s)"
-msgstr ""
-
-#: admin/abpet_dashboard.php:156
-msgid "Manage locations"
 msgstr ""
 
 #: admin/abpet_additional.php:87
@@ -2289,16 +2368,16 @@ msgstr ""
 msgid "Max qty/Order"
 msgstr ""
 
-#: tb_templates/speaker/modern.php:14
+#: et_templates/speaker/modern.php:14
 msgid "Meet the"
 msgstr ""
 
-#: admin/abpet_configuration.php:440
+#: admin/abpet_configuration.php:466
 msgid "Min & Max qty"
 msgstr ""
 
-#: tb_templates/list/default.php:54 tb_templates/list/minimal.php:40
-#: tb_templates/list/missionary.php:46
+#: et_templates/list/default.php:57 et_templates/list/minimal.php:43
+#: et_templates/list/missionary.php:49
 msgid "Min Price :"
 msgstr ""
 
@@ -2310,11 +2389,11 @@ msgstr ""
 msgid "Min qty/Order"
 msgstr ""
 
-#: admin/abpet_post.php:218
+#: admin/abpet_post_configuration.php:106
 msgid "Modern Template"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:520
+#: admin/abpet_seat_plan.php:522
 msgid "Modify / Edit Seat Plan Seat Color Combination"
 msgstr ""
 
@@ -2331,7 +2410,7 @@ msgstr ""
 msgid "Move This Item"
 msgstr ""
 
-#: admin/abpet_post.php:131
+#: admin/abpet_post.php:122
 msgid "Move to Trash : "
 msgstr ""
 
@@ -2339,11 +2418,11 @@ msgstr ""
 msgid "move to Trashing.........!"
 msgstr ""
 
-#: admin/abpet_post.php:810
+#: admin/abpet_post.php:180
 msgid "Moved to trash successfully...... !! "
 msgstr ""
 
-#: admin/abpet_configuration.php:426
+#: admin/abpet_configuration.php:452
 msgid "Multiple Ticket Type"
 msgstr ""
 
@@ -2361,34 +2440,34 @@ msgstr ""
 #: admin/abpet_brand.php:57 admin/abpet_category.php:57
 #: admin/abpet_category.php:58 admin/abpet_form.php:159
 #: admin/abpet_location.php:60 admin/abpet_organizer.php:58
-#: admin/abpet_organizer.php:59 admin/abpet_speaker.php:59
-#: admin/abpet_speaker.php:60 admin/abpet_ticket.php:153
+#: admin/abpet_organizer.php:59 admin/abpet_speaker.php:85
+#: admin/abpet_speaker.php:86 admin/abpet_ticket.php:153
 #: admin/abpet_ticket.php:199
 msgid "Name"
 msgstr ""
 
-#: includes/abpet_layout.php:1034
+#: includes/abpet_layout.php:1123
 msgid "Name :"
 msgstr ""
 
 #: admin/abpet_brand.php:106 admin/abpet_category.php:107
 #: admin/abpet_location.php:131 admin/abpet_organizer.php:107
-#: admin/abpet_speaker.php:196
+#: admin/abpet_speaker.php:222
 msgid "Name cannot be blank!"
 msgstr ""
 
-#: admin/abpet_resource.php:81 admin/abpet_timeline.php:76
+#: admin/abpet_faq.php:63 admin/abpet_post_configuration.php:380
 msgid "NEW"
 msgstr ""
 
-#: admin/abpet_documentation.php:82
+#: admin/abpet_documentation.php:96
 msgid ""
 "New to the plugin? Import the built-in demo data from the Dashboard’s System "
 "Status section to explore everything safely. When live, every purchase "
 "appears under Orders and paid orders reduce the available seats."
 msgstr ""
 
-#: tb_templates/layout/pagination.php:39
+#: et_templates/layout/pagination.php:39
 msgid "Next Page"
 msgstr ""
 
@@ -2400,23 +2479,23 @@ msgstr ""
 msgid "No bookings for this journey yet."
 msgstr ""
 
-#: includes/abpet_static.php:77
+#: includes/abpet_static.php:103
 msgid "No Brand Found ! "
 msgstr ""
 
-#: includes/abpet_static.php:62
+#: includes/abpet_static.php:88
 msgid "No Category Found !"
 msgstr ""
 
-#: includes/abpet_static.php:142
+#: includes/abpet_static.php:168
 msgid "No Dates Found !"
 msgstr ""
 
-#: includes/abpet_static.php:151
+#: includes/abpet_static.php:177
 msgid "No Decor Item Found ! Please add Decor item to use Multiple Decor item"
 msgstr ""
 
-#: includes/abpet_static.php:82
+#: includes/abpet_static.php:108
 msgid "No Feature Found ! "
 msgstr ""
 
@@ -2424,7 +2503,7 @@ msgstr ""
 msgid "No Item selected !"
 msgstr ""
 
-#: includes/abpet_static.php:72
+#: includes/abpet_static.php:98
 msgid "No Location Found ! "
 msgstr ""
 
@@ -2436,11 +2515,11 @@ msgstr ""
 msgid "No orders found."
 msgstr ""
 
-#: includes/abpet_static.php:67
+#: includes/abpet_static.php:93
 msgid "No Organizer Found !"
 msgstr ""
 
-#: includes/abpet_static.php:143
+#: includes/abpet_static.php:169
 msgid "No Results Found !"
 msgstr ""
 
@@ -2448,13 +2527,13 @@ msgstr ""
 msgid "No seat plan assigned."
 msgstr ""
 
-#: includes/abpet_static.php:149
+#: includes/abpet_static.php:175
 msgid ""
 "No Seat Plan configuration is available for this Event. Please contact the "
 "administrator."
 msgstr ""
 
-#: includes/abpet_static.php:145
+#: includes/abpet_static.php:171
 msgid "No Seat Plan Found. Click Add New to create one."
 msgstr ""
 
@@ -2462,7 +2541,7 @@ msgstr ""
 msgid "No sessions scheduled today."
 msgstr ""
 
-#: includes/abpet_static.php:140
+#: includes/abpet_static.php:166
 msgid "No Speaker Found ! Click Add New to create one."
 msgstr ""
 
@@ -2470,23 +2549,23 @@ msgstr ""
 msgid "No ticket configuration found."
 msgstr ""
 
-#: includes/abpet_static.php:148
+#: includes/abpet_static.php:174
 msgid ""
 "No ticket configuration is available for this Event. Please contact the "
 "administrator."
 msgstr ""
 
-#: tb_templates/layout/total_price.php:41
+#: et_templates/layout/total_price.php:41
 msgid "No Ticket Selected ! Please Select Ticket"
 msgstr ""
 
-#: includes/abpet_static.php:147
+#: includes/abpet_static.php:173
 msgid ""
 "No Ticket Type Found ! Please add Ticket Type to use Multiple Ticket Type"
 msgstr ""
 
-#: admin/abpet_resource.php:160 admin/abpet_seat_plan.php:300
-#: admin/abpet_seat_plan.php:309
+#: admin/abpet_post_configuration.php:316 admin/abpet_seat_plan.php:302
+#: admin/abpet_seat_plan.php:311
 msgid "None"
 msgstr ""
 
@@ -2494,18 +2573,22 @@ msgstr ""
 msgid "Not active"
 msgstr ""
 
-#: tb_templates/layout/additional_services.php:60
+#: et_templates/layout/additional_services.php:60
 msgid "Not Available !"
 msgstr ""
 
-#: includes/abpet_static.php:46
+#: includes/abpet_layout.php:883
+msgid "Not Checked !"
+msgstr ""
+
+#: includes/abpet_static.php:72
 msgid ""
 "Note : Enable this option to display the capacity for this Event on the "
 "frontend. This setting only works when the global Event Capacity Display "
 "option is enabled."
 msgstr ""
 
-#: includes/abpet_static.php:166
+#: includes/abpet_static.php:194
 msgid ""
 "Note : Here you can create and manage all Event types or categories. You can "
 "assign  categories to each Event while creating or editing a post. Every "
@@ -2515,7 +2598,7 @@ msgid ""
 "a post may affect its existing configuration."
 msgstr ""
 
-#: includes/abpet_static.php:157
+#: includes/abpet_static.php:183
 msgid ""
 "Note : Here you can create and manage decorative items for the seat plan "
 "layout. These items are used only for designing and organizing the seating "
@@ -2528,7 +2611,7 @@ msgid ""
 "can be reused across multiple seat plans."
 msgstr ""
 
-#: includes/abpet_static.php:168
+#: includes/abpet_static.php:196
 msgid ""
 "Note : Here you can create and manage Event brands, manufacturers, or "
 "service providers. You can assign  brand to each Event while creating or "
@@ -2538,7 +2621,7 @@ msgid ""
 "to a post may affect the existing configuration."
 msgstr ""
 
-#: includes/abpet_static.php:170
+#: includes/abpet_static.php:198
 msgid ""
 "Note : Here you can create and manage Event features that help attendee "
 "understand the facilities and services available with each Event. Examples "
@@ -2549,7 +2632,7 @@ msgid ""
 "affect the existing configuration."
 msgstr ""
 
-#: includes/abpet_static.php:169
+#: includes/abpet_static.php:197
 msgid ""
 "Note : Here you can create and manage Event speakers with full profiles "
 "including bio, photo, designation, company, website, and social links. "
@@ -2558,7 +2641,7 @@ msgid ""
 "affect the existing configuration."
 msgstr ""
 
-#: includes/abpet_static.php:158
+#: includes/abpet_static.php:184
 msgid ""
 "Note : Here you can create and manage reusable seat plans that can be "
 "assigned to any Event multiple times. Instead of designing the same layout "
@@ -2573,7 +2656,7 @@ msgid ""
 "plan has a unique ID"
 msgstr ""
 
-#: includes/abpet_static.php:159
+#: includes/abpet_static.php:185
 msgid ""
 "Note : Here you can design and customize the entire seat layout according to "
 "your requirements. You can define the overall layout structure by setting "
@@ -2598,106 +2681,106 @@ msgid ""
 "conference halls, and many other seating arrangements. "
 msgstr ""
 
-#: includes/abpet_static.php:88
+#: includes/abpet_static.php:114
 msgid ""
 "Note : If you want to change the Time Format, simply choose a different "
 "format. The default Time Format is: "
 msgstr ""
 
-#: includes/abpet_static.php:59
+#: includes/abpet_static.php:85
 msgid ""
 "Note : Set the maximum quantity a customer can select per order. This global "
 "setting helps control the maximum number of tickets or seats a customer can "
 "book in a single order."
 msgstr ""
 
-#: includes/abpet_static.php:58
+#: includes/abpet_static.php:84
 msgid ""
 "Note : Set the minimum quantity customers must select per order. This global "
 "setting applies across the entire booking system."
 msgstr ""
 
-#: includes/abpet_static.php:48
+#: includes/abpet_static.php:74
 msgid ""
 "Note : This switch indicate Event Brand name . You can also show or hide it "
 "on the frontend by turning the switch On or Off."
 msgstr ""
 
-#: includes/abpet_static.php:49
+#: includes/abpet_static.php:75
 msgid ""
 "Note : This switch indicate Event Category . You can also show or hide it on "
 "the frontend by turning the switch On or Off."
 msgstr ""
 
-#: includes/abpet_static.php:47
+#: includes/abpet_static.php:73
 msgid ""
 "Note : This switch indicate Event Organizer . You can also show or hide it "
 "on the frontend by turning the switch On or Off."
 msgstr ""
 
-#: includes/abpet_static.php:57
+#: includes/abpet_static.php:83
 msgid ""
 "Note : This switch indicate Event ticket type. if your all ticket/seat same "
 "type then switch will be off. if you want to multiple type please switch on"
 msgstr ""
 
-#: includes/abpet_static.php:89
+#: includes/abpet_static.php:115
 msgid ""
 "Note:  Enter the time in minutes to close ticket sales before the Event "
 "starts. If not specified, it will default to 0 (e.g. 1 hour equals 60 "
 "minutes). "
 msgstr ""
 
-#: includes/abpet_static.php:87
+#: includes/abpet_static.php:113
 msgid ""
 "Note:  If you want to change the Date  Format, simply choose a different "
 "format. The default date is: "
 msgstr ""
 
-#: includes/abpet_static.php:44
+#: includes/abpet_static.php:70
 msgid ""
 "Note: Add a Sub-title to enable the Post sub-tile. Leave this blank if you "
 "dont want to show any Sub-title information for this Post."
 msgstr ""
 
-#: includes/abpet_static.php:161
+#: includes/abpet_static.php:189
 msgid ""
 "Note: Add extra services for products/equipment with your Event—import or "
 "set per Post (also usable globally); stock applies per Post, empty quantity "
 "= unlimited, empty max qty = no limit, empty/Zero price = free."
 msgstr ""
 
-#: includes/abpet_static.php:45
+#: includes/abpet_static.php:71
 msgid ""
 "Note: Add short description about this Event . Leave this blank if you dont "
 "want to show any  description for this Event."
 msgstr ""
 
-#: includes/abpet_static.php:80
+#: includes/abpet_static.php:106
 msgid ""
 "Note: Brand description  is optional — you can add details to better explain "
 "this Brand. "
 msgstr ""
 
-#: includes/abpet_static.php:79
+#: includes/abpet_static.php:105
 msgid ""
 "Note: Brand slug is optional — leave it blank to auto-generate from the name."
 " "
 msgstr ""
 
-#: includes/abpet_static.php:65
+#: includes/abpet_static.php:91
 msgid ""
 "Note: Category description is optional — you can add details to better "
 "explain this category. "
 msgstr ""
 
-#: includes/abpet_static.php:64
+#: includes/abpet_static.php:90
 msgid ""
 "Note: Category slug is optional — leave it blank to auto-generate from the "
 "name. "
 msgstr ""
 
-#: includes/abpet_static.php:152
+#: includes/abpet_static.php:178
 msgid ""
 "Note: Choose an image, icon, or emoji to represent this decoration item "
 "within the Seat Plan layout. Enter a name to identify the item while "
@@ -2712,7 +2795,7 @@ msgid ""
 "applied wherever this decoration item is used."
 msgstr ""
 
-#: includes/abpet_static.php:39
+#: includes/abpet_static.php:65
 msgid ""
 "Note: Configure the general settings for this Event here. If you do not want "
 "to use any specific feature, you can enable or disable it from Main "
@@ -2720,14 +2803,14 @@ msgid ""
 "entire site."
 msgstr ""
 
-#: includes/abpet_static.php:94
+#: includes/abpet_static.php:120
 msgid ""
 "Note: Configure the time schedule for this event. You can add multiple times "
 "and set different times for each event date. This is useful when the event "
 "has multiple sessions or different schedules on different dates."
 msgstr ""
 
-#: includes/abpet_static.php:98
+#: includes/abpet_static.php:124
 msgid ""
 "Note: Enable this checkbox to configure special on/off date  settings. This "
 "option is optional. If you set a date/time in the special “On” date, that "
@@ -2735,24 +2818,32 @@ msgid ""
 "weekends."
 msgstr ""
 
-#: includes/abpet_static.php:112
+#: includes/abpet_static.php:200
+msgid ""
+"Note: Enter your company contact details here. This information is used as "
+"the organizer and sender identity on booking documents, invoices, PDF "
+"tickets, and customer emails. Leave any field blank if you do not want it to "
+"appear."
+msgstr ""
+
+#: includes/abpet_static.php:138
 msgid ""
 "Note: Globally, the Attendee Form feature is currently disabled. To add an "
 "attendee form for this Event, please enable the feature from the Global "
 "Settings, then reload this page."
 msgstr ""
 
-#: includes/abpet_static.php:42
+#: includes/abpet_static.php:68
 msgid ""
 "Note: Here you can add an SKU for this post. You can also show or hide it on "
 "the frontend by turning the switch On or Off."
 msgstr ""
 
-#: includes/abpet_static.php:41
+#: includes/abpet_static.php:67
 msgid "Note: Here You can change your details page template."
 msgstr ""
 
-#: includes/abpet_static.php:167
+#: includes/abpet_static.php:195
 msgid ""
 "Note: Here you can create and manage Event organizers, operators, or "
 "companies. You can assign  organizers to each Event while creating or "
@@ -2763,7 +2854,7 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: includes/abpet_static.php:165
+#: includes/abpet_static.php:193
 msgid ""
 "Note: Here, you can add all of your Event Location, which can then be used "
 "across any Event . You can edit or delete them at any time. However, please "
@@ -2772,7 +2863,7 @@ msgid ""
 " deleting it will not cause any issues."
 msgstr ""
 
-#: includes/abpet_static.php:56
+#: includes/abpet_static.php:82
 msgid ""
 "Note: If the Global Multiple Ticket System is disabled, you cannot use "
 "multiple ticket types for any Event.To enable this feature, turn on Multiple "
@@ -2781,181 +2872,181 @@ msgid ""
 "choose to use a single ticket for specific Events whenever needed."
 msgstr ""
 
-#: includes/abpet_static.php:99
+#: includes/abpet_static.php:125
 msgid ""
 "Note: If you add any date  in Special On Dates, it will always remain "
 "active—even if that date falls within an off date range or on weekends."
 msgstr ""
 
-#: includes/abpet_static.php:104
+#: includes/abpet_static.php:130
 msgid ""
 "Note: If you have off days between two dates which can add here.(optional)"
 msgstr ""
 
-#: includes/abpet_static.php:109
+#: includes/abpet_static.php:135
 msgid ""
 "Note: If you want sale additional product/equipment with this  Event then "
 "active this button and add additional service. Additional item not depends "
 "on  operation time."
 msgstr ""
 
-#: includes/abpet_static.php:52
+#: includes/abpet_static.php:78
 msgid ""
 "Note: If you want to add an image gallery for this Event, you can upload "
 "images below.  You may leave this section empty if you do not want to show "
 "images. "
 msgstr ""
 
-#: includes/abpet_static.php:106
+#: includes/abpet_static.php:132
 msgid ""
 "Note: If you want to add any new tax class , Please go to WooCommerce ->"
 "configuration->Tax Area"
 msgstr ""
 
-#: includes/abpet_static.php:51
+#: includes/abpet_static.php:77
 msgid ""
 "Note: If you want to add feature for this Event, you can add Here. These "
 "feature will be show with this Event . You may leave this section empty if "
 "you do not want to show frontend. "
 msgstr ""
 
-#: includes/abpet_static.php:114
+#: includes/abpet_static.php:140
 msgid ""
-"Note: If you want to get Client information then active this button and add "
-"form/import global form or use global form as a client form"
+"Note: If you want to get Attendee information then active this button and "
+"add form/import global form or use global form as a Attendee form"
 msgstr ""
 
-#: includes/abpet_static.php:110
+#: includes/abpet_static.php:136
 msgid ""
 "Note: Keep this switch ON to apply the global additional settings.Switch it "
 "OFF if you want to set special additional rules for this Event.additional "
 "configuration options will open when turned OFF. "
 msgstr ""
 
-#: includes/abpet_static.php:115
+#: includes/abpet_static.php:141
 msgid ""
-"Note: Keep this switch ON to apply the global Client Form settings.Switch it "
-"OFF if you want to set special  Client Form rules for this Event. Client "
-"Form configuration options will open when turned OFF. "
+"Note: Keep this switch ON to apply the global Attendee Form settings.Switch "
+"it OFF if you want to set special  Attendee Form rules for this Event. "
+"Attendee Form configuration options will open when turned OFF. "
 msgstr ""
 
-#: includes/abpet_static.php:90
+#: includes/abpet_static.php:116
 msgid ""
 "Note: Kindly provide the number of days in advance for booking. By default, "
 "the advance booking period is set to 28 days.(optional) "
 msgstr ""
 
-#: includes/abpet_static.php:75
+#: includes/abpet_static.php:101
 msgid ""
 "Note: Location Address is optional — you can add details to better explain "
 "this Location Full  Address. "
 msgstr ""
 
-#: includes/abpet_static.php:74
+#: includes/abpet_static.php:100
 msgid ""
 "Note: Location slug is optional — leave it blank to auto-generate from the "
 "name. "
 msgstr ""
 
-#: includes/abpet_static.php:70
+#: includes/abpet_static.php:96
 msgid ""
 "Note: Organizer description is optional — you can add details to better "
 "explain this Organizer. "
 msgstr ""
 
-#: includes/abpet_static.php:69
+#: includes/abpet_static.php:95
 msgid ""
 "Note: Organizer slug is optional — leave it blank to auto-generate from the "
 "name. "
 msgstr ""
 
-#: includes/abpet_static.php:95
+#: includes/abpet_static.php:121
 msgid ""
 "Note: Please add your Event Launching Date otherwise it will be start today "
 msgstr ""
 
-#: includes/abpet_static.php:93
+#: includes/abpet_static.php:119
 msgid "Note: Please add your Event operational Specific Date lists  ."
 msgstr ""
 
-#: includes/abpet_static.php:96
+#: includes/abpet_static.php:122
 msgid ""
 "Note: Please add your Event Terminate  Date otherwise it will be "
 "Continuously running periodically"
 msgstr ""
 
-#: includes/abpet_static.php:97
+#: includes/abpet_static.php:123
 msgid ""
 "Note: Please add your periodically after days. if  your Event operation day "
 "everyday this will be one(1).(optional)"
 msgstr ""
 
-#: includes/abpet_static.php:102
+#: includes/abpet_static.php:128
 msgid "Note: please add your specific Operation off dates.(optional)"
 msgstr ""
 
-#: includes/abpet_static.php:78
+#: includes/abpet_static.php:104
 msgid "Note: Please enter a Brand name — the field cannot be empty. "
 msgstr ""
 
-#: includes/abpet_static.php:63
+#: includes/abpet_static.php:89
 msgid "Note: Please enter a category name — the field cannot be empty. "
 msgstr ""
 
-#: includes/abpet_static.php:85
+#: includes/abpet_static.php:111
 msgid "Note: Please enter a Feature Name  — the field cannot be empty."
 msgstr ""
 
-#: includes/abpet_static.php:83
+#: includes/abpet_static.php:109
 msgid "Note: Please enter a Feature Value  — the field optional "
 msgstr ""
 
-#: includes/abpet_static.php:73
+#: includes/abpet_static.php:99
 msgid "Note: Please enter a Location name — the field cannot be empty. "
 msgstr ""
 
-#: includes/abpet_static.php:68
+#: includes/abpet_static.php:94
 msgid "Note: Please enter a Organizer name — the field cannot be empty. "
 msgstr ""
 
-#: includes/abpet_static.php:92
+#: includes/abpet_static.php:118
 msgid "Note: Please Select your Event  type. Default Type Offline/Phisical"
 msgstr ""
 
-#: includes/abpet_static.php:91
+#: includes/abpet_static.php:117
 msgid ""
 "Note: Please Select your Event operational date type. Default operational "
 "date will be Periodic"
 msgstr ""
 
-#: includes/abpet_static.php:54
+#: includes/abpet_static.php:80
 msgid "Note: Please select your Event seat type . Default is Ticket"
 msgstr ""
 
-#: includes/abpet_static.php:100
+#: includes/abpet_static.php:126
 msgid "Note: Please select your weekend.Default all days open(optional)"
 msgstr ""
 
-#: includes/abpet_static.php:50
+#: includes/abpet_static.php:76
 msgid ""
 "Note: Select related items to display on the details page. Leave this option "
 "empty or disabled if you do not want to show related items."
 msgstr ""
 
-#: includes/abpet_static.php:43
+#: includes/abpet_static.php:69
 msgid ""
 "Note: Set a custom icon or emoji for this post. The selected icon/emoji will "
 "be displayed alongside the post title wherever the title appears across the "
 "website, helping it stand out and improve visual recognition."
 msgstr ""
 
-#: includes/abpet_static.php:160
+#: includes/abpet_static.php:188
 msgid ""
 "Note: Set a global date configuration for your Event  that can be reused "
 "across all posts"
 msgstr ""
 
-#: includes/abpet_static.php:103
+#: includes/abpet_static.php:129
 msgid ""
 "Note: Set the Event  time for specific dates. A date will only be saved if "
 "it has at least one operation time. If a date is not saved, the regular day-"
@@ -2963,38 +3054,76 @@ msgid ""
 "multiple operation times for the same date.(optional)"
 msgstr ""
 
-#: includes/abpet_static.php:162
+#: includes/abpet_static.php:186
+msgid ""
+"Note: These are the main global settings for the plugin. Select the order "
+"statuses that count as a confirmed booking, then customize the dashboard "
+"menu label, URL slug, and icon so the Events area matches your site. You can "
+"also change the Category, Organizer, Brand, and Location labels and their "
+"URL slugs used across the frontend. The Google Maps API Key is optional and "
+"is only needed to show the interactive map for event locations. After "
+"changing any slug, save your permalinks from Settings → Permalinks."
+msgstr ""
+
+#: includes/abpet_static.php:201
+msgid ""
+"Note: These options control the global look of the plugin. Set the base and "
+"alternate theme colors, the default text color, the corner radius, and the "
+"font sizes for body text, labels, headings, and the section background. "
+"Changes apply across all plugin pages and shortcodes so the design matches "
+"your site."
+msgstr ""
+
+#: includes/abpet_static.php:199
+msgid ""
+"Note: These settings control the global image gallery used by events. Choose "
+"the Carousel Slider or Gallery / Masonry layout, then set how many images "
+"appear per row in gallery mode. For the carousel you can show or hide the "
+"navigation indicators, choose their position, and enable or disable the full-"
+"screen popup along with its own image indicator."
+msgstr ""
+
+#: includes/abpet_static.php:190
 msgid ""
 "Note: This is a flexibility global form system. Once you design the "
 "structure here, it serves as a global form. You can effortlessly import this "
 "form into any Event or use this setting at any Event,"
 msgstr ""
 
-#: includes/abpet_static.php:40
+#: includes/abpet_static.php:66
 msgid ""
 "Note: This switch indicate Event Ticket sale close/continue . You can  sale "
 "close/continue  by this switch. By default sale will be  continue"
 msgstr ""
 
-#: includes/abpet_static.php:84
+#: includes/abpet_static.php:187
+msgid ""
+"Note: Use these switches to turn individual plugin features on or off across "
+"the entire site. When a feature is switched OFF, its menu, settings, and "
+"frontend output are removed everywhere. Turn the feature back ON to restore "
+"it. Some features also have per-event switches, so you can keep a feature "
+"enabled globally and disable it only for selected events."
+msgstr ""
+
+#: includes/abpet_static.php:110
 msgid "Note: You can add an icon, or emoji for this Feature(optional)."
 msgstr ""
 
-#: includes/abpet_static.php:163
+#: includes/abpet_static.php:191
 msgid ""
 "Note: You can set all Event-related FAQs here and use them globally across "
 "all Events. You can also import these FAQs into any individual Event and "
 "customize them as needed."
 msgstr ""
 
-#: includes/abpet_static.php:164
+#: includes/abpet_static.php:192
 msgid ""
 "Note: You can set all Event-related Term & Condition here and use them "
 "globally across all Event. You can also import these Term & Condition into "
 "any individual Event and customize them as needed."
 msgstr ""
 
-#: includes/abpet_static.php:55
+#: includes/abpet_static.php:81
 msgid ""
 "Note: You have disabled the Seat Plan System from the Global On/Off Settings,"
 " so your ticket types will function as regular tickets only.If you want to "
@@ -3004,13 +3133,13 @@ msgid ""
 "needed."
 msgstr ""
 
-#: includes/abpet_static.php:107
+#: includes/abpet_static.php:133
 msgid ""
 "Note: Your Woo-commerce Tax setting already disable. If you want to enable "
 "tax please enable woo-commerce tax."
 msgstr ""
 
-#: includes/abpet_static.php:101
+#: includes/abpet_static.php:127
 msgid ""
 "Note:Add Day-wise Time if your Event operates on different schedules "
 "throughout the week. You can assign multiple departure times for each day, "
@@ -3018,7 +3147,7 @@ msgid ""
 "attendees. "
 msgstr ""
 
-#: includes/abpet_static.php:144
+#: includes/abpet_static.php:170
 msgid "Nothing Found !"
 msgstr ""
 
@@ -3046,7 +3175,11 @@ msgstr ""
 msgid "Off Dates Range"
 msgstr ""
 
-#: admin/abpet_post.php:278
+#: includes/abpet_static.php:60
+msgid "Offer dismissed."
+msgstr ""
+
+#: admin/abpet_post_configuration.php:166
 msgid "Offline"
 msgstr ""
 
@@ -3054,22 +3187,18 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: admin/abpet_documentation.php:146
+#: admin/abpet_documentation.php:160
 msgid ""
 "On the event edit page you can enable \"Multiple Ticket Type\" to sell "
 "several categories (Adult + Child + VIP) at once — or keep it off to sell a "
 "single ticket type per event."
 msgstr ""
 
-#: admin/abpet_configuration.php:172
-msgid "ON/OFF"
-msgstr ""
-
 #: admin/abpet_dashboard.php:147
 msgid "ON/OFF Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:145
+#: admin/abpet_documentation.php:159
 msgid "One or many ticket types?"
 msgstr ""
 
@@ -3083,44 +3212,44 @@ msgstr ""
 msgid "One or more seats became unavailable. The order has been cancelled."
 msgstr ""
 
-#: admin/abpet_post.php:283
+#: admin/abpet_post_configuration.php:171
 msgid "Online"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:122
+#: et_templates/details_theme/default.php:121
 msgid "Online / TBA"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:137
+#: et_templates/details_theme/default.php:136
 msgid "Open"
 msgstr ""
 
-#: admin/abpet_documentation.php:44
-msgid "Open Configuration"
-msgstr ""
-
-#: admin/abpet_documentation.php:36 admin/abpet_documentation.php:76
-#: admin/abpet_documentation.php:84
+#: admin/abpet_documentation.php:50 admin/abpet_documentation.php:90
+#: admin/abpet_documentation.php:98
 msgid "Open Dashboard"
 msgstr ""
 
-#: admin/abpet_documentation.php:68
+#: admin/abpet_documentation.php:82
 msgid "Open Event List"
 msgstr ""
 
-#: admin/abpet_documentation.php:52
-msgid "Open Global Data"
+#: admin/abpet_documentation.php:58 admin/abpet_documentation.php:66
+msgid "Open Global Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:33
+#: admin/abpet_documentation.php:225
+msgid "Open PRO License"
+msgstr ""
+
+#: admin/abpet_documentation.php:47
 msgid "Open the Dashboard and verify everything is ready."
 msgstr ""
 
-#: admin/abpet_documentation.php:60
+#: admin/abpet_documentation.php:74
 msgid "Open Ticket/Seat Plan"
 msgstr ""
 
-#: admin/abpet_documentation.php:142
+#: admin/abpet_documentation.php:156
 msgid ""
 "Open Ticket/Seat Plan → press Add New Seat Plan, then drag and drop seats "
 "and other cells (entrance, aisle, window, stairs) to build your layout. Give "
@@ -3132,21 +3261,21 @@ msgstr ""
 msgid "Operation Time"
 msgstr ""
 
-#: admin/abpet_dates.php:380
+#: admin/abpet_dates.php:382
 msgid "Operation Time : "
 msgstr ""
 
-#: admin/abpet_documentation.php:172
+#: admin/abpet_documentation.php:185
 msgid "optional add-ons with their own prices (meals, merchandise, transfers)."
 msgstr ""
 
-#: admin/abpet_documentation.php:170
+#: admin/abpet_documentation.php:183
 msgid ""
-"optional classifications; they only appear here when switched ON in "
+"optional classifications; they only appear here when switched ON in Global "
 "Configuration."
 msgstr ""
 
-#: includes/abpet_static.php:129
+#: includes/abpet_static.php:155
 msgid ""
 "Optional URL-friendly identifier. If left blank, it will be auto-generated "
 "from the speaker name."
@@ -3162,11 +3291,11 @@ msgstr[1] ""
 msgid "Order / Event"
 msgstr ""
 
-#: includes/abpet_layout.php:1127
+#: includes/abpet_layout.php:1216
 msgid "Order Date"
 msgstr ""
 
-#: includes/abpet_layout.php:1139
+#: includes/abpet_layout.php:1228
 msgid "Order Date Between"
 msgstr ""
 
@@ -3174,15 +3303,15 @@ msgstr ""
 msgid "Order Filter"
 msgstr ""
 
-#: includes/abpet_layout.php:1184 includes/abpet_layout.php:1185
+#: includes/abpet_layout.php:1273 includes/abpet_layout.php:1274
 msgid "Order ID"
 msgstr ""
 
-#: admin/abpet_orders.php:109
+#: admin/abpet_orders.php:110
 msgid "Order ID/ Date"
 msgstr ""
 
-#: admin/abpet_orders.php:229
+#: admin/abpet_orders.php:235
 msgid "Order Loaded Successfully !"
 msgstr ""
 
@@ -3190,8 +3319,12 @@ msgstr ""
 msgid "Order Loading........ !"
 msgstr ""
 
+#: includes/abpet_layout.php:1333
+msgid "Order Status"
+msgstr ""
+
 #: admin/abpet_admin.php:55 admin/abpet_dashboard.php:62
-#: admin/abpet_documentation.php:155
+#: admin/abpet_documentation.php:169
 msgid "Orders"
 msgstr ""
 
@@ -3199,15 +3332,15 @@ msgstr ""
 msgid "Organizer"
 msgstr ""
 
-#: admin/abpet_configuration.php:249
+#: admin/abpet_configuration.php:289
 msgid "Organizer Label"
 msgstr ""
 
-#: admin/abpet_configuration.php:257
+#: admin/abpet_configuration.php:297
 msgid "Organizer Slug"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:228
+#: admin/abpet_seat_plan.php:230
 msgid "Others / Decor"
 msgstr ""
 
@@ -3215,14 +3348,15 @@ msgstr ""
 msgid "Others/Decor Item List"
 msgstr ""
 
-#: admin/abpet_documentation.php:159
+#: admin/abpet_documentation.php:172
 msgid ""
-"overview and charts, plus a System Status health check with quick tools: "
-"install WooCommerce, create the booking/list/gallery pages, and import or "
-"remove demo data."
+"overview of KPI cards, today's sessions, quick actions, recent orders and "
+"system status, plus a System Status health check with quick tools: install "
+"WooCommerce, create the booking/list/gallery pages, and import or remove "
+"demo data."
 msgstr ""
 
-#: includes/abpet_static.php:636
+#: includes/abpet_static.php:675
 msgid "Page already exists."
 msgstr ""
 
@@ -3234,20 +3368,25 @@ msgstr ""
 msgid "Partial Payment"
 msgstr ""
 
-#: admin/abpet_orders.php:125
-msgid "Passenger Info"
+#: admin/abpet_documentation.php:238
+msgid "Partial payments, balance tracking, and customer balance payments."
 msgstr ""
 
 #. %s: Google Maps Platform help link
-#: admin/abpet_configuration.php:310
+#: admin/abpet_configuration.php:350
 #, php-format
 msgid ""
 "Paste your Google Maps JavaScript API key to enable the Google Location Map "
 "feature on the frontend. Get a key from the %s."
 msgstr ""
 
-#: admin/abpet_orders.php:122 includes/abpet_my_account.php:118
+#: admin/abpet_orders.php:125 includes/abpet_my_account.php:118
 msgid "Payment Method"
+msgstr ""
+
+#: admin/abpet_documentation.php:240
+msgid ""
+"PDF tickets and attendee lists, customizable booking emails and resend tools."
 msgstr ""
 
 #: admin/abpet_dates.php:110
@@ -3262,23 +3401,23 @@ msgstr ""
 msgid "Permanent Deleting.........!"
 msgstr ""
 
-#: admin/abpet_post.php:127 admin/abpet_seat_plan.php:120
+#: admin/abpet_post.php:118 admin/abpet_seat_plan.php:121
 msgid "Permanent Remove : "
 msgstr ""
 
-#: admin/abpet_post.php:796
+#: admin/abpet_post.php:166
 msgid "Permanently removed. ..... !! "
 msgstr ""
 
-#: includes/abpet_static.php:322
+#: includes/abpet_static.php:361
 msgid "Phone"
 msgstr ""
 
-#: includes/abpet_layout.php:1040
+#: includes/abpet_layout.php:1129
 msgid "Phone :"
 msgstr ""
 
-#: admin/abpet_speaker.php:95
+#: admin/abpet_speaker.php:121
 msgid "Photo"
 msgstr ""
 
@@ -3286,19 +3425,19 @@ msgstr ""
 msgid "PHP"
 msgstr ""
 
-#: admin/abpet_configuration.php:723
+#: admin/abpet_configuration.php:756
 msgid ""
 "Pick a default foreground color shade for interactive typography labels "
 "inside button boundaries."
 msgstr ""
 
-#: admin/abpet_configuration.php:622
+#: admin/abpet_configuration.php:655
 msgid ""
 "Pick the primary corporate core signature theme color for accents, links, "
 "and buttons."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:174 admin/abpet_seat_plan.php:291
+#: admin/abpet_seat_plan.php:176 admin/abpet_seat_plan.php:293
 msgid "Plan Name"
 msgstr ""
 
@@ -3306,18 +3445,18 @@ msgstr ""
 msgid "Please login to see your bookings."
 msgstr ""
 
-#: includes/abpet_static.php:172
+#: includes/abpet_static.php:203
 msgid "Please Login your account to Download/View ticket !"
 msgstr ""
 
-#: admin/abpet_configuration.php:1050 admin/abpet_post.php:215
-#: admin/abpet_resource.php:157 admin/abpet_resource.php:168
-#: admin/abpet_ticket.php:26 includes/abpet_dependencies.php:229
-#: includes/abpet_layout.php:297
+#: admin/abpet_configuration.php:1083 admin/abpet_post_configuration.php:103
+#: admin/abpet_post_configuration.php:313
+#: admin/abpet_post_configuration.php:324 admin/abpet_ticket.php:26
+#: includes/abpet_dependencies.php:229 includes/abpet_layout.php:297
 msgid "Please Select"
 msgstr ""
 
-#: includes/abpet_layout.php:681
+#: includes/abpet_layout.php:696 includes/abpet_layout.php:707
 msgid "Please Select Event Date"
 msgstr ""
 
@@ -3333,68 +3472,68 @@ msgstr ""
 msgid "Plugin"
 msgstr ""
 
-#: admin/abpet_documentation.php:110
+#: admin/abpet_documentation.php:124
 msgid "Popular switches you may want to change:"
 msgstr ""
 
-#: admin/abpet_configuration.php:605
+#: admin/abpet_configuration.php:638
 msgid "Popup Image Indicator"
 msgstr ""
 
-#: includes/abpet_dependencies.php:288
+#: includes/abpet_dependencies.php:289
 msgid "Post"
 msgstr ""
 
-#: includes/abpet_dependencies.php:299 includes/abpet_dependencies.php:300
+#: includes/abpet_dependencies.php:300 includes/abpet_dependencies.php:301
 msgid "Post Image"
 msgstr ""
 
-#: includes/abpet_dependencies.php:287
+#: includes/abpet_dependencies.php:288
 msgid "Post Item:"
 msgstr ""
 
-#: includes/abpet_dependencies.php:285 includes/abpet_dependencies.php:286
-#: includes/abpet_dependencies.php:305
+#: includes/abpet_dependencies.php:286 includes/abpet_dependencies.php:287
+#: includes/abpet_dependencies.php:306
 msgid "Post List"
 msgstr ""
 
-#: admin/abpet_post.php:847
+#: admin/abpet_post.php:217
 msgid "Post List Loaded successfully...... !! "
 msgstr ""
 
-#: includes/abpet_dependencies.php:297
+#: includes/abpet_dependencies.php:298
 msgid "Post Not Found"
 msgstr ""
 
-#: includes/abpet_dependencies.php:298
+#: includes/abpet_dependencies.php:299
 msgid "Post Not found in Trash"
 msgstr ""
 
-#: admin/abpet_configuration.php:321
+#: admin/abpet_configuration.php:361
 msgid "Post SKU"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:644
+#: admin/abpet_seat_plan.php:646
 msgid "Prefix"
 msgstr ""
 
-#: admin/abpet_documentation.php:66
+#: admin/abpet_documentation.php:80
 msgid ""
 "Press the + button, then add a title, image, description, schedule (date & "
 "time), location/category, and configure tickets or seat plan with prices and "
 "quantities. The event gets its own page automatically."
 msgstr ""
 
-#: tb_templates/layout/pagination.php:27
+#: et_templates/layout/pagination.php:27
 msgid "Previous Page"
 msgstr ""
 
 #: admin/abpet_additional.php:86 admin/abpet_ticket.php:154
-#: admin/abpet_ticket.php:201 tb_templates/layout/registration.php:44
+#: admin/abpet_ticket.php:201 et_templates/layout/registration.php:44
 msgid "Price"
 msgstr ""
 
-#: admin/abpet_orders.php:116
+#: admin/abpet_orders.php:118
 msgid "Price "
 msgstr ""
 
@@ -3402,32 +3541,63 @@ msgstr ""
 msgid "Price Configuration Loading........"
 msgstr ""
 
-#: admin/abpet_documentation.php:144
+#: admin/abpet_documentation.php:158
 msgid ""
 "Prices, quantities, reserved stock, and min/max per order are set per event "
 "(Event edit → Ticket Configuration). The global Ticket Type only defines the "
 "label and style; the price is decided on each event."
 msgstr ""
 
-#: admin/abpet_dashboard.php:632 admin/abpet_post.php:36
+#: admin/abpet_dashboard.php:632 admin/abpet_post.php:34
 msgid "Private"
 msgstr ""
 
-#: admin/abpet_speaker.php:141
+#: admin/abpet_documentation.php:217 admin/abpet_documentation.php:234
+msgid "PRO"
+msgstr ""
+
+#: admin/abpet_documentation.php:213
+msgid ""
+"PRO ADD-ON — Optional tools that require ABP Event Ticket PRO and an active "
+"license/trial"
+msgstr ""
+
+#: admin/abpet_documentation.php:29
+msgid "PRO Features Enabled"
+msgstr ""
+
+#: admin/abpet_documentation.php:27
+msgid "PRO Installed"
+msgstr ""
+
+#: admin/abpet_documentation.php:220
+msgid ""
+"PRO is an add-on; keep WooCommerce and the free ABP Event Ticket plugin "
+"active. Install the PRO ZIP from Plugins → Add New → Upload Plugin, then "
+"open the Event Ticket Dashboard and activate your license in the PRO License "
+"card. Install ABP PDF Tools as well if you need PDF tickets or attendee "
+"lists."
+msgstr ""
+
+#: admin/abpet_documentation.php:227
+msgid "PRO Setup Guide"
+msgstr ""
+
+#: admin/abpet_speaker.php:167
 msgid "Profile URL"
 msgstr ""
 
-#: admin/abpet_configuration.php:515
+#: admin/abpet_configuration.php:548
 msgid ""
 "Provide the full corporate physical location or street address to appear on "
 "booking logs."
 msgstr ""
 
-#: admin/abpet_documentation.php:73
+#: admin/abpet_documentation.php:87
 msgid "Publish the booking and event-list pages."
 msgstr ""
 
-#: admin/abpet_dashboard.php:630 admin/abpet_post.php:35
+#: admin/abpet_dashboard.php:630 admin/abpet_post.php:33
 msgid "Published"
 msgstr ""
 
@@ -3439,7 +3609,7 @@ msgstr ""
 msgid "Quick Actions"
 msgstr ""
 
-#: admin/abpet_documentation.php:25
+#: admin/abpet_documentation.php:39
 msgid "Quick Start — Follow these steps in order"
 msgstr ""
 
@@ -3455,15 +3625,20 @@ msgstr ""
 msgid "Recent Orders"
 msgstr ""
 
-#: admin/abpet_post.php:372 tb_templates/layout/related_item.php:21
+#: admin/abpet_post_configuration.php:49 admin/abpet_post_configuration.php:270
+#: et_templates/layout/related_item.php:21
 msgid "Related Event"
 msgstr ""
 
-#: admin/abpet_configuration.php:412
+#: admin/abpet_post_configuration.php:265
+msgid "Related Event Configuration"
+msgstr ""
+
+#: admin/abpet_configuration.php:445
 msgid "Related Post"
 msgstr ""
 
-#: admin/abpet_configuration.php:497
+#: admin/abpet_configuration.php:530
 msgid "Remove All Data on Uninstall"
 msgstr ""
 
@@ -3475,11 +3650,11 @@ msgstr ""
 msgid "Remove Image"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:201
+#: admin/abpet_seat_plan.php:203
 msgid "Remove Last Col"
 msgstr ""
 
-#: includes/abpet_dependencies.php:301
+#: includes/abpet_dependencies.php:302
 msgid "Remove Post Image"
 msgstr ""
 
@@ -3500,16 +3675,11 @@ msgstr ""
 msgid "Reserve Quantity"
 msgstr ""
 
-#: admin/abpet_admin.php:141 admin/abpet_documentation.php:174
-#: admin/abpet_post.php:179
-msgid "Resources"
-msgstr ""
-
-#: admin/abpet_post.php:126
+#: admin/abpet_post.php:117
 msgid "Restore : "
 msgstr ""
 
-#: admin/abpet_post.php:831
+#: admin/abpet_post.php:201
 msgid "Restored successfully...... !! "
 msgstr ""
 
@@ -3521,7 +3691,8 @@ msgstr ""
 msgid "Return Date  Loading............."
 msgstr ""
 
-#: includes/abpet_layout.php:995 tb_templates/layout/additional_services.php:71
+#: includes/abpet_layout.php:1084
+#: et_templates/layout/additional_services.php:71
 msgid "Returnable"
 msgstr ""
 
@@ -3529,31 +3700,35 @@ msgstr ""
 msgid "Returnable or Not"
 msgstr ""
 
-#: admin/abpet_documentation.php:174
-msgid "reusable FAQ and Terms & Conditions blocks."
+#: admin/abpet_documentation.php:187
+msgid "reusable question and answer blocks."
 msgstr ""
 
-#: admin/abpet_documentation.php:169
+#: admin/abpet_documentation.php:188
+msgid "reusable terms and conditions content."
+msgstr ""
+
+#: admin/abpet_documentation.php:182
 msgid "reusable venue list used by every event."
 msgstr ""
 
-#: admin/abpet_configuration.php:582
+#: admin/abpet_configuration.php:615
 msgid "Right"
 msgstr ""
 
-#: admin/abpet_post.php:206
+#: admin/abpet_post_configuration.php:94
 msgid "Sale continue?"
 msgstr ""
 
-#: admin/abpet_post.php:115
+#: admin/abpet_post.php:106
 msgid "Sale Off"
 msgstr ""
 
-#: admin/abpet_post.php:115
+#: admin/abpet_post.php:106
 msgid "Sale On"
 msgstr ""
 
-#: admin/abpet_configuration.php:454
+#: admin/abpet_configuration.php:480
 msgid "Same Attendee"
 msgstr ""
 
@@ -3566,9 +3741,9 @@ msgid "Saturday"
 msgstr ""
 
 #: admin/abpet_brand.php:36 admin/abpet_category.php:37
-#: admin/abpet_configuration.php:143 admin/abpet_feature.php:37
+#: admin/abpet_configuration.php:91 admin/abpet_feature.php:63
 #: admin/abpet_location.php:35 admin/abpet_organizer.php:38
-#: admin/abpet_speaker.php:37
+#: admin/abpet_speaker.php:63
 msgid "Save"
 msgstr ""
 
@@ -3576,15 +3751,15 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:521
+#: admin/abpet_seat_plan.php:523
 msgid "Save Color Combination"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:844
+#: admin/abpet_seat_plan.php:846
 msgid "Save Decor items"
 msgstr ""
 
-#: admin/abpet_resource.php:69
+#: admin/abpet_faq.php:51
 msgid "Save FAQs Configuration"
 msgstr ""
 
@@ -3593,28 +3768,28 @@ msgid "Save Global Additional services Configuration"
 msgstr ""
 
 #: admin/abpet_form.php:128
-msgid "Save Global Client Form Configuration"
+msgid "Save Global Attendee Form Configuration"
 msgstr ""
 
 #: admin/abpet_dates.php:69
 msgid "Save Global Date Configuration"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:239
+#: admin/abpet_seat_plan.php:241
 msgid "Save Seat Plan"
 msgstr ""
 
-#: admin/abpet_resource.php:280
+#: admin/abpet_tc.php:33
 msgid "Save Term & Conditions Configuration"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:663
+#: admin/abpet_seat_plan.php:665
 msgid "Save Ticket Types"
 msgstr ""
 
 #: admin/abpet_brand.php:129 admin/abpet_category.php:130
 #: admin/abpet_location.php:177 admin/abpet_organizer.php:130
-#: admin/abpet_speaker.php:224
+#: admin/abpet_speaker.php:250
 msgid "Saved Successfully !"
 msgstr ""
 
@@ -3626,7 +3801,7 @@ msgstr ""
 msgid "Saving.............!"
 msgstr ""
 
-#: tb_templates/timeline/modern.php:14
+#: et_templates/timeline/modern.php:14
 msgid "Schedule"
 msgstr ""
 
@@ -3646,19 +3821,23 @@ msgstr ""
 msgid "Search address / place on the map"
 msgstr ""
 
-#: includes/abpet_dependencies.php:296
+#: includes/abpet_dependencies.php:297
 msgid "Search Post"
 msgstr ""
 
-#: tb_templates/layout/registration.php:43
+#: admin/abpet_documentation.php:237
+msgid "Seasonal and Early Bird discounts, globally or per event."
+msgstr ""
+
+#: et_templates/layout/registration.php:43
 msgid "Seat"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:90
+#: admin/abpet_seat_plan.php:91
 msgid "Seat Information"
 msgstr ""
 
-#: tb_templates/layout/sp_type.php:19
+#: et_templates/layout/sp_type.php:19
 msgid "Seat Label :"
 msgstr ""
 
@@ -3666,13 +3845,13 @@ msgstr ""
 msgid "Seat Map"
 msgstr ""
 
-#: admin/abpet_configuration.php:433 admin/abpet_dashboard.php:306
-#: admin/abpet_documentation.php:111 admin/abpet_seat_plan.php:74
+#: admin/abpet_configuration.php:459 admin/abpet_dashboard.php:306
+#: admin/abpet_documentation.php:125 admin/abpet_seat_plan.php:74
 #: includes/abpet_layout.php:470
 msgid "Seat Plan"
 msgstr ""
 
-#: admin/abpet_documentation.php:128
+#: admin/abpet_documentation.php:142
 msgid "Seat Plan (assigned seating)"
 msgstr ""
 
@@ -3680,7 +3859,7 @@ msgstr ""
 msgid "Seat Plan Configuration"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:431
+#: admin/abpet_seat_plan.php:433
 msgid "Seat Plan deleted Successfully ..... !! "
 msgstr ""
 
@@ -3688,7 +3867,7 @@ msgstr ""
 msgid "Seat Plan Deleting.............!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:251 admin/abpet_seat_plan.php:346
+#: admin/abpet_seat_plan.php:253 admin/abpet_seat_plan.php:348
 msgid "Seat Plan Loaded Successfully .....! "
 msgstr ""
 
@@ -3696,11 +3875,11 @@ msgstr ""
 msgid "Seat Plan Loading.............!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:89 admin/abpet_ticket.php:128
+#: admin/abpet_seat_plan.php:90 admin/abpet_ticket.php:128
 msgid "Seat Plan Name"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:411
+#: admin/abpet_seat_plan.php:413
 msgid "Seat Plan Saved Successfully...!"
 msgstr ""
 
@@ -3708,15 +3887,15 @@ msgstr ""
 msgid "Seat Plan Saving.............!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:404
+#: admin/abpet_seat_plan.php:406
 msgid "Seat Plan Updated Successfully.....!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:227
+#: admin/abpet_seat_plan.php:229
 msgid "Seats"
 msgstr ""
 
-#: admin/abpet_configuration.php:743
+#: admin/abpet_configuration.php:776
 msgid "Section Background Color"
 msgstr ""
 
@@ -3724,17 +3903,17 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: includes/abpet_layout.php:776
+#: includes/abpet_layout.php:849
 msgid "Select "
 msgstr ""
 
-#: admin/abpet_configuration.php:223
+#: admin/abpet_configuration.php:263
 msgid ""
 "Select a global FontAwesome vector icon / Emoji to act as the primary visual "
 "brand identity throughout the plugin panels."
 msgstr ""
 
-#: includes/abpet_layout.php:679
+#: includes/abpet_layout.php:694 includes/abpet_layout.php:706
 msgid "Select Event Date"
 msgstr ""
 
@@ -3746,17 +3925,21 @@ msgstr ""
 msgid "Select Location.."
 msgstr ""
 
+#: includes/abpet_layout.php:1335
+msgid "Select Order Status"
+msgstr ""
+
 #: admin/abpet_ticket.php:312
 msgid "Select Seat plan"
 msgstr ""
 
-#: admin/abpet_configuration.php:540
+#: admin/abpet_configuration.php:573
 msgid ""
 "Select the preferred frontend presentation layout style for display item "
 "multimedia asset sheets."
 msgstr ""
 
-#: admin/abpet_configuration.php:185
+#: admin/abpet_configuration.php:225
 msgid ""
 "Select the specific order statuses that will automatically trigger inventory "
 "deduction or reserve a seat."
@@ -3770,23 +3953,24 @@ msgstr ""
 msgid "Select Ticket Type.."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:502
+#: admin/abpet_seat_plan.php:504
 msgid "Selected"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:558
+#: admin/abpet_seat_plan.php:560
 msgid "Selected Color"
 msgstr ""
 
 #: admin/abpet_dashboard.php:234 admin/abpet_dashboard.php:254
+#: admin/abpet_orders.php:112
 msgid "Session"
 msgstr ""
 
-#: includes/abpet_ajax.php:18 includes/abpet_ajax.php:106
+#: includes/abpet_ajax.php:18 includes/abpet_ajax.php:117
 msgid "Session expired. Page Reloading......"
 msgstr ""
 
-#: includes/abpet_ajax.php:178
+#: includes/abpet_ajax.php:207
 msgid "Session expired. Please refresh the page."
 msgstr ""
 
@@ -3803,7 +3987,7 @@ msgid "Session Time"
 msgstr ""
 
 #: includes/abpet_woocommerce.php:319
-#: tb_templates/layout/display_cart_item.php:32
+#: et_templates/layout/display_cart_item.php:32
 msgid "Session Time: "
 msgstr ""
 
@@ -3811,46 +3995,42 @@ msgstr ""
 msgid "Set Location On Google Map"
 msgstr ""
 
-#: admin/abpet_configuration.php:651
+#: admin/abpet_configuration.php:684
 msgid ""
 "Set the default baseline layout font scale size applied to normal paragraph "
 "blocks across UI views."
 msgstr ""
 
-#: admin/abpet_configuration.php:730
+#: admin/abpet_configuration.php:763
 msgid ""
 "Set the default fill backdrop hexadecimal color value for transactional "
 "action trigger containers."
 msgstr ""
 
-#: admin/abpet_documentation.php:19
+#: admin/abpet_documentation.php:21
 msgid "Set up and start selling tickets in ~15 minutes."
 msgstr ""
 
-#: admin/abpet_configuration.php:204 admin/abpet_configuration.php:241
-#: admin/abpet_configuration.php:261 admin/abpet_configuration.php:281
-#: admin/abpet_configuration.php:300
+#: admin/abpet_configuration.php:244 admin/abpet_configuration.php:281
+#: admin/abpet_configuration.php:301 admin/abpet_configuration.php:321
+#: admin/abpet_configuration.php:340
 msgid "Settings → Permalinks"
 msgstr ""
 
-#: admin/abpet_documentation.php:157
-msgid "shared reusable lists used by all events (see the sub-tabs list below)."
-msgstr ""
-
-#: admin/abpet_seat_plan.php:166
+#: admin/abpet_seat_plan.php:168
 msgid "Shift+Click"
 msgstr ""
 
-#: admin/abpet_resource.php:159
+#: admin/abpet_post_configuration.php:315
 msgid "Shipping only"
 msgstr ""
 
-#: admin/abpet_post.php:264
+#: admin/abpet_post_configuration.php:152
 msgid "Short Description"
 msgstr ""
 
 #: admin/abpet_brand.php:176 admin/abpet_category.php:178
-#: admin/abpet_organizer.php:176 admin/abpet_post.php:85
+#: admin/abpet_organizer.php:176 admin/abpet_post.php:76
 msgid "Shortcode"
 msgstr ""
 
@@ -3858,37 +4038,37 @@ msgstr ""
 msgid "Shortcode Post"
 msgstr ""
 
-#: admin/abpet_documentation.php:179
+#: admin/abpet_documentation.php:193
 msgid "Shortcodes you can place anywhere"
 msgstr ""
 
-#: admin/abpet_configuration.php:350
+#: admin/abpet_configuration.php:390
 msgid ""
 "Show a clickable date and time list on event details pages when an event has "
 "more than one date."
 msgstr ""
 
-#: admin/abpet_configuration.php:399
+#: admin/abpet_configuration.php:432
 msgid ""
 "Show a Google Map for each Location on the frontend. When this switch is OFF,"
 " no map will be displayed anywhere on the site even if locations have map "
 "data saved."
 msgstr ""
 
-#: admin/abpet_configuration.php:484
+#: admin/abpet_configuration.php:517
 msgid ""
 "Show the Event Timeline section on event details pages. When this switch is "
 "OFF, no timeline will be displayed anywhere on the site even if events have "
 "timeline entries saved."
 msgstr ""
 
-#: tb_templates/layout/pagination.php:22
+#: et_templates/layout/pagination.php:22
 msgid "Showing Item"
 msgstr ""
 
 #: admin/abpet_brand.php:172 admin/abpet_category.php:174
 #: admin/abpet_location.php:229 admin/abpet_organizer.php:172
-#: admin/abpet_post.php:81 admin/abpet_speaker.php:270
+#: admin/abpet_post.php:72 admin/abpet_speaker.php:296
 msgid "SI"
 msgstr ""
 
@@ -3896,35 +4076,35 @@ msgstr ""
 msgid "Single"
 msgstr ""
 
-#: admin/abpet_configuration.php:173
+#: admin/abpet_configuration.php:213
 msgid "Slider"
 msgstr ""
 
-#: admin/abpet_configuration.php:539
+#: admin/abpet_configuration.php:572
 msgid "Slider Theme"
 msgstr ""
 
 #: admin/abpet_brand.php:65 admin/abpet_category.php:66
-#: admin/abpet_configuration.php:200 admin/abpet_location.php:68
-#: admin/abpet_organizer.php:67 admin/abpet_speaker.php:68
+#: admin/abpet_configuration.php:240 admin/abpet_location.php:68
+#: admin/abpet_organizer.php:67 admin/abpet_speaker.php:94
 msgid "Slug"
 msgstr ""
 
 #: admin/abpet_brand.php:64 admin/abpet_category.php:65
 #: admin/abpet_location.php:67 admin/abpet_organizer.php:66
-#: admin/abpet_speaker.php:67
+#: admin/abpet_speaker.php:93
 msgid "Slug (Optional)"
 msgstr ""
 
-#: admin/abpet_speaker.php:127
+#: admin/abpet_speaker.php:153
 msgid "Social Links"
 msgstr ""
 
-#: admin/abpet_dashboard.php:351 admin/abpet_seat_plan.php:500
+#: admin/abpet_dashboard.php:351 admin/abpet_seat_plan.php:502
 msgid "Sold"
 msgstr ""
 
-#: includes/abpet_layout.php:919
+#: includes/abpet_layout.php:1008
 msgid "Sold !"
 msgstr ""
 
@@ -3933,31 +4113,31 @@ msgstr ""
 msgid "Sold %d"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:538
+#: admin/abpet_seat_plan.php:540
 msgid "Sold Color"
 msgstr ""
 
-#: includes/abpet_layout.php:795
+#: includes/abpet_layout.php:868
 msgid "Sold Out !"
 msgstr ""
 
-#: admin/abpet_orders.php:259
+#: admin/abpet_orders.php:265
 msgid "Something Error Occurred !"
 msgstr ""
 
-#: includes/abpet_ajax.php:173
+#: includes/abpet_ajax.php:202
 msgid "Something Wrong... Reload Page....!"
 msgstr ""
 
-#: includes/abpet_static.php:638
+#: includes/abpet_static.php:677
 msgid "Something Wrong...!"
 msgstr ""
 
-#: includes/abpet_static.php:175
+#: includes/abpet_static.php:206
 msgid "Sorry ! We can not find any Order in your criteria."
 msgstr ""
 
-#: admin/abpet_post.php:397 includes/abpet_function.php:100
+#: includes/abpet_function.php:100
 msgid "Speaker"
 msgstr ""
 
@@ -3985,48 +4165,44 @@ msgstr ""
 msgid "Specific Off Dates(optional)"
 msgstr ""
 
-#: admin/abpet_configuration.php:643
+#: admin/abpet_configuration.php:676
 msgid ""
 "Specify a global UI layout component corner sharpness curve boundary "
 "rounding threshold value in raw pixel units."
 msgstr ""
 
-#: admin/abpet_configuration.php:522
+#: admin/abpet_configuration.php:555
 msgid ""
-"Specify the primary telephone or corporate helpline number for client "
+"Specify the primary telephone or corporate helpline number for Attendee "
 "inquiries."
 msgstr ""
 
-#: admin/abpet_configuration.php:715
+#: admin/abpet_configuration.php:748
 msgid ""
 "Specify the responsive scaling text size applied directly to interactive "
 "call-to-action control items."
 msgstr ""
 
-#: admin/abpet_configuration.php:552
+#: admin/abpet_configuration.php:585
 msgid ""
 "Specify the total number of gallery thumbnails to render in a single "
 "horizontal grid line row layout."
 msgstr ""
 
-#: admin/abpet_resource.php:169
+#: admin/abpet_post_configuration.php:325
 msgid "Standard"
 msgstr ""
 
 #: admin/abpet_dashboard.php:235 admin/abpet_dashboard.php:255
-#: admin/abpet_orders.php:121
+#: admin/abpet_orders.php:124
 msgid "Status"
 msgstr ""
 
-#: admin/abpet_dashboard.php:156
-msgid "Stops Configuration"
-msgstr ""
-
-#: admin/abpet_post.php:252
+#: admin/abpet_post_configuration.php:140
 msgid "Sub Title"
 msgstr ""
 
-#: tb_templates/layout/registration.php:52
+#: et_templates/layout/registration.php:52
 msgid "Sub-Total"
 msgstr ""
 
@@ -4034,15 +4210,15 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: admin/abpet_configuration.php:533
+#: admin/abpet_configuration.php:566
 msgid "support@example.com"
 msgstr ""
 
-#: admin/abpet_documentation.php:105
+#: admin/abpet_documentation.php:119
 msgid "Switch OFF"
 msgstr ""
 
-#: admin/abpet_documentation.php:99
+#: admin/abpet_documentation.php:113
 msgid "Switch ON (default)"
 msgstr ""
 
@@ -4050,41 +4226,46 @@ msgstr ""
 msgid "System Status"
 msgstr ""
 
-#: admin/abpet_resource.php:166
+#: admin/abpet_post_configuration.php:59
+msgid "Tax"
+msgstr ""
+
+#: admin/abpet_post_configuration.php:322
 msgid "Tax Class"
 msgstr ""
 
-#: admin/abpet_resource.php:149
+#: admin/abpet_post_configuration.php:305
 msgid "Tax Configuration"
 msgstr ""
 
-#: admin/abpet_resource.php:155
+#: admin/abpet_post_configuration.php:311
 msgid "Tax Status"
 msgstr ""
 
-#: admin/abpet_resource.php:158
+#: admin/abpet_post_configuration.php:314
 msgid "Taxable"
 msgstr ""
 
-#: tb_templates/details_theme/default.php:93
-#: tb_templates/details_theme/default.php:100
+#: et_templates/details_theme/default.php:92
+#: et_templates/details_theme/default.php:99
 msgid "TBA"
 msgstr ""
 
-#: admin/abpet_post.php:213
+#: admin/abpet_post_configuration.php:101
 msgid "Template"
 msgstr ""
 
-#: admin/abpet_configuration.php:469 admin/abpet_resource.php:237
-#: tb_templates/layout/term_condition.php:20
+#: admin/abpet_configuration.php:210 admin/abpet_configuration.php:502
+#: admin/abpet_documentation.php:188 admin/abpet_post_configuration.php:64
+#: admin/abpet_tc.php:70 et_templates/layout/term_condition.php:20
 msgid "Term & Conditions"
 msgstr ""
 
-#: admin/abpet_resource.php:320
+#: admin/abpet_tc.php:119
 msgid "Term & Conditions  Saved Successfully..... !!"
 msgstr ""
 
-#: admin/abpet_resource.php:290
+#: admin/abpet_tc.php:43
 msgid "Term & Conditions Content"
 msgstr ""
 
@@ -4092,7 +4273,7 @@ msgstr ""
 msgid "Terminate Date (Optional)"
 msgstr ""
 
-#: admin/abpet_documentation.php:80
+#: admin/abpet_documentation.php:94
 msgid "Test & Go Live"
 msgstr ""
 
@@ -4104,14 +4285,14 @@ msgstr ""
 msgid "Textarea"
 msgstr ""
 
-#: admin/abpet_documentation.php:192
+#: admin/abpet_documentation.php:206
 msgid ""
-"The booked order status (Configuration → General → Booked Status) decides "
-"when seats are deducted from inventory. Set it to the statuses you consider "
-"\"paid\"."
+"The booked order status (Global Configuration → Events (first tab, named "
+"after the Label field) → Booked Status) decides when seats are deducted from "
+"inventory. Set it to the statuses you consider \"paid\"."
 msgstr ""
 
-#: admin/abpet_documentation.php:74
+#: admin/abpet_documentation.php:88
 msgid ""
 "The Dashboard creates a Booking page ([abpet-booking]) and an Event List "
 "page ([abpet-post]) for you via the System Status section. Put the list page "
@@ -4119,51 +4300,52 @@ msgid ""
 "shortcodes into any page."
 msgstr ""
 
-#: admin/abpet_documentation.php:34
+#: admin/abpet_documentation.php:48
 msgid ""
 "The Dashboard shows your WordPress, PHP, and WooCommerce versions. "
 "Everything green means you can continue. If WooCommerce is missing, install "
 "it from the System Status section — it is required for ticket payments."
 msgstr ""
 
-#: admin/abpet_documentation.php:195
+#: admin/abpet_documentation.php:209
 msgid ""
-"The event post type and taxonomies support Gutenberg and Polylang, so events "
-"can be edited in the block editor and translated for multilingual sites."
+"The event post type uses the classic editor and supports Polylang, so events "
+"are edited on the classic event screen and can be translated for "
+"multilingual sites."
 msgstr ""
 
-#: admin/abpet_documentation.php:100
+#: admin/abpet_documentation.php:114
 msgid ""
 "The feature is active everywhere. You see its menus, its global lists, and "
 "its fields on the event edit page."
 msgstr ""
 
-#: admin/abpet_documentation.php:106
+#: admin/abpet_documentation.php:120
 msgid ""
 "The feature is completely hidden from the whole site — its menus, forms, and "
 "fields disappear. This keeps your admin screen clean and shows only what you "
 "use."
 msgstr ""
 
-#: admin/abpet_documentation.php:92
+#: admin/abpet_documentation.php:106
 msgid "The ON/OFF tab — what it is and why it matters"
 msgstr ""
 
-#: admin/abpet_post.php:766
+#: admin/abpet_post_configuration.php:775
 msgid "The WooCommerce product could not be linked to this event."
 msgstr ""
 
-#: includes/abpet_static.php:141
+#: includes/abpet_static.php:167
 msgid "This Event sale close shortly. please try another Event."
 msgstr ""
 
-#: admin/abpet_documentation.php:20
+#: admin/abpet_documentation.php:22
 msgid ""
 "This guide explains the plugin step by step: what every menu does, in which "
 "order to set things up, and how tickets and seat plans work."
 msgstr ""
 
-#: admin/abpet_documentation.php:160
+#: admin/abpet_documentation.php:173
 msgid "this guide."
 msgstr ""
 
@@ -4175,11 +4357,11 @@ msgstr ""
 msgid "Ticket"
 msgstr ""
 
-#: admin/abpet_post.php:170
+#: admin/abpet_post_configuration.php:37
 msgid "Ticket & Price"
 msgstr ""
 
-#: admin/abpet_orders.php:150
+#: admin/abpet_orders.php:151
 msgid "Ticket Cancel"
 msgstr ""
 
@@ -4187,7 +4369,7 @@ msgstr ""
 msgid "Ticket Configuration"
 msgstr ""
 
-#: admin/abpet_orders.php:112
+#: admin/abpet_orders.php:114
 msgid "Ticket Info"
 msgstr ""
 
@@ -4195,15 +4377,15 @@ msgstr ""
 msgid "Ticket Information"
 msgstr ""
 
-#: tb_templates/layout/display_cart_item.php:37
+#: et_templates/layout/display_cart_item.php:37
 msgid "Ticket Information : "
 msgstr ""
 
-#: admin/abpet_seat_plan.php:642
+#: admin/abpet_seat_plan.php:644
 msgid "Ticket Name"
 msgstr ""
 
-#: tb_templates/layout/total_price.php:21
+#: et_templates/layout/total_price.php:21
 msgid "Ticket Price : "
 msgstr ""
 
@@ -4212,11 +4394,11 @@ msgstr ""
 msgid "Ticket Type"
 msgstr ""
 
-#: admin/abpet_post.php:84
+#: admin/abpet_post.php:75
 msgid "Ticket Type & Qty"
 msgstr ""
 
-#: admin/abpet_documentation.php:134
+#: admin/abpet_documentation.php:148
 msgid "Ticket Type (general admission)"
 msgstr ""
 
@@ -4224,11 +4406,11 @@ msgstr ""
 msgid "Ticket Type Breakdown"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:741
+#: admin/abpet_seat_plan.php:743
 msgid "Ticket type Deleted Successfully!"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:676
+#: admin/abpet_seat_plan.php:678
 msgid "Ticket Type Form Loaded Successfully .....! "
 msgstr ""
 
@@ -4244,22 +4426,22 @@ msgstr ""
 msgid "Ticket Type Switching... Please Wait......."
 msgstr ""
 
-#: admin/abpet_documentation.php:121
+#: admin/abpet_documentation.php:135
 msgid "Ticket Type vs Seat Plan — made clear"
 msgstr ""
 
-#: admin/abpet_documentation.php:56
+#: admin/abpet_documentation.php:70
 msgid "Ticket Types & Seat Plans"
 msgstr ""
 
-#: admin/abpet_documentation.php:58
+#: admin/abpet_documentation.php:72
 msgid ""
 "Ticket Types are the reusable categories you sell (Adult, Child, VIP…). Seat "
 "Plans are visual layouts for assigned seating (theater, bus, hall). A full "
 "explanation of Ticket vs Seat Plan is below."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:717
+#: admin/abpet_seat_plan.php:719
 msgid "Ticket types Saved Successfully..........!!"
 msgstr ""
 
@@ -4267,11 +4449,11 @@ msgstr ""
 msgid "Ticket/Seat"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:451
+#: admin/abpet_seat_plan.php:453
 msgid "Ticket/Seat : "
 msgstr ""
 
-#: admin/abpet_admin.php:60 admin/abpet_documentation.php:156
+#: admin/abpet_admin.php:60 admin/abpet_documentation.php:170
 msgid "Ticket/Seat Plan"
 msgstr ""
 
@@ -4279,11 +4461,12 @@ msgstr ""
 msgid "Tickets Sold"
 msgstr ""
 
-#: admin/abpet_timeline.php:91 tb_templates/details_theme/default.php:99
+#: admin/abpet_post_configuration.php:393
+#: et_templates/details_theme/default.php:98
 msgid "Time"
 msgstr ""
 
-#: includes/abpet_layout.php:705
+#: includes/abpet_layout.php:777
 msgid "Time :"
 msgstr ""
 
@@ -4295,35 +4478,35 @@ msgstr ""
 msgid "Time Format"
 msgstr ""
 
-#: admin/abpet_timeline.php:15
+#: admin/abpet_post_configuration.php:52
 msgid "Timeline"
 msgstr ""
 
-#: admin/abpet_timeline.php:27
+#: admin/abpet_post_configuration.php:350
 msgid "Timeline Configuration"
 msgstr ""
 
-#: admin/abpet_documentation.php:116
+#: admin/abpet_documentation.php:130
 msgid "Tip:"
 msgstr ""
 
-#: admin/abpet_timeline.php:96
+#: admin/abpet_post_configuration.php:398
 msgid "Title"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:167
+#: admin/abpet_seat_plan.php:169
 msgid "To any range select"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:158
+#: admin/abpet_seat_plan.php:160
 msgid "to Clone/Copy & range select"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:161
+#: admin/abpet_seat_plan.php:163
 msgid "to edit Row/Col Spanning in the Left Panel."
 msgstr ""
 
-#: admin/abpet_seat_plan.php:164
+#: admin/abpet_seat_plan.php:166
 msgid "To particular Item select"
 msgstr ""
 
@@ -4335,7 +4518,7 @@ msgstr ""
 msgid "Today's Sessions"
 msgstr ""
 
-#: admin/abpet_configuration.php:581
+#: admin/abpet_configuration.php:614
 msgid "Top"
 msgstr ""
 
@@ -4345,7 +4528,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: admin/abpet_orders.php:120
+#: admin/abpet_orders.php:122
 msgid "Total "
 msgstr ""
 
@@ -4354,7 +4537,7 @@ msgstr ""
 msgid "Total %d"
 msgstr ""
 
-#: tb_templates/layout/total_price.php:32
+#: et_templates/layout/total_price.php:32
 msgid "Total : "
 msgstr ""
 
@@ -4374,7 +4557,7 @@ msgstr ""
 msgid "Total Revenue"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:334
+#: admin/abpet_seat_plan.php:336
 msgid "Total Seat"
 msgstr ""
 
@@ -4382,26 +4565,26 @@ msgstr ""
 msgid "Total Seat :"
 msgstr ""
 
-#: admin/abpet_seat_plan.php:91
+#: admin/abpet_seat_plan.php:92
 msgid "Total Seats"
 msgstr ""
 
-#: admin/abpet_orders.php:199
+#: admin/abpet_orders.php:203
 msgid "Total Summary"
 msgstr ""
 
-#: admin/abpet_dashboard.php:633 admin/abpet_post.php:38
+#: admin/abpet_dashboard.php:633 admin/abpet_post.php:36
 msgid "Trash"
 msgstr ""
 
 #: admin/abpet_brand.php:193 admin/abpet_category.php:195
-#: admin/abpet_feature.php:160 admin/abpet_location.php:250
-#: admin/abpet_organizer.php:195 admin/abpet_seat_plan.php:611
-#: admin/abpet_seat_plan.php:799 admin/abpet_speaker.php:301
+#: admin/abpet_feature.php:186 admin/abpet_location.php:250
+#: admin/abpet_organizer.php:195 admin/abpet_seat_plan.php:613
+#: admin/abpet_seat_plan.php:801 admin/abpet_speaker.php:327
 msgid "Trash : "
 msgstr ""
 
-#: admin/abpet_documentation.php:81
+#: admin/abpet_documentation.php:95
 msgid "Try it with demo data, then watch the orders."
 msgstr ""
 
@@ -4409,30 +4592,30 @@ msgstr ""
 msgid "Tuesday"
 msgstr ""
 
-#: admin/abpet_documentation.php:115
+#: admin/abpet_documentation.php:129
 msgid "turn OFF if you do not need these blocks on the event page."
 msgstr ""
 
-#: admin/abpet_documentation.php:114
+#: admin/abpet_documentation.php:128
 msgid ""
 "turn OFF if you do not need to collect attendee names/details at checkout."
 msgstr ""
 
-#: admin/abpet_documentation.php:113
+#: admin/abpet_documentation.php:127
 msgid "turn OFF if you have no extras (meals, merchandise) to sell."
 msgstr ""
 
-#: admin/abpet_documentation.php:111
+#: admin/abpet_documentation.php:125
 msgid ""
 "turn OFF if you only sell tickets by quantity and never need reserved "
 "seating."
 msgstr ""
 
-#: admin/abpet_documentation.php:112
+#: admin/abpet_documentation.php:126
 msgid "turn OFF the ones you do not use to hide their menus and event fields."
 msgstr ""
 
-#: admin/abpet_configuration.php:413
+#: admin/abpet_configuration.php:446
 msgid ""
 "Turn this switch OFF to completely disable the Related Posts feature. Once "
 "disabled, Related Post items will no longer be displayed on any details page "
@@ -4458,26 +4641,32 @@ msgstr ""
 
 #: admin/abpet_brand.php:44 admin/abpet_category.php:45
 #: admin/abpet_location.php:43 admin/abpet_organizer.php:46
-#: admin/abpet_speaker.php:45
+#: admin/abpet_speaker.php:71
 msgid "Update"
 msgstr ""
 
-#: includes/abpet_dependencies.php:293
+#: includes/abpet_dependencies.php:294
 msgid "Update Post"
 msgstr ""
 
-#: includes/abpet_static.php:131
+#: includes/abpet_static.php:157
 msgid ""
 "Upload a professional photo of the speaker. This will be displayed on the "
 "event details page and speaker profile."
 msgstr ""
 
-#: includes/abpet_dependencies.php:304
+#: includes/abpet_dependencies.php:305
 msgid "Uploaded  Post"
 msgstr ""
 
-#: includes/abpet_static.php:113
+#: includes/abpet_static.php:139
 msgid "Use comma( , ) to separate option."
+msgstr ""
+
+#: includes/abpet_static.php:42
+msgid ""
+"Use coupon code <strong id=\"abpet-pro-offer-code\">ABP50</strong> at "
+"checkout."
 msgstr ""
 
 #: admin/abpet_additional.php:57
@@ -4485,57 +4674,40 @@ msgid "Use Global Additional Service ?"
 msgstr ""
 
 #: admin/abpet_form.php:60
-msgid "Use Global Client Form ?"
+msgid "Use Global Attendee Form ?"
 msgstr ""
 
-#: admin/abpet_resource.php:211
+#: admin/abpet_faq.php:128
 msgid "Use Global FAQ ?"
 msgstr ""
 
-#: admin/abpet_resource.php:254
+#: admin/abpet_tc.php:87
 msgid "Use Global Term & Conditions ?"
 msgstr ""
 
-#: includes/abpet_dependencies.php:302
+#: includes/abpet_dependencies.php:303
 msgid "Use image Post as featured image"
 msgstr ""
 
-#: includes/abpet_static.php:126
-msgid ""
-"Use this switch to control whether the Event Timeline is displayed on the "
-"frontend. Turn the switch ON to show the timeline, and OFF to hide it. By "
-"default, this option is set to ON."
-msgstr ""
-
-#: includes/abpet_static.php:122
+#: includes/abpet_static.php:148
 msgid ""
 "Use this switch to control whether the FAQ is displayed on the frontend. "
 "Turn the switch ON to show the FAQ, and OFF to hide it. By default, this "
 "option is set to ON."
 msgstr ""
 
-#: includes/abpet_static.php:139
-msgid ""
-"Use this switch to control whether the linked speakers are displayed on the "
-"event details page. Turn the switch ON to show the speaker section, and OFF "
-"to hide it. By default, this option is set to ON. Select one or more "
-"speakers for this Event. Speakers are created and managed from the Global "
-"Data section of the plugin. A speaker can be assigned to any number of "
-"Events."
-msgstr ""
-
-#: includes/abpet_static.php:118
+#: includes/abpet_static.php:144
 msgid ""
 "Use this switch to control whether the Term & Condition is displayed on the "
 "frontend. Turn the switch ON to show the Term & Condition, and OFF to hide "
 "it. By default, this option is set to ON."
 msgstr ""
 
-#: includes/abpet_layout.php:1162 includes/abpet_layout.php:1164
+#: includes/abpet_layout.php:1251 includes/abpet_layout.php:1253
 msgid "User Name"
 msgstr ""
 
-#: admin/abpet_feature.php:52
+#: admin/abpet_feature.php:78
 msgid "Value"
 msgstr ""
 
@@ -4543,7 +4715,7 @@ msgstr ""
 msgid "Value Option"
 msgstr ""
 
-#: admin/abpet_post.php:130 admin/abpet_seat_plan.php:117
+#: admin/abpet_post.php:121 admin/abpet_seat_plan.php:118
 msgid "View : "
 msgstr ""
 
@@ -4555,23 +4727,23 @@ msgstr ""
 msgid "View All"
 msgstr ""
 
-#: tb_templates/layout/pagination.php:13
+#: et_templates/layout/pagination.php:13
 msgid "View More"
 msgstr ""
 
-#: includes/abpet_hooks.php:206
+#: includes/abpet_hooks.php:200
 msgid "View More Date"
 msgstr ""
 
-#: includes/abpet_dependencies.php:294 includes/abpet_dependencies.php:295
+#: includes/abpet_dependencies.php:295 includes/abpet_dependencies.php:296
 msgid "View Post"
 msgstr ""
 
-#: admin/abpet_configuration.php:592
+#: admin/abpet_configuration.php:625
 msgid "Visible Popup?"
 msgstr ""
 
-#: admin/abpet_configuration.php:736
+#: admin/abpet_configuration.php:769
 msgid "Warning Color"
 msgstr ""
 
@@ -4583,13 +4755,13 @@ msgstr ""
 msgid "WC Name"
 msgstr ""
 
-#: includes/abpet_static.php:174
+#: includes/abpet_static.php:205
 msgid "We see, this id are not valid !"
 msgstr ""
 
-#: admin/abpet_speaker.php:120 includes/abpet_function.php:356
-#: tb_templates/speaker/default.php:77 tb_templates/speaker/light.php:74
-#: tb_templates/speaker/modern.php:66
+#: admin/abpet_speaker.php:146 includes/abpet_function.php:356
+#: et_templates/speaker/default.php:77 et_templates/speaker/light.php:74
+#: et_templates/speaker/modern.php:66
 msgid "Website"
 msgstr ""
 
@@ -4611,11 +4783,15 @@ msgstr ""
 msgid "Welcome back, %s!"
 msgstr ""
 
-#: admin/abpet_documentation.php:139
+#: admin/abpet_documentation.php:153
 msgid "What is a \"Ticket Type\"?"
 msgstr ""
 
-#: admin/abpet_configuration.php:498
+#: admin/abpet_documentation.php:233
+msgid "What PRO adds"
+msgstr ""
+
+#: admin/abpet_configuration.php:531
 msgid ""
 "When this switch is OFF (recommended), all ABP Event Ticket data is "
 "preserved when you uninstall the plugin. You can reinstall the plugin later "
@@ -4624,15 +4800,15 @@ msgid ""
 "orders table, and all options) is permanently deleted on uninstall."
 msgstr ""
 
-#: admin/abpet_documentation.php:196
+#: admin/abpet_documentation.php:210
 msgid ""
 "When you uninstall the plugin, your data is preserved by default so you can "
 "reinstall later without losing anything. Turn ON \"Remove All Data on "
-"Uninstall\" in Configuration → ON/OFF only if you really want to delete "
-"everything."
+"Uninstall\" in Global Configuration → Feature ON/OFF only if you really want "
+"to delete everything."
 msgstr ""
 
-#: admin/abpet_documentation.php:143
+#: admin/abpet_documentation.php:157
 msgid "Where do prices go?"
 msgstr ""
 
@@ -4644,7 +4820,7 @@ msgstr ""
 msgid "WooCommerce  Installing.........Please Wait...............!!"
 msgstr ""
 
-#: includes/abpet_static.php:593
+#: includes/abpet_static.php:632
 msgid "WooCommerce activated successfully!"
 msgstr ""
 
@@ -4659,15 +4835,15 @@ msgid ""
 "reserved seats."
 msgstr ""
 
-#: includes/abpet_static.php:585
+#: includes/abpet_static.php:624
 msgid "WooCommerce installed and activated successfully!"
 msgstr ""
 
-#: includes/abpet_static.php:596
+#: includes/abpet_static.php:635
 msgid "WooCommerce is either not installed or already active."
 msgstr ""
 
-#: includes/abpet_static.php:22
+#: includes/abpet_static.php:27
 msgid "WooCommerce is required"
 msgstr ""
 
@@ -4679,7 +4855,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: admin/abpet_configuration.php:215
+#: admin/abpet_configuration.php:255
 msgid "WordPress Dashicons Library"
 msgstr ""
 
@@ -4687,24 +4863,31 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: includes/abpet_static.php:173
+#: includes/abpet_static.php:204
 msgid "You are not permitted to Download/View this ticket !"
 msgstr ""
 
-#: tb_templates/layout/registration.php:20
+#: et_templates/layout/registration.php:20
 msgid "You can buy max ticket :"
 msgstr ""
 
-#: admin/abpet_documentation.php:116
+#: admin/abpet_documentation.php:130
 msgid ""
 "You can change the switches at any time. Turning a feature back ON restores "
 "its menus and event fields instantly, so feel free to experiment."
 msgstr ""
 
-#: admin/abpet_documentation.php:194
+#: admin/abpet_documentation.php:208
 msgid ""
 "You can configure a global attendee form and additional services once, then "
 "import them into any event and fine-tune them there."
+msgstr ""
+
+#: includes/abpet_static.php:165
+msgid ""
+"You Can Select one or more speakers for this Event. Speakers are created and "
+"managed from the Global Configuration section of the plugin. A speaker can "
+"be assigned to any number of Events."
 msgstr ""
 
 #: includes/abpet_my_account.php:83

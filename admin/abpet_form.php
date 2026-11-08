@@ -23,7 +23,7 @@
                     $forms = ABPET_Function::get_option('abpet_form', ABPET_Static::form());
                     ?>
                     <div class="abp_form">
-                        <h4 class="abp"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Global Client Form Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class="abp"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Global Attendee Form Configuration', 'abp-event-ticket'); ?></h4>
                         <?php ABPET_Layout::info_text('abpet_form'); ?>
                         <?php $this->passenger_form_settings($forms, true); ?>
                     </div>
@@ -39,7 +39,7 @@
                     $display_single_form = ABPET_Function::on_off('same_attendee') ? $display_single_form : 'off';
                     ?>
                     <div class="tab_item abpet_client_form" data-tabs="#abpet_client_form">
-                        <h4 class=" abp_color_theme"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Client Forms Configuration', 'abp-event-ticket'); ?></h4>
+                        <h4 class=" abp_color_theme"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Attendee Forms Configuration', 'abp-event-ticket'); ?></h4>
                         <div class="_divider_xs"></div>
                         <?php if (ABPET_Function::on_off('custom_attendee')) { ?>
                             <div class="group_setting">
@@ -47,7 +47,7 @@
                                     <div class="_f_wrap_fj_between_fa_center">
                                         <label>
                                             <?php ABPET_Layout::switch_checkbox('display_client_form', $display); ?>
-                                            <span><?php esc_html_e('Client Form ?', 'abp-event-ticket'); ?></span>
+                                            <span><?php esc_html_e('Attendee Form ?', 'abp-event-ticket'); ?></span>
                                         </label>
                                     </div>
                                     <div class="_divider_xs"></div>
@@ -57,10 +57,10 @@
                                     <div class="_fj_between">
                                         <label>
                                             <?php ABPET_Layout::switch_checkbox('active_global_form', $active_global_form); ?>
-                                            <span><?php esc_html_e('Use Global Client Form ?', 'abp-event-ticket'); ?></span>
+                                            <span><?php esc_html_e('Use Global Attendee Form ?', 'abp-event-ticket'); ?></span>
                                         </label>
                                         <div data-collapse="#active_global_form" class=" <?php echo esc_attr($active_global_form == 'on' ? '' : 'abp_active'); ?>">
-                                            <button type="button" class="_btn_theme" onclick="abpet_import_global('client_form_content')"><span class="fas fa-file-upload _mar_r_xs"></span><?php esc_html_e('Import Global Client Form', 'abp-event-ticket'); ?></button>
+                                            <button type="button" class="_btn_theme_xs" onclick="abpet_import_global('client_form_content')"><span class="fas fa-file-upload"></span><?php esc_html_e('Import Global Attendee Form', 'abp-event-ticket'); ?></button>
                                         </div>
                                     </div>
                                     <div class="_divider_xs"></div>
@@ -125,7 +125,7 @@
                     <div class="_fj_between">
                         <?php ABPET_Layout::button_add(__('Add New Form Item', 'abp-event-ticket'));
                             if ($global) {
-                                ABPET_Layout::button_global_save('form_config', __('Save Global Client Form Configuration', 'abp-event-ticket'));
+                                ABPET_Layout::button_global_save('form_config', __('Save Global Attendee Form Configuration', 'abp-event-ticket'));
                             } ?>
                     </div>
                     <div class="abp_hidden">
@@ -247,7 +247,7 @@
                 }
                 $form_infos = $this->get_form_array();
                 update_option('abpet_form', $form_infos);
-                wp_send_json_success(['msg' => __('Client Form Configuration Saved Successfully..... !! ', 'abp-event-ticket'), 'type' => 'success']);
+                wp_send_json_success(['msg' => __('Attendee Form Configuration Saved Successfully..... !! ', 'abp-event-ticket'), 'type' => 'success']);
             }
             public function import_client_form_content(): void {
                 if (!check_ajax_referer('abpet_admin_ajax_nonce', 'nonce', false) || !current_user_can('manage_options')) {
@@ -259,7 +259,7 @@
                 ob_start();
                 $this->passenger_form_settings($forms);
                 $html_content = ob_get_clean();
-                wp_send_json_success(['html' => $html_content, 'msg' => __('Global Client Form Imported Successfully ..... !! ', 'abp-event-ticket'), 'type' => 'success']);
+                wp_send_json_success(['html' => $html_content, 'msg' => __('Global Attendee Form Imported Successfully ..... !! ', 'abp-event-ticket'), 'type' => 'success']);
             }
         }
         new ABPET_Form();

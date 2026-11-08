@@ -406,6 +406,25 @@
 				}
 				return $id;
 			}
+			public static function ticket_label( array $ticket_info = [], array $booking_item = [] ): string {
+				if ( empty( $booking_item ) || empty( $ticket_info ) ) {
+					return '';
+				}
+				$label     = $ticket_info['name'] ?? '';
+				$seat_type = $ticket_info['seat_type'] ?? ( $booking_item['seat_type'] ?? '' );
+				$post_id   = $booking_item['post_id'] ?? '';
+				if ( 'sp' === $seat_type && self::on_off( 'ticket_type' ) && self::get_post_info( $post_id, 'display_ticket_type' ) === 'on' ) {
+					$ticket_id = $ticket_info['id'] ?? '';
+					$sp_id     = $ticket_info['sp_id'] ?? ( $booking_item['sp_id'] ?? '' );
+					$tic_name  = self::ticket_name( $ticket_id );
+					$sp_name   = self::sp_label( $post_id, $sp_id );
+					$details   = array_filter( [ $tic_name, $sp_name ] );
+					if ( ! empty( $details ) ) {
+						$label .= ' (' . implode( ' - ', $details ) . ')';
+					}
+				}
+				return $label;
+			}
 			public static function on_off( $key ): bool {
 				$value = ( ABPET_On_Off[ $key ] ?? 'on' ) ?: 'on';
 				return $value !== 'off';
@@ -530,15 +549,15 @@
 				$template_name = sanitize_key( self::get_post_info( $post_id, 'abpet_template', 'default' ) );
 				$template_name = in_array( $template_name, [ 'default', 'light', 'modern' ], true ) ? $template_name : 'default';
 				$file_name     = 'details_theme/' . $template_name . '.php';
-				$dir           = ABPET_DIR . 'tb_templates/' . $file_name;
+				$dir           = ABPET_DIR . 'et_templates/' . $file_name;
 				if ( ! file_exists( $dir ) ) {
 					$file_name = 'details_theme/default.php';
 				}
 				return self::template_path( $file_name );
 			}
 			public static function template_path( $file_name ): string {
-				$file_path   = wp_normalize_path( WP_CONTENT_DIR . DIRECTORY_SEPARATOR . '/tb_templates/' . $file_name );
-				$default_dir = wp_normalize_path( ABPET_DIR . 'tb_templates/' . $file_name );
+				$file_path   = wp_normalize_path( WP_CONTENT_DIR . DIRECTORY_SEPARATOR . '/et_templates/' . $file_name );
+				$default_dir = wp_normalize_path( ABPET_DIR . 'et_templates/' . $file_name );
 				return file_exists( $file_path ) ? $file_path : $default_dir;
 			}
 			//============== Event Function===============//
@@ -1071,7 +1090,7 @@
 								$legacy_prices = $price_infos['price'] ?? [];
 								$price         = is_array( $legacy_prices ) ? ( current( $legacy_prices ) ?: 0 ) : 0;
 							}
-							$price = $price > 0 ? apply_filters( 'abpet_filter_price', $price, $date ) : $price;
+							$price = $price > 0 ? apply_filters( 'abpet_filter_price', $price, $post_infos, $date ) : $price;
 						}
 					}
 					return $price > 0 ? self::tax_with_price( $post_id, $price ) : 0;

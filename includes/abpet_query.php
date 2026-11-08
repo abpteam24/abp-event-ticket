@@ -69,19 +69,19 @@
 				$speaker_id = $filters['speaker_id'] ?? null;
 				$meta_query = ['relation' => 'AND'];
 				// Category query
-				if (!empty($cat_id)) {
+				if (!empty($cat_id) && ABPET_Function::on_off('category')) {
 					$meta_query[] = ['key' => 'abpet_category', 'value' => '(^|,)' . absint($cat_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
-				if (!empty($loc_id)) {
+				if (!empty($loc_id) && ABPET_Function::on_off('location')) {
 					$meta_query[] = ['key' => 'abpet_location', 'value' => '(^|,)' . absint($loc_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
-				if (!empty($organizer_id)) {
+				if (!empty($organizer_id) && ABPET_Function::on_off('organizer')) {
 					$meta_query[] = ['key' => 'abpet_organizer', 'value' => '(^|,)' . absint($organizer_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
-				if (!empty($brand_id)) {
+				if (!empty($brand_id) && ABPET_Function::on_off('brand')) {
 					$meta_query[] = ['key' => 'abpet_brand', 'value' => '(^|,)' . absint($brand_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
-				if (!empty($speaker_id)) {
+				if (!empty($speaker_id) && ABPET_Function::on_off('speaker')) {
 					$meta_query[] = ['key' => 'speaker', 'value' => '(^|,)' . absint($speaker_id) . '(,|$)', 'compare' => 'REGEXP'];
 				}
 				$order = strtoupper((string) ($filters['sort'] ?? 'ASC')) === 'DESC' ? 'DESC' : 'ASC';

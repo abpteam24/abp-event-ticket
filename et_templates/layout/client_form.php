@@ -8,7 +8,7 @@
             <div class="client_info_area">
                 <div class="item_box_1 attendee_item">
                     <h5 class=" abp_title">
-                        <?php esc_html_e('Client Info : ', 'abp-event-ticket'); ?>&nbsp;<span class="_color_theme attendee_seat_name"></span>
+                        <?php esc_html_e('Attendee Info : ', 'abp-event-ticket'); ?>&nbsp;<span class="_color_theme attendee_seat_name"></span>
                     </h5>
                     <?php
                         foreach ($forms as $id => $form) {

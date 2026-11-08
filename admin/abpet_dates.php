@@ -23,7 +23,7 @@
 				$time_format  = $date_infos['time_format'] ?? ABPET_Time_Format;
 				?>
                 <div class="abp_form">
-                    <h4 class="abp_gap_xs"><?php ABPET_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-event-ticket' ); ?></h4>
+                    <h4 class="abp_gap_xs"><?php ABPET_Static::svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-event-ticket' ); ?></h4>
 					<?php ABPET_Layout::info_text( 'abpet_dates' ); ?>
                     <div class="group_setting _mar_t_xs">
                         <div class="setting_item">
@@ -355,12 +355,14 @@
 			}
 			public function day_wise_time( $day_times = [] ): void {
 				$days = ABPET_Layout::week_day();
+				$day_keys=!empty($day_times)?implode(", ", array_keys($day_times)):'';
 				?>
                 <div class="full_width  <?php echo esc_attr( ! empty( $day_times ) ? 'abp_active' : '' ); ?>" data-collapse="#day_wise_time">
                     <div class="_divider_xxs"></div>
                     <div class="_fj_between _fa_center">
                         <span class="abp_label"><?php esc_html_e( 'Day Wise Operation Time (Optional) ', 'abp-event-ticket' ); ?></span>
                         <div class="_group_content custom_checkbox">
+                            <input type="hidden" name="operation_time_day_name" value="<?php echo esc_attr($day_keys); ?>"/>
 							<?php foreach ( $days as $key => $day ) { ?>
                                 <div class="checkbox_item">
                                     <button type="button" class="_btn_light_info_xs <?php echo esc_attr( array_key_exists( $key, $day_times ) ? 'abp_active' : '' ); ?>" data-collapse-target="#<?php echo esc_attr(  $key ); ?>" data-checked="<?php echo esc_attr( $key ); ?>" data-open-icon="fa-check-square" data-close-icon="fa-square">

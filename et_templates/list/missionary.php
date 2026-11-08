@@ -19,9 +19,12 @@
 					$post_infos['post_id'] = $post_id;
 					$cat_id                = ABPET_Function::get_post_info( $post_id, 'abpet_category' );
 					$loc_id                = ABPET_Function::get_post_info( $post_id, 'abpet_location' );
+					$org_id                = ABPET_Function::get_post_info( $post_id, 'abpet_organizer' );
+					$brand_id              = ABPET_Function::get_post_info( $post_id, 'abpet_brand' );
+					$speaker_id            = ABPET_Function::get_post_info( $post_id, 'speaker' );
 					$post_count ++;
 					$url = get_the_permalink( $post_id ); ?>
-                    <div class="pagination_item item_box_1  <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>">
+                    <div class="pagination_item item_box_1  <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>" data-organizer_id="<?php echo esc_attr( $org_id ); ?>" data-brand_id="<?php echo esc_attr( $brand_id ); ?>" data-speaker_id="<?php echo esc_attr( $speaker_id ); ?>">
                         <div class="item_head">
 							<?php ABPET_Layout::category( $post_infos, 'ribbon' ); ?>
 							<?php ABPET_Layout::image( $post_id ); ?>

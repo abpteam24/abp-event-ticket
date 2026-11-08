@@ -45,7 +45,7 @@
                 return sizeof($new) > 0 ? $new : $old;
             }
             public function load_configuration(): void {
-                $allowed_tabs = [];
+                $allowed_tabs = ['discount', 'partial_payment'];
                 $all_sections = $this->configuration_section();
                 foreach ($all_sections as $tab) {
                     $tab_id = $tab['id'] ?? '';
@@ -55,7 +55,7 @@
                 }
                 $active_tab = 'configuration';
                 if (isset($_GET['_abpet_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_abpet_nonce'])), 'abpet_url_action')) {
-                    $active_tab = isset($_GET['configuration']) ? sanitize_text_field(wp_unslash($_GET['configuration'])) : 'configuration';
+                    $active_tab = isset($_GET['configuration']) ? sanitize_text_field(wp_unslash($_GET['configuration'])) : (isset($_GET['global']) ? sanitize_text_field(wp_unslash($_GET['global'])) : 'configuration');
                 }
                 if (!in_array($active_tab, $allowed_tabs, true)) {
                     $active_tab = 'configuration';
@@ -65,7 +65,7 @@
                 $fields = $all_fields[$section_id] ?? [];
                 $current_section = [];
                 ?>
-                <div id="abpet_configuration" class="global_config">
+                <div id="abpet_configuration" class="_section_card global_cinfiguration">
                     <div class="abp_tabs tab_left">
                         <ul class="abp tab_lists">
                             <?php foreach ($all_sections as $tab) {
@@ -75,18 +75,24 @@
                                     $current_section = $key == $active_tab ? $tab : $current_section; ?>
                                     <li data-href="<?php echo esc_url(ABPET_Function::build_url('configuration', ['configuration' => $key])); ?>" class="<?php echo esc_attr($active_tab == $key ? 'abp_active' : ''); ?>">
                                         <?php ABPET_Layout::image_icon($tab['icon'] ?? '');
-                                            ABPET_Static::icon_svg($tab['svg'] ?? '');
+                                            ABPET_Static::svg($tab['svg'] ?? '');
                                             echo esc_html($tab['menu'] ?? ''); ?>
                                     </li>
                                 <?php }
                             } ?>
+                            <?php do_action('abpet_add_admin_global_tab', $active_tab); ?>
                         </ul>
                         <div class="tab_content <?php echo esc_attr($section_id); ?>">
                             <?php if (sizeof($fields) > 0) {
-                                $title = $current_section['menu'] ?? '';
-                                ABPET_Layout::info_text($section_id);
-                                ?>
+                                $title = $current_section['menu'] ?? '';                                ?>
                                 <form method="post" action="options.php">
+                                    <div class="_fj_between">
+                                        <h4 class="abp_gap_xs"><?php echo esc_html($title . ' ' . __('Global Configuration', 'abp-event-ticket')); ?></h4>
+                                        <button type="submit" class="_btn_success_xs" value="submit"><?php ABPET_Static::svg('save');?><?php echo esc_html(__('Save', 'abp-event-ticket') . ' ' . $title . ' ' . __('Global Configuration', 'abp-event-ticket')); ?></button>
+                                    </div>
+	                                <?php ABPET_Layout::info_text( $section_id); ?>
+                                    <div class="_divider_xs"></div>
+
                                     <div class="group_setting">
                                         <?php
                                             settings_fields($section_id);
@@ -139,8 +145,8 @@
                                             }
                                         ?>
                                     </div>
-                                    <div class="_divider_xs"></div>
-                                    <button type="submit" class="_btn_theme" value="submit"><?php ABPET_Static::icon_svg('save');?><?php echo esc_html(__('Save', 'abp-event-ticket') . ' ' . $title . ' ' . __('Configuration', 'abp-event-ticket')); ?></button>
+
+
                                 </form>
                             <?php } else {
                                 do_action('abpet_global_' . $active_tab);
@@ -178,7 +184,7 @@
                     $configuration[] = array('id' => 'abpet_additional', 'icon' => '💰', 'menu' => __('Additional services', 'abp-event-ticket'));
                 }
                 if (ABPET_Function::on_off('client_info')) {
-                    $configuration[] = array('id' => 'abpet_client_form', 'icon' => '📋', 'menu' => __('Client Form', 'abp-event-ticket'));
+                    $configuration[] = array('id' => 'abpet_client_form', 'icon' => '📋', 'menu' => __('Attendee Form', 'abp-event-ticket'));
                 }
                 $configuration = apply_filters('abpet_configuration_after', $configuration);
                 $configuration[] = array('id' => 'abpet_location', 'icon' => 'fas fa-map-marker-alt', 'menu' => ABPET_Function::location_label());
@@ -400,13 +406,6 @@
                             'default' => 'on',
                         ),
                         array(
-                            'name' => 'display_location',
-                            'label' => __('Location', 'abp-event-ticket'),
-                            'desc' => __('If you do not want to display Location across the entire frontend of your site, turn this switch Off.', 'abp-event-ticket'),
-                            'type' => 'button_switch',
-                            'default' => 'on',
-                        ),
-                        array(
                             'name' => 'brand',
                             'label' => ABPET_Function::brand_label(),
                             'desc' => __('If you do not want to use the Brand Feature, simply turn this switch OFF. Once disabled, the Brand Feature field and related Brand Feature options will be completely removed from the site.', 'abp-event-ticket'),
@@ -449,13 +448,6 @@
                             'default' => 'on',
                         ),
                         array(
-                            'name' => 'feature',
-                            'label' => __('Features', 'abp-event-ticket'),
-                            'desc' => __('If you do not want to use Features, simply turn this switch OFF. This will completely disable the Features across the entire website, including all related , settings, and functionality. You can re-enable it at any time by turning the switch back ON.', 'abp-event-ticket'),
-                            'type' => 'button_switch',
-                            'default' => 'on',
-                        ),
-                        array(
                             'name' => 'ticket_type',
                             'label' => __('Multiple Ticket Type', 'abp-event-ticket'),
                             'desc' => __('If you do not want to use Multiple Ticket Type, simply turn this switch OFF. This will completely disable the Multiple Ticket Type feature across the entire website, including all related settings and functionality. You can re-enable it at any time by turning the switch back ON.', 'abp-event-ticket'),
@@ -490,6 +482,13 @@
                             'type' => 'button_switch',
                             'default' => 'on',
                             'collapse_data' => array('option' => 'abpet_on_off', 'key' => 'custom_attendee'),
+                        ),
+                        array(
+                            'name' => 'client_info',
+                            'label' => __('Attendee Form', 'abp-event-ticket'),
+                            'desc' => __('If you do not want to use the Attendee Form, simply turn this switch OFF. Once disabled, the Attendee Form field and related Attendee Form options will be completely removed from the site.', 'abp-event-ticket'),
+                            'type' => 'button_switch',
+                            'default' => 'on',
                         ),
                         array(
                             'name' => 'additional_info',
@@ -553,7 +552,7 @@
                         array(
                             'name' => 'phone',
                             'label' => __('Contact Number', 'abp-event-ticket'),
-                            'desc' => __('Specify the primary telephone or corporate helpline number for client inquiries.', 'abp-event-ticket'),
+                            'desc' => __('Specify the primary telephone or corporate helpline number for Attendee inquiries.', 'abp-event-ticket'),
                             'type' => 'text',
                             'default' => '',
                             'placeholder' => __('e.g., +1 (234) 567-8901', 'abp-event-ticket'),
@@ -785,7 +784,7 @@
             public static function description($option): void {
                 $desc = $option['desc'] ?? '';
                 if ($desc) { ?>
-                    <div class="_divider_xs"></div>
+                    <div class="_divider_xxs"></div>
                     <?php
                     ABPET_Layout::info_text('', $desc);
                 }
@@ -1034,7 +1033,7 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="_divider_xs"></div>
+                    <div class="_divider_xxs"></div>
                     <?php self::description($option); ?>
                 </div>
                 <?php

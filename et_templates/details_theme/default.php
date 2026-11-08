@@ -39,7 +39,7 @@
                             <div class="abpet_default_hero_kicker">
 								<?php if ( ! empty( $upcoming_date ) ) { ?>
                                     <span class="abpet_default_date_chip">
-										<?php ABPET_Static::icon_svg( 'date_1' ); ?>
+										<?php ABPET_Static::svg( 'date_1' ); ?>
 										<?php echo esc_html( ABPET_Function::date_format( $upcoming_date ) ); ?>
                                     </span>
 								<?php } ?>

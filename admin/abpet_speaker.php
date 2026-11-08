@@ -6,22 +6,48 @@
 		class ABPET_Speaker {
 			public function __construct() {
 				add_action( 'abpet_global_speaker', array( $this, 'global_speaker' ) );
+				add_action( 'abpet_post_content', array( $this, 'post_speaker' ) );
 				add_action( 'wp_ajax_abpet_add_tax_speaker', array( $this, 'add_tax_speaker' ) );
 				add_action( 'wp_ajax_abpet_save_tax_speaker', array( $this, 'save_tax_speaker' ) );
 				add_action( 'wp_ajax_abpet_delete_tax_speaker', array( $this, 'delete_tax_speaker' ) );
 				add_action( 'abpet_speaker_update', array( $this, 'update_speaker' ) );
 			}
+			public function post_speaker( $post_infos = [] ): void {
+				if ( ABPET_Function::on_off( 'speaker' ) ) {
+					$label   = ABPET_Function::speaker_label();
+					?>
+                    <div class="tab_item post_speaker" data-tabs="#abpet_speaker">
+                        <h4 class="abp_color_theme_gap_xxs">🎤<?php echo esc_html( $label ); ?> <?php esc_html_e( 'Configuration', 'abp-event-ticket' ); ?></h4>
+                        <div class="_divider_xxs"></div>
+                        <div class="group_setting">
+                            <div class="setting_item">
+                                <div class="_fj_between_fa_center">
+                                    <span class="abp_label"><?php echo esc_html( $label ); ?></span>
+                                    <div class="_group_content">
+										<?php ABPET_Layout::selection_area(); ?>
+										<?php ABPET_Layout::button_global_popup( 'tax_speaker', __( 'Add New', 'abp-event-ticket' ) . ' ' . $label ); ?>
+                                    </div>
+                                </div>
+                                <div class="_divider_xxs"></div>
+								<?php ABPET_Layout::info_text( 'display_speaker' );
+									ABPET_Layout::selected_area( 'speaker', ( $post_infos['speaker'] ?? '' ) ); ?>
+                            </div>
+                        </div>
+                    </div>
+					<?php
+				}
+			}
 			public function global_speaker(): void {
 				if ( ABPET_Function::on_off( 'speaker' ) ) {
 					$label = ABPET_Function::speaker_label(); ?>
-					<div class="_fj_between">
-						<h5 class="abp"><span class="_mar_r_xs">🎤</span><?php echo esc_html( $label ); ?></h5>
+                    <div class="_fj_between">
+                        <h5 class="abp_gap_xs">🎤<?php echo esc_html( $label ); ?></h5>
 						<?php ABPET_Layout::button_global_popup( 'tax_speaker', __( 'Add New', 'abp-event-ticket' ) . ' ' . $label ); ?>
-					</div>
+                    </div>
 					<?php ABPET_Layout::info_text( 'abpet_speaker' ); ?>
-					<div class="tax_speaker _ov_auto_mar_t_xs">
+                    <div class="tax_speaker _ov_auto_mar_t_xs">
 						<?php $this->speaker_list(); ?>
-					</div>
+                    </div>
 					<?php
 				}
 			}
@@ -31,11 +57,11 @@
 				}
 				$term_id = isset( $_POST['id'] ) ? absint( wp_unslash( $_POST['id'] ) ) : 0;
 				ob_start();
-				$name         = $slug = $des = '';
-				$meta         = [];
-				$label        = ABPET_Function::speaker_label();
-				$btn_label    = __( 'Save', 'abp-event-ticket' ) . ' ' . $label;
-				$title        = __( 'Add new ', 'abp-event-ticket' ) . ' ' . $label;
+				$name      = $slug = $des = '';
+				$meta      = [];
+				$label     = ABPET_Function::speaker_label();
+				$btn_label = __( 'Save', 'abp-event-ticket' ) . ' ' . $label;
+				$title     = __( 'Add new ', 'abp-event-ticket' ) . ' ' . $label;
 				if ( ! empty( $term_id ) ) {
 					$term = get_term( $term_id, 'abpet_speaker' );
 					if ( ! empty( $term ) && ! is_wp_error( $term ) ) {
@@ -49,30 +75,30 @@
 					}
 				}
 				?>
-				<div class="abp_form">
-					<h5 class="abp"><span class="_mar_r_xs">🎤</span><?php echo esc_html( $title ); ?></h5>
-					<div class="_divider_xs"></div>
-					<input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
-					<div class="group_setting">
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
-								<input class="_form_control" name="name" value="<?php echo esc_attr( $name ); ?>" placeholder="<?php esc_attr_e( 'Name', 'abp-event-ticket' ); ?>" required/>
-							</label>
-							<div class="_divider_xs"></div>
+                <div class="abp_form">
+                    <h5 class="abp"><span class="_mar_r_xs">🎤</span><?php echo esc_html( $title ); ?></h5>
+                    <div class="_divider_xs"></div>
+                    <input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
+                    <div class="group_setting">
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-event-ticket' ); ?><sup class="_color_required">*</sup></span>
+                                <input class="_form_control" name="name" value="<?php echo esc_attr( $name ); ?>" placeholder="<?php esc_attr_e( 'Name', 'abp-event-ticket' ); ?>" required/>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_name' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-event-ticket' ); ?></span>
-								<input class="_form_control" name="slug" value="<?php echo esc_attr( $slug ); ?>" placeholder="<?php esc_attr_e( 'Slug', 'abp-event-ticket' ); ?>"/>
-							</label>
-							<div class="_divider_xs"></div>
+                        </div>
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-event-ticket' ); ?></span>
+                                <input class="_form_control" name="slug" value="<?php echo esc_attr( $slug ); ?>" placeholder="<?php esc_attr_e( 'Slug', 'abp-event-ticket' ); ?>"/>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_slug' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Bio', 'abp-event-ticket' ); ?></span>
+                        </div>
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Bio', 'abp-event-ticket' ); ?></span>
 								<?php
 									$editor_id = 'abpet_speaker_bio_' . $term_id;
 									wp_editor(
@@ -87,68 +113,68 @@
 										)
 									);
 								?>
-							</label>
-							<div class="_divider_xs"></div>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_bio' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Photo', 'abp-event-ticket' ); ?></span>
-							<div class="speaker_photo_selection">
+                        </div>
+                        <div class="setting_item full_width">
+                            <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Photo', 'abp-event-ticket' ); ?></span>
+                            <div class="speaker_photo_selection">
 								<?php do_action( 'abpet_image_selection', 'meta[photo]', absint( $meta['photo'] ?? 0 ) ); ?>
-							</div>
-							<div class="_divider_xs"></div>
+                            </div>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_photo' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Designation', 'abp-event-ticket' ); ?></span>
-								<input class="_form_control" name="meta[designation]" value="<?php echo esc_attr( $meta['designation'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'e.g., CEO, CTO, Professor', 'abp-event-ticket' ); ?>"/>
-							</label>
-							<div class="_divider_xs"></div>
+                        </div>
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Designation', 'abp-event-ticket' ); ?></span>
+                                <input class="_form_control" name="meta[designation]" value="<?php echo esc_attr( $meta['designation'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'e.g., CEO, CTO, Professor', 'abp-event-ticket' ); ?>"/>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_designation' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Company', 'abp-event-ticket' ); ?></span>
-								<input class="_form_control" name="meta[company]" value="<?php echo esc_attr( $meta['company'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Company/Organization', 'abp-event-ticket' ); ?>"/>
-							</label>
-							<div class="_divider_xs"></div>
+                        </div>
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Company', 'abp-event-ticket' ); ?></span>
+                                <input class="_form_control" name="meta[company]" value="<?php echo esc_attr( $meta['company'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Company/Organization', 'abp-event-ticket' ); ?>"/>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_company' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<label class="_f_equal_f_wrap">
-								<span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Website', 'abp-event-ticket' ); ?></span>
-								<input type="url" class="_form_control" name="meta[website]" value="<?php echo esc_attr( $meta['website'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'https://example.com', 'abp-event-ticket' ); ?>"/>
-							</label>
-							<div class="_divider_xs"></div>
+                        </div>
+                        <div class="setting_item full_width">
+                            <label class="_f_equal_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Website', 'abp-event-ticket' ); ?></span>
+                                <input type="url" class="_form_control" name="meta[website]" value="<?php echo esc_attr( $meta['website'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'https://example.com', 'abp-event-ticket' ); ?>"/>
+                            </label>
+                            <div class="_divider_xs"></div>
 							<?php ABPET_Layout::info_text( 'speaker_website' ); ?>
-						</div>
-						<div class="setting_item full_width">
-							<strong><?php esc_html_e( 'Social Links', 'abp-event-ticket' ); ?></strong>
-							<div class="_divider_xxs"></div>
+                        </div>
+                        <div class="setting_item full_width">
+                            <strong><?php esc_html_e( 'Social Links', 'abp-event-ticket' ); ?></strong>
+                            <div class="_divider_xxs"></div>
 							<?php
-							$social = $meta['social'] ?? [];
-							$social_fields = [
-								'twitter'   => [ 'icon' => 'fab fa-twitter', 'label' => 'Twitter/X', 'info' => 'speaker_social_twitter' ],
-								'linkedin'  => [ 'icon' => 'fab fa-linkedin', 'label' => 'LinkedIn', 'info' => 'speaker_social_linkedin' ],
-								'facebook'  => [ 'icon' => 'fab fa-facebook', 'label' => 'Facebook', 'info' => 'speaker_social_facebook' ],
-								'instagram' => [ 'icon' => 'fab fa-instagram', 'label' => 'Instagram', 'info' => 'speaker_social_instagram' ],
-							];
-							foreach ( $social_fields as $key => $info ) { ?>
-								<div class="setting_item full_width _mar_t_xxs">
-									<label class="_f_equal_f_wrap">
-										<span class="abp_label"><i class="<?php echo esc_attr( $info['icon'] ); ?>"></i> <?php echo esc_html( $info['label'] ); ?></span>
-										<input type="url" class="_form_control" name="meta[social][<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( $social[ $key ] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Profile URL', 'abp-event-ticket' ); ?>"/>
-									</label>
-									<div class="_divider_xxs"></div>
-									<?php ABPET_Layout::info_text( $info['info'] ); ?>
-								</div>
-							<?php } ?>
-						</div>
-					</div>
-					<div class="_divider_xs"></div>
+								$social        = $meta['social'] ?? [];
+								$social_fields = [
+									'twitter'   => [ 'icon' => 'fab fa-twitter', 'label' => 'Twitter/X', 'info' => 'speaker_social_twitter' ],
+									'linkedin'  => [ 'icon' => 'fab fa-linkedin', 'label' => 'LinkedIn', 'info' => 'speaker_social_linkedin' ],
+									'facebook'  => [ 'icon' => 'fab fa-facebook', 'label' => 'Facebook', 'info' => 'speaker_social_facebook' ],
+									'instagram' => [ 'icon' => 'fab fa-instagram', 'label' => 'Instagram', 'info' => 'speaker_social_instagram' ],
+								];
+								foreach ( $social_fields as $key => $info ) { ?>
+                                    <div class="setting_item full_width _mar_t_xxs">
+                                        <label class="_f_equal_f_wrap">
+                                            <span class="abp_label"><i class="<?php echo esc_attr( $info['icon'] ); ?>"></i> <?php echo esc_html( $info['label'] ); ?></span>
+                                            <input type="url" class="_form_control" name="meta[social][<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( $social[ $key ] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Profile URL', 'abp-event-ticket' ); ?>"/>
+                                        </label>
+                                        <div class="_divider_xxs"></div>
+										<?php ABPET_Layout::info_text( $info['info'] ); ?>
+                                    </div>
+								<?php } ?>
+                        </div>
+                    </div>
+                    <div class="_divider_xs"></div>
 					<?php ABPET_Layout::button_global_save( 'tax_speaker', $btn_label ); ?>
-				</div>
+                </div>
 				<?php
 				$html = ob_get_clean();
 				wp_send_json_success( [ 'html' => $html, 'type' => 'success', 'msg' => $label . ' ' . __( 'Form Loaded Successfully .....! ', 'abp-event-ticket' ) ] );
@@ -157,33 +183,33 @@
 				if ( ! check_ajax_referer( 'abpet_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 					wp_send_json_error( [ 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-event-ticket' ), 'type' => 'warn' ], 403 );
 				}
-				$post_int       = fn( $key, $default = 0 ) => isset( $_POST[ $key ] ) ? absint( $_POST[ $key ] ) : $default;
-				$post_val       = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : $default;
-				$post_textarea  = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? wp_kses_post( wp_unslash( $_POST[ $key ] ) ) : $default;
-				$post_slug      = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_title( wp_unslash( $_POST[ $key ] ) ) : $default;
-				$post_meta      = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
+				$post_int      = fn( $key, $default = 0 ) => isset( $_POST[ $key ] ) ? absint( $_POST[ $key ] ) : $default;
+				$post_val      = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : $default;
+				$post_textarea = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? wp_kses_post( wp_unslash( $_POST[ $key ] ) ) : $default;
+				$post_slug     = fn( $key, $default = '' ) => isset( $_POST[ $key ] ) ? sanitize_title( wp_unslash( $_POST[ $key ] ) ) : $default;
+				$post_meta     = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
 					? sanitize_text_field( wp_unslash( $_POST['meta'][ $key ] ) ) : $default;
-				$post_meta_url  = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
+				$post_meta_url = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
 					? esc_url_raw( wp_unslash( $_POST['meta'][ $key ] ) ) : $default;
-				$post_meta_int  = fn( $key, $default = 0 ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
+				$post_meta_int = fn( $key, $default = 0 ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] ) && isset( $_POST['meta'][ $key ] )
 					? absint( $_POST['meta'][ $key ] ) : $default;
-				$post_social    = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] )
-					&& isset( $_POST['meta']['social'] ) && is_array( $_POST['meta']['social'] )
-					&& isset( $_POST['meta']['social'][ $key ] )
+				$post_social   = fn( $key, $default = '' ) => isset( $_POST['meta'] ) && is_array( $_POST['meta'] )
+				                                              && isset( $_POST['meta']['social'] ) && is_array( $_POST['meta']['social'] )
+				                                              && isset( $_POST['meta']['social'][ $key ] )
 					? esc_url_raw( wp_unslash( $_POST['meta']['social'][ $key ] ) ) : $default;
-				$tax_id         = $post_int( 'id' );
-				$name           = $post_val( 'name' );
-				$slug           = $post_slug( 'slug' );
-				$description    = $post_textarea( 'description' );
-				$post_id        = $post_int( 'post_id' );
-				$meta           = [
+				$tax_id        = $post_int( 'id' );
+				$name          = $post_val( 'name' );
+				$slug          = $post_slug( 'slug' );
+				$description   = $post_textarea( 'description' );
+				$post_id       = $post_int( 'post_id' );
+				$meta          = [
 					'photo'       => $post_meta_int( 'photo' ),
 					'designation' => $post_meta( 'designation' ),
 					'company'     => $post_meta( 'company' ),
 					'website'     => $post_meta_url( 'website' ),
 					'social'      => [],
 				];
-				$social_keys    = [ 'twitter', 'linkedin', 'facebook', 'instagram' ];
+				$social_keys   = [ 'twitter', 'linkedin', 'facebook', 'instagram' ];
 				foreach ( $social_keys as $key ) {
 					$meta['social'][ $key ] = $post_social( $key );
 				}
@@ -250,8 +276,8 @@
 				$speaker    = [];
 				if ( ! empty( $taxonomies ) && is_array( $taxonomies ) && sizeof( $taxonomies ) > 0 ) {
 					foreach ( $taxonomies as $taxonomy ) {
-						$meta = get_term_meta( $taxonomy->term_id, '_abpet_speaker_meta', true );
-						$meta = is_array( $meta ) ? $meta : [];
+						$meta                                         = get_term_meta( $taxonomy->term_id, '_abpet_speaker_meta', true );
+						$meta                                         = is_array( $meta ) ? $meta : [];
 						$speaker[ $taxonomy->term_id ]['label']       = $taxonomy->name;
 						$speaker[ $taxonomy->term_id ]['description'] = $taxonomy->description;
 						$speaker[ $taxonomy->term_id ]['meta']        = $meta;
@@ -264,47 +290,47 @@
 				$all_speaker = ABPET_Function::get_option( 'abpet_speaker' );
 				if ( ! empty( $all_speaker ) && is_array( $all_speaker ) && sizeof( $all_speaker ) > 0 ) {
 					$count = 1; ?>
-					<table class="abp">
-						<thead>
-						<tr>
-							<th><?php esc_html_e( 'SI', 'abp-event-ticket' ) ?></th>
-							<th class="_min_150"><?php echo esc_html( ABPET_Function::speaker_label() ); ?></th>
-							<th><?php esc_html_e( 'ID', 'abp-event-ticket' ) ?></th>
-							<th class="_min_150"><?php esc_html_e( 'Designation', 'abp-event-ticket' ); ?></th>
-							<th class="_min_150"><?php esc_html_e( 'Company', 'abp-event-ticket' ); ?></th>
-							<th class="_w_100"><?php esc_html_e( 'Action', 'abp-event-ticket' ) ?></th>
-						</tr>
-						</thead>
-						<tbody>
+                    <table class="abp">
+                        <thead>
+                        <tr>
+                            <th><?php esc_html_e( 'SI', 'abp-event-ticket' ) ?></th>
+                            <th class="_min_150"><?php echo esc_html( ABPET_Function::speaker_label() ); ?></th>
+                            <th><?php esc_html_e( 'ID', 'abp-event-ticket' ) ?></th>
+                            <th class="_min_150"><?php esc_html_e( 'Designation', 'abp-event-ticket' ); ?></th>
+                            <th class="_min_150"><?php esc_html_e( 'Company', 'abp-event-ticket' ); ?></th>
+                            <th class="_w_100"><?php esc_html_e( 'Action', 'abp-event-ticket' ) ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
 						<?php foreach ( $all_speaker as $id => $speaker ) {
-							$meta = $speaker['meta'] ?? [];
+							$meta      = $speaker['meta'] ?? [];
 							$photo_url = '';
 							if ( ! empty( $meta['photo'] ) ) {
 								$photo_url = wp_get_attachment_url( $meta['photo'] );
 							} ?>
-							<tr>
-								<td><?php echo esc_html( $count++ ); ?></td>
-								<td>
-									<div class="_gap_xs">
+                            <tr>
+                                <td><?php echo esc_html( $count ++ ); ?></td>
+                                <td>
+                                    <div class="_gap_xs">
 										<?php if ( $photo_url ) { ?>
-											<img src="<?php echo esc_url( $photo_url ); ?>" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;"/>
+                                            <img src="<?php echo esc_url( $photo_url ); ?>" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;"/>
 										<?php } ?>
-										<strong><?php echo esc_html( $speaker['label'] ); ?></strong>
-									</div>
-								</td>
-								<td><?php echo esc_html( $id ); ?></td>
-								<td><?php echo esc_html( $meta['designation'] ?? '' ); ?></td>
-								<td><?php echo esc_html( $meta['company'] ?? '' ); ?></td>
-								<td>
-									<div class="_group_content">
-									<button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_speaker','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $speaker['label'] ); ?>"><?php ABPET_Static::icon_svg( 'edit' ); ?></button>
-									<button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_speaker','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $speaker['label'] ); ?>"><?php ABPET_Static::icon_svg( 'close_1' ); ?></button>
-									</div>
-								</td>
-							</tr>
+                                        <strong><?php echo esc_html( $speaker['label'] ); ?></strong>
+                                    </div>
+                                </td>
+                                <td><?php echo esc_html( $id ); ?></td>
+                                <td><?php echo esc_html( $meta['designation'] ?? '' ); ?></td>
+                                <td><?php echo esc_html( $meta['company'] ?? '' ); ?></td>
+                                <td>
+                                    <div class="_group_content">
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_speaker','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $speaker['label'] ); ?>"><?php ABPET_Static::svg( 'edit' ); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_speaker','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $speaker['label'] ); ?>"><?php ABPET_Static::svg( 'close_1' ); ?></button>
+                                    </div>
+                                </td>
+                            </tr>
 						<?php } ?>
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 					<?php
 				} else {
 					ABPET_Layout::layout_warning_info( 'no_speaker' );

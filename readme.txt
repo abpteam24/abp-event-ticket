@@ -3,10 +3,10 @@ Contributors: abpteam
 Tags: event tickets, ticket booking, seat reservation, event registration, seat plan
 Requires at least: 6.2
 Tested up to: 7.1
-Requires PHP: 7.4
+Requires PHP: 8.0
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,11 +14,15 @@ Sell event tickets online with WooCommerce using general admission, reserved sea
 
 == Description ==
 
-ABP Event Ticket turns WooCommerce into a complete event ticketing and registration system. Create events, configure ticket types and prices, publish event details, collect attendee information, and sell tickets through the standard WooCommerce checkout. It is the simplest way to sell event tickets, concert tickets, conference tickets, festival tickets, and workshop registration online.
+ABP Event Ticket extends WooCommerce with event ticketing and attendee registration features. Create events, configure ticket types and pricing, publish event details, collect attendee information, and process ticket purchases through the standard WooCommerce checkout.
 
-The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, so you never oversell an event.
+The plugin supports both general admission and reserved seating. Administrators can create reusable seat plans using drag-and-drop controls, automatic numbering, custom labels, ticket type assignments, and flexible seating layouts. Ticket and seat availability is managed separately for each event and session as bookings are recorded.
 
-Create reusable global configuration for ticket types, seat plans, dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, event timelines, and speakers. Global configuration can be imported into an individual event and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
+Create reusable global configurations for ticket types, seat plans, event dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, event timelines, and speakers. These configurations can be imported into individual events and customized when needed.
+
+Customers can book tickets directly from any page using a shortcode. A dedicated Bookings tab is also available in the WooCommerce My Account area, allowing customers to access their bookings.
+
+ABP Event Ticket supports ticket sales and registrations for concerts, conferences, festivals, workshops, seminars, and other events.
 
 == Key Features ==
 
@@ -36,7 +40,7 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * Custom seat labels, cells, dimensions, spacing, and layout
 * Ticket-type assignment to seats
 * Multiple seat plan instances and seat layers
-* Real-time seat availability
+* Ticket and seat availability tracked per event and session
 * Specific-date and periodic-date event schedules
 * Date-wise and day-wise time configuration
 * Advance booking and sale closing buffer controls
@@ -57,8 +61,44 @@ Create reusable global configuration for ticket types, seat plans, dates, locati
 * WooCommerce cart, checkout, payment, tax, coupon, and order integration
 * Booking and order details in the WordPress dashboard
 * Translation-ready
-* Gutenberg-compatible event post type and taxonomies
+* Event post type and taxonomies exposed through the WordPress REST API
 * Polylang-compatible frontend language filtering when Polylang is active
+
+The event editor uses the Classic Editor; Gutenberg blocks can still be used to place the plugin's shortcodes on regular pages.
+
+== Optional PRO Add-on ==
+
+ABP Event Ticket PRO extends the free plugin. It does not replace it; keep ABP Event Ticket and WooCommerce installed and active. PRO requires PHP 8.0 or later. A 30-day trial is available for a new PRO installation; a valid license is required to continue using PRO after the trial and to receive PRO updates.
+
+PRO features include:
+
+* Seasonal and Early Bird Percentage Discounts (Global or Per Event)
+* Partial Payments & Deposit Management
+*Outstanding Balance Tracking & Payment via WooCommerce My Account
+*Customer Booking Cancellation Requests with Custom Deadlines
+*Admin Approval or Rejection of Cancellation Requests
+*Individual Booking Ticket PDF Generation
+*Filtered Attendee List PDF Export
+*QR Codes on Booking Ticket PDFs
+*Customizable Booking Emails
+*Status-Based Automatic Email Notifications
+*PDF Attachments in Booking Emails
+*Administrator Email Resend Tools
+*Administrator-Created Bookings
+*Advanced Booking & Order Editing
+*Event Date, Session, Ticket Quantity & Seat Editing
+*Attendee & Billing Information Editing
+*Booking & Order Status Management
+*Filtered Booking CSV Export
+*Event Session Ticket Sales & Revenue Statistics
+*Frontend Ticket Lookup, PDF Download & Check-in via [abpet-ticket] Shortcode
+*Secure Ticket Access for Authorized Logged-in Users
+*PRO License Management
+*Automatic PRO Plugin Updates
+
+Get PRO from the [ABP Event Ticket PRO page](https://abp-team.com/downloads/abp-event-ticket-pro/). Install WooCommerce and the free plugin first, then upload and activate PRO. Install ABP PDF Tools as well if you need PDF features. Configure PRO settings in the Event Ticket administration area.
+
+The free plugin continues to provide event creation, schedules, ticket types, seat plans, attendee forms, and booking records. For the complete guide, visit the [ABP Event Ticket documentation](https://demo-et.abp-team.com/documentation/).
 
 == Ticket Types and Pricing ==
 
@@ -193,7 +233,7 @@ Unlike the other taxonomy pages, the speaker page does not run an event list. It
 
 Sections with no data are omitted entirely, so a speaker with only a name shows only their name.
 
-The page template can be overridden the same way as the other templates: copy `page/speaker.php` from the plugin's `tb_templates` folder into `wp-content/tb_templates/page/`.
+The page template can be overridden the same way as the other templates: copy `page/speaker.php` from the plugin's `et_templates` folder into `wp-content/et_templates/page/`.
 
 To list a speaker's events somewhere, for example on a normal WordPress page or inside your own template, use the shortcode:
 
@@ -215,8 +255,8 @@ Each style also fires its own template action after rendering, for example `abpe
 
 All three designs live in separate template files and can be overridden without touching the plugin:
 
-1. Create a `tb_templates/speaker` folder inside your `wp-content` directory.
-2. Copy `default.php`, `light.php`, or `modern.php` from the plugin's `tb_templates/speaker` folder into it.
+1. Create a `et_templates/speaker` folder inside your `wp-content` directory.
+2. Copy `default.php`, `light.php`, or `modern.php` from the plugin's `et_templates/speaker` folder into it.
 3. Edit your copy. The plugin uses your file instead of its own.
 
 == Attendee Information and Services ==
@@ -254,6 +294,8 @@ Common attributes include:
 * `loc_id` - Filter by location.
 * `organizer_id` - Filter by organizer.
 * `brand_id` - Filter by brand.
+* `speaker_id` - Filter by speaker.
+* `filter` - Choose which taxonomy dropdowns appear in the event list filter bar. Accepts `all` (default), `none`, a comma-separated list such as `category,location`, or an exclusion list such as `-speaker`. A taxonomy that is switched OFF in Event Ticket -> Configuration -> Feature ON/OFF is never filterable, even when it is listed here.
 * `style` - Listing style: `grid`, `list`, `missionary`, or `minimal`.
 * `slider_style` - Gallery style: `gallery` or `slider`.
 * `pagination` - Enable or disable pagination.
@@ -276,13 +318,14 @@ When used with WooCommerce, a "Bookings" tab is added automatically to the WooCo
 == Requirements ==
 
 * WordPress 6.2 or later
-* PHP 7.4 or later
+* PHP 8.0 or later
 * MySQL 5.7 or later
 * WooCommerce 8.0 or later
+* Optional ABP Event Ticket PRO: requires this free plugin and WooCommerce to be active; ABP PDF Tools is required only for PDF generation.
 
-== Gutenberg and Multilingual Support ==
+== Editor and Multilingual Support ==
 
-The event post type and all event taxonomies are registered with REST API support, so events and taxonomies can be edited with the Gutenberg block editor. The plugin's event listing and booking shortcodes can also be inserted into Gutenberg Shortcode blocks.
+The event post type and its enabled taxonomies are exposed through the WordPress REST API. The plugin uses the Classic Editor for editing events. Its event listing, booking, and gallery shortcodes can be inserted into Gutenberg Shortcode blocks on regular pages.
 
 The plugin is translation-ready and supports Polylang's frontend language filtering for event listings. Create a translated event and translated taxonomy terms in Polylang for each language you publish. WooCommerce handles translated checkout and customer account pages according to the multilingual plugin configuration.
 
@@ -367,19 +410,68 @@ Assigned speakers appear automatically on the event details page below the event
 
 Yes. The plugin uses the WordPress localization system and is translation-ready.
 
+= Does the plugin have a PRO version? =
+
+Yes. ABP Event Ticket PRO is an optional add-on for discounts, partial payments, cancellation requests, PDFs, booking emails, admin booking tools, CSV exports, session statistics, ticket lookup/check-in, QR codes, and license-managed updates. WooCommerce and the free ABP Event Ticket plugin must remain active. See the [PRO product page](https://abp-team.com/downloads/abp-event-ticket-pro/).
+
+= Can I edit an existing event booking or order? =
+
+Yes. PRO adds an Edit Booking action to eligible existing bookings in the Event Ticket Orders list. An administrator can update the event date/session, ticket quantities or selected seats, attendee information, billing details, and order status. The edit action is shown for bookings whose status is included in the configured booked statuses.
+
+= How do I use the PRO ticket lookup and QR code? =
+
+Add `[abpet-ticket]` to a WordPress page and publish it. Users must log in and be authorized to view a booking. Enable QR Code under the PRO Feature ON/OFF settings to add QR codes to individual booking PDFs. PDF generation requires ABP PDF Tools. QR codes point to the ticket page and contain a ticket PIN; the QR image is requested from the external QR Server service.
+
+= Is ABP PDF Tools required for the free plugin or all PRO features? =
+
+No. The free plugin and most PRO features do not require ABP PDF Tools. It is required for PRO ticket PDFs, attendee-list PDFs, and PDF email attachments.
+
 == Screenshots ==
 
-1.  Admin Dashboard - overview charts and System Status health check
-2. Event list page - admin events with create, edit, clone, trash, restore actions
-3. Event create / edit page - tickets, prices, quantities, and schedule
-4. Ticket/Seat Plan designer - drag-and-drop seat layout editor
-5.  Global Data - dates, location, category, organizer, brand lists
-6. Configuration - general settings and ON/OFF feature switches
-7. Orders - booking and order management with status and check-in
-8. Frontend event listing - event grid with search and filters
-9.  Frontend event detail
-10. Frontend event detail
-11. Frontend event detail
+1. Admin Dashboard - store overview with today's sessions, orders, tickets sold, revenue, and the latest orders.
+2. Events - admin event list with published, private, and draft counts plus create, edit, clone, trash, and restore actions.
+3. Orders - booking and order list with ticket quantities, event sessions, order status, and check-in information.
+4. Ticket Types - reusable ticket type and decor item manager for VIP, business class, special, and other seat categories.
+5. Seat Plan Settings - configure rows, columns, background, cell size, and layout options for the seat plan designer.
+6. Seat Plan Designer - visual seat layout editor with entrance, stage, and numbered seats.
+7. Global Configuration - central settings screen for dates, services, attendee forms, PDF, CSV, email, taxonomies, discounts, and partial payments.
+8. Feature ON/OFF - site-wide switches to enable or disable individual plugin features.
+9. Global Dates - default date format, time format, buffer time, and advance booking window.
+10. Global Additional Services - reusable paid add-ons such as parking, meal packages, VIP lounge access, and event merchandise.
+11. Global Attendee Form - flexible form builder for attendee details that can be imported into any event.
+12. Global Locations - manage reusable event locations and copy their shortcodes.
+13. Add Location - create or edit a location with name, address, and optional slug.
+14. Global Categories - manage event categories and copy category shortcodes.
+15. Add Category - create or edit an event category with name, slug, and description.
+16. Global Organizers - manage event organizers and copy organizer shortcodes.
+17. Add Organizer - create or edit an organizer with name, slug, and description.
+18. Global Brands - manage event brands and copy brand shortcodes.
+19. Add Brand - create or edit a brand with name, slug, and description.
+20. Add Feature - create a feature item with an icon or emoji, title, and value.
+21. Global Features - manage reusable event features that can be assigned to any event.
+22. Global Speakers - manage speaker profiles with photo, bio, designation, company, website, and social links.
+23. Global FAQs - create site-wide FAQ items that can be imported into individual events.
+24. Global Terms & Conditions - write reusable terms that can be imported and customized per event.
+25. Event General - event title, icon, SKU, sub-title, short description, type, capacity, location, category, organizer, and brand.
+26. Event Ticket & Price - ticket type, quantity, pricing, seat plan, and minimum and maximum quantity per order.
+27. Event Multiple Ticket Types - enable multiple ticket types and configure each ticket name, description, price, and reserved quantity.
+28. Event Dates - single or periodic date configuration with date, time, and booking availability.
+29. Event Periodic Dates - recurring session dates and times shown on the frontend schedule.
+30. Event Additional Services - enable paid add-ons for the event and manage price, stock, and maximum quantity.
+31. Event Attendee Form - enable the attendee form and manage per-event form fields.
+32. Event Speakers - search and assign one or more global speakers to the event.
+33. Event Related Events - select related events to display on the event details page.
+34. Event Timeline - build an event schedule with registration, opening, breaks, sessions, and closing items.
+35. Event Features - add or import features that display with the event on the frontend.
+36. Event FAQs - enable FAQs and import global items or add event-specific questions.
+37. Event Terms & Conditions - enable terms and import global terms or write event-specific conditions.
+38. Frontend Events - event listing with search plus category, location, organizer, brand, and speaker filters.
+39. Frontend Event Cards with Features - event listing with feature badges, descriptions, and booking buttons.
+40. Frontend Event Grid - multi-column event grid with organizers, categories, and minimum prices.
+41. Frontend Event Prices - event listing with minimum price display and Book Now actions.
+42. Frontend Event Details - event hero, organizer, attendees, description, date selector, timeline, speakers, FAQs, terms, seat plan, and booking form.
+43. Frontend Event Highlights - event highlights, FAQ, timeline, booking form, and seat selection sections.
+44. Frontend Ticket Booking - booking page with schedule, ticket types, seat availability, additional services, attendee information, and order summary.
 
 == Need help or have suggestions? ==
 If you need any further assistance or support, please contact us through the [ðŸŽ« support form](https://abp-team.com/support-desk/). We welcome your suggestions, so feel free to tell us anything we can improve in the plugin.
@@ -392,6 +484,14 @@ If you need any further assistance or support, please contact us through the [ðŸ
 
 
 == Changelog ==
+
+= 1.0.5 =
+
+* New: The event list filter bar now has Location, Organizer, Brand and Speaker dropdowns in addition to Category, and all selected filters combine.
+* New: `filter` shortcode attribute for `[abpet-booking]` and `[abpet-post]`, to show only the chosen taxonomy dropdowns (`filter="category,location"`), hide all (`filter="none"`), or exclude some (`filter="-speaker"`).
+* Fix: A taxonomy switched OFF in Configuration -> Feature ON/OFF no longer renders a filter dropdown or applies its shortcode filter attribute.
+
+Released: November 1,1 2026
 
 = 1.0.4 =
 
@@ -414,7 +514,7 @@ Released: October 2, 2026
 * New: Every speaker gets a public profile page at `/speaker/{slug}/`. Unlike the other taxonomy pages it runs no event list and shows only the speaker's own admin-entered details: photo or initials, name, designation, company, website, rich-text bio, and every saved social profile.
 * New: `[abpet-post speaker_id="TERM_ID"]` shortcode attribute, for listing a speaker's events on a normal page or in your own template.
 * New: Speakers are displayed on the event details page below the event timeline, in a separate section that matches the active details template.
-* New: Three built-in speaker designs (Default, Light, Modern), each in its own template file that can be overridden from `wp-content/tb_templates/speaker`.
+* New: Three built-in speaker designs (Default, Light, Modern), each in its own template file that can be overridden from `wp-content/et_templates/speaker`.
 * New: `abpet_speaker` action to place or restyle the speaker section, plus per-style template actions.
 * New: Per-event "Active Speaker" switch to hide the section for a single event.
 * New: Speakers without a photo show their initials instead.
@@ -450,6 +550,10 @@ Released: September 13, 2026
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.5 =
+
+Released: November 1,1 2026
 
 = 1.0.4 =
 

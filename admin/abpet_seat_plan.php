@@ -70,17 +70,18 @@
                 $sp_infos = ABPET_Query::get_sp();
                 $options = ABPET_Function::get_option('abpet_ticket');
                 ?>
-                <div class="_fj_between_mar_b_xxs">
+                <div class="_fj_between_mar_b_xxs abpet_sp_header">
                     <h5 class="abp_text_nowrap_gap_xs">💺 <?php esc_html_e('Seat Plan', 'abp-event-ticket'); ?><sup class="_circle_icon_xs"><?php echo esc_html(ABPET_Query::get_sp('', true)); ?></sup></h5>
                     <div class="color_control"><?php $this->color_control(); ?></div>
                     <button class="_btn_light_active_xs" onclick="abpet_sp_add()">
-                        <?php ABPET_Static::icon_svg('plus');
+                        <?php ABPET_Static::svg('plus');
                             esc_html_e('Add New Seat Plan', 'abp-event-ticket'); ?>
                     </button>
                 </div>
                 <div class="_divider_xxs"></div>
                 <?php ABPET_Layout::info_text('abpet_sp'); ?>
                 <?php if (!empty($sp_infos)) { ?>
+                    <div class="_ov_auto">
                     <table class="abp_mar_t_xs">
                         <thead>
                         <tr>
@@ -114,16 +115,17 @@
                                 <th><?php echo esc_html(($others['width'] ?? 50) . ' X ' . ($others['height'] ?? 50) . ' X ' . ($others['gap'] ?? 0)); ?></th>
                                 <td>
                                     <div class="_group_content">
-                                        <button type="button" class="_btn_light_theme_xxs" onclick="abpet_popup_open_global('view_sp','<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('View : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::icon_svg('view_1'); ?></button>
-                                        <button type="button" class="_btn_light_navy_blue_xxs" onclick="abpet_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>','1')" title="<?php echo esc_attr__('Copy/Clone : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::icon_svg('clone_1'); ?></button>
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::icon_svg('edit'); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abpet_sp_delete('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Permanent Remove : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::icon_svg('close_1'); ?></button>
+                                        <button type="button" class="_btn_light_theme_xxs" onclick="abpet_popup_open_global('view_sp','<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('View : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::svg('view_1'); ?></button>
+                                        <button type="button" class="_btn_light_navy_blue_xxs" onclick="abpet_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>','1')" title="<?php echo esc_attr__('Copy/Clone : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::svg('clone_1'); ?></button>
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::svg('edit'); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abpet_sp_delete('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Permanent Remove : ', 'abp-event-ticket') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPET_Static::svg('close_1'); ?></button>
                                     </div>
                                 </td>
                             </tr>
                         <?php } ?>
                         </tbody>
                     </table>
+                    </div>
                     <?php
                 } else {
                     ABPET_Layout::layout_warning_info_xs('no_sp');
@@ -235,9 +237,9 @@
                             </div>
                         </div>
                         <div class="sp_section_card_xs _group_content_f_equal">
-                            <button type="button" class="_btn_active_xs" onclick="abpet_sp_save()"><?php ABPET_Static::icon_svg('save');
+                            <button type="button" class="_btn_active_xs" onclick="abpet_sp_save()"><?php ABPET_Static::svg('save');
                                     esc_html_e('Save Seat Plan', 'abp-event-ticket'); ?></button>
-                            <button type="button" class="_btn_warning_xs" onclick="abpet_sp_clear()"><?php ABPET_Static::icon_svg('close_1');
+                            <button type="button" class="_btn_warning_xs" onclick="abpet_sp_clear()"><?php ABPET_Static::svg('close_1');
                                     esc_html_e('Clear Layout', 'abp-event-ticket'); ?></button>
                         </div>
                     </div>
@@ -500,7 +502,7 @@
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($sold) ?>"></span><?php esc_html_e('Sold', 'abp-event-ticket'); ?></button>
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($booked) ?>"></span><?php esc_html_e('Booked', 'abp-event-ticket'); ?></button>
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($selected) ?>"></span><?php esc_html_e('Selected', 'abp-event-ticket'); ?></button>
-                    <button type="button" class="_btn_light_default_xs" onclick="abpet_popup_open_global('color_control')"><?php ABPET_Static::icon_svg('edit'); ?><?php esc_html_e('Edit/Modify', 'abp-event-ticket'); ?></button>
+                    <button type="button" class="_btn_light_default_xs" onclick="abpet_popup_open_global('color_control')"><?php ABPET_Static::svg('edit'); ?><?php esc_html_e('Edit/Modify', 'abp-event-ticket'); ?></button>
                 </div>
                 <?php
             }
@@ -607,8 +609,8 @@
                                                     echo esc_html($label . ' ' . (!empty($prefix) ? '(' . $prefix . ')' : '')); ?>
                                             </h6>
                                             <div class="_group_content">
-                                                <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::icon_svg('edit'); ?></button>
-                                                <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::icon_svg('close_1'); ?></button>
+                                                <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::svg('edit'); ?></button>
+                                                <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::svg('close_1'); ?></button>
                                             </div>
                                         </div>
                                         <?php
@@ -795,8 +797,8 @@
                                     <h6 class="abp_gap_xxs" style="color:<?php echo esc_attr($item['color'] ?? ''); ?>"><?php ABPET_Layout::image_icon($item['icon'] ?? '');
                                             echo esc_html($label); ?></h6>
                                     <div class="_group_content">
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('decor_item')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::icon_svg('edit'); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('decor_item','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::icon_svg('close_1'); ?></button>
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('decor_item')" title="<?php echo esc_attr__('Edit : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::svg('edit'); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('decor_item','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-event-ticket') . ' ' . esc_attr($label); ?>"><?php ABPET_Static::svg('close_1'); ?></button>
                                     </div>
                                 </div>
                             <?php }

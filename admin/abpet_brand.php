@@ -179,7 +179,7 @@
                         </thead>
                         <tbody>
 						<?php foreach ( $brands as $term_id => $brand ) {
-							$name = $brand['name'] ?? ''; ?>
+							$name = $brand['label'] ?? $brand['name'] ?? ''; ?>
                             <tr>
                                 <th><?php echo esc_html( $count ); ?>.</th>
                                 <th class="_text_left"><a href="<?php echo esc_url( get_term_link( $term_id ) ); ?>" target="_blank" class="abp_fs_h5 _color_theme"><?php echo esc_html( $name ); ?></a></th>
@@ -189,8 +189,8 @@
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_brand','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_brand','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::icon_svg( 'close_1' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abpet_popup_open_global('tax_brand','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abpet_delete_global('tax_brand','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-event-ticket' ) . ' ' . esc_attr( $name ); ?>"><?php ABPET_Static::svg( 'close_1' ); ?></button>
                                         </div>
                                     </div>
                                 </th>

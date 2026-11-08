@@ -156,9 +156,6 @@
 				if ( ! ABPET_Function::on_off( 'timeline' ) ) {
 					return;
 				}
-				if ( ( $post_infos['display_timeline'] ?? 'on' ) === 'off' ) {
-					return;
-				}
 				$timeline_items = $post_infos['abpet_timeline'] ?? [];
 				$timeline_items = is_array( $timeline_items ) ? $timeline_items : [];
 				$timeline_items = array_values( array_filter( $timeline_items, static function ( $item ) {
@@ -177,9 +174,6 @@
 					return;
 				}
 				if ( ! ABPET_Function::on_off( 'speaker' ) ) {
-					return;
-				}
-				if ( ( $post_infos['display_speaker'] ?? 'on' ) === 'off' ) {
 					return;
 				}
 				$speakers = ABPET_Function::speaker_items( $post_id );

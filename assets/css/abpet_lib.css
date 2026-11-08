@@ -517,9 +517,9 @@
 @media only screen and (min-width: 10px) {
 	.abpet_area ul[class*="abp"] { list-style-type: none; margin: 0; padding: 0; line-height: 1.25; }
 	.abpet_area ol[class*="abp"] { margin: 0; padding: 0; line-height: 1.25; }
-	div.abpet_area ol[class*="abp"] li,
-	div.abpet_area ul[class*="abp"] li { margin: 0; padding: 0; line-height: inherit; }
-	div.abpet_area ul[class*="abp"] li.abp_active { background-color: var(--et_color_active) }
+	.abpet_area ol[class*="abp"] li,
+	.abpet_area ul[class*="abp"] li { margin: 0; padding: 0; line-height: inherit; }
+	.abpet_area ul[class*="abp"] li.abp_active { background-color: var(--et_color_active) }
 	/******List inline**********/
 	div.abpet_area ul[class*="abp_list_inline"] {display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap;}
 	div.abpet_area ul[class*="abp_list_inline"] li { text-align: center; border-right: 1px solid; }
@@ -628,6 +628,7 @@
 	.abpet_area table[class*="abp"] th[data-collapse].abp_active,
 	.abpet_area table[class*="abp"] td[data-collapse].abp_active { display: table-cell; }
 }
+
 /******************************************************************** Tabs section ************************************************/
 @media only screen and (min-width: 10px) {
 	div.abpet_area .abp_tabs .tab_lists { display: -webkit-flex; display: flex; background-color: var(--et_color_white);font-size: var(--et_fs_label); width: 100%; }
@@ -640,7 +641,6 @@
 	div.abpet_area .tab_lists [data-tabs-target]:hover { font-weight: var(--et_fw-medium); border-color: var(--et_color_theme); color: var(--et_color_theme) }
 	div.abpet_area .tab_lists li.abp_active,
 	div.abpet_area .tab_lists [data-tabs-target].abp_active { font-weight: var(--et_fw-medium); background-color: var(--et_color_theme); color: var(--et_color_theme_alter); font-size: var(--et_fs_h6);}
-	div.abpet_area .tab_lists span { margin: 0 var(--et_gap_xxs) 0 0; }
 	div.abpet_area .abp_tabs .tab_content { position: relative; overflow: auto; width: 100%;padding: var(--et_gap); }
 	div.abpet_area .tab_content [data-tabs] { display: none;}
 	/*=============================*/
@@ -701,6 +701,7 @@
 }
 /******************************************************************** Pagination section ************************************************/
 @media only screen and (min-width: 10px) {
+	div.abpet_area div.pagination_area{display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center; -webkit-align-items: center; align-items: center; }
 	div.abpet_area div.pagination_area button[class*="_btn"] {width: 40px;font-size: var(--et_fs_label);}
 	div.abpet_area div.pagination_area button[class*="_btn"].abp_active {width: 70px;font-size: var(--et_fs_h6);font-weight: var(--et_fw-bold);background-color: var(--et_color_theme);color: var(--et_color_theme_alter); }
 	div.abpet_area div.pagination_area [class*="_group_content"] {border-color: var(--et_color_theme);}

@@ -128,7 +128,7 @@
                                         <span ><?php esc_html_e('Use Global FAQ ?', 'abp-event-ticket'); ?></span>
                                     </label>
                                     <div data-collapse="#active_global_faq" class=" <?php echo esc_attr($active_global_faq == 'on' ? '' : 'abp_active'); ?>">
-                                        <button type="button" class="_btn_theme" onclick="abpet_import_global('faq_content')"><span class="fas fa-file-upload _mar_r_xs"></span><?php esc_html_e('Import Global FAQ', 'abp-event-ticket'); ?></button>
+                                        <button type="button" class="_btn_theme_xs" onclick="abpet_import_global('faq_content')"><span class="fas fa-file-upload"></span><?php esc_html_e('Import Global FAQ', 'abp-event-ticket'); ?></button>
                                     </div>
                                 </div>
                                 <div class="_divider_xs"></div>

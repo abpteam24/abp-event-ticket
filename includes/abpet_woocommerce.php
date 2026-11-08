@@ -263,7 +263,7 @@
 								}
 								$attendee_infos = $cart_item['pass_info'] ?? [];
 								if (ABPET_Function::on_off('client_info') && !empty($attendee_infos) && sizeof($attendee_infos) > 0) {
-									$html .= esc_html__('Client Information', 'abp-event-ticket') . '<br />';
+									$html .= esc_html__('Attendee Information', 'abp-event-ticket') . '<br />';
 									foreach ($attendee_infos as $attendee_info) {
 										if (!empty($attendee_info)) {
 											foreach ($attendee_info as $attendee) {
@@ -343,7 +343,7 @@
 									}
 								}
 								if (ABPET_Function::on_off('client_info') && !empty($attendee_infos) && sizeof($attendee_infos) > 0) {
-									$item->add_meta_data(__('Client Information', 'abp-event-ticket'), '');
+									$item->add_meta_data(__('Attendee Information', 'abp-event-ticket'), '');
 									foreach ($attendee_infos as $attendee_info) {
 										if (!empty($attendee_info)) {
 											foreach ($attendee_info as $attendee) {

@@ -57,7 +57,7 @@
                                         <span class="_fs_label_mar_lr_xs"><?php esc_html_e('Use Global Additional Service ?', 'abp-event-ticket'); ?></span>
                                     </div>
                                     <div data-collapse="#active_global_additional" class=" <?php echo esc_attr($active_global_additional == 'on' ? '' : 'abp_active'); ?>">
-                                        <button type="button" class="_btn_theme" onclick="abpet_import_global('additional_content')"><span class="fas fa-file-upload _mar_r_xs"></span><?php esc_html_e('Import Additional Service', 'abp-event-ticket'); ?></button>
+                                        <button type="button" class="_btn_theme_xs" onclick="abpet_import_global('additional_content')"><span class="fas fa-file-upload"></span><?php esc_html_e('Import Additional Service', 'abp-event-ticket'); ?></button>
                                     </div>
                                 </div>
                                 <div class="_divider_xs"></div>
