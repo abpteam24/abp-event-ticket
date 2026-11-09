@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ABP Event Ticket\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-07 10:52+0000\n"
+"POT-Creation-Date: 2026-11-09 14:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -104,12 +104,12 @@ msgstr ""
 
 #: admin/abpet_orders.php:194 includes/abpet_layout.php:166
 #: includes/abpet_layout.php:166 includes/abpet_layout.php:176
-#: includes/abpet_layout.php:176 includes/abpet_layout.php:825
-#: includes/abpet_layout.php:825
+#: includes/abpet_layout.php:176 includes/abpet_layout.php:848
+#: includes/abpet_layout.php:848
 msgid ".... More"
 msgstr ""
 
-#: admin/abpet_orders.php:194 includes/abpet_layout.php:825
+#: admin/abpet_orders.php:194 includes/abpet_layout.php:848
 msgid "....Less "
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: includes/abpet_layout.php:1132
+#: includes/abpet_layout.php:1155
 msgid "Address :"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgid ""
 "events."
 msgstr ""
 
-#: includes/abpet_layout.php:878
+#: includes/abpet_layout.php:901
 msgid "Already Checked By"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "Attendee Information : "
 msgstr ""
 
-#: et_templates/details_theme/default.php:135
+#: et_templates/details_theme/default.php:101
 msgid "Attendees"
 msgstr ""
 
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: includes/abpet_layout.php:1006
+#: includes/abpet_layout.php:1029
 msgid "Available !"
 msgstr ""
 
@@ -543,23 +543,23 @@ msgstr ""
 msgid "Billing & Attendee  Info"
 msgstr ""
 
-#: includes/abpet_layout.php:1313 includes/abpet_layout.php:1314
+#: includes/abpet_layout.php:1336 includes/abpet_layout.php:1337
 msgid "Billing Address"
 msgstr ""
 
-#: includes/abpet_layout.php:1323 includes/abpet_layout.php:1324
+#: includes/abpet_layout.php:1346 includes/abpet_layout.php:1347
 msgid "Billing Amount"
 msgstr ""
 
-#: includes/abpet_layout.php:1293 includes/abpet_layout.php:1294
+#: includes/abpet_layout.php:1316 includes/abpet_layout.php:1317
 msgid "Billing Email"
 msgstr ""
 
-#: includes/abpet_layout.php:1283 includes/abpet_layout.php:1284
+#: includes/abpet_layout.php:1306 includes/abpet_layout.php:1307
 msgid "Billing Name"
 msgstr ""
 
-#: includes/abpet_layout.php:1303 includes/abpet_layout.php:1304
+#: includes/abpet_layout.php:1326 includes/abpet_layout.php:1327
 msgid "Billing phone"
 msgstr ""
 
@@ -577,7 +577,7 @@ msgstr ""
 msgid "Book Now"
 msgstr ""
 
-#: et_templates/details_theme/light.php:98
+#: et_templates/details_theme/light.php:62
 msgid "Book Your Ticket"
 msgstr ""
 
@@ -601,8 +601,7 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
-#: et_templates/details_theme/default.php:54
-#: et_templates/details_theme/light.php:56
+#: includes/abpet_layout.php:598
 msgid "Booking Closed"
 msgstr ""
 
@@ -622,9 +621,7 @@ msgstr ""
 msgid "Booking Information "
 msgstr ""
 
-#: et_templates/details_theme/default.php:49
-#: et_templates/details_theme/light.php:51
-#: et_templates/details_theme/modern.php:44
+#: includes/abpet_layout.php:593
 msgid "Booking Open"
 msgstr ""
 
@@ -755,7 +752,7 @@ msgstr ""
 msgid "Checkbox"
 msgstr ""
 
-#: includes/abpet_layout.php:879
+#: includes/abpet_layout.php:902
 msgid "Checked"
 msgstr ""
 
@@ -774,10 +771,10 @@ msgid ""
 msgstr ""
 
 #: admin/abpet_form.php:200 includes/abpet_layout.php:270
-#: includes/abpet_layout.php:697 includes/abpet_layout.php:1186
-#: includes/abpet_layout.php:1200 includes/abpet_layout.php:1205
-#: includes/abpet_layout.php:1219 includes/abpet_layout.php:1233
-#: includes/abpet_layout.php:1238
+#: includes/abpet_layout.php:728 includes/abpet_layout.php:1209
+#: includes/abpet_layout.php:1223 includes/abpet_layout.php:1228
+#: includes/abpet_layout.php:1242 includes/abpet_layout.php:1256
+#: includes/abpet_layout.php:1261
 msgid "Clear Date"
 msgstr ""
 
@@ -793,7 +790,7 @@ msgstr ""
 msgid "Click a session to see its booking details."
 msgstr ""
 
-#: includes/abpet_layout.php:882
+#: includes/abpet_layout.php:905
 msgid "Click to Check In"
 msgstr ""
 
@@ -992,7 +989,7 @@ msgid "data loaded....!"
 msgstr ""
 
 #: admin/abpet_form.php:181 admin/abpet_post_configuration.php:38
-#: et_templates/details_theme/default.php:91
+#: et_templates/details_theme/default.php:57
 msgid "Date"
 msgstr ""
 
@@ -1259,7 +1256,7 @@ msgstr ""
 msgid "E-Mail"
 msgstr ""
 
-#: includes/abpet_layout.php:1126
+#: includes/abpet_layout.php:1149
 msgid "E-Mail :"
 msgstr ""
 
@@ -1419,7 +1416,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: includes/abpet_layout.php:738 includes/abpet_layout.php:1183
+#: includes/abpet_layout.php:769 includes/abpet_layout.php:1206
 #: includes/abpet_my_account.php:115 includes/abpet_woocommerce.php:237
 #: includes/abpet_woocommerce.php:318
 msgid "Event Date"
@@ -1433,16 +1430,12 @@ msgstr ""
 msgid "Event Date and Time List"
 msgstr ""
 
-#: includes/abpet_layout.php:1195
+#: includes/abpet_layout.php:1218
 msgid "Event Date Between"
 msgstr ""
 
 #: admin/abpet_configuration.php:382
 msgid "Event Description"
-msgstr ""
-
-#: et_templates/details_theme/light.php:30
-msgid "Event Highlights"
 msgstr ""
 
 #: admin/abpet_configuration.php:368 admin/abpet_post_configuration.php:130
@@ -1704,7 +1697,7 @@ msgstr ""
 #: admin/abpet_orders.php:174 admin/abpet_orders.php:179
 #: admin/abpet_orders.php:204 admin/abpet_orders.php:206
 #: admin/abpet_orders.php:208 includes/abpet_dependencies.php:232
-#: includes/abpet_layout.php:1060 includes/abpet_layout.php:1081
+#: includes/abpet_layout.php:1083 includes/abpet_layout.php:1104
 #: includes/abpet_my_account.php:140 includes/abpet_woocommerce.php:243
 #: includes/abpet_woocommerce.php:244 includes/abpet_woocommerce.php:258
 #: includes/abpet_woocommerce.php:259 includes/abpet_woocommerce.php:324
@@ -1800,7 +1793,7 @@ msgstr ""
 msgid "Get PRO"
 msgstr ""
 
-#: et_templates/details_theme/default.php:157
+#: et_templates/details_theme/default.php:128
 msgid "Get Tickets"
 msgstr ""
 
@@ -2446,7 +2439,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: includes/abpet_layout.php:1123
+#: includes/abpet_layout.php:1146
 msgid "Name :"
 msgstr ""
 
@@ -2577,7 +2570,7 @@ msgstr ""
 msgid "Not Available !"
 msgstr ""
 
-#: includes/abpet_layout.php:883
+#: includes/abpet_layout.php:906
 msgid "Not Checked !"
 msgstr ""
 
@@ -3216,11 +3209,11 @@ msgstr ""
 msgid "Online"
 msgstr ""
 
-#: et_templates/details_theme/default.php:121
+#: et_templates/details_theme/default.php:87
 msgid "Online / TBA"
 msgstr ""
 
-#: et_templates/details_theme/default.php:136
+#: et_templates/details_theme/default.php:102
 msgid "Open"
 msgstr ""
 
@@ -3291,11 +3284,11 @@ msgstr[1] ""
 msgid "Order / Event"
 msgstr ""
 
-#: includes/abpet_layout.php:1216
+#: includes/abpet_layout.php:1239
 msgid "Order Date"
 msgstr ""
 
-#: includes/abpet_layout.php:1228
+#: includes/abpet_layout.php:1251
 msgid "Order Date Between"
 msgstr ""
 
@@ -3303,7 +3296,7 @@ msgstr ""
 msgid "Order Filter"
 msgstr ""
 
-#: includes/abpet_layout.php:1273 includes/abpet_layout.php:1274
+#: includes/abpet_layout.php:1296 includes/abpet_layout.php:1297
 msgid "Order ID"
 msgstr ""
 
@@ -3319,7 +3312,7 @@ msgstr ""
 msgid "Order Loading........ !"
 msgstr ""
 
-#: includes/abpet_layout.php:1333
+#: includes/abpet_layout.php:1356
 msgid "Order Status"
 msgstr ""
 
@@ -3413,7 +3406,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: includes/abpet_layout.php:1129
+#: includes/abpet_layout.php:1152
 msgid "Phone :"
 msgstr ""
 
@@ -3456,7 +3449,7 @@ msgstr ""
 msgid "Please Select"
 msgstr ""
 
-#: includes/abpet_layout.php:696 includes/abpet_layout.php:707
+#: includes/abpet_layout.php:727 includes/abpet_layout.php:738
 msgid "Please Select Event Date"
 msgstr ""
 
@@ -3691,7 +3684,7 @@ msgstr ""
 msgid "Return Date  Loading............."
 msgstr ""
 
-#: includes/abpet_layout.php:1084
+#: includes/abpet_layout.php:1107
 #: et_templates/layout/additional_services.php:71
 msgid "Returnable"
 msgstr ""
@@ -3903,7 +3896,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: includes/abpet_layout.php:849
+#: includes/abpet_layout.php:872
 msgid "Select "
 msgstr ""
 
@@ -3913,7 +3906,7 @@ msgid ""
 "brand identity throughout the plugin panels."
 msgstr ""
 
-#: includes/abpet_layout.php:694 includes/abpet_layout.php:706
+#: includes/abpet_layout.php:725 includes/abpet_layout.php:737
 msgid "Select Event Date"
 msgstr ""
 
@@ -3925,7 +3918,7 @@ msgstr ""
 msgid "Select Location.."
 msgstr ""
 
-#: includes/abpet_layout.php:1335
+#: includes/abpet_layout.php:1358
 msgid "Select Order Status"
 msgstr ""
 
@@ -4104,7 +4097,7 @@ msgstr ""
 msgid "Sold"
 msgstr ""
 
-#: includes/abpet_layout.php:1008
+#: includes/abpet_layout.php:1031
 msgid "Sold !"
 msgstr ""
 
@@ -4117,7 +4110,7 @@ msgstr ""
 msgid "Sold Color"
 msgstr ""
 
-#: includes/abpet_layout.php:868
+#: includes/abpet_layout.php:891
 msgid "Sold Out !"
 msgstr ""
 
@@ -4246,8 +4239,8 @@ msgstr ""
 msgid "Taxable"
 msgstr ""
 
-#: et_templates/details_theme/default.php:92
-#: et_templates/details_theme/default.php:99
+#: et_templates/details_theme/default.php:58
+#: et_templates/details_theme/default.php:65
 msgid "TBA"
 msgstr ""
 
@@ -4462,11 +4455,11 @@ msgid "Tickets Sold"
 msgstr ""
 
 #: admin/abpet_post_configuration.php:393
-#: et_templates/details_theme/default.php:98
+#: et_templates/details_theme/default.php:64
 msgid "Time"
 msgstr ""
 
-#: includes/abpet_layout.php:777
+#: includes/abpet_layout.php:808
 msgid "Time :"
 msgstr ""
 
@@ -4703,7 +4696,7 @@ msgid ""
 "it. By default, this option is set to ON."
 msgstr ""
 
-#: includes/abpet_layout.php:1251 includes/abpet_layout.php:1253
+#: includes/abpet_layout.php:1274 includes/abpet_layout.php:1276
 msgid "User Name"
 msgstr ""
 

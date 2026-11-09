@@ -576,6 +576,37 @@
 					}
 				}
 			}
+			public static function hero_kicker( $post_infos, $upcoming_date ): void {
+				$sale_continue = $post_infos['sale_continue'] ?? 'on';
+				$is_on_sale    = ( $sale_continue === 'on' );
+				?>
+                <div class="hero_area_kicker">
+					<?php if ( ! empty( $upcoming_date ) ) { ?>
+                        <span class="abp_tag theme">
+										<?php ABPET_Static::svg( 'date_1' ); ?>
+										<?php echo esc_html( ABPET_Function::date_format( $upcoming_date ) ); ?>
+                                    </span>
+					<?php } ?>
+					<?php if ( $is_on_sale ) { ?>
+                        <span class="abp_tag live">
+										<i class="fas fa-check-circle" aria-hidden="true"></i>
+										<?php esc_html_e( 'Booking Open', 'abp-event-ticket' ); ?>
+                                    </span>
+					<?php } else { ?>
+                        <span class="abpet_default_badge_off">
+										<i class="fas fa-times-circle" aria-hidden="true"></i>
+										<?php esc_html_e( 'Booking Closed', 'abp-event-ticket' ); ?>
+                                    </span>
+					<?php } ?>
+                </div>
+				<?php
+			}
+			public static function post_thumb( $post_id ): void {
+				$image_url = ABPET_Function::get_image_url( $post_id );
+				if ( $image_url ) {
+					ABPET_Layout::image( '', '', $image_url );
+				}
+			}
 			public static function category( $post_infos = [], $class = '' ): void {
 				$post_id = absint( $post_infos['post_id'] ?? 0 );
 				if ( ABPET_Function::on_off( 'category' ) && $post_id > 0 ) {
@@ -654,7 +685,7 @@
 					}
 				}
 			}
-			public static function description( $post_infos = [], $class = '' ): void {
+			public static function description( $post_infos = [], $class = 'post_description' ): void {
 				$post_id = absint( $post_infos['post_id'] ?? 0 );
 				if ( ABPET_Function::on_off( 'post_des' ) && $post_id > 0 ) {
 					$value = $post_infos['post_description'] ?? ABPET_Function::get_post_info( $post_id, 'post_description' );
@@ -791,34 +822,26 @@
 				<?php
 			}
 			public static function item_feature( $features = '' ): void {
-				if ( ABPET_Function::on_off( 'feature' ) ) {
-					if ( ! is_string( $features ) || $features === '' ) {
-						return;
-					}
-					$feature_ids   = explode( ',', $features );
-					$abpet_feature = defined( 'ABPET_Feature' ) ? ABPET_Feature : [];
-					if ( empty( $feature_ids ) || ! is_array( $abpet_feature ) ) {
-						return;
-					}
-					//echo '<pre>';print_r($abpet_feature);echo '</pre>';
+				$feature_ids = ! empty( $features ) && is_string( $features ) ? explode( ',', $features ) : [];
+				if ( ABPET_Function::on_off( 'feature' ) && sizeof( $feature_ids ) > 0 ) {
+					//echo '<pre>';print_r($feature_ids);echo '</pre>'
 					?>
                     <div class="item_spec load_more">
                         <div class="_f_wrap_gap_xxs">
 							<?php
 								foreach ( $feature_ids as $fec_id ) {
-									$feature = $abpet_feature[ $fec_id ] ?? null;
-									if ( ! is_array( $feature ) ) {
-										continue;
-									}
-									$label = $feature['label'] ?? '';
-									$value = $feature['value'] ?? '';
-									$icon  = $feature['icon'] ?? '';
-									if ( $label || $value ) {
-										echo '<span class="abp_tag" title="' . esc_attr( $label ) . '">';
-										ABPET_Layout::image_icon( $icon );
-										$output = implode( ' - ', array_filter( [ $label, $value ] ) );
-										echo esc_html( $output );
-										echo '</span>';
+									$feature = ABPET_Feature[ $fec_id ] ?? null;
+									if ( ! empty( $feature ) ) {
+										$label = $feature['label'] ?? '';
+										$value = $feature['value'] ?? '';
+										$icon  = $feature['icon'] ?? '';
+										if ( $label || $value ) {
+											echo '<span class="abp_tag" title="' . esc_attr( $label ) . '">';
+											ABPET_Layout::image_icon( $icon );
+											$output = implode( ' - ', array_filter( [ $label, $value ] ) );
+											echo esc_html( $output );
+											echo '</span>';
+										}
 									}
 								} ?>
                         </div>

@@ -4,9 +4,10 @@ Tags: event tickets, ticket booking, seat reservation, event registration, seat 
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 8.0
+Requires Plugins: woocommerce
 WC requires at least: 8.0
 WC tested up to: 9.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,17 +15,14 @@ Sell event tickets online with WooCommerce using general admission, reserved sea
 
 == Description ==
 
-ABP Event Ticket extends WooCommerce with event ticketing and attendee registration features. Create events, configure ticket types and pricing, publish event details, collect attendee information, and process ticket purchases through the standard WooCommerce checkout.
+ABP Event Ticket extends WooCommerce with powerful event ticketing and attendee registration features. Create events, manage ticket types, pricing, reserved seating, seat plans, and attendee forms. Configure reusable global settings for ticket types, locations, organizers, categories, FAQs, speakers, and more.
 
-The plugin supports both general admission and reserved seating. Administrators can create reusable seat plans using drag-and-drop controls, automatic numbering, custom labels, ticket type assignments, and flexible seating layouts. Ticket and seat availability is managed separately for each event and session as bookings are recorded.
+Customers can book tickets through shortcodes or event pages using standard WooCommerce checkout and manage their bookings from the My Account area.
 
-Create reusable global configurations for ticket types, seat plans, event dates, locations, categories, organizers, brands, features, additional services, attendee forms, FAQs, Terms & Conditions, event timelines, and speakers. These configurations can be imported into individual events and customized when needed.
+Perfect for concerts, conferences, festivals, workshops, seminars, and other events.
 
-Customers can book tickets directly from any page using a shortcode. A dedicated Bookings tab is also available in the WooCommerce My Account area, allowing customers to access their bookings.
 
-ABP Event Ticket supports ticket sales and registrations for concerts, conferences, festivals, workshops, seminars, and other events.
-
-== Key Features ==
+=== Key Features ===
 
 * Event creation and management
 * Event list with pagination and status filters
@@ -484,6 +482,13 @@ If you need any further assistance or support, please contact us through the [ðŸ
 
 
 == Changelog ==
+= 1.0.6 =
+
+*Update read me txt.
+* Design Improve in details page.
+* Fix: admin time save issue solve.
+
+Released: November 9 2026
 
 = 1.0.5 =
 
@@ -491,7 +496,7 @@ If you need any further assistance or support, please contact us through the [ðŸ
 * New: `filter` shortcode attribute for `[abpet-booking]` and `[abpet-post]`, to show only the chosen taxonomy dropdowns (`filter="category,location"`), hide all (`filter="none"`), or exclude some (`filter="-speaker"`).
 * Fix: A taxonomy switched OFF in Configuration -> Feature ON/OFF no longer renders a filter dropdown or applies its shortcode filter attribute.
 
-Released: November 1,1 2026
+Released: November 1 2026
 
 = 1.0.4 =
 
@@ -551,9 +556,13 @@ Released: September 13, 2026
 
 == Upgrade Notice ==
 
+= 1.0.6 =
+
+Released: November 9 2026
+
 = 1.0.5 =
 
-Released: November 1,1 2026
+Released: November 1 2026
 
 = 1.0.4 =
 

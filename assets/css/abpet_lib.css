@@ -487,6 +487,9 @@
 	div.abpet_area [class*="abp_tag"].trash {background: var(--et_color_danger); color: var(--et_color_white);}
 	div.abpet_area [class*="abp_tag"].draft {background: var(--et_color_yellow); color: var(--et_color_white);}
 	div.abpet_area [class*="abp_tag"] svg {height: var(--et_fs_label);width: auto;}
+	div.abpet_area [class*="abp_tag"].theme{background: var(--et_color_light);color: var(--et_color_theme);}
+	div.abpet_area [class*="abp_tag"].live {background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.25); color: #16A34A;}
+
 	@media only screen and (max-width: 1200px) {
 		body.theme-astra div.abpet_area div.abp_container,
 		body.theme-twentytwenty div.abpet_area div.abp_container,
@@ -1024,7 +1027,7 @@
 		-webkit-border-radius: var(--et_br); border-radius: var(--et_br);-webkit-transition: var(--et_transition); transition: var(--et_transition);
 	}
 	.abpet_area [class*="_btn"]:hover,
-	.abpet_area [class*="_btn"]:focus { text-decoration: none; opacity: 0.5; color: var(--et_color_theme);outline: none; }
+	.abpet_area [class*="_btn"]:focus { text-decoration: none; opacity: 0.5; color: inherit;outline: none; }
 	.abpet_area [class*="_btn"]:hover span,
 	.abpet_area [class*="_btn"]:focus span { color: inherit; }
 	div.abpet_area [class*="_btn"][disabled] { cursor: not-allowed; opacity: 0.7; background-color: #DDD5; pointer-events: none;}

@@ -20,65 +20,29 @@
 			$form_data['session_time'] = $start_time;
 			$form_data['event_date']   = $upcoming_date;
 			?>
-            <div id="abpet_area" class="abpet_area abpet_light_details">
+            <div id="abpet_area" class="abpet_area light_theme">
                 <div class="abp_container">
-                    <div class="abp_row">
-                        <div class="_f_equal_f_wrap_gap_section_15 abpet_light_lead">
-                            <div class="abpet_details_column abpet_light_lead_body">
-                                <div class="abpet_light_lead_kicker">
-									<?php ABPET_Static::svg( 'location_1' ); ?>
-                                    <span><?php esc_html_e( 'Event Highlights', 'abp-event-ticket' ); ?></span>
-                                </div>
-                                <h1 class="abpet_details_title"><?php ABPET_Layout::title( $post_infos ); ?></h1>
-								<?php ABPET_Layout::sub_title( $post_infos ); ?>
-                                <div class="abpet_light_lead_meta _gap_xs_mar_t_xs">
-									<?php ABPET_Layout::capacity( $post_infos );
-										ABPET_Layout::category( $post_infos );
-										ABPET_Layout::brand( $post_infos );
-										ABPET_Layout::organizer( $post_infos, 'publish' );
-										ABPET_Layout::location( $post_infos );
-									?>
-                                </div>
-								<?php if ( ! empty( $upcoming_date ) ) { ?>
-                                    <div class="abpet_light_lead_date">
-										<?php ABPET_Static::svg( 'date_1' ); ?>
-                                        <span><?php echo esc_html( ABPET_Function::date_format( $upcoming_date ) ); ?></span>
-                                    </div>
-								<?php } ?>
-								<?php if ( ( $post_infos['sale_continue'] ?? 'on' ) === 'on' ) { ?>
-                                    <span class="abpet_light_badge_live">
-										<i class="fas fa-check-circle" aria-hidden="true"></i>
-										<?php esc_html_e( 'Booking Open', 'abp-event-ticket' ); ?>
-                                    </span>
-								<?php } else { ?>
-                                    <span class="abpet_light_badge_off">
-										<i class="fas fa-times-circle" aria-hidden="true"></i>
-										<?php esc_html_e( 'Booking Closed', 'abp-event-ticket' ); ?>
-                                    </span>
-								<?php } ?>
-                                <div class="abpet_details_column abpet_light_main">
-									<?php if ( ABPET_Function::on_off( 'feature' ) ) {
-										ABPET_Layout::item_feature( $post_infos['post_feature'] ?? '' );
-									}
-										ABPET_Layout::description( $post_infos ); ?>
-                                </div>
+                    <section class="hero_area">
+                        <div class="hero_area_body">
+							<?php ABPET_Layout::hero_kicker( $post_infos, $upcoming_date ); ?>
+                            <h1 class="post_title"><?php ABPET_Layout::title( $post_infos ); ?></h1>
+							<?php ABPET_Layout::sub_title( $post_infos ); ?>
+                            <div class="_f_wrap_gap_xs">
+								<?php ABPET_Layout::capacity( $post_infos );
+									ABPET_Layout::category( $post_infos );
+									ABPET_Layout::brand( $post_infos );
+									ABPET_Layout::organizer( $post_infos, 'publish' );
+									ABPET_Layout::location( $post_infos );
+								?>
                             </div>
-                            <div class="abpet_details_column abpet_light_lead_media">
-								<?php if ( ! empty( $post_infos['abpet_slider'] ) ) {
-									do_action( 'abpet_slider', $post_infos['abpet_slider'], [ 'slider_style' => 'slider' ] );
-								} else {
-									ABPET_Layout::image( $post_id );
-								} ?>
-                            </div>
+	                        <?php ABPET_Layout::item_feature( $post_infos['post_feature'] ?? '' );
+		                        ABPET_Layout::description( $post_infos ); ?>
                         </div>
-                    </div>
+						<?php ABPET_Layout::post_thumb( $post_id ); ?>
+                    </section>
 					<?php if ( ! empty( $content ) ) { ?>
-                        <div class="abp_row">
-                            <div class="_col_12">
-                                <div class="the_post_content">
-									<?php echo wp_kses_post( apply_filters( 'the_content', $content ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter 'the_content'. ?>
-                                </div>
-                            </div>
+                        <div class="the_post_content">
+							<?php echo wp_kses_post( apply_filters( 'the_content', $content ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core filter 'the_content'. ?>
                         </div>
 					<?php } ?>
 					<?php if ( $show_date_list ) { ?>

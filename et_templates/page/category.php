@@ -29,7 +29,7 @@
 	}
 	$term = get_queried_object();
 	if ( $term instanceof WP_Term ) {
-		printf( '<main class="abpet_area"><div class="abp_container"><h1 class="abpet_details_title">%s</h1>%s</div></main>', esc_html( $term->name ), do_shortcode( '[abpet-post cat_id="' . absint( $term->term_id ) . '"]' ) );
+		printf( '<main class="abpet_area"><div class="abp_container"><h1 class="post_title">%s</h1>%s</div></main>', esc_html( $term->name ), do_shortcode( '[abpet-post cat_id="' . absint( $term->term_id ) . '"]' ) );
 	}
 	if ( wp_is_block_theme() ) {
 		?>
